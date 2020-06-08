@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fan.login" >
+    <application>
+        <activity android:name="com.fan.login.ui.activity.LoginActivity"
+            android:label="login"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.fan.login.ui.activity.ForgetPwdActivity"
+            android:configChanges="orientation|screenSize"
+            />
+        <activity android:name="com.fan.login.ui.activity.ForgetPwdActivity"
+            android:configChanges="orientation|screenSize"
+            />
+    </application>
+</manifest>

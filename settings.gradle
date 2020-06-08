@@ -1,0 +1,8 @@
+rootProject.name='BqBaseProject'
+include ':app'
+include ':baselibrary'
+include ':baseui-library'
+include ':utils-library'
+include ':net-library'
+include ':comm-config-library'
+include ':loginTemplet'

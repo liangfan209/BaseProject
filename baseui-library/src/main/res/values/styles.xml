@@ -1,0 +1,25 @@
+<resources>
+
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!-- 3中状态view-->
+    <declare-styleable name="MultipleStatusView">
+        <attr name="loadingView" format="reference" />
+        <attr name="emptyView" format="reference" />
+        <attr name="contentView" format="reference" />
+    </declare-styleable>
+
+    <style name="tab_test">
+        <item  name="android:textSize">20sp</item>
+        <item  name="android:textColor">@color/red</item>
+        <item name="android:drawableLeft">@mipmap/ic_dialog_tip_error</item>
+    </style>
+</resources>

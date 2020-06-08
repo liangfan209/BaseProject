@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="phone_is_not_null" >手机号不能为空</string>
+    <string name="phone_is_error">手机号不正确</string>
+    <string name="new_pwd_not_null">新密码不能为空</string>
+    <string name="confirm_pwd_not_null">确认密码不能为空</string>
+    <string name="vertication_code_not_null">验证码不能为空</string>
+    <string name="pwd_not_compaire">两次密码输入不一致</string>
+
+</resources>

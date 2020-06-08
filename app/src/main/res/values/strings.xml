@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BqBaseProject</string>
+    <string name="jump_login">跳转到登陆</string>
+</resources>
