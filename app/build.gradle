@@ -24,30 +24,13 @@ android {
             }
         }
     }
-
-
-    buildTypes {
-        debug {
-            buildConfigField "boolean", "LOG_DEBUG", "true"
-            buildConfigField "boolean", "USE_CANARY", "true"
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        release {
-            buildConfigField "boolean", "LOG_DEBUG", "false"
-            buildConfigField "boolean", "USE_CANARY", "false"
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
 }
 
 dependencies {
-    api project(path: ':comm-config-library')
+    implementation project(path: ':common-library')
     if (!isBuildModule.toBoolean()) {
-        implementation project(":loginTemplet")
-        implementation project(":orderTemplet")
+        implementation project(":loginApp")
+        implementation project(":userCenterApp")
     }
     annotationProcessor rootProject.ext.dependencies["butterknife.compiler"]
     annotationProcessor rootProject.ext.dependencies["arouter.compiler"]

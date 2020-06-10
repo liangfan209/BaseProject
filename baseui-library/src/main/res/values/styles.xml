@@ -22,4 +22,8 @@
         <item  name="android:textColor">@color/red</item>
         <item name="android:drawableLeft">@mipmap/ic_dialog_tip_error</item>
     </style>
+
+    <style name="bt_tab">
+        <item  name="android:textSize">15sp</item>
+    </style>
 </resources>

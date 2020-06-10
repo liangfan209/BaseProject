@@ -11,7 +11,6 @@ import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 
-import com.fan.baseuilibrary.utils.EmojiFilter;
 import com.fan.baseuilibrary.utils.Utils;
 
 import androidx.appcompat.widget.AppCompatEditText;

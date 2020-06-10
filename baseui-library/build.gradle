@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply from:"../base_nexus.gradle"
+apply plugin: 'maven'
 
 android {
 
@@ -18,24 +20,67 @@ android {
         testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
     }
 
-
-    buildTypes {
-        debug {
-            buildConfigField "boolean", "LOG_DEBUG", "true"
-            buildConfigField "boolean", "USE_CANARY", "true"
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        release {
-            buildConfigField "boolean", "LOG_DEBUG", "false"
-            buildConfigField "boolean", "USE_CANARY", "false"
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
 }
 
 dependencies {
-    api project(path: ':baselibrary')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+
+    api rootProject.ext.dependencies["androidx.appcompat"]
+    api rootProject.ext.dependencies["androidx.lifecycle"]
+    api rootProject.ext.dependencies["multidex"]
+
+    api rootProject.ext.dependencies["eventbus"]
+    api rootProject.ext.dependencies["autosize"]
+    api rootProject.ext.dependencies["quick.adapter"]
+    api rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["butterknife"]
+    api rootProject.ext.dependencies["arouter"]
+    //rx系列
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["retrofit.converter.gson"]
+    api rootProject.ext.dependencies["retrofit.adapter.rxjava2"]
+    api rootProject.ext.dependencies["okhttp3"]
+    api rootProject.ext.dependencies["okhttp.urlconnection"]
+    api rootProject.ext.dependencies["okhttp.logging"]
+
+    api rootProject.ext.dependencies["loading.dialog"]
+    api rootProject.ext.dependencies["x.dialog"]
+    api rootProject.ext.dependencies["smartrefresh"]
+    api rootProject.ext.dependencies["smartrefresh.header"]
+    api rootProject.ext.dependencies["quick.adapter"]
+
+    //test
+    api rootProject.ext.dependencies["junit"]
+    api rootProject.ext.dependencies["androidJUnitRunner"]
+    api rootProject.ext.dependencies["espresso"]
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api rootProject.ext.dependencies["retrofit.converter.gson"]
+    api rootProject.ext.dependencies["okgo"]
+    api rootProject.ext.dependencies["okgo.chuck"]
+}
+Properties properties = new Properties()
+InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream() ;
+properties.load( inputStream )
+def userName = properties.getProperty('NEXUS_USERNAME')
+def userPwd = properties.getProperty('NEXUS_PASSWORD')
+def uploadUrl = properties.getProperty('RELEASE_REPOSITORY_URL')
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //仓库地址
+            repository(url: uploadUrl) {
+                //私服账户信息
+                authentication(userName: userName, password: userPwd)
+            }
+            //pom必需的参数
+            pom.project {
+                groupId "com.android.bq.baseui"
+                artifactId "baseui"
+                version "1.0.0"
+            }
+        }
+    }
 }

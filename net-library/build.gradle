@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply from:"../base_nexus.gradle"
+apply plugin: 'maven'
 
 android {
 
@@ -19,20 +21,6 @@ android {
     }
 
 
-    buildTypes {
-        debug {
-            buildConfigField "boolean", "LOG_DEBUG", "true"
-            buildConfigField "boolean", "USE_CANARY", "true"
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        release {
-            buildConfigField "boolean", "LOG_DEBUG", "false"
-            buildConfigField "boolean", "USE_CANARY", "false"
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
 
 }
 
@@ -41,4 +29,27 @@ dependencies {
     api rootProject.ext.dependencies["retrofit.converter.gson"]
     api rootProject.ext.dependencies["okgo"]
     api rootProject.ext.dependencies["okgo.chuck"]
+}
+Properties properties = new Properties()
+InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream() ;
+properties.load( inputStream )
+def userName = properties.getProperty('NEXUS_USERNAME')
+def userPwd = properties.getProperty('NEXUS_PASSWORD')
+def uploadUrl = properties.getProperty('RELEASE_REPOSITORY_URL')
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //仓库地址
+            repository(url: uploadUrl) {
+                //私服账户信息
+                authentication(userName: userName, password: userPwd)
+            }
+            //pom必需的参数
+            pom.project {
+                groupId "com.android.bq.net"
+                artifactId "netlib"
+                version "1.0.0"
+            }
+        }
+    }
 }

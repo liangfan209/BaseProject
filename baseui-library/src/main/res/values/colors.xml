@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
     <!-- 使用的是该App的颜色-->
     <color name="colorPrimary">#6e5454</color>
     <color name="colorPrimaryDark">#aa0000ff</color>

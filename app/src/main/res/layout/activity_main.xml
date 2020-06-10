@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
-
-    <Button
-        android:id="@+id/bt_login"
+    <FrameLayout
+        android:id="@+id/flt_content"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="跳转到登陆"
-        android:gravity="center"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        />
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:tabIndicatorColor="@color/transparent"
+        app:tabTextColor="@color/color_999999"
+        app:tabSelectedTextColor="#FD523A"
+        android:layout_alignParentBottom="true"
+        app:tabTextAppearance="@style/tab_test"
+        app:tabRippleColor="@color/transparent"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"
+        android:layout_alignTop="@+id/tablayout"/>
+</RelativeLayout>
