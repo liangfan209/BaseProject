@@ -11,12 +11,8 @@ import java.io.Serializable;
  */
 public class LoginModel implements Serializable {
 
-
-
 //    public abstract void login(String api, String username, String pwd, LoginIView view);
-//
 //    public abstract void getVertificatCode(String api,String type, String phone, LoginIView view);
-//
 //    public abstract void forgetPwd(String api, String phone, String pwd, String verticode, LoginIView view);
 
 }

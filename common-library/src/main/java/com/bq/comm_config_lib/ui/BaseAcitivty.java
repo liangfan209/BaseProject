@@ -1,7 +1,10 @@
 package com.bq.comm_config_lib.ui;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
+import com.bq.comm_config_lib.R;
 import com.bq.comm_config_lib.mvp.IView;
 import com.fan.baseuilibrary.view.dialog.LoadingDialog;
 
@@ -20,13 +23,22 @@ import butterknife.ButterKnife;
 public abstract class BaseAcitivty extends AppCompatActivity implements IView {
 
     private LoadingDialog mLoadingDialog;
+    ImageView mIvTitleLeft;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentViewLayout());
         mLoadingDialog = new LoadingDialog(this);
         ButterKnife.bind(this);
+        View backIv = findViewById(R.id.iv_title_left);
+        if(backIv != null){
+            backIv.setOnClickListener(v->{
+                finish();
+            });
+        }
         attach();
+
     }
 
 

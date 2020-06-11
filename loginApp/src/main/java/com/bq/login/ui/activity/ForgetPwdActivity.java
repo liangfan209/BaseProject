@@ -15,14 +15,15 @@ import com.bq.login.R;
 import com.bq.login.R2;
 import com.bq.login.bean.LoginInfo;
 import com.bq.login.mvp.LoginIView;
-import com.bq.login.mvp.LoginPresenter;
-import com.fan.baseuilibrary.utils.Utils;
+import com.bq.login.mvp.LoginPersenter;
+import com.bq.utilslib.Md5Utils;
+import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-@Route(path = AppArouter.TEMPLTE_FORGET_PWD)
+@Route(path = AppArouter.FORGET_PWD_ACTIVITY)
 public class ForgetPwdActivity extends BaseAcitivty implements LoginIView {
 
 
@@ -43,7 +44,7 @@ public class ForgetPwdActivity extends BaseAcitivty implements LoginIView {
     String phoneNumber = "";
     String newPwd = "";
 
-    private LoginPresenter mLoginPresenter;
+    private LoginPersenter mLoginPresenter;
     @Override
     protected int getContentViewLayout() {
         return R.layout.login_activity_forget_pwd;
@@ -51,23 +52,23 @@ public class ForgetPwdActivity extends BaseAcitivty implements LoginIView {
 
     @Override
     protected void attach() {
-        mLoginPresenter = new LoginPresenter(this);
+        mLoginPresenter = new LoginPersenter(this);
     }
 
     @Override
     public void getVerticalCodeView() {
-        Utils.showToast(this, "验证码获取成功");
+        ToastUtils.showToast(this, "验证码获取成功");
     }
 
     @Override
     public void forgetPwdView() {
-        mLoginPresenter.login(ApiLogin.API_LOGIN,phoneNumber,newPwd);
+        mLoginPresenter.login(phoneNumber,newPwd);
     }
 
     @Override
     public void loginView(LoginInfo info) {
         //登陆到主界面
-        Utils.showToast(this,"登录成功");
+        ToastUtils.showToast(this,"登录成功");
     }
 
     @OnClick({R2.id.rlt_close_page, R2.id.tv_get_vertical_code, R2.id.tv_comfirm_login})
@@ -95,23 +96,23 @@ public class ForgetPwdActivity extends BaseAcitivty implements LoginIView {
         }
 
         if(TextUtils.isEmpty(newPwd)){
-            Utils.showToast(this, R.string.new_pwd_not_null);
+            ToastUtils.showToast(this, R.string.new_pwd_not_null);
             return;
         }
 
         if(TextUtils.isEmpty(rePwd)){
-            Utils.showToast(this, R.string.confirm_pwd_not_null);
+            ToastUtils.showToast(this, R.string.confirm_pwd_not_null);
             return;
         }
         if(TextUtils.isEmpty(code)){
-            Utils.showToast(this, R.string.vertication_code_not_null);
+            ToastUtils.showToast(this, R.string.vertication_code_not_null);
             return;
         }
         if (!newPwd.equals(rePwd)) {
-            Utils.showToast(this, R.string.pwd_not_compaire);
+            ToastUtils.showToast(this, R.string.pwd_not_compaire);
             return;
         }
-        newPwd = Utils.md5(newPwd);
+        newPwd = Md5Utils.md5(newPwd);
         mLoginPresenter.forgetPwd(ApiLogin.API_FORGET_PWD,phoneNumber,newPwd,code);
     }
 }

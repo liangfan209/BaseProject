@@ -1,2 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bq.user_center" />
+    package="com.bq.user_center" >
+    <application>
+        <activity android:name=".ui.bankcard.BankCardListActivity"
+            android:label="login"
+            android:configChanges="orientation|screenSize"/>
+    </application>
+</manifest>

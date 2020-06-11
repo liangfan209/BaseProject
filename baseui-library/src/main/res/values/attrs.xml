@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VerifyEditText">
+        <!--输入框数量-->
+        <attr name="inputCount" format="integer" />
+        <!--输入框间距-->
+        <attr name="inputSpace" format="dimension" />
+        <!--下划线厚度-->
+        <attr name="underlineHeight" format="dimension" />
+        <!--输入框文本大小-->
+        <attr name="mTextSize" format="dimension" />
+        <!--下划线选中的颜色-->
+        <attr name="focusColor" format="color" />
+        <!--下划线未选中的颜色-->
+        <attr name="defaultColor" format="color" />
+        <!--下划线距文本的距离-->
+        <attr name="underlineSpace" format="dimension" />
+        <!--光标-->
+        <attr name="cursorDrawable" format="reference" />
+    </declare-styleable>
+
+    <!--图片添加器-->
+    <declare-styleable name="public_ZzImageBox">
+        <attr name="public_zib_max_line" format="integer" />
+        <attr name="public_zib_img_size_one_line" format="integer" />
+        <attr name="public_zib_img_padding" format="dimension|reference" />
+        <attr name="public_zib_img_default" format="color|reference" />
+        <attr name="public_zib_img_delete" format="color|reference" />
+        <attr name="public_zib_img_add" format="color|reference" />
+        <attr name="public_zib_img_deletable" format="boolean" />
+        <attr name="public_zib_left_margin" format="dimension|reference" />
+        <attr name="public_zib_right_margin" format="dimension|reference" />
+    </declare-styleable>
+    <!--  ***************************** 其他 *****************************  -->
+
+    <declare-styleable name="public_CircleProgressBar">
+        <!--圆环相关-->
+        <attr name="public_roundWidth" format="dimension" />
+        <attr name="public_roundColor" format="color" />
+        <!--进度相关-->
+        <attr name="public_progressColor" format="color" />
+        <attr name="public_curProgress" format="integer" />
+        <attr name="public_maxProgress" format="integer" />
+        <!--百分比文本-->
+        <attr name="public_textColor" format="color" />
+        <attr name="public_textSize" format="dimension" />
+    </declare-styleable>
+
+    <!--圆弧进度条-->
+    <declare-styleable name="public_CircleProgressView">
+        <attr name="public_radius" format="dimension"/>
+        <attr name="public_strokeWidth" format="dimension"/>
+        <attr name="public_circleColor" format="color"/>
+        <attr name="public_ringColor" format="color"/>
+        <attr name="public_ringBgColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="public_CircleImageView">
+        <attr name="public_border_width" format="dimension" />
+        <attr name="public_border_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="public_RatingBar">
+        <!--尺寸值-->
+        <attr name="public_starImageSize" format="dimension" />
+        <!--星星间距-->
+        <attr name="public_starPadding" format="dimension" />
+        <!--星星总数-->
+        <attr name="public_starCount" format="integer" />
+        <!--空白的星星资源文件值-->
+        <attr name="public_starEmpty" format="reference" />
+        <!--满星资源文件值-->
+        <attr name="public_starFill" format="reference" />
+        <!--半星资源文件值-->
+        <attr name="public_starHalf" format="reference" />
+        <!--是否可点击boolean值-->
+        <attr name="public_clickable" format="boolean" />
+        <!--当前进度float值-->
+        <attr name="public_starStep" format="float" />
+        <!--每次进度方式的值，整星还是半星-->
+        <attr name="public_stepSize">
+            <enum name="Half" value="0" />
+            <enum name="Full" value="1" />
+        </attr>
+    </declare-styleable>
+
+
+</resources>

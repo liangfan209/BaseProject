@@ -12,7 +12,7 @@ import com.bq.comm_config_lib.configration.AppArouter;
  * 版权：
  */
 
-@Route(path = AppArouter.TEMPLET_LOGIN_SERVER)
+@Route(path = AppArouter.LOGIN_SERVER)
 public interface LoginService extends IProvider {
     public String getLoginInfo();
 }

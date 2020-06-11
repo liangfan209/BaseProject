@@ -20,20 +20,18 @@ public class JsonConvert<T> implements Converter<T> {
     private static Gson create() {
         return GsonHolder.gson;
     }
+
     private static class GsonHolder {
         private static Gson gson = new Gson();
     }
+
     public static <T> T fromJson(JsonReader reader, Type typeOfT) throws JsonIOException, JsonSyntaxException {
         return create().fromJson(reader, typeOfT);
     }
 
-
-
     private Type type;
     private Class<T> clazz;
 
-    public JsonConvert() {
-    }
 
     public JsonConvert(Type type) {
         this.type = type;
@@ -79,13 +77,10 @@ public class JsonConvert<T> implements Converter<T> {
         JsonReader jsonReader = new JsonReader(body.charStream());
 
         if (rawType == String.class) {
-            //noinspection unchecked
             return (T) body.string();
         } else if (rawType == JSONObject.class) {
-            //noinspection unchecked
             return (T) new JSONObject(body.string());
         } else if (rawType == JSONArray.class) {
-            //noinspection unchecked
             return (T) new JSONArray(body.string());
         } else {
             T t = fromJson(jsonReader, rawType);
@@ -99,7 +94,6 @@ public class JsonConvert<T> implements Converter<T> {
         ResponseBody body = response.body();
         if (body == null) return null;
         JsonReader jsonReader = new JsonReader(body.charStream());
-
         // 泛型格式如下： new JsonCallback<任意JavaBean>(this)
         T t = fromJson(jsonReader, type);
         response.close();
@@ -133,21 +127,9 @@ public class JsonConvert<T> implements Converter<T> {
                 int code = lzyResponse.code;
                 //这里的0是以下意思
                 //一般来说服务器会和客户端约定一个数表示成功，其余的表示失败，这里根据实际情况修改
-                if (code == 10000) {
-                    //noinspection unchecked
-                    return (T) lzyResponse;
-                } else if (code == 104) {
-                    throw new IllegalStateException("用户授权信息无效");
-                } else if (code == 105) {
-                    throw new IllegalStateException("用户收取信息已过期");
-                } else {
-                    //直接将服务端的错误信息抛出，onError中可以获取
-                    throw new IllegalStateException("错误代码：" + code + "，错误信息：" + lzyResponse.msg);
-                }
+                return (T) lzyResponse;
             }
         }
     }
-
-
 
 }

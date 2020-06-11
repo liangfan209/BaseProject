@@ -11,7 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 
-import com.fan.baseuilibrary.utils.Utils;
+import com.fan.baseuilibrary.utils.ToastUtils;
 
 import androidx.appcompat.widget.AppCompatEditText;
 
@@ -33,7 +33,7 @@ public class DeletableEditText extends AppCompatEditText {
     public DeletableEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setupViews();
-        setPadding(0,0, Utils.dp2px(getContext(),15),0);
+        setPadding(0,0, ToastUtils.dp2px(getContext(),15),0);
         EmojiFilter.setEditTextFilter(this);
     }
 

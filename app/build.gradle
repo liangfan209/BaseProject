@@ -31,6 +31,7 @@ dependencies {
     if (!isBuildModule.toBoolean()) {
         implementation project(":loginApp")
         implementation project(":userCenterApp")
+//        implementation "com.android.bq.app.usercenter:userCenter:1.0.3"
     }
     annotationProcessor rootProject.ext.dependencies["butterknife.compiler"]
     annotationProcessor rootProject.ext.dependencies["arouter.compiler"]

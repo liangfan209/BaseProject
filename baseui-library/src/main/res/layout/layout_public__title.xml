@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlt_title"
+    android:layout_height="48dp"
+    android:layout_width="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_title_left"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:paddingBottom="14dp"
+        android:paddingLeft="14dp"
+        android:paddingTop="14dp"
+        android:src="@mipmap/public_ic_arrow_back_black" />
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textColor="#FF202020"
+        android:textSize="17sp"
+        android:ellipsize="end"
+        tools:text="标题" />
+
+    <TextView
+        android:id="@+id/tv_right"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textColor="#FF202020"
+        android:textSize="15sp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:ellipsize="end"
+        tools:text="下一步"
+        android:visibility="gone"/>
+
+    <View
+        android:background="#cccccc"
+        android:id="@+id/view_line"
+        android:layout_alignParentBottom="true"
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:visibility="gone" />
+</RelativeLayout>

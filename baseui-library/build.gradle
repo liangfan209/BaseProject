@@ -25,6 +25,9 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
 
+//    api "com.android.bq.utils:utilslib:1.0.0"
+    api project(path: ':utils-library')
+
     api rootProject.ext.dependencies["androidx.appcompat"]
     api rootProject.ext.dependencies["androidx.lifecycle"]
     api rootProject.ext.dependencies["multidex"]

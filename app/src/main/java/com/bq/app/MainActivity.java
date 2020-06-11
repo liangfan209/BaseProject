@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.base.R;
+import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.ui.BaseAcitivty;
-import com.bq.user_center.ui.UserFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Arrays;
@@ -19,12 +21,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 
+@Route(path = AppArouter.MAIN_ACTIVITY)
 public class MainActivity extends BaseAcitivty {
-
     @BindView(R.id.tablayout)
     TabLayout mTablayout;
 
-    private String[] tabs = new String[]{"tab1", "tab2", "tab3"};
+    private String[] tabs = new String[]{"tab1", "tab2", "个人中心"};
     private Fragment mUserFragment;
 
     @Override
@@ -35,6 +37,7 @@ public class MainActivity extends BaseAcitivty {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void attach() {
+
         List<String> strings = Arrays.asList(tabs);
         for (String str : strings) {
             View view = LayoutInflater.from(this).inflate(R.layout.item_tab, null);
@@ -75,9 +78,9 @@ public class MainActivity extends BaseAcitivty {
         FragmentTransaction transaction = fm.beginTransaction();
         hideFragments(transaction);
         switch (index) {
-            case 0:
+            case 2:
                 if (mUserFragment == null) {
-                    mUserFragment = new UserFragment();
+                    mUserFragment = (Fragment) ARouter.getInstance().build(AppArouter.USER_CENTER_USER_FRAGMENT).navigation();
                     transaction.add(R.id.flt_content, mUserFragment, "flag" + index);
                 }else{
                     transaction.show(mUserFragment);

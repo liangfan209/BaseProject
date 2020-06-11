@@ -10,15 +10,21 @@ package com.bq.comm_config_lib.configration;
 public class AppArouter {
 
 
+    //壳子
+    public static final String MAIN = "/main";
+    public static final String MAIN_ACTIVITY = "/main/MainActivity";
+
     //登录模块
     public static final String LOGIN = "/login";
-    public static final String TEMPLTE_LOGIN = LOGIN+"/LoginActivity";
-    public static final String TEMPLTE_FORGET_PWD = LOGIN+"/ForgetPwdActivity";
+    public static final String LOGIN_ACTVITY = LOGIN+"/LoginActivity";
+    public static final String FORGET_PWD_ACTIVITY = LOGIN+"/ForgetPwdActivity";
+    public static final String LOGIN_SERVER = LOGIN+"/LoginService";
 
-    public static final String TEMPLET_LOGIN_SERVER = LOGIN+"/LoginService";
+    //用户中心
+    public static final String USER_CENTER = "/userCenter";
+    public static final String USER_ACTIVITY = USER_CENTER+"/UserInfoActivity";
+    public static final String USER_CENTER_BANK_LIST = USER_CENTER+"/BankListActivity";
+    public static final String USER_CENTER_USER_FRAGMENT = USER_CENTER+"/UserInfoActivity";
 
-    //用户模块
-    public static final String USER = "/user";
-    public static final String TEMPLETE_USER_INFO = USER+"/UserInfoActivity";
 
 }

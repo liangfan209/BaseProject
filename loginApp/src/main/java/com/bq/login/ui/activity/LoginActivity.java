@@ -7,21 +7,22 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.ui.BaseAcitivty;
-import com.bq.login.ApiLogin;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.login.R;
 import com.bq.login.R2;
 import com.bq.login.bean.LoginInfo;
 import com.bq.login.mvp.LoginIView;
-import com.bq.login.mvp.LoginPresenter;
-import com.bq.utilslib.rsa.AccountValidatorUtil;
-import com.bq.utilslib.rsa.EditFormatUtils;
-import com.fan.baseuilibrary.utils.Utils;
+import com.bq.login.mvp.LoginPersenter;
+import com.bq.utilslib.AccountValidatorUtil;
+import com.bq.utilslib.EditFormatUtils;
+import com.bq.utilslib.Md5Utils;
+import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-@Route(path = AppArouter.TEMPLTE_LOGIN)
+@Route(path = AppArouter.LOGIN_ACTVITY)
 public class LoginActivity extends BaseAcitivty implements LoginIView {
 
     @BindView(R2.id.tv_welcom)
@@ -39,7 +40,7 @@ public class LoginActivity extends BaseAcitivty implements LoginIView {
     @BindView(R2.id.tv_protocol2)
     TextView mTvProtocol2;
 
-    private LoginPresenter mLoginPresenter;
+    private LoginPersenter mLoginPresenter;
 
     @Override
     protected int getContentViewLayout() {
@@ -48,26 +49,31 @@ public class LoginActivity extends BaseAcitivty implements LoginIView {
 
     @Override
     protected void attach() {
-        mLoginPresenter = new LoginPresenter(this);
+        mLoginPresenter = new LoginPersenter(this);
         EditFormatUtils.phoneNumAddSpace(mEtPhone);
     }
 
 
 
     private void login() {
+        mEtPhone.setText("13260606900");
+        mEtPwd.setText("123456");
         String phoneNumber = mEtPhone.getText().toString().replaceAll(" ", "").trim();
         if (!AccountValidatorUtil.isMobile(phoneNumber)) {
-            Utils.showToast(this, "请输入正确的手机号码");
+            ToastUtils.showToast(this, "请输入正确的手机号码");
             return;
         }
         String pwd = mEtPwd.getText().toString().trim();
-        pwd = Utils.md5(pwd);
-        mLoginPresenter.login(ApiLogin.API_LOGIN, phoneNumber, pwd);
+        pwd = Md5Utils.md5(pwd);
+        mLoginPresenter.login(phoneNumber, pwd);
     }
 
     @Override
     public void loginView(LoginInfo info) {
-        Utils.showToastOk(this, "登陆成功");
+        //将token保存到本地sp中
+        CommSpUtils.saveToken(info.getAuth_token());
+        //跳转到主页面中
+        ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
     }
 
 
@@ -76,7 +82,7 @@ public class LoginActivity extends BaseAcitivty implements LoginIView {
         if(view.getId() == R.id.tv_login){
             login();
         }else if(view.getId() == R.id.tv_forget_pwd){
-            ARouter.getInstance().build(AppArouter.TEMPLTE_FORGET_PWD).navigation();
+            ARouter.getInstance().build(AppArouter.FORGET_PWD_ACTIVITY).navigation();
         }
     }
 }

@@ -1,3 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bq.login" >
+
+    <application>
+        <activity android:name=".ui.activity.LoginActivity"
+            android:label="login"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".ui.activity.ForgetPwdActivity"
+            android:configChanges="orientation|screenSize"
+            />
+    </application>
 </manifest>

@@ -8,14 +8,15 @@ public class BaseResponse<T> implements Serializable {
 
     public int code;
     public String msg;
-    public T data;
+    public String status;
+    public T result;
 
     @Override
     public String toString() {
         return "LzyResponse{\n" +//
                "\tcode=" + code + "\n" +//
                "\tmsg='" + msg + "\'\n" +//
-               "\tdata=" + data + "\n" +//
+               "\tresult=" + result + "\n" +//
                '}';
     }
 }

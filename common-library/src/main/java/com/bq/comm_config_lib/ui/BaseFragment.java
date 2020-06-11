@@ -31,7 +31,7 @@ public abstract class BaseFragment extends Fragment implements IView {
                              @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(getContentViewLayout(),null);
         mLoadingDialog = new LoadingDialog(this.getContext());
-        ButterKnife.bind(view);
+        ButterKnife.bind(this,view);
         attach();
         return view;
     }

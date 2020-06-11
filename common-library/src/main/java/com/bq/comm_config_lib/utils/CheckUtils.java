@@ -3,9 +3,9 @@ package com.bq.comm_config_lib.utils;
 import android.app.Activity;
 import android.text.TextUtils;
 
-import com.bq.utilslib.rsa.AccountValidatorUtil;
+import com.bq.utilslib.AccountValidatorUtil;
 import com.fan.baseuilibrary.R;
-import com.fan.baseuilibrary.utils.Utils;
+import com.fan.baseuilibrary.utils.ToastUtils;
 
 /**
  * 文件名：
@@ -20,11 +20,11 @@ public class CheckUtils {
         boolean b = false;
         phone = phone.replaceAll(" ","").trim();
         if(TextUtils.isEmpty(phone)){
-            Utils.showToast(activity, R.string.phone_is_not_null);
+            ToastUtils.showToast(activity, R.string.phone_is_not_null);
             return b;
         }
         if(!AccountValidatorUtil.isMobile(phone)){
-            Utils.showToast(activity, R.string.phone_is_error);
+            ToastUtils.showToast(activity, R.string.phone_is_error);
             return b;
         }
         b = true;
