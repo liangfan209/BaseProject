@@ -14,5 +14,5 @@ import com.bq.comm_config_lib.configration.AppArouter;
 
 @Route(path = AppArouter.LOGIN_SERVER)
 public interface LoginService extends IProvider {
-    public String getLoginInfo();
+    String getLoginProvider();
 }

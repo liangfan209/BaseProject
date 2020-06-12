@@ -6,7 +6,8 @@ android {
     resourcePrefix "user_center_" //给 Module 内的资源名增加前缀, 避免资源名冲突
 }
 dependencies {
-    implementation project(path: ':common-library')
+//    implementation project(path: ':common-library')
+    implementation "com.android.bq.comm:commLib:1.0.0"
 }
 
 
@@ -28,7 +29,7 @@ uploadArchives {
             pom.project {
                 groupId "com.android.bq.app.usercenter"
                 artifactId "userCenter"
-                version "1.0.3"
+                version "1.0.0"
             }
         }
     }

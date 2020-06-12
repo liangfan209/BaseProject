@@ -36,7 +36,7 @@ public class BankCardPersenter implements BasePersenter {
             @Override
             public void onSuccess(Response<BaseResponse<List<BankCard>>> response) {
                 super.onSuccess(response);
-                mBankCardView.getBankListView(response.body().result);
+                mBankCardView.getBankListView(response.body().data);
             }
         });
     }

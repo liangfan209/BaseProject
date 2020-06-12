@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="40dp"
-            android:text="添加银行卡"
+            android:text="获取登录模块服务"
             android:textColor="#ff232323"
             android:textSize="14sp" />
     </RelativeLayout>

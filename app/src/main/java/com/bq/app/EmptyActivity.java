@@ -21,11 +21,6 @@ public class EmptyActivity extends BaseAcitivty {
     @Override
     protected void attach() {
         //跳转到登录界面
-        try {
-            ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
-            finish();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
     }
 }

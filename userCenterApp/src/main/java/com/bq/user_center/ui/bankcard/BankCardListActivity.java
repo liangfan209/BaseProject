@@ -6,8 +6,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.service.login.LoginService;
 import com.bq.comm_config_lib.ui.BaseAcitivty;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
@@ -15,6 +18,7 @@ import com.bq.user_center.bean.BankCard;
 import com.bq.user_center.mvp.bankcard.BankCardPersenter;
 import com.bq.user_center.mvp.bankcard.BankCardIView;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
 
 import java.util.List;
@@ -38,6 +42,8 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardIView,
 
     @BindView(R2.id.tv_title)
     TextView mTvTitle;
+    @Autowired(name = AppArouter.LOGIN_SERVER)
+    LoginService mLoginService;
 
     @Override
     protected int getContentViewLayout() {
@@ -46,16 +52,21 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardIView,
 
     @Override
     protected void attach() {
+        ARouter.getInstance().inject(this);
         mTvTitle.setText("银行卡列表");
         mBankCardPersenter = new BankCardPersenter(this);
         myRefreshLayout = new MyRefreshLayout<>(this, this);
-        myRefreshLayout.setRefresh(true,false);
+        myRefreshLayout.setRefresh(true, false);
         mFltContent.addView(myRefreshLayout);
     }
 
     @Override
     public View addFooter() {
-        View view =  LinearLayout.inflate(this,R.layout.user_center_layout_add_card,null);
+        View view = LinearLayout.inflate(this, R.layout.user_center_layout_add_card, null);
+        view.setOnClickListener(v -> {
+            //获取登录模块的相关服务
+            ToastUtils.showLongToast(this, mLoginService==null?"没有找到该服务":mLoginService.getLoginProvider());
+        });
         return view;
     }
 

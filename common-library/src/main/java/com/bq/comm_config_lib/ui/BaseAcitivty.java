@@ -32,9 +32,12 @@ public abstract class BaseAcitivty extends AppCompatActivity implements IView {
         mLoadingDialog = new LoadingDialog(this);
         ButterKnife.bind(this);
         View backIv = findViewById(R.id.iv_title_left);
-        if(backIv != null){
-            backIv.setOnClickListener(v->{
-                finish();
+        if (backIv != null) {
+            backIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
             });
         }
         attach();
@@ -42,7 +45,9 @@ public abstract class BaseAcitivty extends AppCompatActivity implements IView {
     }
 
 
-    protected abstract @LayoutRes int getContentViewLayout();
+    protected abstract @LayoutRes
+    int getContentViewLayout();
+
     protected abstract void attach();
 
 }

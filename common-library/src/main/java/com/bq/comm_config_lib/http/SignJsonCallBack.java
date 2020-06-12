@@ -46,13 +46,12 @@ public abstract class SignJsonCallBack<T> extends JsonCallback<T> {
     public void onSuccess(Response<T> response) {
         T body = response.body();
         if (body instanceof BaseResponse) {
-            if (10000 != ((BaseResponse) body).code) {
+            if (10000 != ((BaseResponse) body).code && mIvew != null) {
                 if (mIvew instanceof BaseAcitivty) {
                     ToastUtils.showToast((BaseAcitivty) mIvew, ((BaseResponse) body).msg);
                 } else if (mIvew instanceof BaseFragment) {
                     ToastUtils.showToast(((BaseFragment) mIvew).getActivity(), ((BaseResponse) body).msg);
                 }
-                return;
             }
         }
     }

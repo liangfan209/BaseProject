@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply from:"../base_nexus.gradle"
+apply plugin: 'maven'
 
 android {
 
@@ -37,10 +39,34 @@ android {
 }
 
 dependencies {
-    api project(path: ':baseui-library')
-    api project(path: ':net-library')
+//    api project(path: ':baseui-library')
 
-//    api "com.android.bq.baseui:baseui:1.0.0"
-//    api "com.android.bq.net:netlib:1.0.0"
+    api "com.android.bq.baseui:baseui:1.0.0"
+}
+
+
+
+Properties properties = new Properties()
+InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream() ;
+properties.load( inputStream )
+def userName = properties.getProperty('NEXUS_USERNAME')
+def userPwd = properties.getProperty('NEXUS_PASSWORD')
+def uploadUrl = properties.getProperty('RELEASE_REPOSITORY_URL')
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //仓库地址
+            repository(url: uploadUrl) {
+                //私服账户信息
+                authentication(userName: userName, password: userPwd)
+            }
+            //pom必需的参数
+            pom.project {
+                groupId "com.android.bq.comm"
+                artifactId "commLib"
+                version "1.0.0"
+            }
+        }
+    }
 }
 

@@ -17,7 +17,7 @@ public class CommSpUtils {
     }
 
     public static String getToken(){
-//        return "jz1hF77lRKdqMYmEHULdssdNPaoYJMfd1p9WjQ2O0uzJE3LGGlq9H-nTUps5eYXe";
+//        return "9p6bK8VpBW2fFpriw2-2AlidciIAXGBGCjQGGMBkRVysVNWH4rqrx0Jl-Z-TH3Ep";
         return SPUtils.getInstance(SpField.AUTH_TOKEN).getString(SpField.AUTH_TOKEN);
     }
 }

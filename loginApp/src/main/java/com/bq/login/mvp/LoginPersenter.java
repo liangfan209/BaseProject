@@ -15,7 +15,7 @@ import java.util.Map;
  * 文件名：
  * 描述：
  * 作者：梁帆
- * 时间：2020/5/28
+ * 时间：2020/6/2
  * 版权：
  */
 public class LoginPersenter implements BasePersenter {
@@ -25,13 +25,18 @@ public class LoginPersenter implements BasePersenter {
     public LoginPersenter(LoginIView IView) {
         mIView = IView;
     }
+    public LoginPersenter() {
+    }
+
+    public String providerMessage(){
+        return "这是登录模块暴露的信息";
+    }
 
     public void login(String name, String pwd) {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiLogin.API_LOGIN);
         map.put("username",name);
         map.put("password",pwd);
-
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<LoginInfo>>(mIView) {
             @Override
             public void onSuccess(Response<BaseResponse<LoginInfo>> response) {
@@ -39,8 +44,6 @@ public class LoginPersenter implements BasePersenter {
                 mIView.loginView(response.body().result);
             }
         });
-
-
     }
 
     public void getVertificatCode(String api, String type, String phone) {

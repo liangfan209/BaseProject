@@ -22,9 +22,9 @@ public class AppArouter {
 
     //用户中心
     public static final String USER_CENTER = "/userCenter";
-    public static final String USER_ACTIVITY = USER_CENTER+"/UserInfoActivity";
+//    public static final String USER_CENTER_ACTIVITY = USER_CENTER+"/UserInfoActivity";
     public static final String USER_CENTER_BANK_LIST = USER_CENTER+"/BankListActivity";
-    public static final String USER_CENTER_USER_FRAGMENT = USER_CENTER+"/UserInfoActivity";
+    public static final String USER_CENTER_USER_FRAGMENT = USER_CENTER+"/UserInfoFragment";
 
 
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.service.login.LoginService;
+import com.bq.login.mvp.LoginPersenter;
 
 /**
  * 文件名：
@@ -15,13 +16,13 @@ import com.bq.comm_config_lib.service.login.LoginService;
  */
 @Route(path = AppArouter.LOGIN_SERVER)
 public class LoginServiceImp implements LoginService {
-    @Override
-    public String getLoginInfo() {
-        return "hello login";
-    }
 
     @Override
     public void init(Context context) {
+    }
 
+    @Override
+    public String getLoginProvider() {
+        return new LoginPersenter().providerMessage();
     }
 }
