@@ -1,4 +1,4 @@
-package com.bq.comm_config_lib.service;
+package com.bq.comm_config_lib.configration;
 
 /**
  * 文件名：

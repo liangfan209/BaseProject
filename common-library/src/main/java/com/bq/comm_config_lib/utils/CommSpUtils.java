@@ -1,6 +1,6 @@
 package com.bq.comm_config_lib.utils;
 
-import com.bq.comm_config_lib.service.SpField;
+import com.bq.comm_config_lib.configration.SpField;
 import com.bq.utilslib.SPUtils;
 
 /**

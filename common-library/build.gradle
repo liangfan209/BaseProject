@@ -40,7 +40,7 @@ android {
 
 dependencies {
     api project(path: ':baseui-library')
-//    api "com.android.bq.baseui:baseui:1.0.0"
+//    api "com.android.bq.baseui:baseui:0.0.3"
 }
 
 
@@ -63,7 +63,7 @@ uploadArchives {
             pom.project {
                 groupId "com.android.bq.comm"
                 artifactId "commLib"
-                version "1.0.0"
+                version "0.0.3"
             }
         }
     }

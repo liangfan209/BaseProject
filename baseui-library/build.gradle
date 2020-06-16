@@ -25,8 +25,8 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
 
-//    api "com.android.bq.utils:utilslib:1.0.0"
-//    api "com.android.bq.net:netlib:1.0.0"
+//    api "com.android.bq.utils:utilslib:0.0.3"
+//    api "com.android.bq.net:netlib:0.0.3"
     api project(path: ':utils-library')
     api project(path: ':net-library')
 
@@ -58,14 +58,13 @@ dependencies {
     api rootProject.ext.dependencies["junit"]
     api rootProject.ext.dependencies["androidJUnitRunner"]
     api rootProject.ext.dependencies["espresso"]
-}
 
-dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
     api rootProject.ext.dependencies["retrofit.converter.gson"]
     api rootProject.ext.dependencies["okgo"]
     api rootProject.ext.dependencies["okgo.chuck"]
 }
+
+
 Properties properties = new Properties()
 InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream() ;
 properties.load( inputStream )
@@ -84,7 +83,7 @@ uploadArchives {
             pom.project {
                 groupId "com.android.bq.baseui"
                 artifactId "baseui"
-                version "1.0.0"
+                version "0.0.3"
             }
         }
     }

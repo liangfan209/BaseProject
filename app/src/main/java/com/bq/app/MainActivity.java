@@ -26,6 +26,7 @@ public class MainActivity extends BaseAcitivty {
     @BindView(R.id.tablayout)
     TabLayout mTablayout;
 
+
     private String[] tabs = new String[]{"tab1", "tab2", "个人中心"};
     private Fragment mUserFragment;
 

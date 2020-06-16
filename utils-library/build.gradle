@@ -47,7 +47,7 @@ uploadArchives {
             pom.project {
                 groupId "com.android.bq.utils"
                 artifactId "utilslib"
-                version "1.0.0"
+                version "0.0.3"
             }
         }
     }
