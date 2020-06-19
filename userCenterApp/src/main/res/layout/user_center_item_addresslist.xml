@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/shap_item_bg_radius_5"
+    android:paddingLeft="19dp"
+    android:paddingRight="19dp"
+    >
+
+    <TextView
+        style="@style/ui_h3_normal_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:text="安先生" />
+
+    <TextView
+        style="@style/ui_h5_normal_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="21dp"
+        android:text="176****5678" />
+
+    <TextView
+        android:id="@+id/tv_detail"
+        style="@style/ui_h5_normal_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="49dp"
+        android:lineSpacingExtra="2dp"
+        android:text="湖北省武汉市江夏区佛祖岭街道58号达尚城1栋2单元" />
+
+
+    <ImageView
+        android:id="@+id/iv_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/tv_detail"
+        android:layout_marginTop="19dp"
+        android:background="#fffbfbfb" />
+
+
+
+    <TextView
+        style="@style/ui_h5_option_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_line"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="16dp"
+        android:text="删除" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_line"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="16dp"
+        style="@style/ui_checkbox_style"
+        android:textSize="12sp"
+        android:background="@null"
+        android:text="默认地址" />
+</RelativeLayout>
+

@@ -3,7 +3,7 @@ package com.bq.app;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.base.R;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 
 /**
  * 文件名：

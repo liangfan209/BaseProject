@@ -28,10 +28,10 @@ android {
 
 dependencies {
     implementation project(path: ':common-library')
-//    if (!isBuildModule.toBoolean()) {
-//        implementation project(":loginApp")
-//        implementation project(":userCenterApp")
-//    }
+    if (!isBuildModule.toBoolean()) {
+        implementation project(":loginApp")
+        implementation project(":userCenterApp")
+    }
     annotationProcessor rootProject.ext.dependencies["butterknife.compiler"]
     annotationProcessor rootProject.ext.dependencies["arouter.compiler"]
 }

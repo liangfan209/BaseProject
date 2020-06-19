@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- 标题栏目文字颜色-->
+    <color name="ui_title_txt_color">#333333</color>
+    <!-- 标题栏背景颜色-->
+    <color name="ui_title_bg_color">#ffffff</color>
+    <!-- 按钮文字颜色-->
+    <color name="ui_button_txt_primary_color">#ffffff</color>
+    <!-- 普通文本颜色-->
+    <color name="ui_txt_normal_color">#333333</color>
+    <!-- 提示文本颜色-->
+    <color name="ui_txt_hint_color">#999999</color>
+    <!-- 主题色-->
+    <color name="ui_primary_color">#066DF7</color>
+    <!-- 列表页背景色-->
+    <color name="ui_recycleview_color">#f2f2f2</color>
+    <!-- 多条选项间隔色-->
+    <color name="ui_interval_color">#fcfcfc</color>
+    <!-- 按钮渐变色开始-->
+    <color name="ui_button_start_color">#ff0f89ec</color>
+    <!-- 按钮渐变色结束-->
+    <color name="ui_button_end_color">#ff0059ff</color>
+    <!-- 滑动开关关闭颜色-->
+    <color name="ui_swich_off">#e3e3e3</color>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- 使用的是该App的颜色-->
     <color name="colorPrimary">#6e5454</color>
     <color name="colorPrimaryDark">#aa0000ff</color>
@@ -14,10 +51,7 @@
 
     <color name="white">#ffffff</color>
     <color name="gray">#c7bdbd</color>
-
-
     <color name="transparent">#00000000</color>
-
     <!-- 按钮颜色-->
     <color name="btColor">#0183FF</color>
     <!-- 主题字体色-->
@@ -43,129 +77,5 @@
 
 
 
-    <color name="public_colorPrimary">#FFFFFFFF</color>
-    <color name="public_colorPrimaryDark">#00000000</color>
-    <color name="public_colorAccent">#FF488DFB</color>
-    <color name="public_colorAccent2">#12ACFF</color>
-    <color name="public_white">#FFFFFF</color>
-    <color name="public_black">#000000</color>
-    <color name="public_tab_selected_color">#0D8CFD</color>
-    <color name="public_color_transparent">#00000000</color>
-    <color name="public_color_split_line">#D1D1D1</color>
-    <color name="public_color_4A4A4A">#4A4A4A</color>
-    <color name="public_color_443636">#443636</color>
-    <color name="public_color_53A8F4">#53A8F4</color>
-    <color name="public_color_333333">#333333</color>
-    <color name="public_color_222222">#222222</color>
-    <color name="public_color_FEFEFE">#FEFEFE</color>
-    <color name="public_color_F7F7F7">#F7F7F7</color>
 
-
-
-    <color name="public_color_53A7F3">#53A7F3</color>
-    <color name="public_color_E5E5E5">#E5E5E5</color>
-    <color name="public_color_F6F6F6">#F6F6F6</color>
-    <color name="public_color_FFFFFF">#FFFFFF</color>
-    <color name="public_color_DDDDDD">#BBBBBB</color>
-    <color name="public_color_E1E1E1">#E1E1E1</color>
-    <color name="public_color_959292">#959292</color>
-    <color name="public_color_CDD3D7">#CDD3D7</color>
-    <color name="public_color_B8B6B6">#B8B6B6</color>
-    <color name="public_color_E7E7E7">#E7E7E7</color>
-    <color name="public_color_D8D8D8">#D8D8D8</color>
-    <color name="public_color_8D8D8D">#8D8D8D</color>
-    <color name="public_color_06CB7E">#06CB7E</color>
-    <color name="public_color_6C6C6C">#6C6C6C</color>
-    <color name="public_color_666F80">#666F80</color>
-    <color name="public_color_0F79FD">#0F79FD</color>
-    <color name="public_color_FF9900">#FF9900</color>
-    <color name="public_color_FFB8B6B6">#FFB8B6B6</color>
-    <color name="public_color_F55122">#F55122</color>
-    <color name="public_color_F55123">#F55123</color>
-    <color name="public_color_F82D22">#F82D22</color>
-    <color name="public_color_D0021B">#D0021B</color>
-    <color name="public_color_FFF55122">#FFF55122</color>
-    <color name="public_color_FF6C6C6C">#FF6C6C6C</color>
-    <color name="public_color_FF959292">#FF959292</color>
-    <color name="public_color_FF9C15">#FF9C15</color>
-    <color name="public_color_FF4A4A4A">#FF4A4A4A</color>
-    <color name="public_color_FFF59C22">#FFF59C22</color>
-    <color name="public_color_F59C22">#F59C22</color>
-    <color name="public_color_F59C23">#F59C23</color>
-    <color name="public_color_FFFFFFFF">#FFFFFFFF</color>
-    <color name="public_color_FF53A8F4">#FF53A8F4</color>
-    <color name="public_color_E9EDEE">#E9EDEE</color>
-    <color name="public_color_FFE9EDEE">#FFE9EDEE</color>
-    <color name="public_color_FF06CB7E">#FF06CB7E</color>
-    <color name="public_background">#FFF6F6F6</color>
-    <color name="public_color_979797">#979797</color>
-    <color name="public_color_FED652">#FED652</color>
-    <color name="public_color_148CF9">#148CF9</color>
-    <color name="public_color_C6C4C4">#C6C4C4</color>
-
-    <color name="public_color_f0f0f0">#FFf0f0f0</color>
-    <color name="public_color_f2f2f2">#FFf2f2f2</color>
-    <color name="public_color_fafafa">#fafafa</color>
-    <!--  ***************************** android:right="0dp" *****************************  -->
-    <color name="public_cc">#59a9ff</color>
-    <color name="public_blue_qian">#40015DFD</color>
-    <color name="public_bg_color">#EDEDED</color>
-    <color name="public_contents_text">#ff000000</color>
-    <color name="public_encode_view">#ffffffff</color>
-    <color name="public_help_button_view">#ffcccccc</color>
-    <color name="public_help_view">#ff404040</color>
-    <color name="public_possible_result_points">#c0ffff00</color>
-    <color name="public_result_image_border">#ffffffff</color>
-    <color name="public_result_minor_text">#ffc0c0c0</color>
-    <color name="public_result_points">#c000ff00</color>
-    <color name="public_result_text">#ffffffff</color>
-    <color name="public_result_view">#b0000000</color>
-    <color name="public_sbc_header_text">#ff808080</color>
-    <color name="public_sbc_header_view">#ffffffff</color>
-    <color name="public_sbc_list_item">#fffff0e0</color>
-    <color name="public_sbc_layout_view">#ffffffff</color>
-    <color name="public_sbc_page_number_text">#ff000000</color>
-    <color name="public_sbc_snippet_text">#ff4b4b4b</color>
-    <color name="public_share_text">#ff000000</color>
-    <color name="public_share_view">#ffffffff</color>
-    <color name="public_status_view">#50000000</color>
-    <color name="public_status_text">#ffffffff</color>
-    <color name="public_transparent">#00000000</color>
-    <color name="public_viewfinder_frame">#ff000000</color>
-    <color name="public_viewfinder_laser">#ffff0000</color>
-    <color name="public_viewfinder_mask">#60000000</color>
-    <color name="public_header">#58567D</color>
-    <color name="public_grgray">#686868</color>
-    <color name="public_colorAccent_dialog">#041a39</color>
-    <!--  ***************************** 搜索 *****************************  -->
-    <color name="public_color_333">#333</color>
-    <color name="public_color_7b8094">#7b8094</color>
-
-    <color name="public_search_color">#b0bdcd</color>
-    <color name="public_text">#333333</color>
-    <color name="public_text_gray">#999999</color>
-    <color name="public_color_42A5F5">#42A5F5</color>
-    <color name="public_color_dadada">#dadada</color>
-    <color name="public_color_eeeeee">#EEEEEE</color>
-    <color name="public_color_d6d6d6">#d6d6d6</color>
-    <color name="public_color_202020">#202020</color>
-    <color name="public_color_0D8CFD">#0D8CFD</color>
-    <color name="public_color_CFCFCF">#CFCFCF</color>
-    <color name="public_color_F5F5F5">#F5F5F5</color>
-    <color name="public_color_FFB341">#FFB341</color>
-    <color name="public_color_679FFA">#679FFA</color>
-    <color name="public_color_555555">#555555</color>
-    <color name="public_color_666666">#666666</color>
-    <color name="public_color_777777">#777777</color>
-    <color name="public_color_4C7090">#4C7090</color>
-    <color name="public_color_007AFF">#007AFF</color>
-    <color name="public_color_EBEBEB">#ebebeb</color>
-    <color name="public_color_EA9518">#EA9518</color>
-    <color name="public_color_50000000">#50000000</color>
-    <color name="public_color_FF4E4C4B">#FF4E4C4B</color>
-
-    <color name="home_scan_border">#2979ff</color>
-
-    <color name="colorFocus">#FF4081</color>
-    <color name="colorDefault">#eeeeee</color>
 </resources>

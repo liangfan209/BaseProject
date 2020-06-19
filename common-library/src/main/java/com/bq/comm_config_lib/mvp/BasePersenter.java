@@ -8,4 +8,6 @@ package com.bq.comm_config_lib.mvp;
  * 版权：
  */
 public interface BasePersenter {
+
 }
+

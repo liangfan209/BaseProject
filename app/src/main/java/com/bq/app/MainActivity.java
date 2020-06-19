@@ -9,7 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.base.R;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Arrays;

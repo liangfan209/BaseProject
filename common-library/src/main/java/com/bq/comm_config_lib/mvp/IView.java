@@ -8,4 +8,7 @@ package com.bq.comm_config_lib.mvp;
  * 版权：
  */
 public interface IView {
+    void showLoading();
+    void onError(String msg);
+    void onComplete();
 }

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ui.bankcard.BankCardListActivity"
+        <activity android:name=".mvp.address.ui.AddressListActivity"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

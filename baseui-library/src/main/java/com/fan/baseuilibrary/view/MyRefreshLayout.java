@@ -168,6 +168,11 @@ public class MyRefreshLayout<T> extends SmartRefreshLayout {
         page++;
     }
 
+    /**
+     * 设置是否开启下拉刷新，和加载更多
+     * @param refresh
+     * @param loadMore
+     */
     public void setRefresh(boolean refresh, boolean loadMore) {
         isRefresh = refresh;
         isLoadMore = loadMore;
@@ -175,5 +180,11 @@ public class MyRefreshLayout<T> extends SmartRefreshLayout {
         this.setEnableLoadmore(isLoadMore);
     }
 
+    /**
+     * 设置背景颜色
+     */
+    public void setbackgroundColor(int color){
+        mRecyclerView.setBackgroundColor(getResources().getColor(color));
+    }
 
 }

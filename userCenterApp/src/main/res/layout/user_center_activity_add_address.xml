@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <include layout="@layout/layout_public_title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ui_h3_normal_style"
+            android:text="所在地区"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请选择地区"
+            android:textColor="@color/ui_txt_hint_color"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="97dp"
+            />
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="12dp"
+            android:background="@mipmap/next_step"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ffeeeeee"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ui_h3_normal_style"
+            android:text="详细地址"
+
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            />
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="详细地址，例：1号楼2层202室"
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="97dp"
+
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ffeeeeee"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ui_h3_normal_style"
+            android:text="联系人"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            />
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请填写收货人姓名"
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="97dp"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ffeeeeee"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="先生"
+            style="@style/ui_checkbox_style"
+            android:layout_marginLeft="99dp"
+            android:textSize="@dimen/h4_font_size"
+            android:layout_centerVertical="true"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="女士"
+            style="@style/ui_checkbox_style"
+            android:textSize="@dimen/h4_font_size"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26dp"
+            />
+
+    </RadioGroup>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/ui_interval_color"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ui_h3_normal_style"
+            android:text="设置默认地址"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            />
+
+        <Switch
+            android:id="@+id/switchView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            style="@style/ui_switch_style"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ffeeeeee"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/ui_interval_color"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/bt_add_address"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="添加新地址"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            style="@style/ui_h3_button_primary_style"
+            android:layout_marginBottom="33dp"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</LinearLayout>

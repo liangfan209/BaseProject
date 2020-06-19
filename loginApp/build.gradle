@@ -7,8 +7,8 @@ android {
     resourcePrefix "login_" //给 Module 内的资源名增加前缀, 避免资源名冲突
 }
 dependencies {
-//    implementation project(path: ':common-library')
-    implementation "com.android.bq.comm:commLib:0.0.3"
+    implementation project(path: ':common-library')
+//    implementation "com.android.bq.comm:commLib:0.0.3"
 }
 
 

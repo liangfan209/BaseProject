@@ -1,5 +1,94 @@
 <resources>
 
+    <!-- 地址管理页面  start-->
+    <!-- H1-->
+    <style name="ui_h1_style">
+        <item name="android:textSize">@dimen/h1_font_size</item>
+        <item name="android:textColor">@color/ui_title_txt_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- H3普通文本-->
+    <style name="ui_h3_normal_style">
+        <item name="android:textSize">@dimen/h3_font_size</item>
+        <item name="android:textColor">@color/ui_txt_normal_color</item>
+    </style>
+
+    <!-- h3 主要按钮-->
+    <style name="ui_h3_button_primary_style">
+        <item name="android:textSize">@dimen/h3_font_size</item>
+        <item name="android:textColor">@color/ui_button_txt_primary_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/ui_shap_button_primary_bg</item>
+    </style>
+
+
+    <!-- h4普通文本-->
+    <style name="ui_h4_normal_style">
+        <item name="android:textSize">@dimen/h4_font_size</item>
+        <item name="android:textColor">@color/ui_txt_normal_color</item>
+    </style>
+
+    <!-- h5普通文本-->
+    <style name="ui_h5_normal_style">
+        <item name="android:textSize">@dimen/h5_font_size</item>
+        <item name="android:textColor">@color/ui_txt_normal_color</item>
+    </style>
+
+    <!-- h5操作文本-->
+    <style name="ui_h5_option_style">
+        <item name="android:textSize">@dimen/h5_font_size</item>
+        <item name="android:textColor">@color/ui_primary_color</item>
+    </style>
+
+    <!--单选按钮样式 checkbox-->
+    <style name="ui_checkbox_style">
+        <item name="android:textColor">@color/ui_txt_normal_color</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawableLeft">@drawable/ui_checkbox_select</item>
+        <item name="android:drawablePadding">5dp</item>
+    </style>
+
+
+    <!-- 滑动开关-->
+    <style name="ui_switch_style">
+        <!-- 内部图形-->
+        <item name="android:thumb">@drawable/ui_switch_thumb</item>
+        <item name="android:track">@drawable/ui_switch_track_selector</item>
+
+    </style>
+
+    <!-- 输入框样式-->
+    <style name="ui_edit_txt_style">
+        <item name="android:textColorHint">@color/ui_txt_hint_color</item>
+        <item name="android:textColor">@color/ui_txt_normal_color</item>
+        <item name="android:background">@null</item>
+        <item name="android:textCursorDrawable">@drawable/ui_edit_cursor</item>
+        <item name="android:drawableRight">@mipmap/icon_clear</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <!-- 地址管理页面  end-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <style name="dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
@@ -11,49 +100,48 @@
     </style>
 
     <!-- 3中状态view-->
+    <style name="tab_test">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:drawableLeft">@mipmap/ic_dialog_tip_error</item>
+    </style>
+
+    <style name="bt_tab">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="user_center_item_left">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:textColor">@color/color_333333</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- 用户中心选项样式-->
+    <style name="user_center_item_right">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">23dp</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="bottom_line">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:background">@color/color_cccccc</item>
+    </style>
+
     <declare-styleable name="MultipleStatusView">
         <attr name="loadingView" format="reference" />
         <attr name="emptyView" format="reference" />
         <attr name="contentView" format="reference" />
     </declare-styleable>
-
-    <style name="tab_test">
-        <item  name="android:textSize">20sp</item>
-        <item  name="android:textColor">@color/red</item>
-        <item name="android:drawableLeft">@mipmap/ic_dialog_tip_error</item>
-    </style>
-
-    <style name="bt_tab">
-        <item  name="android:textSize">15sp</item>
-    </style>
-
-
-    <!-- 用户中心选项样式-->
-    <style name="user_center_item_left">
-        <item  name="android:layout_width">wrap_content</item>
-        <item  name="android:layout_height">match_parent</item>
-        <item  name="android:gravity">center_vertical</item>
-        <item  name="android:layout_marginLeft">15dp</item>
-        <item  name="android:textColor">@color/public_color_333333</item>
-        <item  name="android:drawablePadding">8dp</item>
-        <item  name="android:textSize">16sp</item>
-    </style>
-
-    <style name="user_center_item_right">
-        <item  name="android:layout_width">wrap_content</item>
-        <item  name="android:layout_height">wrap_content</item>
-        <item  name="android:layout_alignParentRight">true</item>
-        <item  name="android:layout_centerVertical">true</item>
-        <item  name="android:layout_marginRight">23dp</item>
-        <item  name="android:drawablePadding">8dp</item>
-        <item  name="android:textSize">15sp</item>
-    </style>
-
-    <style name="bottom_line">
-        <item  name="android:layout_width">wrap_content</item>
-        <item  name="android:layout_height">1px</item>
-        <item  name="android:layout_alignParentBottom">true</item>
-        <item  name="android:background">@color/color_cccccc</item>
-    </style>
 
 </resources>

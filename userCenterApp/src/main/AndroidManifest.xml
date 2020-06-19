@@ -1,8 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bq.user_center" >
     <application>
-        <activity android:name=".ui.bankcard.BankCardListActivity"
+        <activity android:name=".mvp.bankcard.ui.BankCardListActivity"
             android:label="login"
             android:configChanges="orientation|screenSize"/>
+        <activity android:name=".mvp.address.ui.AddressListActivity"/>
+        <activity android:name=".mvp.address.ui.AddressOptionActivity"/>
     </application>
 </manifest>

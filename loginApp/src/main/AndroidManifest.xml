@@ -2,10 +2,10 @@
     package="com.bq.login" >
 
     <application>
-        <activity android:name=".ui.activity.LoginActivity"
+        <activity android:name=".mvp.login.ui.LoginActivity"
             android:label="login"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".ui.activity.ForgetPwdActivity"
+        <activity android:name=".mvp.login.ui.ForgetPwdActivity"
             android:configChanges="orientation|screenSize"
             />
     </application>

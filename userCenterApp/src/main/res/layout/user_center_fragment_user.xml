@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
 
-<!--    <include layout="@layout/layout_public__title"/>-->
+<!--    <include layout="@layout/layout_public_title"/>-->
 
 
     <RelativeLayout
@@ -83,6 +83,51 @@
             android:drawableRight="@mipmap/next_step"
             style="@style/user_center_item_right"
             android:text="立即绑定"
+            />
+        <ImageView
+            style="@style/bottom_line"
+            android:layout_marginLeft="60dp"
+            />
+    </RelativeLayout>
+
+    <!-- 我的地址-->
+    <RelativeLayout
+        android:id="@+id/rlt_address"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
+        <TextView
+            style="@style/user_center_item_left"
+            android:drawableLeft="@mipmap/icon_user_auth"
+            android:text="我的地址管理"
+            />
+
+        <TextView
+            android:drawableRight="@mipmap/next_step"
+            style="@style/user_center_item_right"
+            />
+        <ImageView
+            style="@style/bottom_line"
+            android:layout_marginLeft="60dp"
+            />
+    </RelativeLayout>
+
+    <!--我的银行卡-->
+    <RelativeLayout
+        android:id="@+id/rlt_logout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
+        <TextView
+            style="@style/user_center_item_left"
+            android:drawableLeft="@mipmap/icon_user_auth"
+            android:text="退出登录"
+            />
+        <TextView
+            android:drawableRight="@mipmap/next_step"
+            style="@style/user_center_item_right"
             />
         <ImageView
             style="@style/bottom_line"

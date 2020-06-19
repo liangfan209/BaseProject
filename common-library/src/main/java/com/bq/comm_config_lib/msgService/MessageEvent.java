@@ -9,9 +9,10 @@ package com.bq.comm_config_lib.msgService;
  */
 public class MessageEvent {
     public  String key;
-    public  EventInter eventInterface;
+    public MessageInter eventInterface;
 
-    public MessageEvent(String key, EventInter eventInter) {
+
+    public MessageEvent(String key, MessageInter eventInter) {
         this.key = key;
         eventInterface = eventInter;
     }

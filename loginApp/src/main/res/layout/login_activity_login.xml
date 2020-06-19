@@ -48,7 +48,7 @@
             android:textColorHint="#ffcccccc"
             android:textColor="@color/color_333333"
             android:textSize="14sp"
-            android:textCursorDrawable="@drawable/edit_cursor"/>
+            android:textCursorDrawable="@drawable/ui_edit_cursor"/>
     </RelativeLayout>
 
 
@@ -78,7 +78,7 @@
             android:textColor="@color/color_333333"
             android:layout_marginRight="14dp"
             android:textSize="14sp"
-            android:textCursorDrawable="@drawable/edit_cursor"/>
+            android:textCursorDrawable="@drawable/ui_edit_cursor"/>
 
     </RelativeLayout>
 
