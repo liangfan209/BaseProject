@@ -27,7 +27,7 @@ import butterknife.OnClick;
  * 版权：
  */
 @Route(path = AppArouter.USER_CENTER_USER_FRAGMENT)
-public class UserFragment extends BaseFragment implements UserIView {
+public class UserFragment extends BaseFragment implements UserBaseIView {
 
 
     @BindView(R2.id.iv_head)
@@ -61,7 +61,7 @@ public class UserFragment extends BaseFragment implements UserIView {
     }
 
 
-    @OnClick({R2.id.rlt_head, R2.id.rlt_user_identification, R2.id.rlt_bank, R2.id.rlt_logout,R2.id.rlt_address})
+    @OnClick({R2.id.rlt_head, R2.id.rlt_user_identification, R2.id.rlt_bank, R2.id.rlt_logout,R2.id.rlt_address,R2.id.rlt_address_select})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.rlt_bank) {
             ARouter.getInstance().build(AppArouter.USER_CENTER_BANK_LIST).navigation();
@@ -69,6 +69,8 @@ public class UserFragment extends BaseFragment implements UserIView {
             mUserPersenter.logout();
         } else if(view.getId() == R.id.rlt_address){
             ARouter.getInstance().build(AppArouter.USER_CENTER_ADDRESS_LIST).navigation();
+        } else if(view.getId() == R.id.rlt_address_select){
+            ARouter.getInstance().build(AppArouter.USER_CENTER_ADDRESS_SELECT).navigation();
         }
     }
 

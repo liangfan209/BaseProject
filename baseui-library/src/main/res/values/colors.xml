@@ -15,8 +15,14 @@
     <color name="ui_primary_color">#066DF7</color>
     <!-- 列表页背景色-->
     <color name="ui_recycleview_color">#f2f2f2</color>
+    <!-- 列表页默认线-->
+    <color name="ui_recycleview_item_line_color">#cccccc</color>
     <!-- 多条选项间隔色-->
     <color name="ui_interval_color">#fcfcfc</color>
+
+    <!-- 小按钮底部色-->
+    <color name="ui_small_button_bg_color">#E5EEFF</color>
+
     <!-- 按钮渐变色开始-->
     <color name="ui_button_start_color">#ff0f89ec</color>
     <!-- 按钮渐变色结束-->
@@ -62,7 +68,6 @@
 
 
     <color name="black">#000000</color>
-    <color name="actionsheet_blue">#037BFF</color>
 
     <color name="font_blue">#ff015DFD</color>
 

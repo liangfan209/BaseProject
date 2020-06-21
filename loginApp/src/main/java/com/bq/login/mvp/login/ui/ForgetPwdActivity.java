@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 @Route(path = AppArouter.FORGET_PWD_ACTIVITY)
-public class ForgetPwdActivity extends BaseAcitivty implements LoginIView {
+public class ForgetPwdActivity extends BaseAcitivty implements LoginBaseIView {
 
 
     @BindView(R2.id.rlt_close_page)

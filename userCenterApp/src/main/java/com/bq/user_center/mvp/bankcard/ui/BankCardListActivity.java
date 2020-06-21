@@ -15,12 +15,15 @@ import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.mvp.bankcard.presenter.BankCardPresenter;
 import com.bq.user_center.requset.bean.BankCard;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
 
 import org.greenrobot.eventbus.EventBus;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,7 +36,7 @@ import butterknife.BindView;
  * 版权：
  */
 @Route(path = AppArouter.USER_CENTER_BANK_LIST)
-public class BankCardListActivity extends BaseAcitivty implements BankCardIView, MyRefreshLayout.LayoutInterface<BankCard> {
+public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIView, MyRefreshLayout.LayoutInterface<BankCard> {
 
     @BindView(R2.id.flt_content)
     FrameLayout mFltContent;
@@ -76,17 +79,17 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardIView,
     }
 
     @Override
-    public int getItemRes() {
-        return R.layout.user_center_item_banklist;
-    }
-
-    @Override
-    public void bindItem(BaseViewHolder helper, BankCard item) {
-        helper.setText(R.id.tv_card_number, item.getCardNo());
-        helper.setText(R.id.tv_card_name, item.getBankName());
-        helper.setText(R.id.tv_card_type, item.getCardType());
-        helper.setText(R.id.tv_card_user, "持卡人：" + item.getPayeeName());
-        ImageView ivCard = helper.getView(R.id.iv_bank);
+    public BaseQuickAdapter<BankCard, ? extends BaseViewHolder> createAdapter() {
+        return new BaseQuickAdapter<BankCard, BaseViewHolder>(R.layout.user_center_item_banklist,new ArrayList<BankCard>()) {
+            @Override
+            protected void convert(@NotNull BaseViewHolder helper, BankCard item) {
+                helper.setText(R.id.tv_card_number, item.getCardNo());
+                helper.setText(R.id.tv_card_name, item.getBankName());
+                helper.setText(R.id.tv_card_type, item.getCardType());
+                helper.setText(R.id.tv_card_user, "持卡人：" + item.getPayeeName());
+                ImageView ivCard = helper.getView(R.id.iv_bank);
+            }
+        };
     }
 
     @Override

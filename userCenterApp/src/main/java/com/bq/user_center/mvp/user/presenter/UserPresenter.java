@@ -4,7 +4,7 @@ import com.bq.comm_config_lib.msgService.MessageBody;
 import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.user_center.api.ComponentService;
-import com.bq.user_center.mvp.user.ui.UserIView;
+import com.bq.user_center.mvp.user.ui.UserBaseIView;
 import com.bq.user_center.requset.UserCenterHttpReqeustImp;
 import com.bq.user_center.requset.bean.UserInfo;
 
@@ -16,9 +16,9 @@ import com.bq.user_center.requset.bean.UserInfo;
  * 版权：
  */
 public class UserPresenter implements BasePersenter {
-    private UserIView mUserIView;
+    private UserBaseIView mUserIView;
 
-    public UserPresenter(UserIView userIView) {
+    public UserPresenter(UserBaseIView userIView) {
         mUserIView = userIView;
     }
 

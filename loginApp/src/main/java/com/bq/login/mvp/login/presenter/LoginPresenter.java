@@ -2,7 +2,7 @@ package com.bq.login.mvp.login.presenter;
 
 import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
-import com.bq.login.mvp.login.ui.LoginIView;
+import com.bq.login.mvp.login.ui.LoginBaseIView;
 import com.bq.login.requset.LoginHttpReqeustImp;
 import com.bq.login.requset.bean.LoginInfo;
 
@@ -14,10 +14,10 @@ import com.bq.login.requset.bean.LoginInfo;
  * 版权：
  */
 public class LoginPresenter implements BasePersenter {
-    private LoginIView mIView;
+    private LoginBaseIView mIView;
 //    private LoginModel mLoginModel;
 
-    public LoginPresenter(LoginIView IView) {
+    public LoginPresenter(LoginBaseIView IView) {
         mIView = IView;
     }
     public LoginPresenter() {

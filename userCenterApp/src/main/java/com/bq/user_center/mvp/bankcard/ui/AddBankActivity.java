@@ -11,7 +11,7 @@ import com.bq.user_center.requset.bean.BankCard;
  * 时间：2020/6/11
  * 版权：
  */
-public class AddBankActivity extends BaseAcitivty implements BankCardIView {
+public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
 
     BankCardPresenter mBankCardPersenter;
 

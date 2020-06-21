@@ -4,7 +4,8 @@
         <activity android:name=".mvp.bankcard.ui.BankCardListActivity"
             android:label="login"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".mvp.address.ui.AddressListActivity"/>
+        <activity android:name=".mvp.address.ui.AddressManagerActivity"/>
         <activity android:name=".mvp.address.ui.AddressOptionActivity"/>
+        <activity android:name=".mvp.address.ui.AddressSelectActivity"/>
     </application>
 </manifest>

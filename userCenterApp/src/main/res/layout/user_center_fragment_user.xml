@@ -113,6 +113,29 @@
             />
     </RelativeLayout>
 
+    <!-- 我的地址-->
+    <RelativeLayout
+        android:id="@+id/rlt_address_select"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
+        <TextView
+            style="@style/user_center_item_left"
+            android:drawableLeft="@mipmap/icon_user_auth"
+            android:text="选择地址"
+            />
+
+        <TextView
+            android:drawableRight="@mipmap/next_step"
+            style="@style/user_center_item_right"
+            />
+        <ImageView
+            style="@style/bottom_line"
+            android:layout_marginLeft="60dp"
+            />
+    </RelativeLayout>
+
     <!--我的银行卡-->
     <RelativeLayout
         android:id="@+id/rlt_logout"

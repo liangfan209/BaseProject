@@ -1,6 +1,6 @@
 package com.bq.comm_config_lib.request;
 
-import com.bq.comm_config_lib.mvp.IView;
+import com.bq.comm_config_lib.mvp.BaseIView;
 
 /**
  * 文件名：
@@ -11,9 +11,9 @@ import com.bq.comm_config_lib.mvp.IView;
  */
 public abstract class AbstractReqeustCallback<T> implements RequestCallBackInter<T>{
 
-    IView mIview;
+    BaseIView mIview;
 
-    public AbstractReqeustCallback(IView iview){
+    public AbstractReqeustCallback(BaseIView iview){
         this.mIview = iview;
     }
 

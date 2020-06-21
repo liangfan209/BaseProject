@@ -27,12 +27,9 @@ public class AppArouter {
     public static final String USER_CENTER_BANK_LIST = USER_CENTER+"/BankListActivity";
     public static final String USER_CENTER_USER_FRAGMENT = USER_CENTER+"/UserInfoFragment";
     public static final String USER_CENTER_ADDRESS_LIST = USER_CENTER+"/AddressListActivity";
-
+    public static final String USER_CENTER_ADDRESS_SELECT = USER_CENTER+"/AddressSelectActivity";
     public static final String USER_CENTER_ADDRESS_OPTION = USER_CENTER+"/AddAddressActivity";
 
-
-
     public static final String USER_CENTER_SERVICE = USER_CENTER+"/service";
-
 
 }

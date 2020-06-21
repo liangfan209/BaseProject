@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bq.comm_config_lib.mvp.IView;
+import com.bq.comm_config_lib.mvp.BaseIView;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
 import com.fan.baseuilibrary.view.dialog.LoadingDialog;
@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
  * 时间：2020/5/28
  * 版权：
  */
-public abstract class BaseFragment extends Fragment implements IView {
+public abstract class BaseFragment extends Fragment implements BaseIView {
 
     private LoadingDialog mLoadingDialog;
     public MyRefreshLayout mRefreshLayout;

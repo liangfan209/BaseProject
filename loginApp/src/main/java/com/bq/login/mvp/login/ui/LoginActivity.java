@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 @Route(path = AppArouter.LOGIN_ACTVITY)
-public class LoginActivity extends BaseAcitivty implements LoginIView {
+public class LoginActivity extends BaseAcitivty implements LoginBaseIView {
 
     @BindView(R2.id.tv_welcom)
     TextView mTvWelcom;

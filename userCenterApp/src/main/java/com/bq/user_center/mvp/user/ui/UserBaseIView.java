@@ -1,6 +1,6 @@
 package com.bq.user_center.mvp.user.ui;
 
-import com.bq.comm_config_lib.mvp.IView;
+import com.bq.comm_config_lib.mvp.BaseIView;
 import com.bq.user_center.requset.bean.UserInfo;
 
 /**
@@ -10,7 +10,7 @@ import com.bq.user_center.requset.bean.UserInfo;
  * 时间：2020/6/11
  * 版权：
  */
-public interface UserIView extends IView {
+public interface UserBaseIView extends BaseIView {
     void showUser(UserInfo info);
     default void logout(){};
 }

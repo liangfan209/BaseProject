@@ -9,9 +9,11 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
+import com.bq.user_center.mvp.address.presenter.AddressOptionPresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -24,7 +26,7 @@ import butterknife.OnClick;
  * 版权：
  */
 @Route(path = AppArouter.USER_CENTER_ADDRESS_OPTION)
-public class AddressOptionActivity extends BaseAcitivty {
+public class AddressOptionActivity extends BaseAcitivty implements AddressBaseIView{
     public static final int ADDRESS_ADD = 1;
     public static final int ADDRESS_EDIT = 2;
     @BindView(R2.id.tv_title)
@@ -37,6 +39,14 @@ public class AddressOptionActivity extends BaseAcitivty {
     @Autowired()
     int optionType;
 
+    private AddressOptionPresenter mAddressOptionPresenter;
+
+
+    @Override
+    protected BasePersenter createPersenter() {
+        mAddressOptionPresenter = new AddressOptionPresenter(this);
+        return mAddressOptionPresenter;
+    }
 
     @Override
     protected int getContentViewLayout() {
@@ -53,6 +63,12 @@ public class AddressOptionActivity extends BaseAcitivty {
     @OnClick(R2.id.bt_add_address)
     public void onViewClicked(View view) {
         if(view.getId() == R.id.bt_add_address){
+            mAddressOptionPresenter.addAddress(null);
         }
+    }
+
+    @Override
+    public void addAdress() {
+        finish();
     }
 }

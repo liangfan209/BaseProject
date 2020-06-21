@@ -5,7 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bq.comm_config_lib.R;
-import com.bq.comm_config_lib.mvp.IView;
+import com.bq.comm_config_lib.mvp.BaseIView;
+import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
 import com.fan.baseuilibrary.view.dialog.LoadingDialog;
@@ -13,6 +14,7 @@ import com.fan.baseuilibrary.view.dialog.LoadingDialog;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
 import butterknife.ButterKnife;
 
 /**
@@ -22,7 +24,7 @@ import butterknife.ButterKnife;
  * 时间：2020/5/28
  * 版权：
  */
-public abstract class BaseAcitivty extends AppCompatActivity implements IView {
+public abstract class BaseAcitivty extends AppCompatActivity implements BaseIView, LifecycleOwner {
 
     private LoadingDialog mLoadingDialog;
     public MyRefreshLayout mRefreshLayout;
@@ -42,6 +44,10 @@ public abstract class BaseAcitivty extends AppCompatActivity implements IView {
                     finish();
                 }
             });
+        }
+        BasePersenter presenter = createPersenter();
+        if(presenter != null){
+            getLifecycle().addObserver(presenter);
         }
         attach();
 
@@ -69,9 +75,7 @@ public abstract class BaseAcitivty extends AppCompatActivity implements IView {
         }
     }
 
-    protected abstract @LayoutRes
-    int getContentViewLayout();
-
+    protected abstract @LayoutRes int getContentViewLayout();
     protected abstract void attach();
-
+    protected abstract BasePersenter createPersenter();
 }

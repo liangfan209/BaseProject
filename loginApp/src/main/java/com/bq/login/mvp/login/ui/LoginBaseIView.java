@@ -1,6 +1,6 @@
 package com.bq.login.mvp.login.ui;
 
-import com.bq.comm_config_lib.mvp.IView;
+import com.bq.comm_config_lib.mvp.BaseIView;
 import com.bq.login.requset.bean.LoginInfo;
 
 /**
@@ -10,7 +10,7 @@ import com.bq.login.requset.bean.LoginInfo;
  * 时间：2020/5/28/028
  * 版权：
  */
-public interface LoginIView extends IView {
+public interface LoginBaseIView extends BaseIView {
     default void loginView(LoginInfo info){};
     default void forgetPwdView(){};
     default void getVerticalCodeView(){};

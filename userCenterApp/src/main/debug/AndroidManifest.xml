@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".mvp.address.ui.AddressListActivity"
+        <activity android:name=".mvp.address.ui.AddressManagerActivity"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

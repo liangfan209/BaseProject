@@ -7,7 +7,7 @@ package com.bq.comm_config_lib.mvp;
  * 时间：2020/5/28
  * 版权：
  */
-public interface IView {
+public interface BaseIView {
     void showLoading();
     void onError(String msg);
     void onComplete();

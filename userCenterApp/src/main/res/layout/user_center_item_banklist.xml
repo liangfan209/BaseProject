@@ -11,7 +11,7 @@
         android:layout_marginLeft="14dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="14dp"
-        android:background="@drawable/shap_white_4_border_radius_selector">
+        android:background="@drawable/shap_white_radius_4">
 
         <ImageView
             android:id="@+id/iv_bank"

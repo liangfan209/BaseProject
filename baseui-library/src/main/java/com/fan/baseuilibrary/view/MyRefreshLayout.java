@@ -13,7 +13,6 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,9 +28,10 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MyRefreshLayout<T> extends SmartRefreshLayout {
 
     public interface LayoutInterface<T> {
-        int getItemRes();
+//        int getItemRes();
+//        void bindItem(BaseViewHolder helper, T item);
 
-        void bindItem(BaseViewHolder helper, T item);
+        BaseQuickAdapter<T, ? extends BaseViewHolder> createAdapter();
 
         void loadData(int page, int pageSize);
 
@@ -49,7 +49,6 @@ public class MyRefreshLayout<T> extends SmartRefreshLayout {
     protected StatusView mStatusView;
     protected int page = 1;
     protected int pageSize = 10;
-    private List<T> data = new ArrayList<>();
     protected boolean refreshBoo = false;
     protected boolean loadmoreBoo = false;
     private LayoutInterface<T> mInterface;
@@ -92,12 +91,13 @@ public class MyRefreshLayout<T> extends SmartRefreshLayout {
             }
         });
         this.setEnableLoadmoreWhenContentNotFull(true);
-        adapter = new BaseQuickAdapter<T, BaseViewHolder>(mInterface.getItemRes(), data) {
-            @Override
-            protected void convert(BaseViewHolder helper, T item) {
-                mInterface.bindItem(helper, item);
-            }
-        };
+        adapter = mInterface.createAdapter();
+//        adapter = new BaseQuickAdapter<T, BaseViewHolder>(mInterface.getItemRes(), data) {
+//            @Override
+//            protected void convert(BaseViewHolder helper, T item) {
+//                mInterface.bindItem(helper, item);
+//            }
+//        };
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         mRecyclerView.setAdapter(adapter);
         if (mInterface.addHeader() != null) {
