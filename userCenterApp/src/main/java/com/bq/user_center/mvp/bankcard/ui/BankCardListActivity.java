@@ -10,6 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.msgService.MessageEvent;
+import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
@@ -51,15 +52,24 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIV
         return R.layout.user_center_activity_banklist;
     }
 
+
+    @Override
+    protected BasePersenter createPersenter() {
+        mBankCardPersenter = new BankCardPresenter(this);
+        return mBankCardPersenter;
+    }
+
+
     @Override
     protected void attach() {
         ARouter.getInstance().inject(this);
         mTvTitle.setText("银行卡列表");
-        mBankCardPersenter = new BankCardPresenter(this);
+
         mRefreshLayout = new MyRefreshLayout<BankCard>(this, this);
         mRefreshLayout.setRefresh(true, false);
         mFltContent.addView(mRefreshLayout);
     }
+
 
     @Override
     public View addFooter() {

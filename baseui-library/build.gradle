@@ -40,7 +40,9 @@ dependencies {
     api rootProject.ext.dependencies["glide"]
     api rootProject.ext.dependencies["butterknife"]
     api rootProject.ext.dependencies["arouter"]
-    api 'com.jaychang:simpletext:2.0.1'
+    api rootProject.ext.dependencies["picker.view"]
+
+//    api 'com.jaychang:simpletext:2.0.1'
     //rx系列
 //    api rootProject.ext.dependencies["retrofit"]
 //    api rootProject.ext.dependencies["retrofit.converter.gson"]

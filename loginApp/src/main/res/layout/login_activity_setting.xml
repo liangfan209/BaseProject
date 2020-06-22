@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <include layout="@layout/layout_public_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_jump"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/ui_txt_hint_color"
+            android:textSize="@dimen/h3_font_size"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="22dp"
+            android:text="跳过"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="33dp">
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/et_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:hint="请输入6位数新密码"
+            android:inputType="textPassword"
+            android:maxLength="13"
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"
+            android:layout_marginRight="21dp"/>
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="14dp"
+        android:background="#CCCCCC" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="13dp">
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/et_re_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:hint="请确认新密码"
+            android:inputType="textPassword"
+            android:maxLength="13"
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"
+            android:layout_marginRight="21dp"/>
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="14dp"
+        android:background="#CCCCCC" />
+
+
+    <TextView
+        android:id="@+id/tv_setting"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginRight="28dp"
+        android:gravity="center"
+        android:text="设置"
+        style="@style/ui_h3_button_primary_style"/>
+</LinearLayout>

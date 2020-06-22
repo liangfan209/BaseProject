@@ -1,5 +1,6 @@
 package com.bq.user_center.mvp.bankcard.ui;
 
+import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.user_center.mvp.bankcard.presenter.BankCardPresenter;
 import com.bq.user_center.requset.bean.BankCard;
@@ -30,5 +31,10 @@ public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
     protected void attach() {
         mBankCardPersenter = new BankCardPresenter(this);
         mBankCardPersenter.addBank();
+    }
+
+    @Override
+    protected BasePersenter createPersenter() {
+        return null;
     }
 }

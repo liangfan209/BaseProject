@@ -76,6 +76,6 @@ public abstract class BaseAcitivty extends AppCompatActivity implements BaseIVie
     }
 
     protected abstract @LayoutRes int getContentViewLayout();
-    protected abstract void attach();
     protected abstract BasePersenter createPersenter();
+    protected abstract void attach();
 }

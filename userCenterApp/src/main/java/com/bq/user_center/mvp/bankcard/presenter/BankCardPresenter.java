@@ -9,6 +9,9 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+
 /**
  * 文件名：
  * 描述：
@@ -36,4 +39,13 @@ public class BankCardPresenter implements BasePersenter {
     public void addBank(){
     }
 
+    @Override
+    public void onCreate(@NonNull LifecycleOwner owner) {
+
+    }
+
+    @Override
+    public void onDestroy(@NonNull LifecycleOwner owner) {
+
+    }
 }

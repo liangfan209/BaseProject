@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.base.R;
 import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.google.android.material.tabs.TabLayout;
 
@@ -34,7 +35,10 @@ public class MainActivity extends BaseAcitivty {
     protected int getContentViewLayout() {
         return R.layout.activity_main;
     }
-
+    @Override
+    protected BasePersenter createPersenter() {
+        return null;
+    }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void attach() {

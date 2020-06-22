@@ -14,6 +14,8 @@ import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.mvp.address.presenter.AddressOptionPresenter;
+import com.bq.utilslib.KeyboardUtils;
+import com.fan.baseuilibrary.utils.provinces.CityUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,6 +37,8 @@ public class AddressOptionActivity extends BaseAcitivty implements AddressBaseIV
     RelativeLayout mRltTitle;
     @BindView(R2.id.bt_add_address)
     Button mBtAddAddress;
+    @BindView(R2.id.tv_provinece)
+    TextView mTvProvinece;
 
     @Autowired()
     int optionType;
@@ -60,10 +64,19 @@ public class AddressOptionActivity extends BaseAcitivty implements AddressBaseIV
         mBtAddAddress.setText(optionType== ADDRESS_ADD?"添加新地址":"保存地址");
     }
 
-    @OnClick(R2.id.bt_add_address)
+    @OnClick({R2.id.bt_add_address,R2.id.rlt_provinces})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.bt_add_address){
             mAddressOptionPresenter.addAddress(null);
+        }else if(view.getId() == R.id.rlt_provinces){
+            String arestr = mTvProvinece.getText().toString().trim();
+            KeyboardUtils.hideSoftInput(this);
+            CityUtils.getInstance(this).showPickerView(this, new CityUtils.CityCallBack() {
+                @Override
+                public void getCitys(String citys) {
+                    mTvProvinece.setText(citys);
+                }
+            },arestr);
         }
     }
 

@@ -8,8 +8,12 @@ import android.app.Application.ActivityLifecycleCallbacks;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -297,6 +301,29 @@ public final class AppUtils {
         ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("simple text", content);
         clipboard.setPrimaryClip(clip);
+    }
+
+
+    /**
+     * 获取assets资源文件内容
+     * @param context 上下文
+     * @param fileName 文件名称
+     * @return
+     */
+    public static String getAssetJson(Context context, String fileName) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            AssetManager assetManager = context.getAssets();
+            BufferedReader bf = new BufferedReader(new InputStreamReader(
+                    assetManager.open(fileName)));
+            String line;
+            while ((line = bf.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stringBuilder.toString();
     }
 
     public interface OnAppStatusChangedListener {

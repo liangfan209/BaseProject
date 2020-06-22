@@ -5,6 +5,7 @@ import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.user_center.mvp.address.ui.AddressBaseIView;
 import com.bq.user_center.mvp.address.ui.AddressManagerActivity;
 import com.bq.user_center.requset.bean.AddressBean;
+import com.bq.utilslib.LogUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -60,6 +61,7 @@ public class AddressManagerPresenter implements BasePersenter{
 
     @Override
     public void onCreate(@NonNull LifecycleOwner owner) {
+        LogUtils.d("=== >>>   presenter....oncreate");
         EventBus.getDefault().register(this);
     }
 

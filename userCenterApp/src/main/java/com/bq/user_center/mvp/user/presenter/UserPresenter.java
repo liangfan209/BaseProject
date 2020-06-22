@@ -8,6 +8,9 @@ import com.bq.user_center.mvp.user.ui.UserBaseIView;
 import com.bq.user_center.requset.UserCenterHttpReqeustImp;
 import com.bq.user_center.requset.bean.UserInfo;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+
 /**
  * 文件名：
  * 描述：
@@ -39,5 +42,15 @@ public class UserPresenter implements BasePersenter {
                 mUserIView.onError(data.getContent());
             }
         });
+    }
+
+    @Override
+    public void onCreate(@NonNull LifecycleOwner owner) {
+
+    }
+
+    @Override
+    public void onDestroy(@NonNull LifecycleOwner owner) {
+
     }
 }

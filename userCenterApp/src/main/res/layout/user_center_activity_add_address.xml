@@ -7,6 +7,7 @@
     <include layout="@layout/layout_public_title"/>
 
     <RelativeLayout
+        android:id="@+id/rlt_provinces"
         android:layout_width="match_parent"
         android:layout_height="52dp">
 
@@ -20,6 +21,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_provinece"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="请选择地区"

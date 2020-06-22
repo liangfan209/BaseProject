@@ -23,6 +23,10 @@ public class LoginInfo {
     private String auth_token;
     private SipSeatBean sip_seat;
 
+    public LoginInfo(String auth_token) {
+        this.auth_token = auth_token;
+    }
+
     public String getIs_first_login() {
         return is_first_login;
     }

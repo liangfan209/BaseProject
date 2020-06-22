@@ -5,8 +5,12 @@
         <activity android:name=".mvp.login.ui.LoginActivity"
             android:label="login"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".mvp.login.ui.ForgetPwdActivity"
+        <activity android:name=".mvp.login.ui.RegisterPwdActivity"
             android:configChanges="orientation|screenSize"
             />
+        <activity android:name=".mvp.login.ui.SettingPwdActivity"
+            android:configChanges="orientation|screenSize"
+            />
+
     </application>
 </manifest>

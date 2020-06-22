@@ -2,6 +2,7 @@ package com.bq.app;
 
 import com.bq.comm_config_lib.BaseApplication;
 import com.bq.comm_config_lib.msgService.Servicemanager;
+import com.fan.baseuilibrary.utils.provinces.CityUtils;
 
 /**
  * 文件名：
@@ -20,6 +21,10 @@ public class AppApplication extends BaseApplication {
         super.onCreate();
         //2.注册组件中暴露的服务
         Servicemanager.getInstance().resiter(this,"com.bq");
+        //出事话json
+        new Thread(()->{
+            CityUtils.getInstance(this);
+        }).start();
     }
 
     //销毁组件中的服务

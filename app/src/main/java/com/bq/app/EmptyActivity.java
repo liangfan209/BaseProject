@@ -3,6 +3,7 @@ package com.bq.app;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.base.R;
 import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 
 /**
@@ -19,8 +20,13 @@ public class EmptyActivity extends BaseAcitivty {
     }
 
     @Override
+    protected BasePersenter createPersenter() {
+        return null;
+    }
+    @Override
     protected void attach() {
         //跳转到登录界面
         ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
+        finish();
     }
 }

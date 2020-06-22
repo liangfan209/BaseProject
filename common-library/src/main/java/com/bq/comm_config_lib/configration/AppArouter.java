@@ -10,6 +10,7 @@ package com.bq.comm_config_lib.configration;
 public class AppArouter {
 
 
+
     //壳子
     public static final String MAIN = "/main";
     public static final String MAIN_ACTIVITY = "/main/MainActivity";
@@ -17,7 +18,8 @@ public class AppArouter {
     //登录模块
     public static final String LOGIN = "/login";
     public static final String LOGIN_ACTVITY = LOGIN+"/LoginActivity";
-    public static final String FORGET_PWD_ACTIVITY = LOGIN+"/ForgetPwdActivity";
+    public static final String FORGET_PWD_ACTIVITY = LOGIN+"/RegisterActivity";
+    public static final String LOGIN_SETTING_ACTIVITY = LOGIN+"/PwdSettingActivityu";
 
     public static final String LOGIN_SERVER = LOGIN+"/LoginService";
     public static final String LOGOUT_SERVER = LOGIN+"/logoutService";

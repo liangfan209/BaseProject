@@ -37,7 +37,7 @@ import butterknife.OnClick;
  * 版权：
  */
 @Route(path = AppArouter.USER_CENTER_ADDRESS_LIST)
-public class AddressManagerActivity extends BaseAcitivty implements MyRefreshLayout.LayoutInterface<String> , AddressBaseIView{
+public class AddressManagerActivity extends BaseAcitivty implements MyRefreshLayout.LayoutInterface<AddressBean> , AddressBaseIView{
 
 
     public static String UPDATE_ADDRESS = "updateAddress";
@@ -82,10 +82,10 @@ public class AddressManagerActivity extends BaseAcitivty implements MyRefreshLay
 
 
     @Override
-    public BaseQuickAdapter<String, ? extends BaseViewHolder> createAdapter() {
-        return new BaseQuickAdapter<String, BaseViewHolder>(R.layout.user_center_item_addresslist,new ArrayList<>()) {
+    public BaseQuickAdapter<AddressBean, ? extends BaseViewHolder> createAdapter() {
+        return new BaseQuickAdapter<AddressBean, BaseViewHolder>(R.layout.user_center_item_addresslist,new ArrayList<>()) {
             @Override
-            protected void convert(@NotNull BaseViewHolder helper, String s) {
+            protected void convert(@NotNull BaseViewHolder helper, AddressBean s) {
                 helper.getView(R.id.tv_delete).setOnClickListener(v->{
                     mCustomDialog.showDialog(v.getContext(),"删除","确定删除","取消","确定",new CustomDialog.ClickCallBack(){
                         @Override

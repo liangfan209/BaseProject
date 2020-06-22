@@ -29,7 +29,8 @@
     <color name="ui_button_end_color">#ff0059ff</color>
     <!-- 滑动开关关闭颜色-->
     <color name="ui_swich_off">#e3e3e3</color>
-
+    <!-- 按钮未选中验证-->
+    <color name="ui_button_unselecter">#9DBFFF</color>
 
 
 

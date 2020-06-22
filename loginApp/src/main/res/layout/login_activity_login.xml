@@ -7,33 +7,15 @@
     android:background="@color/white"
     tools:ignore="ResourceName">
 
-    <TextView
-        android:id="@+id/tv_welcom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="29dp"
-        android:layout_marginTop="60dp"
-        android:text="欢迎使用APP"
-        android:textColor="#232323"
-        android:textSize="21sp"
-        android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="在这里有你想要的东西"
-        android:textColor="#ff999999"
-        android:textSize="13sp"
-        android:layout_marginLeft="29dp"
-        android:layout_marginTop="2dp"
-        />
 
+    <include layout="@layout/layout_public_title"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="27dp"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="45dp">
 
         <com.fan.baseuilibrary.view.DeletableEditText
             android:drawableRight="@mipmap/icon_clear"
@@ -45,10 +27,8 @@
             android:inputType="number"
             android:maxLength="13"
             android:layout_marginRight="15dp"
-            android:textColorHint="#ffcccccc"
-            android:textColor="@color/color_333333"
-            android:textSize="14sp"
-            android:textCursorDrawable="@drawable/ui_edit_cursor"/>
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"/>
     </RelativeLayout>
 
 
@@ -56,10 +36,11 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginLeft="27dp"
-        android:layout_marginRight="27dp"
-        android:background="#CCCCCC" />
+        android:layout_marginRight="15dp"
+        android:background="@color/ui_recycleview_item_line_color" />
 
     <RelativeLayout
+        android:id="@+id/rlt_pwd"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="27dp"
@@ -70,15 +51,54 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@null"
-            android:hint="请输入密码"
-            android:drawableRight="@mipmap/icon_clear"
+            android:hint="请输入登录密码"
             android:inputType="textPassword"
+            android:layout_marginRight="15dp"
             android:maxLength="13"
-            android:textColorHint="#ffcccccc"
-            android:textColor="@color/color_333333"
-            android:layout_marginRight="14dp"
-            android:textSize="14sp"
-            android:textCursorDrawable="@drawable/ui_edit_cursor"/>
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlt_verification"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="15dp">
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/tv_input_verification"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:hint="请输入验证码"
+            android:inputType="textPassword"
+            android:layout_marginRight="15dp"
+            android:maxLength="13"
+            android:minWidth="200dp"
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"/>
+
+        <TextView
+            android:id="@+id/tv_get_verification_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取验证码"
+            android:gravity="center"
+            android:textSize="@dimen/h5_font_size"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:textColor="@color/ui_button_txt_primary_color"
+            android:background="@drawable/ui_shap_button_bg_selector"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:enabled="false"
+            />
 
     </RelativeLayout>
 
@@ -87,23 +107,31 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginLeft="27dp"
-        android:layout_marginRight="27dp"
-        android:background="#CCCCCC" />
+        android:layout_marginRight="15dp"
+        android:background="@color/ui_recycleview_item_line_color" />
 
 
     <RelativeLayout
+        android:id="@+id/rlt_pwd_option"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp">
 
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="注册账号"
+            style="@style/ui_h3_normal_style"
+            android:layout_marginLeft="30dp"
+            />
         <TextView
             android:id="@+id/tv_forget_pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="忘记密码"
-            android:textColor="#ff232323"
-            android:textSize="12sp"
+            android:text="忘记密码?"
+            style="@style/ui_h3_normal_style"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
             />
     </RelativeLayout>
@@ -111,45 +139,29 @@
     <TextView
         android:id="@+id/tv_login"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="40dp"
+        android:layout_height="43dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginTop="50dp"
-        android:layout_marginRight="40dp"
-        android:background="@drawable/shap_main_theme_selector"
+        android:layout_marginRight="28dp"
         android:gravity="center"
         android:text="登录"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textStyle="normal"
+        style="@style/ui_h3_button_primary_style"
+        android:background="@drawable/ui_shap_button_bg_selector"
+        android:enabled="false"
+        />
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/tv_protocol1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="登录即代表阅读并同意"
-            android:textColor="#ff666666"
-            android:textSize="13sp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="47dp"
-            android:layout_marginBottom="19dp"
-            />
-
-        <TextView
-            android:id="@+id/tv_protocol2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="《app用户服务协议》"
-            android:textColor="#F82D22"
-            android:textSize="13sp"
-            android:layout_toRightOf="@id/tv_protocol1"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="2dp"
-            android:layout_marginBottom="19dp"
-            />
-    </RelativeLayout>
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/cb_login_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="密码登录"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/ui_primary_color"
+        android:textSize="@dimen/h3_font_size"
+        android:layout_marginTop="18dp"
+        android:button="@null"
+        android:background="@null"
+        />
 
 </LinearLayout>
