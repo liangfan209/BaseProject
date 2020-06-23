@@ -25,6 +25,8 @@ import com.bq.utilslib.Md5Utils;
 import com.fan.baseuilibrary.utils.CountDownHelper;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
+import com.fan.baseuilibrary.view.captcha.Captcha;
+import com.fan.baseuilibrary.view.dialog.CaptchaDialog;
 
 import androidx.appcompat.widget.AppCompatCheckBox;
 import butterknife.BindView;
@@ -182,7 +184,11 @@ public class LoginActivity extends BaseAcitivty implements LoginBaseIView {
     @OnClick({R2.id.tv_forget_pwd, R2.id.tv_login, R2.id.tv_get_verification_code, R2.id.tv_register, R2.id.cb_login_type})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.tv_login) {
-            login();
+            if(loginConfig.isHasImageVirification()){
+                showCaptcha();
+            }else{
+                login();
+            }
         } else if (view.getId() == R.id.tv_forget_pwd) {
             ARouter.getInstance().build(AppArouter.FORGET_PWD_ACTIVITY).withInt("optionType"
                     , RegisterPwdActivity.FORGET_PWD).navigation();
@@ -195,6 +201,33 @@ public class LoginActivity extends BaseAcitivty implements LoginBaseIView {
         } else if (view.getId() == R.id.cb_login_type) {
 
         }
+    }
+
+    private void showCaptcha(){
+        final CaptchaDialog dialog = new CaptchaDialog(this, com.fan.baseuilibrary.R.layout.dialog_captcha);
+        dialog.refreshImg();
+        final Captcha captCha = dialog.getCaptCha();
+        captCha.setCaptchaListener(new Captcha.CaptchaListener() {
+            @Override
+            public String onAccess(long time) {
+                dialog.dissmiss();
+                login();
+                return "验证通过,耗时" + time + "毫秒";
+            }
+
+            @Override
+            public String onFailed(int failedCount) {
+                ToastUtils.showToast(LoginActivity.this,"验证失败");
+                captCha.reset(true);
+                return "验证失败,已失败" + failedCount + "次";
+            }
+
+            @Override
+            public String onMaxFailed() {
+                captCha.reset(true);
+                return "验证失败,帐号已封锁";
+            }
+        });
     }
 
     @Override

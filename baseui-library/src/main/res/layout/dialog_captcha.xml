@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/round_corner_white_bg">
+    <TextView
+        android:id="@+id/tv_line1"
+        android:text="滑块"
+        android:layout_marginTop="22dp"
+        android:layout_marginLeft="22dp"
+        android:textSize="@dimen/h1_font_size"
+        android:textColor="@color/ui_txt_normal_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
+    <com.fan.baseuilibrary.view.captcha.Captcha
+        android:id="@+id/captCha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:src="@mipmap/hdyzm1"/>
+
+    <Button
+        android:id="@+id/btn_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/ui_recycleview_item_line_color"
+        android:layout_below="@+id/captCha"/>
+
+    <TextView
+        android:id="@+id/btn_right"
+        android:layout_width="match_parent"
+        android:text="关闭"
+        android:textColor="@color/ui_txt_normal_color"
+        android:textSize="@dimen/h3_font_size"
+        android:background="@drawable/round_rightbottom_and_left_corner_white_bg"
+        android:layout_height="@dimen/dp_40"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        />
+
+
+</RelativeLayout>

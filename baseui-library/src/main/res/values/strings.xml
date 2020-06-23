@@ -8,7 +8,7 @@
     <string name="vertication_code_not_null">验证码不能为空</string>
     <string name="pwd_not_compaire">两次密码输入不一致</string>
 
-
-
+    <string name="vertify_access">验证通过,耗时%d毫秒</string>
+    <string name="vertify_failed">验证失败,还剩%d次机会</string>
 
 </resources>

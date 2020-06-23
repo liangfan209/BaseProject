@@ -326,6 +326,17 @@ public final class AppUtils {
         return stringBuilder.toString();
     }
 
+    /**
+     * dp转换为px
+     * @param context
+     * @param dpValue
+     * @return
+     */
+    public static int dp2px(Context context, final float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
     public interface OnAppStatusChangedListener {
         void onForeground();
 
