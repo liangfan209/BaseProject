@@ -1,6 +1,5 @@
 package com.bq.user_center.mvp.address.presenter;
 
-import com.bq.comm_config_lib.msgService.MessageEvent;
 import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.user_center.mvp.address.ui.AddressBaseIView;
 import com.bq.user_center.mvp.address.ui.AddressManagerActivity;
@@ -25,6 +24,7 @@ import androidx.lifecycle.LifecycleOwner;
  */
 public class AddressManagerPresenter implements BasePersenter{
     private AddressBaseIView mAddressBaseIView;
+    public static  ArrayList<AddressBean> list;
 
     public AddressManagerPresenter(AddressBaseIView addressBaseIView) {
         mAddressBaseIView = addressBaseIView;
@@ -34,12 +34,18 @@ public class AddressManagerPresenter implements BasePersenter{
      * 获取地址列表
      */
     public void getAddressList(){
-        ArrayList<AddressBean> list = new ArrayList<AddressBean>();
-        for (int i = 0; i <10 ; i++) {
-            if(i== 0){
-                list.add(new AddressBean(1));
+        if(list == null){
+            list = new ArrayList<>();
+            for (int i = 0; i <3 ; i++) {
+               AddressBean ab = new AddressBean(i,1,"phonenumber"+i,
+                        "name"+i,1,"provinces"+i,"Address"+i);
+                if(i== 0){
+                    ab.setType(1);
+                }else{
+                    ab.setType(2);
+                }
+                list.add(ab);
             }
-            list.add(new AddressBean(2));
         }
         mAddressBaseIView.getAddressList(list);
     }
@@ -49,15 +55,29 @@ public class AddressManagerPresenter implements BasePersenter{
         EventBus.getDefault().post(AddressManagerActivity.UPDATE_ADDRESS);
     }
 
-    public void deleteAddress(int addressId){
+    public void deleteAddress(AddressBean addressBean){
+        list.remove(addressBean);
         mAddressBaseIView.deleteAddress();
         EventBus.getDefault().post(AddressManagerActivity.UPDATE_ADDRESS);
     }
 
-    public void editeAddress(){
-        mAddressBaseIView.addAdress();
+    public void updateAddress(AddressBean address){
+        if(address.getType() == 1){
+            for (int i = 0; i < list.size(); i++) {
+                if(list.get(i).getId() == address.getId()){
+                    list.remove(i);
+                    list.add(i,address);
+                }else{
+                    list.get(i).setType(2);
+                }
+            }
+        }
+        mAddressBaseIView.editeAddress();
         EventBus.getDefault().post(AddressManagerActivity.UPDATE_ADDRESS);
     }
+
+
+
 
     @Override
     public void onCreate(@NonNull LifecycleOwner owner) {
@@ -71,8 +91,8 @@ public class AddressManagerPresenter implements BasePersenter{
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void updateAddress(MessageEvent event) {
-        if(AddressManagerActivity.UPDATE_ADDRESS.equals(event.key)){
+    public void updateAddress(String event) {
+        if(AddressManagerActivity.UPDATE_ADDRESS.equals(event)){
             getAddressList();
         }
     }

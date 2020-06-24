@@ -1,8 +1,11 @@
 package com.bq.app;
 
+import android.view.LayoutInflater;
+
 import com.bq.comm_config_lib.BaseApplication;
 import com.bq.comm_config_lib.msgService.Servicemanager;
 import com.fan.baseuilibrary.utils.provinces.CityUtils;
+import com.wind.me.xskinloader.SkinInflaterFactory;
 
 /**
  * 文件名：
@@ -21,10 +24,16 @@ public class AppApplication extends BaseApplication {
         super.onCreate();
         //2.注册组件中暴露的服务
         Servicemanager.getInstance().resiter(this,"com.bq");
-        //出事话json
+
+        SkinInflaterFactory.setFactory(LayoutInflater.from(this));
+        //初始化城市json
         new Thread(()->{
             CityUtils.getInstance(this);
         }).start();
+
+
+
+
     }
 
     //销毁组件中的服务

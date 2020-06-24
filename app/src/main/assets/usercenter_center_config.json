@@ -1,0 +1,89 @@
+{
+  "moduleList": [
+    {
+      "name": "我的订单",
+      "type": "grid",
+      "tabList": [
+        {
+          "name": "待付款",
+          "remark": "",
+          "icon": "icon_order_wait_payment",
+          "path": "/order/orderManager",
+          "parmas": 0,
+          "jumpType": "arouter"
+        },
+        {
+          "name": "待发货",
+          "remark": "",
+          "icon": "icon_order_wait_sent_out",
+          "path": "/order/orderManager",
+          "parmas": 1,
+          "jumpType": "arouter"
+        },
+        {
+          "name": "待收货",
+          "remark": "",
+          "icon": "icon_order_wait_receive",
+          "path": "/order/orderManager",
+          "parmas": 2,
+          "jumpType": "arouter"
+        },
+        {
+          "name": "已完成",
+          "remark": "",
+          "icon": "icon_order_complet",
+          "path": "/order/orderManager",
+          "parmas": 2,
+          "jumpType": "arouter"
+        }
+      ]
+    }, {
+      "name": "",
+      "type": "vertical",
+      "tabList": [
+        {
+          "name": "修改密码",
+          "remark": "",
+          "icon": "icon_usercenter_modify_pwd",
+          "path": "/login/ModifyPwdActivity",
+          "jumpType": "arouter"
+        },
+        {
+          "name": "地址管理",
+          "remark": "",
+          "icon": "icon_usercenter_address_manager",
+          "path": "/userCenter/AddressManagerActivity",
+          "jumpType": "arouter"
+        },
+        {
+          "name": "银行卡",
+          "remark": "",
+          "icon": "icon_usercenter_bank_manager",
+          "path": "/userCenter/BankManagerActivity",
+          "jumpType": "arouter"
+        },
+        {
+          "name": "选择地址",
+          "remark": "",
+          "icon": "icon_usercenter_address_manager",
+          "path": "/userCenter/AddressSelectActivity",
+          "jumpType": "arouter"
+        },
+        {
+          "name": "常见问题",
+          "remark": "",
+          "icon": "icon_faq",
+          "path": "http://www.baidu.com",
+          "jumpType": "url"
+        },
+        {
+          "name": "关于我们",
+          "remark": "",
+          "icon": "icon_about_us",
+          "path": "/userCenter/AboutUsActivity",
+          "jumpType": "arouter"
+        }
+      ]
+    }
+  ]
+}

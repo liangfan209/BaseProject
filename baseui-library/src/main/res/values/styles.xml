@@ -132,10 +132,10 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:layout_marginLeft">15dp</item>
-        <item name="android:textColor">@color/color_333333</item>
-        <item name="android:drawablePadding">8dp</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginLeft">22dp</item>
+        <item name="android:textColor">@color/ui_txt_normal_color</item>
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:textSize">@dimen/h2_font_size</item>
     </style>
 
     <!-- 用户中心选项样式-->

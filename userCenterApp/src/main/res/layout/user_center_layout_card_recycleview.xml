@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    xmlns:skin="http://schemas.android.com/android/skin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="-10dp"
+    android:background="@mipmap/shadow_card">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/h2_font_size"
+        android:textColor="@color/ui_txt_normal_color"
+        android:textStyle="bold"
+        android:text="我的订单"
+        android:paddingLeft="22dp"
+        android:paddingTop="15dp"
+        skin:enable="true"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcyView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        skin:enable="true"/>
+</LinearLayout>

@@ -2,7 +2,7 @@ ext {
     android = [
             compileSdkVersion: 28,
             buildToolsVersion: "28.0.3",
-            minSdkVersion    : 16,
+            minSdkVersion    : 19,
             targetSdkVersion : 28,
             versionCode      : 1,
             versionName      : "1.0.0"
@@ -44,6 +44,8 @@ ext {
             "glide.loader.okhttp3"     : "com.github.bumptech.glide:okhttp3-integration:${version["glideSdkVersion"]}",
             "okgo"                     : "com.lzy.net:okgo:3.0.4",
             "okgo.chuck"               : "com.readystatesoftware.chuck:library:1.0.4",
+            "base.utils"               : "com.blankj:utilcodex:1.29.0",
+            "base.skin"                : "com.windysha.xskinloader:xskinloader:0.1.0",
 
 
             //view

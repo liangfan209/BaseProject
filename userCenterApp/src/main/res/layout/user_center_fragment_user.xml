@@ -1,160 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-
-<!--    <include layout="@layout/layout_public_title"/>-->
-
-
-    <RelativeLayout
-        android:id="@+id/rlt_head"
+    xmlns:skin="http://schemas.android.com/android/skin"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="86dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/ui_interval_color">
 
-        <com.fan.baseuilibrary.view.CircleImageView
-            android:id="@+id/iv_head"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:background="@mipmap/icon_user_head"
-            android:textSize="14sp" />
+        <RelativeLayout
+            android:id="@+id/rlt_head"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp">
 
-        <TextView
-            android:id="@+id/tv_nick_name"
-            android:layout_width="wrap_content"
+            <com.fan.baseuilibrary.view.CircleImageView
+                android:id="@+id/iv_head"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:background="@mipmap/icon_user_head"
+                android:textSize="14sp"
+                skin:enable="true"
+                />
+
+            <TextView
+                android:id="@+id/tv_nick_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="27dp"
+                android:gravity="center_vertical"
+                android:layout_toRightOf="@+id/iv_head"
+                android:textColor="@color/ui_txt_normal_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/h2_font_size"
+                android:text="安安宝贝"/>
+            <TextView
+                android:drawableRight="@mipmap/next_step"
+                style="@style/user_center_item_right"
+                />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llt_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:gravity="center_vertical"
-            android:layout_toRightOf="@+id/iv_head"
-            android:textColor="@color/color_333333"
-            android:textStyle="bold"
-            android:textSize="20sp" />
-        <TextView
-            android:drawableRight="@mipmap/next_step"
-            style="@style/user_center_item_right"
-            />
+            android:orientation="vertical"/>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="vertical"
+            android:layout_marginTop="-20dp"
+            android:background="@mipmap/shadow_card">
+
+            <TextView
+                android:id="@+id/tv_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h3_font_size"
+                android:textColor="@color/ui_txt_normal_color"
+                android:textStyle="bold"
+                android:text="推出登录"
+                skin:enable="true"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
 
 
-    <!--实名认证-->
-    <RelativeLayout
-        android:id="@+id/rlt_user_identification"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white">
-        <TextView
-           style="@style/user_center_item_left"
-            android:drawableLeft="@mipmap/icon_user_auth"
-            android:text="实名认证"
-            />
-        <TextView
-            android:id="@+id/tv_name"
-            android:drawableRight="@mipmap/next_step"
-            style="@style/user_center_item_right"
-            />
-        <ImageView
-            style="@style/bottom_line"
-            android:layout_marginLeft="60dp"
-            />
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:orientation="vertical">
+            <!--实名认证-->
+            <RelativeLayout
+                android:id="@+id/rlt_user_identification"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white">
+                <TextView
+                    style="@style/user_center_item_left"
+                    android:drawableLeft="@mipmap/icon_user_auth"
+                    android:text="实名认证"
+                    />
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:drawableRight="@mipmap/next_step"
+                    style="@style/user_center_item_right"
+                    />
+                <ImageView
+                    style="@style/bottom_line"
+                    android:layout_marginLeft="60dp"
+                    />
+            </RelativeLayout>
 
-    <!--我的银行卡-->
-    <RelativeLayout
-        android:id="@+id/rlt_bank"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white">
-        <TextView
-            style="@style/user_center_item_left"
-            android:drawableLeft="@mipmap/icon_user_auth"
-            android:text="我的银行卡"
-            />
-        <TextView
-            android:id="@+id/tv_bank_type"
-            android:drawableRight="@mipmap/next_step"
-            style="@style/user_center_item_right"
-            android:text="立即绑定"
-            />
-        <ImageView
-            style="@style/bottom_line"
-            android:layout_marginLeft="60dp"
-            />
-    </RelativeLayout>
+            <!--我的银行卡-->
+            <RelativeLayout
+                android:id="@+id/rlt_bank"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white">
+                <TextView
+                    style="@style/user_center_item_left"
+                    android:drawableLeft="@mipmap/icon_user_auth"
+                    android:text="我的银行卡"
+                    />
+                <TextView
+                    android:id="@+id/tv_bank_type"
+                    android:drawableRight="@mipmap/next_step"
+                    style="@style/user_center_item_right"
+                    android:text="立即绑定"
+                    />
+                <ImageView
+                    style="@style/bottom_line"
+                    android:layout_marginLeft="60dp"
+                    />
+            </RelativeLayout>
 
-    <!-- 我的地址-->
-    <RelativeLayout
-        android:id="@+id/rlt_address"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white">
-        <TextView
-            style="@style/user_center_item_left"
-            android:drawableLeft="@mipmap/icon_user_auth"
-            android:text="我的地址管理"
-            />
+            <!-- 我的地址-->
+            <RelativeLayout
+                android:id="@+id/rlt_address"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white">
+                <TextView
+                    style="@style/user_center_item_left"
+                    android:drawableLeft="@mipmap/icon_user_auth"
+                    android:text="我的地址管理"
+                    />
 
-        <TextView
-            android:drawableRight="@mipmap/next_step"
-            style="@style/user_center_item_right"
-            />
-        <ImageView
-            style="@style/bottom_line"
-            android:layout_marginLeft="60dp"
-            />
-    </RelativeLayout>
+                <TextView
+                    android:drawableRight="@mipmap/next_step"
+                    style="@style/user_center_item_right"
+                    />
+                <ImageView
+                    style="@style/bottom_line"
+                    android:layout_marginLeft="60dp"
+                    />
+            </RelativeLayout>
 
-    <!-- 我的地址-->
-    <RelativeLayout
-        android:id="@+id/rlt_address_select"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white">
-        <TextView
-            style="@style/user_center_item_left"
-            android:drawableLeft="@mipmap/icon_user_auth"
-            android:text="选择地址"
-            />
+            <!-- 我的地址-->
+            <RelativeLayout
+                android:id="@+id/rlt_address_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white">
+                <TextView
+                    style="@style/user_center_item_left"
+                    android:drawableLeft="@mipmap/icon_user_auth"
+                    android:text="选择地址"
+                    />
 
-        <TextView
-            android:drawableRight="@mipmap/next_step"
-            style="@style/user_center_item_right"
-            />
-        <ImageView
-            style="@style/bottom_line"
-            android:layout_marginLeft="60dp"
-            />
-    </RelativeLayout>
+                <TextView
+                    android:drawableRight="@mipmap/next_step"
+                    style="@style/user_center_item_right"
+                    />
+                <ImageView
+                    style="@style/bottom_line"
+                    android:layout_marginLeft="60dp"
+                    />
+            </RelativeLayout>
 
-    <!--我的银行卡-->
-    <RelativeLayout
-        android:id="@+id/rlt_logout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white">
-        <TextView
-            style="@style/user_center_item_left"
-            android:drawableLeft="@mipmap/icon_user_auth"
-            android:text="退出登录"
-            />
-        <TextView
-            android:drawableRight="@mipmap/next_step"
-            style="@style/user_center_item_right"
-            />
-        <ImageView
-            style="@style/bottom_line"
-            android:layout_marginLeft="60dp"
-            />
-    </RelativeLayout>
-</LinearLayout>
+            <!--我的银行卡-->
+            <RelativeLayout
+                android:id="@+id/rlt_logout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white">
+                <TextView
+                    style="@style/user_center_item_left"
+                    android:drawableLeft="@mipmap/icon_user_auth"
+                    android:text="退出登录"
+                    />
+                <TextView
+                    android:drawableRight="@mipmap/next_step"
+                    style="@style/user_center_item_right"
+                    />
+                <ImageView
+                    style="@style/bottom_line"
+                    android:layout_marginLeft="60dp"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

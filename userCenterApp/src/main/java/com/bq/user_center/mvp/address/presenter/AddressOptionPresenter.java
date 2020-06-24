@@ -26,8 +26,8 @@ public class AddressOptionPresenter implements BasePersenter{
 
 
     public void addAddress(AddressBean address){
-        mAddressBaseIView.addAdress();
-        EventBus.getDefault().post(AddressManagerActivity.UPDATE_ADDRESS);
+//        mAddressBaseIView.addAdress();
+//        EventBus.getDefault().post(AddressManagerActivity.UPDATE_ADDRESS);
     }
 
     public void deleteAddress(int addressId){

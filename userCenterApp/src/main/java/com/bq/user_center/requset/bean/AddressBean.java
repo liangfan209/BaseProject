@@ -11,11 +11,39 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
  */
 public class AddressBean implements MultiItemEntity {
 
+    private int id;
     private int type;
-    private String name;
     private String phoneNumber;
+    private String name;
+    private int sex;
     private String provinces;
     private String detailAddress;
+
+    public AddressBean(int id,int type, String phoneNumber, String name, int sex, String provinces, String detailAddress) {
+        this.id = id;
+        this.type = type;
+        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.sex = sex;
+        this.provinces = provinces;
+        this.detailAddress = detailAddress;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
 
     public String getName() {
         return name;

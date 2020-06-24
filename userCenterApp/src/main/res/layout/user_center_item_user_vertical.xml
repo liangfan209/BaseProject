@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    xmlns:skin="http://schemas.android.com/android/skin"
+    android:id="@+id/rlt_address_select"
+    android:layout_width="match_parent"
+    android:layout_height="56dp">
+
+    <TextView
+        style="@style/user_center_item_right"
+        android:drawableRight="@mipmap/next_step"
+        skin:enable="true"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/user_center_item_left"
+        android:drawableLeft="@mipmap/icon_user_auth"
+        android:text="选择地址"
+        android:textStyle="bold"
+        skin:enable="true"/>
+</RelativeLayout>

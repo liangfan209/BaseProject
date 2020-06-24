@@ -56,6 +56,9 @@ dependencies {
     api rootProject.ext.dependencies["smartrefresh"]
     api rootProject.ext.dependencies["smartrefresh.header"]
     api rootProject.ext.dependencies["quick.adapter"]
+    api rootProject.ext.dependencies["base.utils"]
+    api rootProject.ext.dependencies["base.skin"]
+
 
     //test
     api rootProject.ext.dependencies["junit"]

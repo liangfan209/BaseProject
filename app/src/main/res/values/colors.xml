@@ -3,10 +3,12 @@
 <!--    <color name="ui_primary_color">#FD541F</color>-->
 <!--    <color name="ui_button_start_color">#9CFD541F</color>-->
 <!--    <color name="ui_button_end_color">#FD541F</color>-->
+<!--    <color name="ui_button_unselecter">#9CF8815C</color>-->
+<!--    <color name="ui_button_txt_primary_color">#999999</color>-->
+<!--    <color name="ui_txt_normal_color">#0000f4</color>-->
+<!--    <color name="ui_txt_hint_color">#ccf10000</color>-->
 
 <!--    <color name="ui_txt_normal_color">#aaaaaa</color>-->
-
-
 <!--    <color name="ui_title_txt_color">#aa0000</color>-->
 <!--    <color name="ui_title_bg_color">#aa000099</color>-->
 </resources>

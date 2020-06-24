@@ -14,6 +14,7 @@
     >
 
     <TextView
+        android:id="@+id/tv_name"
         style="@style/ui_h3_normal_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,6 +22,7 @@
         android:text="安先生" />
 
     <TextView
+        android:id="@+id/tv_phone"
         style="@style/ui_h5_normal_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,6 +62,7 @@
         android:text="删除" />
 
     <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/cb_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_line"

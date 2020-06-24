@@ -66,12 +66,14 @@ public class SettingPwdActivity extends BaseAcitivty implements LoginBaseIView{
     @Override
     public void settingPwdView() {
         ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
+        finish();
     }
 
     @OnClick({R2.id.iv_title_left, R2.id.tv_jump, R2.id.tv_setting})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.tv_jump){
             ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
+            finish();
         } else if(view.getId() == R.id.tv_setting){
             mLoginPresenter.setPwd("");
         }

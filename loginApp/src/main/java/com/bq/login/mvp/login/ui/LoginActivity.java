@@ -178,6 +178,7 @@ public class LoginActivity extends BaseAcitivty implements LoginBaseIView {
         CommSpUtils.saveToken(info.getAuth_token());
         //跳转到主页面中
         ARouter.getInstance().build(AppArouter.LOGIN_SETTING_ACTIVITY).navigation();
+        finish();
     }
 
 

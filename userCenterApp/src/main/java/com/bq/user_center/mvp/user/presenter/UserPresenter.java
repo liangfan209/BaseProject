@@ -23,6 +23,7 @@ public class UserPresenter implements BasePersenter {
 
     public UserPresenter(UserBaseIView userIView) {
         mUserIView = userIView;
+
     }
 
     public void showUserInfo(){

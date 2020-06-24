@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:ignore="MissingDefaultResource">
 
     <include layout="@layout/layout_public_title"/>
@@ -19,17 +20,18 @@
         <RelativeLayout
             android:id="@+id/rlt_add_address"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/white">
+            android:layout_height="55dp"
+            android:background="@mipmap/shadow_bottom_bg"
+            android:layout_alignParentBottom="true">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 style="@style/ui_h3_normal_style"
                 android:drawableLeft="@mipmap/ui_icon_small_add"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:drawablePadding="4dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:text="添加新地址"/>

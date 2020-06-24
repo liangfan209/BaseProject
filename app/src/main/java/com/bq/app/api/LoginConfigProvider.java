@@ -21,7 +21,7 @@ public class LoginConfigProvider {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getLoginConfig(MessageEvent event){
         if ("config/login".equals(event.key)) {
-            String configStr = AppUtils.getAssetJson(AppUtils.getApp(),"LoginConfig.json");
+            String configStr = AppUtils.getAssetJson(AppUtils.getApp(), "login_login_config.json");
             event.eventInterface.callBack(new MessageBody(MessageBody.SUCCESS_CODE,configStr));
         }
     }

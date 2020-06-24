@@ -1,7 +1,11 @@
 package com.bq.user_center.mvp.user.ui;
 
+import android.os.Build;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -11,11 +15,26 @@ import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
+import com.bq.user_center.api.bean.UserConfigBean;
 import com.bq.user_center.mvp.user.presenter.UserPresenter;
 import com.bq.user_center.requset.bean.UserInfo;
+import com.bq.utilslib.AppUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.CircleImageView;
+import com.fan.baseuilibrary.view.SimpleDividerItemDecoration;
+import com.google.gson.Gson;
+import com.wind.me.xskinloader.SkinManager;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+
+import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -45,7 +64,10 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
     @BindView(R2.id.rlt_bank)
     RelativeLayout mRltBank;
 
+    @BindView(R2.id.llt_content)
+    LinearLayout mLltContent;
     private UserPresenter mUserPersenter;
+    private UserConfigBean userConfig;
 
     @Override
     protected int getContentViewLayout() {
@@ -54,22 +76,98 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
 
     @Override
     protected void attach() {
+        String jsonStr = AppUtils.getAssetJson(this.getContext(),"usercenter_center_config.json");
+        userConfig = new Gson().fromJson(jsonStr,UserConfigBean.class);
+        updateView();
         //获取用户信息
-        mUserPersenter = new UserPresenter(this);
-        mUserPersenter.showUserInfo();
-
+//        mUserPersenter = new UserPresenter(this);
+//        mUserPersenter.showUserInfo();
     }
 
 
-    @OnClick({R2.id.rlt_head, R2.id.rlt_user_identification, R2.id.rlt_bank, R2.id.rlt_logout,R2.id.rlt_address,R2.id.rlt_address_select})
+    public void updateView() {
+        List<UserConfigBean.ModuleListBean> moduleList = userConfig.getModuleList();
+        for (int i = 0; i < moduleList.size(); i++) {
+            createRecycleView(moduleList.get(i));
+        }
+    }
+
+    /**
+     * 创建模块
+     * @param moduleListBean
+     */
+    private void createRecycleView(UserConfigBean.ModuleListBean moduleListBean) {
+        LayoutInflater inflater = LayoutInflater.from(this.getContext());
+        View view = inflater.inflate(R.layout.user_center_layout_card_recycleview,null);
+        RecyclerView recyclerView = view.findViewById(R.id.rcyView);
+        TextView tvTitle =view.findViewById(R.id.tv_title);
+        int itemResource = -1;
+        BaseQuickAdapter<UserConfigBean.ModuleListBean.TabListBean, BaseViewHolder> adapter;
+        if (moduleListBean.getType().equals("grid")) {
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 4);
+            recyclerView.setLayoutManager(gridLayoutManager);
+            itemResource = R.layout.user_center_item_user_grid;
+            tvTitle.setText(moduleListBean.getName());
+            adapter = new
+                    BaseQuickAdapter<UserConfigBean.ModuleListBean.TabListBean, BaseViewHolder>(itemResource, moduleListBean.getTabList()) {
+                        @Override
+                        protected void convert(@NotNull BaseViewHolder helper,
+                                               UserConfigBean.ModuleListBean.TabListBean tabListBean) {
+                            helper.setText(R.id.tv_name,tabListBean.getName());
+                            int resId = getResources().getIdentifier(tabListBean.getIcon(), "mipmap",
+                                    UserFragment.this.getActivity().getPackageName());
+                            ImageView ivImg = helper.getView(R.id.iv_img);
+
+                            SkinManager.get().setImageDrawable(ivImg, R.mipmap.icon_order_wait_payment);
+//                            ivImg.setBackgroundResource(resId);
+                        }
+                    };
+        } else {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
+            recyclerView.setLayoutManager(linearLayoutManager);
+            itemResource = R.layout.user_center_item_user_vertical;
+            tvTitle.setVisibility(View.GONE);
+            recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this.getContext(),R.color.ui_recycleview_item_line_color,1
+                , AppUtils.dp2px(this.getContext(),20),AppUtils.dp2px(this.getContext(),10)));
+            adapter = new
+                    BaseQuickAdapter<UserConfigBean.ModuleListBean.TabListBean, BaseViewHolder>(itemResource, moduleListBean.getTabList()) {
+                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+                        @Override
+                        protected void convert(@NotNull BaseViewHolder helper,
+                                               UserConfigBean.ModuleListBean.TabListBean tabListBean) {
+                            TextView tvName = helper.getView(R.id.tv_name);
+                            tvName.setText(tabListBean.getName());
+                            int resId = getResources().getIdentifier(tabListBean.getIcon(), "mipmap",
+                                    UserFragment.this.getActivity().getPackageName());
+                            tvName.setCompoundDrawablesRelativeWithIntrinsicBounds(resId,0,0,0);
+                        }
+                    };
+        }
+
+        recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener((adapter1, view1, position) -> {
+            UserConfigBean.ModuleListBean.TabListBean tabBean = (UserConfigBean.ModuleListBean.TabListBean) adapter1.getData().get(position);
+            String path = tabBean.getPath();
+            if(path.startsWith("http")){
+
+            }else{
+                ARouter.getInstance().build(path).navigation();
+            }
+
+        });
+        mLltContent.addView(view);
+    }
+
+    @OnClick({R2.id.rlt_head, R2.id.rlt_user_identification, R2.id.rlt_bank, R2.id.rlt_logout, R2.id.rlt_address,
+            R2.id.rlt_address_select})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.rlt_bank) {
             ARouter.getInstance().build(AppArouter.USER_CENTER_BANK_LIST).navigation();
         } else if (view.getId() == R.id.rlt_logout) {
             mUserPersenter.logout();
-        } else if(view.getId() == R.id.rlt_address){
+        } else if (view.getId() == R.id.rlt_address) {
             ARouter.getInstance().build(AppArouter.USER_CENTER_ADDRESS_LIST).navigation();
-        } else if(view.getId() == R.id.rlt_address_select){
+        } else if (view.getId() == R.id.rlt_address_select) {
             ARouter.getInstance().build(AppArouter.USER_CENTER_ADDRESS_SELECT).navigation();
         }
     }
@@ -77,9 +175,9 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
     @Override
     public void logout() {
         ToastUtils.showToast(this.getActivity(), "退出成功");
-        new Handler().postDelayed(()->{
+        new Handler().postDelayed(() -> {
             getActivity().finish();
-        },1000);
+        }, 1000);
     }
 
     @Override

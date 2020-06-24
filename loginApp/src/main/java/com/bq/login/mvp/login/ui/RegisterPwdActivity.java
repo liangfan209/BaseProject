@@ -19,6 +19,7 @@ import com.bq.login.R2;
 import com.bq.login.mvp.login.presenter.LoginPresenter;
 import com.bq.login.requset.bean.LoginInfo;
 import com.bq.utilslib.AccountValidatorUtil;
+import com.bq.utilslib.EditFormatUtils;
 import com.bq.utilslib.Md5Utils;
 import com.fan.baseuilibrary.utils.CountDownHelper;
 import com.fan.baseuilibrary.utils.ToastUtils;
@@ -78,6 +79,7 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
     }
 
     private void initView() {
+        EditFormatUtils.phoneNumAddSpace(mEtPhone);
         mEtPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

@@ -100,7 +100,8 @@ public class AddressSelectActivity extends BaseAcitivty implements MyRefreshLayo
 
     @Override
     public void getAddressList(List<AddressBean> list) {
-        mRefreshLayout.addData(list);
+        mRefreshLayout.adapter.setNewData(list);
+        mRefreshLayout.adapter.notifyDataSetChanged();
     }
 
     @Override

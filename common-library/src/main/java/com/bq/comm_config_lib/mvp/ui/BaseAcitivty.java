@@ -10,6 +10,7 @@ import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
 import com.fan.baseuilibrary.view.dialog.LoadingDialog;
+import com.wind.me.xskinloader.SkinInflaterFactory;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -32,6 +33,7 @@ public abstract class BaseAcitivty extends AppCompatActivity implements BaseIVie
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        SkinInflaterFactory.setFactory(this);
         super.onCreate(savedInstanceState);
         setContentView(getContentViewLayout());
         mLoadingDialog = new LoadingDialog(this);

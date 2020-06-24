@@ -11,6 +11,8 @@
         <activity android:name=".mvp.login.ui.SettingPwdActivity"
             android:configChanges="orientation|screenSize"
             />
-
+        <activity android:name=".mvp.login.ui.ModifyPwdActivity"
+            android:configChanges="orientation|screenSize"
+            />
     </application>
 </manifest>
