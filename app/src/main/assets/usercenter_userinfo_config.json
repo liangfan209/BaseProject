@@ -1,0 +1,46 @@
+{
+  "moduleList": [
+    {
+      "name": "昵称",
+      "value": "安安宝",
+      "type": "nikeName",
+      "hasInterval": false
+    },
+    {
+      "name": "地址管理",
+      "value": "",
+      "type": "address",
+      "hasInterval": true
+    },
+    {
+      "name": "性别",
+      "value": "未知",
+      "type": "sex",
+      "hasInterval": false
+    },
+    {
+      "name": "地区",
+      "value": "未知",
+      "type": "area",
+      "hasInterval": false
+    },
+    {
+      "name": "职业",
+      "value": "未设置",
+      "type": "profession",
+      "hasInterval": true
+    },
+    {
+      "name": "绑定手机号",
+      "value": "未绑定",
+      "type": "bindPhoneNumber",
+      "hasInterval": false
+    },
+    {
+      "name": "实名认证",
+      "value": "未实名",
+      "type": "certification",
+      "hasInterval": false
+    }
+  ]
+}

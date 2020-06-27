@@ -18,7 +18,7 @@
     <!-- 列表页默认线-->
     <color name="ui_recycleview_item_line_color">#cccccc</color>
     <!-- 多条选项间隔色-->
-    <color name="ui_interval_color">#fcfcfc</color>
+    <color name="ui_interval_color">#f2f2f2</color>
 
     <!-- 小按钮底部色-->
     <color name="ui_small_button_bg_color">#E5EEFF</color>

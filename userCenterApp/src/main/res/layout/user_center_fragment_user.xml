@@ -80,52 +80,9 @@
             android:layout_height="match_parent"
             android:visibility="gone"
             android:orientation="vertical">
-            <!--实名认证-->
-            <RelativeLayout
-                android:id="@+id/rlt_user_identification"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/white">
-                <TextView
-                    style="@style/user_center_item_left"
-                    android:drawableLeft="@mipmap/icon_user_auth"
-                    android:text="实名认证"
-                    />
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:drawableRight="@mipmap/next_step"
-                    style="@style/user_center_item_right"
-                    />
-                <ImageView
-                    style="@style/bottom_line"
-                    android:layout_marginLeft="60dp"
-                    />
-            </RelativeLayout>
 
-            <!--我的银行卡-->
-            <RelativeLayout
-                android:id="@+id/rlt_bank"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/white">
-                <TextView
-                    style="@style/user_center_item_left"
-                    android:drawableLeft="@mipmap/icon_user_auth"
-                    android:text="我的银行卡"
-                    />
-                <TextView
-                    android:id="@+id/tv_bank_type"
-                    android:drawableRight="@mipmap/next_step"
-                    style="@style/user_center_item_right"
-                    android:text="立即绑定"
-                    />
-                <ImageView
-                    style="@style/bottom_line"
-                    android:layout_marginLeft="60dp"
-                    />
-            </RelativeLayout>
+
+
 
             <!-- 我的地址-->
             <RelativeLayout

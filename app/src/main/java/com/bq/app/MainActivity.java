@@ -73,7 +73,7 @@ public class MainActivity extends BaseAcitivty {
 
             }
         });
-        changeSkin();
+//        changeSkin();
     }
 
     /**

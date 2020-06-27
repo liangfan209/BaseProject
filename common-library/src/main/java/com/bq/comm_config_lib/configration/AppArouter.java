@@ -28,10 +28,12 @@ public class AppArouter {
     //用户中心
     public static final String USER_CENTER = "/userCenter";
     public static final String USER_CENTER_BANK_LIST = USER_CENTER+"/BankManagerActivity";
+    public static final String USER_CENTER_BANK_ADD_ACTIVITY = USER_CENTER+"/AddBankActivity";
     public static final String USER_CENTER_USER_FRAGMENT = USER_CENTER+"/UserInfoFragment";
     public static final String USER_CENTER_ADDRESS_LIST = USER_CENTER+"/AddressManagerActivity";
     public static final String USER_CENTER_ADDRESS_SELECT = USER_CENTER+"/AddressSelectActivity";
     public static final String USER_CENTER_ADDRESS_OPTION = USER_CENTER+"/AddAddressActivity";
+    public static final String USER_CENTER_USER_INFO_ACTIVITY = USER_CENTER+"/UserInfoActivity";
 
     public static final String USER_CENTER_SERVICE = USER_CENTER+"/service";
 

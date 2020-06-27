@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:text="头像"
+            android:textStyle="bold"
+            style="@style/ui_h3_normal_style"/>
+
+        <TextView
+            android:id="@+id/tv_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/h5_font_size"
+            android:textColor="@color/ui_txt_hint_color"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32dp"
+            android:drawableRight="@mipmap/next_step"
+            android:drawablePadding="20dp"/>
+
+        <ImageView
+            android:id="@+id/iv_line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/ui_interval_color"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"/>
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/iv_interval"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/ui_interval_color"
+        />
+</LinearLayout>

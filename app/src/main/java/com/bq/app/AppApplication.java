@@ -1,5 +1,7 @@
 package com.bq.app;
 
+import android.os.Build;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 
 import com.bq.comm_config_lib.BaseApplication;
@@ -24,6 +26,13 @@ public class AppApplication extends BaseApplication {
         super.onCreate();
         //2.注册组件中暴露的服务
         Servicemanager.getInstance().resiter(this,"com.bq");
+
+        // android 7.0系统拍照兼容
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            builder.detectFileUriExposure();
+        }
 
         SkinInflaterFactory.setFactory(LayoutInflater.from(this));
         //初始化城市json

@@ -1,5 +1,7 @@
 package com.bq.user_center.mvp.bankcard.ui;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.user_center.mvp.bankcard.presenter.BankCardPresenter;
@@ -12,6 +14,7 @@ import com.bq.user_center.requset.bean.BankCard;
  * 时间：2020/6/11
  * 版权：
  */
+@Route(path = AppArouter.USER_CENTER_BANK_ADD_ACTIVITY)
 public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
 
     BankCardPresenter mBankCardPersenter;

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+
+
+    <include layout="@layout/layout_public_title"/>
+
+    <!--手机号-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="20dp">
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/et_bank"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:hint="请输入银行卡号"
+            android:inputType="number"
+            android:textSize="@dimen/h4_font_size"
+            style="@style/ui_edit_txt_style"
+            android:layout_marginRight="21dp"/>
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="14dp"
+        android:background="@color/ui_recycleview_item_line_color" />
+
+
+    <!--新密码-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="13dp">
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:hint="请输入开户人姓名"
+            android:layout_marginRight="21dp"
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size" />
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="14dp"
+        android:background="@color/ui_recycleview_item_line_color" />
+
+
+    <!--重复新密码-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="13dp">
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/et_repwd"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:hint="请输入身份证号"
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"
+            android:layout_marginRight="21dp"/>
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="14dp"
+        android:background="#CCCCCC" />
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="13dp">
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:hint="请输入银行预留手机号"
+            android:inputType="number"
+            android:textSize="@dimen/h4_font_size"
+            style="@style/ui_edit_txt_style"
+            android:layout_marginRight="21dp"/>
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="14dp"
+        android:background="@color/ui_recycleview_item_line_color" />
+
+    <!--验证码-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginRight="16dp">
+
+        <EditText
+            android:id="@+id/et_vertical_code"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:hint="请输入短信验证码  "
+            android:inputType="number"
+            android:maxLength="6"
+            android:layout_marginRight="160dp"
+            style="@style/ui_edit_txt_style"
+            android:drawableRight="@null"
+            android:textSize="@dimen/h4_font_size" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/tv_get_verification_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="获取验证码"
+                android:gravity="center"
+                android:textSize="@dimen/h5_font_size"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:textColor="@color/ui_button_txt_primary_color"
+                android:background="@drawable/ui_shap_button_bg_selector"
+                android:enabled="false"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="14dp"
+        android:background="#CCCCCC" />
+
+
+
+
+    <RadioButton
+        android:id="@+id/rb_protocol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我已阅读并同意签署《某某支付服务协议》"
+        style="@style/ui_checkbox_style"
+        android:textSize="@dimen/h5_font_size"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="26dp"
+        android:textColor="@color/ui_txt_hint_color"
+        android:enabled="true"
+        android:checked="true"
+        android:layout_marginTop="50dp"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_comfirm_form"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginRight="28dp"
+        android:gravity="center"
+        android:text="同意协议并绑定"
+        style="@style/ui_h3_button_primary_style"/>
+
+
+</LinearLayout>

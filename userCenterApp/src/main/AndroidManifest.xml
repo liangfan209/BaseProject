@@ -7,5 +7,6 @@
         <activity android:name=".mvp.address.ui.AddressManagerActivity"/>
         <activity android:name=".mvp.address.ui.AddressOptionActivity"/>
         <activity android:name=".mvp.address.ui.AddressSelectActivity"/>
+        <activity android:name=".mvp.user.ui.UserinfoActivity"/>
     </application>
 </manifest>

@@ -9,7 +9,7 @@ import java.util.List;
  * 时间：2020/6/24
  * 版权：
  */
-public class UserConfigBean {
+public class UserCenterConfigBean {
     private List<ModuleListBean> moduleList;
 
     public List<ModuleListBean> getModuleList() {
