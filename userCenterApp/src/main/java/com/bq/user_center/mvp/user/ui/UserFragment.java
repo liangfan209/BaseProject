@@ -25,6 +25,7 @@ import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.CircleImageView;
 import com.fan.baseuilibrary.view.SimpleDividerItemDecoration;
 import com.google.gson.Gson;
+import com.wind.me.xskinloader.SkinManager;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -105,12 +106,11 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
                         protected void convert(@NotNull BaseViewHolder helper,
                                                UserCenterConfigBean.ModuleListBean.TabListBean tabListBean) {
                             helper.setText(R.id.tv_name,tabListBean.getName());
-                            int resId = getResources().getIdentifier(tabListBean.getIcon(), "mipmap",
+                            int resId = getResources().getIdentifier(tabListBean.getIcon(), "drawable",
                                     UserFragment.this.getActivity().getPackageName());
                             ImageView ivImg = helper.getView(R.id.iv_img);
-
-//                            SkinManager.get().setImageDrawable(ivImg, R.mipmap.icon_order_wait_payment);
-                            ivImg.setBackgroundResource(resId);
+                            SkinManager.get().setImageDrawable(ivImg,resId);
+//                            ivImg.setBackgroundResource(resId);
                         }
                     };
         } else {
@@ -128,9 +128,11 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
                                                UserCenterConfigBean.ModuleListBean.TabListBean tabListBean) {
                             TextView tvName = helper.getView(R.id.tv_name);
                             tvName.setText(tabListBean.getName());
-                            int resId = getResources().getIdentifier(tabListBean.getIcon(), "mipmap",
+                            int resId = getResources().getIdentifier(tabListBean.getIcon(), "drawable",
                                     UserFragment.this.getActivity().getPackageName());
-                            tvName.setCompoundDrawablesRelativeWithIntrinsicBounds(resId,0,0,0);
+                            ImageView ivImg = helper.getView(R.id.iv_img);
+                            SkinManager.get().setImageDrawable(ivImg,resId);
+//                            tvName.setCompoundDrawablesRelativeWithIntrinsicBounds(resId,0,0,0);
                         }
                     };
         }
@@ -140,7 +142,8 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
             UserCenterConfigBean.ModuleListBean.TabListBean tabBean = (UserCenterConfigBean.ModuleListBean.TabListBean) adapter1.getData().get(position);
             String path = tabBean.getPath();
             if(path.startsWith("http")){
-
+                ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
+                        .withString("h5url",path).navigation();
             }else{
                 ARouter.getInstance().build(path).navigation();
             }

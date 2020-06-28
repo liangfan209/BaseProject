@@ -11,10 +11,16 @@
         android:drawableRight="@mipmap/next_step"
         skin:enable="true"/>
 
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="22dp"
+        android:layout_centerVertical="true"/>
     <TextView
         android:id="@+id/tv_name"
         style="@style/user_center_item_left"
-        android:drawableLeft="@mipmap/icon_user_auth"
+        android:layout_toRightOf="@id/iv_img"
         android:text="选择地址"
         android:textStyle="bold"
         skin:enable="true"/>

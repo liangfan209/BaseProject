@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="435dp"
+    android:orientation="vertical">
+
+  
+    <TextView
+        android:id="@+id/tv_unbind"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:textColor="@color/ui_txt_normal_color"
+        android:textSize="@dimen/h3_font_size"
+        android:gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/shap_white_radius_4"
+        android:text="解绑"
+        />
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="17dp"
+        android:background="@drawable/shap_white_radius_4"
+        android:textColor="@color/ui_primary_color"
+        android:textSize="@dimen/h3_font_size"
+        android:gravity="center"
+        android:text="取消"
+        />
+</LinearLayout>

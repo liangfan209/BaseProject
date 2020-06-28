@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <include layout="@layout/layout_public_title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:background="@mipmap/icon_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="APP名称"
+            android:textColor="@color/ui_primary_color"
+            android:textSize="@dimen/h1_font_size"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/iv_logo"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:id="@+id/tv_app_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前版本号 V1.0.1"
+            android:textColor="@color/ui_txt_hint_color"
+            android:textSize="@dimen/h5_font_size"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_app_name"
+            android:layout_marginTop="10dp"
+            />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcyView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="40dp"
+        android:background="@mipmap/shadow_bank_add"/>
+
+
+</LinearLayout>

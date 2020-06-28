@@ -148,7 +148,7 @@
         android:textStyle="normal"
         style="@style/ui_h3_button_primary_style"
         android:background="@drawable/ui_shap_button_bg_selector"
-        android:enabled="false"
+        android:enabled="true"
         />
 
     <androidx.appcompat.widget.AppCompatCheckBox

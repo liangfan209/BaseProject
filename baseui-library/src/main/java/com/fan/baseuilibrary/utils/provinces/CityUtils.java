@@ -8,8 +8,10 @@ import android.view.View;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.blankj.utilcode.util.ColorUtils;
 import com.bq.utilslib.AppUtils;
 import com.contrarywind.interfaces.IPickerViewData;
+import com.fan.baseuilibrary.R;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -91,8 +93,11 @@ public class CityUtils {
 
                 .setTitleText("城市选择")
                 .setDividerColor(Color.BLACK)
+                .setSubmitColor(ColorUtils.getColor(R.color.ui_primary_color))
+                .setCancelColor(ColorUtils.getColor(R.color.ui_primary_color))
                 .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
                 .setContentTextSize(20);
+
         if(optionInt != null){
             if(optionInt.length == 3){
                 builder.setSelectOptions(optionInt[0],optionInt[1],optionInt[2]);

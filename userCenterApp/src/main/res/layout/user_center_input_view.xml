@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <com.fan.baseuilibrary.view.DeletableEditText
+        android:id="@+id/et_value"
+        style="@style/ui_edit_txt_style"
+        android:layout_width="match_parent"
+        android:hint="请输入"
+        android:layout_height="40dp"
+        android:textSize="@dimen/h4_font_size"
+        android:layout_marginLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:maxLength="15"
+        android:maxLines="1"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/ui_interval_color"
+        />
+</LinearLayout>

@@ -111,7 +111,7 @@ public class LoginActivity extends BaseAcitivty implements LoginBaseIView {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String phoneNum = s.toString().replaceAll(" ", "").trim();
                 mTvGetVerificationCode.setEnabled(AccountValidatorUtil.isMobile(phoneNum) ? true : false);
-                mTvLogin.setEnabled(AccountValidatorUtil.isMobile(phoneNum) ? true : false);
+//                mTvLogin.setEnabled(AccountValidatorUtil.isMobile(phoneNum) ? true : false);
             }
 
             @Override

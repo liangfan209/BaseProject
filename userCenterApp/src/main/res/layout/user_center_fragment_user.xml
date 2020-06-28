@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/ui_interval_color">
+        android:background="@color/white">
 
         <RelativeLayout
             android:id="@+id/rlt_head"
@@ -68,7 +68,7 @@
                 android:textSize="@dimen/h3_font_size"
                 android:textColor="@color/ui_txt_normal_color"
                 android:textStyle="bold"
-                android:text="推出登录"
+                android:text="退出登录"
                 skin:enable="true"
                 android:layout_centerInParent="true"
                 />

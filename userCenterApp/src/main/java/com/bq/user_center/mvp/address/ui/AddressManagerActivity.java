@@ -55,7 +55,7 @@ public class AddressManagerActivity extends BaseAcitivty implements MyRefreshLay
 
     @Override
     protected int getContentViewLayout() {
-        return R.layout.user_center_activity_banklist;
+        return R.layout.user_center_activity_addresslist;
     }
 
     @Override
@@ -85,9 +85,9 @@ public class AddressManagerActivity extends BaseAcitivty implements MyRefreshLay
         return new BaseQuickAdapter<AddressBean, BaseViewHolder>(R.layout.user_center_item_addresslist, new ArrayList<>()) {
             @Override
             protected void convert(@NotNull BaseViewHolder helper, AddressBean s) {
-                helper.setText(R.id.tv_name, s.getName());
-                helper.setText(R.id.tv_phone, s.getPhoneNumber());
-                helper.setText(R.id.tv_detail, s.getProvinces() + " " + s.getDetailAddress());
+//                helper.setText(R.id.tv_name, s.getName());
+//                helper.setText(R.id.tv_phone, s.getPhoneNumber());
+//                helper.setText(R.id.tv_detail, s.getProvinces() + " " + s.getDetailAddress());
                 AppCompatCheckBox cb = helper.getView(R.id.cb_address);
                 cb.setChecked(s.getType() == 1 ? true : false);
 

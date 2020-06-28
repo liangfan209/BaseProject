@@ -27,8 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <activity android:name="com.bq.app.MainActivity">-->
-<!--        </activity>-->
+
+        <activity android:name="com.bq.app.H5Activity"/>
+<!--        <activity android:name="com.bq.app.MainActivity"></activity>-->
 
         <meta-data
             android:name="design_width_in_dp"
@@ -36,6 +37,8 @@
         <meta-data
             android:name="design_height_in_dp"
             android:value="667" />
+
+        <meta-data android:value="5d775acc0cafb241aa000dc2" android:name="UMENG_APPKEY"/>
     </application>
 
 </manifest>

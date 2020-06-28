@@ -9,6 +9,11 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.blankj.utilcode.util.ColorUtils;
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
@@ -21,10 +26,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.view.CircleImageView;
+import com.fan.baseuilibrary.view.DeletableEditText;
 import com.fan.baseuilibrary.view.UserPicture;
+import com.fan.baseuilibrary.view.dialog.CustomDialog;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -86,36 +96,84 @@ public class UserinfoActivity extends BaseAcitivty {
         mBaseQuickAdapter =
                 new BaseQuickAdapter<UserInfoConfigBean.ModuleListBean, BaseViewHolder>(R.layout.user_center_item_user_info,
                         mUserInfoConfigBean.getModuleList()) {
-            @Override
-            protected void convert(@NotNull BaseViewHolder helper, UserInfoConfigBean.ModuleListBean moduleListBean) {
-                helper.setText(R.id.tv_name, moduleListBean.getName());
-                helper.setText(R.id.tv_value, moduleListBean.getValue());
-                boolean hasInterval = moduleListBean.isHasInterval();
-                View interValView = helper.getView(R.id.iv_interval);
-                interValView.setVisibility(hasInterval ? View.VISIBLE : View.GONE);
-            }
-        };
+                    @Override
+                    protected void convert(@NotNull BaseViewHolder helper, UserInfoConfigBean.ModuleListBean moduleListBean) {
+                        helper.setText(R.id.tv_name, moduleListBean.getName());
+                        helper.setText(R.id.tv_value, moduleListBean.getValue());
+                        boolean hasInterval = moduleListBean.isHasInterval();
+                        View interValView = helper.getView(R.id.iv_interval);
+                        interValView.setVisibility(hasInterval ? View.VISIBLE : View.GONE);
+                    }
+                };
         mRcyView.setAdapter(mBaseQuickAdapter);
         mBaseQuickAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 UserInfoConfigBean.ModuleListBean module = (UserInfoConfigBean.ModuleListBean) adapter.getData().get(position);
                 String type = module.getType();
-                if("nikeName".equals(type)){
-
-                }else if("address".equals(type)){
+                if ("sex".equals(type)) {
+                    chooseSex();
+                    return;
+                } else if ("address".equals(type)) {
                     ARouter.getInstance().build(AppArouter.USER_CENTER_ADDRESS_LIST).navigation();
-                }else if("sex".equals(type)){
+                    return;
+                } else if ("area".equals(type)) {
 
-                }else if("area".equals(type)){
+                } else if ("profession".equals(type)) {
 
-                }else if("profession".equals(type)){
-
-                }else if("bindPhoneNumber".equals(type)){
+                } else if ("bindPhoneNumber".equals(type)) {
 
                 }
+                changeValueDialog(module);
             }
         });
+    }
+
+    void changeValueDialog(UserInfoConfigBean.ModuleListBean module) {
+        View view = LinearLayout.inflate(this, R.layout.user_center_input_view, null);
+        final DeletableEditText etValue = view.findViewById(R.id.et_value);
+        etValue.setHint("请输入" + module.getName());
+        new CustomDialog().showCustonViewDialog(this, view, "修改" + module.getName(), new CustomDialog.ClickCallBack() {
+            @Override
+            public void ok() {
+                String text = etValue.getText().toString();
+                module.setValue(text);
+                mBaseQuickAdapter.notifyDataSetChanged();
+//                List<UserInfoConfigBean.ModuleListBean> data = mBaseQuickAdapter.getData();
+//                for (int i = 0; i <data.size() ; i++) {
+//                    if(module.getType().equals(data.get(i).getType())){
+//                    }
+//                }
+            }
+
+            @Override
+            public void cacel() {
+            }
+        });
+    }
+
+    void chooseSex() {
+        KeyboardUtils.hideSoftInput(this);
+        List<String> dataList = new ArrayList<>();
+        dataList.add("男");
+        dataList.add("女");
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                String s = dataList.get(options1);
+                List<UserInfoConfigBean.ModuleListBean> moduleList = mUserInfoConfigBean.getModuleList();
+                for (int i = 0; i < moduleList.size(); i++) {
+                    if (moduleList.get(i).getType().equals("sex")) {
+                        moduleList.get(i).setValue(s);
+                        mBaseQuickAdapter.notifyDataSetChanged();
+                        break;
+                    }
+                }
+            }
+        }).setSubmitColor(ColorUtils.getColor(com.fan.baseuilibrary.R.color.ui_primary_color))
+                .setCancelColor(ColorUtils.getColor(com.fan.baseuilibrary.R.color.ui_primary_color)).build();
+        pvOptions.setPicker(dataList);
+        pvOptions.show();
     }
 
     @Override

@@ -1,12 +1,11 @@
 package com.bq.user_center.mvp.bankcard.presenter;
 
 import com.bq.comm_config_lib.mvp.BasePersenter;
-import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.user_center.mvp.bankcard.ui.BankCardBaseIView;
-import com.bq.user_center.requset.UserCenterHttpReqeustImp;
 import com.bq.user_center.requset.bean.BankCard;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -28,12 +27,17 @@ public class BankCardPresenter implements BasePersenter {
 
 
     public void getBankList(SmartRefreshLayout layout) {
-        new UserCenterHttpReqeustImp().getBankList(new AbstractReqeustCallback<List<BankCard>>(mBankCardView) {
-            @Override
-            public void onSuccess(List<BankCard> list) {
-                mBankCardView.getBankListView(list);
-            }
-        });
+//        new UserCenterHttpReqeustImp().getBankList(new AbstractReqeustCallback<List<BankCard>>(mBankCardView) {
+//            @Override
+//            public void onSuccess(List<BankCard> list) {
+//                mBankCardView.getBankListView(list);
+//            }
+//        });
+        List<BankCard> list =new ArrayList<>();
+        list.add(new BankCard("name1","**** **** **** 1234"));
+        list.add(new BankCard("name2","**** **** **** 5678"));
+        mBankCardView.getBankListView(list);
+
     }
 
     public void addBank(){

@@ -61,6 +61,16 @@ dependencies {
     api rootProject.ext.dependencies["base.skin"]
 
 
+    api 'com.umeng.umsdk:analytics:8.0.0'
+    api 'com.umeng.umsdk:common:2.0.0'
+    implementation files('libs/umeng-shareboard-widget-6.9.6.jar')
+    implementation files('libs/umeng-share-core-6.9.6.jar')
+    implementation files('libs/umeng-sharetool-6.9.6.jar')
+    implementation files('libs/umeng-share-wechat-simplify-6.9.6.jar')
+    implementation files('libs/umeng-share-QQ-simplify-6.9.6.jar')
+    implementation files('libs/umeng-share-sina-simplify-6.9.6.jar')
+
+
     //test
     api rootProject.ext.dependencies["junit"]
     api rootProject.ext.dependencies["androidJUnitRunner"]

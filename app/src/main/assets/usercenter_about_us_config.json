@@ -1,0 +1,18 @@
+{
+  "moduleList": [
+    {
+      "name": "使用帮助",
+      "value": "",
+      "type": "help",
+      "path": "http://www.baidu.com",
+      "hasInterval": false
+    },
+    {
+      "name": "隐私政策",
+      "value": "",
+      "type": "privacy",
+      "path": "http://www.baidu.com",
+      "hasInterval": false
+    }
+  ]
+}

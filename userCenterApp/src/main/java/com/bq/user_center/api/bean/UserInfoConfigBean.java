@@ -33,6 +33,15 @@ public class UserInfoConfigBean {
         private String value;
         private String type;
         private boolean hasInterval;
+        private String path;
+
+        public String getPath() {
+            return path;
+        }
+
+        public void setPath(String path) {
+            this.path = path;
+        }
 
         public String getName() {
             return name;

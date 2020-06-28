@@ -8,5 +8,7 @@
         <activity android:name=".mvp.address.ui.AddressOptionActivity"/>
         <activity android:name=".mvp.address.ui.AddressSelectActivity"/>
         <activity android:name=".mvp.user.ui.UserinfoActivity"/>
+        <activity android:name=".mvp.bankcard.ui.AddBankActivity"/>
+        <activity android:name=".mvp.user.ui.AboutUsActivity"/>
     </application>
 </manifest>

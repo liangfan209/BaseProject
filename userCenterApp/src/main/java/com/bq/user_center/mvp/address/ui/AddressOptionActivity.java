@@ -1,6 +1,5 @@
 package com.bq.user_center.mvp.address.ui;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -22,7 +21,6 @@ import com.fan.baseuilibrary.utils.provinces.CityUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -108,11 +106,5 @@ public class AddressOptionActivity extends BaseAcitivty implements AddressBaseIV
         finish();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
 }

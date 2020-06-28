@@ -12,10 +12,7 @@ import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.google.android.material.tabs.TabLayout;
-import com.wind.me.xskinloader.SkinManager;
-import com.wind.me.xskinloader.util.AssetFileUtils;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -73,7 +70,7 @@ public class MainActivity extends BaseAcitivty {
 
             }
         });
-//        changeSkin();
+
     }
 
     /**
@@ -108,18 +105,5 @@ public class MainActivity extends BaseAcitivty {
         }
     }
 
-
-    private void changeSkin() {
-        //将assets目录下的皮肤文件拷贝到data/data/.../cache目录下
-        String saveDir = getCacheDir().getAbsolutePath() + "/skins";
-        String savefileName = "/yoyo.skin";
-        String asset_dir = "skin-apk-debug.apk";
-//        String asset_dir = "skins/xskinloader-skin-apk-debug2.apk";
-        File file = new File(saveDir + File.separator + savefileName);
-        if (!file.exists()) {
-            AssetFileUtils.copyAssetFile(this, asset_dir, saveDir, savefileName);
-        }
-        SkinManager.get().loadSkin(file.getAbsolutePath());
-    }
 
 }

@@ -9,7 +9,7 @@
           "remark": "",
           "icon": "icon_order_wait_payment",
           "path": "/order/orderManager",
-          "parmas": 0,
+          "params": 0,
           "jumpType": "arouter"
         },
         {
@@ -17,7 +17,7 @@
           "remark": "",
           "icon": "icon_order_wait_sent_out",
           "path": "/order/orderManager",
-          "parmas": 1,
+          "params": 1,
           "jumpType": "arouter"
         },
         {
@@ -25,7 +25,7 @@
           "remark": "",
           "icon": "icon_order_wait_receive",
           "path": "/order/orderManager",
-          "parmas": 2,
+          "params": 2,
           "jumpType": "arouter"
         },
         {
@@ -33,11 +33,59 @@
           "remark": "",
           "icon": "icon_order_complet",
           "path": "/order/orderManager",
-          "parmas": 2,
+          "params": 2,
           "jumpType": "arouter"
         }
       ]
-    }, {
+    },
+
+    {
+      "name": "我的设备",
+      "type": "grid",
+      "tabList": [
+        {
+          "name": "入库列表",
+          "remark": "",
+          "icon": "icon_order_wait_payment",
+          "path": "/order/orderManager",
+          "params": 0,
+          "jumpType": "arouter"
+        },
+        {
+          "name": "出库列表",
+          "remark": "",
+          "icon": "icon_order_wait_sent_out",
+          "path": "/order/orderManager",
+          "params": 1,
+          "jumpType": "arouter"
+        },
+        {
+          "name": "设备列表",
+          "remark": "",
+          "icon": "icon_order_wait_receive",
+          "path": "/order/orderManager",
+          "params": 2,
+          "jumpType": "arouter"
+        },
+        {
+          "name": "出库列表",
+          "remark": "",
+          "icon": "icon_order_wait_sent_out",
+          "path": "/order/orderManager",
+          "params": 1,
+          "jumpType": "arouter"
+        },
+        {
+          "name": "设备列表",
+          "remark": "",
+          "icon": "icon_order_wait_receive",
+          "path": "/order/orderManager",
+          "params": 2,
+          "jumpType": "arouter"
+        }
+      ]
+    },
+    {
       "name": "",
       "type": "vertical",
       "tabList": [
@@ -61,7 +109,14 @@
           "icon": "icon_usercenter_bank_manager",
           "path": "/userCenter/BankManagerActivity",
           "jumpType": "arouter"
-        },
+        }
+      ]
+    },
+    {
+      "name": "",
+      "type": "vertical",
+      "tabList": [
+
         {
           "name": "选择地址",
           "remark": "",
@@ -73,7 +128,7 @@
           "name": "常见问题",
           "remark": "",
           "icon": "icon_faq",
-          "path": "http://www.baidu.com",
+          "path": "http://faq.hebaopro.com",
           "jumpType": "url"
         },
         {

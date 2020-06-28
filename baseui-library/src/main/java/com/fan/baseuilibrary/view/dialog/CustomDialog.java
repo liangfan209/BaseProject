@@ -54,6 +54,15 @@ public class CustomDialog {
         }
     }
 
+    public void showCustonViewDialog(Context context, View view, String title,ClickCallBack mClickCallBack) {
+        initLayoutView(context, mClickCallBack, 0.8f, Gravity.CENTER);
+        titleTv.setText(title);
+        if (contentLlt != null) {
+            contentLlt.removeAllViews();
+            contentLlt.addView(view);
+        }
+    }
+
 
     /**
      * @param context

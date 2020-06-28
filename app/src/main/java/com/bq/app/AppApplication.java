@@ -7,7 +7,13 @@ import android.view.LayoutInflater;
 import com.bq.comm_config_lib.BaseApplication;
 import com.bq.comm_config_lib.msgService.Servicemanager;
 import com.fan.baseuilibrary.utils.provinces.CityUtils;
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.socialize.PlatformConfig;
 import com.wind.me.xskinloader.SkinInflaterFactory;
+import com.wind.me.xskinloader.SkinManager;
+import com.wind.me.xskinloader.util.AssetFileUtils;
+
+import java.io.File;
 
 /**
  * 文件名：
@@ -17,6 +23,11 @@ import com.wind.me.xskinloader.SkinInflaterFactory;
  * 版权：
  */
 public class AppApplication extends BaseApplication {
+
+    {
+        PlatformConfig.setWeixin("wx22a8fc65e8d220af", "f90d0b596034a8c92ed578f9c9a7773a");
+        PlatformConfig.setQQZone("123", "123");
+    }
 
     private Servicemanager mServicemanager;
 
@@ -33,6 +44,12 @@ public class AppApplication extends BaseApplication {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             builder.detectFileUriExposure();
         }
+        //替换皮肤
+//        changeSkin();
+
+        //友盟
+        UMConfigure.setLogEnabled(true);
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE,"");
 
         SkinInflaterFactory.setFactory(LayoutInflater.from(this));
         //初始化城市json
@@ -51,5 +68,20 @@ public class AppApplication extends BaseApplication {
             mServicemanager.destroy();
         }
         mServicemanager = null;
+    }
+
+
+    /**
+     * 替换资源文件
+     */
+    private void changeSkin() {
+        String saveDir = getCacheDir().getAbsolutePath() + "/skins";
+        String savefileName = "/cc.skin";
+        String asset_dir = "skin-apk-debug.apk";
+        File file = new File(saveDir + File.separator + savefileName);
+        if (!file.exists()) {
+            AssetFileUtils.copyAssetFile(this, asset_dir, saveDir, savefileName);
+        }
+        SkinManager.get().loadSkin(file.getAbsolutePath());
     }
 }

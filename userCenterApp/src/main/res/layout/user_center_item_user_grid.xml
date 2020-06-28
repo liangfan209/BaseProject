@@ -12,7 +12,6 @@
         android:id="@+id/iv_img"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:background="@mipmap/bank_icon_cgb"
         skin:enable="true"/>
 
     <TextView
