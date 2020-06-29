@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
@@ -64,7 +65,10 @@ public class MyWalletActivity extends BaseAcitivty {
     }
 
 
-    @OnClick({R2.id.tv_title, R2.id.flt_content})
+    @OnClick({R2.id.tv_title, R2.id.tv_right})
     public void onViewClicked(View view) {
+        if(view.getId() == R.id.tv_right){
+            ARouter.getInstance().build(AppArouter.WALLET_TACK_CASH_ACTIVITY).navigation();
+        }
     }
 }

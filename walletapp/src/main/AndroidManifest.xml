@@ -2,7 +2,12 @@
     package="com.bq.walletapp" >
     <application>
         <activity android:name=".wallet.ui.MyWalletActivity"
-            android:label="login"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".wallet.ui.BillDetailActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".wallet.ui.RechargeActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".wallet.ui.TackCashActivity"
             android:configChanges="orientation|screenSize"/>
     </application>
 </manifest>

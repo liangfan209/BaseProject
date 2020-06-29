@@ -284,12 +284,6 @@ public abstract class BaseStickTimerFragment<T> extends BaseFragment {
     }
 
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
     public static String[] getFilterTime(String selectDate){
         if(StringUtils.isEmpty(selectDate)){
             return null;

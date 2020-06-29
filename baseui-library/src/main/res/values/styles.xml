@@ -173,6 +173,10 @@
         <item name="android:progressDrawable">@drawable/po_seekbar</item>
     </style>
 
+    <declare-styleable name="MaxHeightRecyclerView">
+        <attr name="maxHeight" format="dimension" />
+    </declare-styleable>
+
     <style name="time_select">
         <item name="android:paddingLeft">12dp</item>
         <item name="android:paddingRight">12dp</item>

@@ -13,16 +13,17 @@ import com.bq.walletapp.R;
 import com.bq.walletapp.R2;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 文件名：
  * 描述：
  * 作者：梁帆
- * 时间：2020/6/29
+ * 时间：2020/6/29/029
  * 版权：
  */
-@Route(path = AppArouter.WALLET_BILL_DETAIL_ACTIVITY)
-public class BillDetailActivity extends BaseAcitivty {
+@Route(path = AppArouter.WALLET_RECHARGE_ACTIVITY)
+public class RechargeActivity extends BaseAcitivty {
 
 
     @BindView(R2.id.iv_title_left)
@@ -35,12 +36,10 @@ public class BillDetailActivity extends BaseAcitivty {
     View mViewLine;
     @BindView(R2.id.rlt_title)
     RelativeLayout mRltTitle;
-    @BindView(R2.id.iv_type_bg)
-    ImageView mIvTypeBg;
 
     @Override
     protected int getContentViewLayout() {
-        return R.layout.wallet_activity_bill_detail;
+        return R.layout.wallet_activity_recharge;
     }
 
     @Override
@@ -50,7 +49,11 @@ public class BillDetailActivity extends BaseAcitivty {
 
     @Override
     protected void attach() {
-        mTvTitle.setText("账单详情");
+        mTvTitle.setText("充值详情");
     }
 
+
+    @OnClick({R2.id.iv_title_left, R2.id.tv_title})
+    public void onViewClicked(View view) {
+    }
 }

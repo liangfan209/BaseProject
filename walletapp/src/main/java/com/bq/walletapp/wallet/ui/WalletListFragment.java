@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
+import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.ui.BaseStickTimerFragment;
 import com.bq.walletapp.R;
 import com.bq.walletapp.api.bean.EarningsListBean;
@@ -35,10 +37,13 @@ public class WalletListFragment extends BaseStickTimerFragment<EarningsListBean.
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-//                EarningsListBean.EarningBean client = (EarningsListBean.EarningBean) adapter.getData().get(position);
-//                Intent intent = new Intent(WalletListFragment.this.getContext(), WalletListFragment.class);
-//                intent.putExtra("earning", client);
-//                WalletListFragment.this.getActivity().startActivity(intent);
+                EarningsListBean.EarningBean client = (EarningsListBean.EarningBean) adapter.getData().get(position);
+                if(client.getIncome_type().equals("in")){
+                    //充值详情
+                    ARouter.getInstance().build(AppArouter.WALLET_RECHARGE_ACTIVITY).navigation();
+                }else{
+                    ARouter.getInstance().build(AppArouter.WALLET_BILL_DETAIL_ACTIVITY).navigation();
+                }
             }
         });
         return view;
@@ -70,10 +75,12 @@ public class WalletListFragment extends BaseStickTimerFragment<EarningsListBean.
     protected void loadData(String info) {
         EarningsListBean.MonthDateDto dateDto = new EarningsListBean.MonthDateDto(10.0,10.0,"一月");
         EarningsListBean.EarningBean eb1 = new EarningsListBean.EarningBean();
-        eb1.setIncome_type("-1");
+        eb1.setIncome_type("out");
+        eb1.setStatus("提现");
         eb1.setMonthDataDto(dateDto);
         EarningsListBean.EarningBean eb2 = new EarningsListBean.EarningBean();
-        eb2.setIncome_type("1");
+        eb2.setIncome_type("in");
+        eb2.setStatus("充值");
         List<EarningsListBean.EarningBean> list = new ArrayList<>();
         list.add(eb1);
         for (int i = 0; i < 15; i++) {
@@ -105,7 +112,8 @@ public class WalletListFragment extends BaseStickTimerFragment<EarningsListBean.
             rltMonth.setVisibility(View.GONE);
         }
         TextView tvMoney = helper.getView(R.id.tv_momey);
-        if(item.getIncome_type().equals("1")){
+        helper.setText(R.id.tv_type,item.getStatus());
+        if(item.getIncome_type().equals("out")){
             tvMoney.setTextColor(getResources().getColor(R.color.ui_primary_color));
             tvMoney.setText("+10,000.00");
         }else{
