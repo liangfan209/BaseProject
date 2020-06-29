@@ -125,6 +125,13 @@
           "jumpType": "arouter"
         },
         {
+          "name": "账单记录",
+          "remark": "",
+          "icon": "icon_usercenter_address_manager",
+          "path": "/wallet/MyWalletActivity",
+          "jumpType": "arouter"
+        },
+        {
           "name": "常见问题",
           "remark": "",
           "icon": "icon_faq",

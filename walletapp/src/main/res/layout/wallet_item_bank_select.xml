@@ -8,6 +8,8 @@
     android:layout_marginRight="23dp"
     android:layout_marginLeft="46dp"
     android:background="@null"
+    android:maxLines="1"
+    android:drawableRight="@drawable/ui_checkbox_select"
     >
 
 </CheckBox>

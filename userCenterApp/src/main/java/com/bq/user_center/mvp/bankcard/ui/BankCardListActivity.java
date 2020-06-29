@@ -2,6 +2,7 @@ package com.bq.user_center.mvp.bankcard.ui;
 
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ import butterknife.BindView;
 @Route(path = AppArouter.USER_CENTER_BANK_LIST)
 public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIView, MyRefreshLayout.LayoutInterface<BankCard> {
 
+    public static final String UPDATE_BANK = "update_bank";
     @BindView(R2.id.flt_content)
     FrameLayout mFltContent;
     BankCardPresenter mBankCardPersenter;
@@ -80,8 +82,13 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIV
 
 
     @Override
-    public void getBankListView(List<BankCard> list) {
-        mRefreshLayout.addData(list);
+    public void getBankListView(List<BankCard> list,int page) {
+        if(page == 1){
+            mRefreshLayout.adapter.setNewData(list);
+            mRefreshLayout.adapter.notifyDataSetChanged();
+        }else{
+            mRefreshLayout.addData(list);
+        }
     }
 
     @Override
@@ -89,10 +96,10 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIV
         BaseQuickAdapter adapter =  new BaseQuickAdapter<BankCard, BaseViewHolder>(R.layout.user_center_item_banklist,new ArrayList<BankCard>()) {
             @Override
             protected void convert(@NotNull BaseViewHolder helper, BankCard item) {
-//                helper.setText(R.id.tv_card_number, item.getCardNo());
-//                helper.setText(R.id.tv_card_name, item.getBankName());
-//                helper.setText(R.id.tv_card_type, item.getCardType());
-//                ImageView ivCard = helper.getView(R.id.iv_bank);
+                helper.setText(R.id.tv_card_number, item.getCardNo());
+                helper.setText(R.id.tv_card_name, item.getBankName());
+                helper.setText(R.id.tv_card_type, item.getCardType());
+                ImageView ivCard = helper.getView(R.id.iv_bank);
             }
         };
         adapter.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -113,7 +120,7 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIV
 
     @Override
     public void loadData(int page, int pageSize) {
-        mBankCardPersenter.getBankList(mRefreshLayout);
+        mBankCardPersenter.getBankList(page);
     }
 
 }

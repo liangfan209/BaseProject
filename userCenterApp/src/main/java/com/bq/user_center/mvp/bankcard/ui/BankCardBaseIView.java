@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface BankCardBaseIView extends BaseIView {
     //获取列表
-    default void getBankListView(List<BankCard> list){};
-    default void addBank(BankCard info){};
+    default void getBankListView(List<BankCard> list,int page){};
+    default void addBankSuccess(){};
     default void deleteBank(String bankId){};
 }

@@ -19,6 +19,7 @@ import com.bq.comm_config_lib.utils.Utils;
 import com.bq.walletapp.R;
 import com.bq.walletapp.R2;
 import com.bq.walletapp.api.bean.BankCard;
+import com.bq.walletapp.wallet.presenter.TackCashPresenter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.view.DeletableEditText;
@@ -32,7 +33,7 @@ import butterknife.OnClick;
 
 
 @Route(path = AppArouter.WALLET_TACK_CASH_ACTIVITY)
-public class TackCashActivity extends BaseAcitivty {
+public class TackCashActivity extends BaseAcitivty implements TackCashIView {
 
     @BindView(R2.id.et_tack_money)
     DeletableEditText mEtTackMoney;
@@ -51,10 +52,10 @@ public class TackCashActivity extends BaseAcitivty {
     @BindView(R2.id.tv_erro)
     TextView mTvErro;
 
+    private TackCashPresenter mTackCashPresenter;
     BaseQuickAdapter<BankCard, BaseViewHolder> adpater;
     private int mPosition = -1;
     private double money;
-
 
 
     @Override
@@ -64,12 +65,14 @@ public class TackCashActivity extends BaseAcitivty {
 
     @Override
     protected BasePersenter createPersenter() {
-        return null;
+        mTackCashPresenter = new TackCashPresenter(this);
+        return mTackCashPresenter;
     }
 
     @Override
     protected void attach() {
         initEditView();
+        mTackCashPresenter.getBankCardList();
     }
 
     private void initEditView() {
@@ -81,11 +84,11 @@ public class TackCashActivity extends BaseAcitivty {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mEtTackMoney.setTextSize(s.length() > 0 ? 24 : 13);
-                mEtTackMoney.setTypeface(s.length() > 0?Typeface.DEFAULT_BOLD:Typeface.DEFAULT);
-
+                mEtTackMoney.setTypeface(s.length() > 0 ? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
 
 
                 if (s.toString().startsWith("0") && s.toString().trim().length() > 1) {
@@ -109,7 +112,7 @@ public class TackCashActivity extends BaseAcitivty {
                         mEtTackMoney.setSelection(s.length());
                     }
                 }
-                if("0".equals(s.toString()) || "0.".equals(s.toString())|| "0.0".equals(s.toString()) || "0.00".equals(s.toString())){
+                if ("0".equals(s.toString()) || "0.".equals(s.toString()) || "0.0".equals(s.toString()) || "0.00".equals(s.toString())) {
                     mTvConfirm.setEnabled(false);
                     return;
                 }
@@ -120,11 +123,11 @@ public class TackCashActivity extends BaseAcitivty {
                         mTvConfirm.setEnabled(false);
                     } else {
                         mTvErro.setVisibility(View.GONE);
-                        if(mPosition != -1){
+                        if (mPosition != -1) {
                             mTvConfirm.setEnabled(true);
                         }
                     }
-                }else{
+                } else {
                     mTvConfirm.setEnabled(false);
                     mTvErro.setVisibility(View.GONE);
                 }
@@ -139,32 +142,23 @@ public class TackCashActivity extends BaseAcitivty {
     @Override
     protected void onResume() {
         super.onResume();
-        getBankCardList();
     }
 
-    //获取银行卡列表
-    private void getBankCardList() {
-//        String token = new UserUtils(this).getToken();
-//        exeHttpWithDialog(ApiServiceManager.getApi().partnerGetBankCardList("partner.account.banklist", "customer",
-//                "1", "sha", token))
-//                .subscribe(new BaseSubscriber<BaseBean<List<BankCard>>>(this) {
-//                    @Override
-//                    public void result(BaseBean<List<BankCard>> bean) {
-//                        List<BankCard> result = bean.getResult();
-//                        if (result != null && result.size() > 0) {
-//                            mLltHasData.setVisibility(View.VISIBLE);
-//                            mLltNoData.setVisibility(View.GONE);
-//                            result.get(0).setCheck(true);
-//                            mPosition = 0;
-//                            //初始化列表页
-//                            initRecycleView(result);
-//                        } else {
-//                            mLltHasData.setVisibility(View.GONE);
-//                            mLltNoData.setVisibility(View.VISIBLE);
-//                        }
-//                    }
-//                });
+    @Override
+    public void getBankList(List<BankCard> result) {
+        if (result != null && result.size() > 0) {
+            mLltHasData.setVisibility(View.VISIBLE);
+            mLltNoData.setVisibility(View.GONE);
+            result.get(0).setCheck(true);
+            mPosition = 0;
+            //初始化列表页
+            initRecycleView(result);
+        } else {
+            mLltHasData.setVisibility(View.GONE);
+            mLltNoData.setVisibility(View.VISIBLE);
+        }
     }
+
 
     //初始化银行卡列表页面
     private void initRecycleView(List<BankCard> result) {
@@ -173,7 +167,7 @@ public class TackCashActivity extends BaseAcitivty {
             @Override
             protected void convert(BaseViewHolder helper, BankCard item) {
                 CheckBox cbBank = helper.getView(R.id.rb_bank);
-                cbBank.setText(item.getBankName());
+                cbBank.setText(item.getBankName()+" "+item.getCardNo());
                 cbBank.setChecked(item.isCheck());
                 cbBank.setOnClickListener(v -> {
                     mPosition = adpater.getData().indexOf(item);
@@ -200,7 +194,7 @@ public class TackCashActivity extends BaseAcitivty {
 
     @OnClick({R2.id.tv_add_bankcard, R2.id.tv_confirm})
     public void onViewClicked(View view) {
-        if(view.getId() == R.id.tv_add_bankcard){
+        if (view.getId() == R.id.tv_add_bankcard) {
             ARouter.getInstance().build(AppArouter.USER_CENTER_BANK_ADD_ACTIVITY).navigation();
         }
     }

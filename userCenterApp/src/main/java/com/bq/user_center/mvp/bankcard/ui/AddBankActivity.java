@@ -1,5 +1,6 @@
 package com.bq.user_center.mvp.bankcard.ui;
 
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -63,9 +64,11 @@ public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
     CountDownHelper countDownHelper;//计时器
 
     @Override
-    public void addBank(BankCard info) {
-        //弹出吐司
-        finish();
+    public void addBankSuccess() {
+        ToastUtils.showToastOk(this,"添加成功");
+        new Handler().postDelayed(()->{
+            finish();
+        },1000);
     }
 
     @Override
@@ -141,6 +144,7 @@ public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
                 ToastUtils.showToast(this,"手机号不能为空");
                 return;
             }
+            mBankCardPersenter.addBankCard(new BankCard("工商银行",cardNum));
         }
     }
 
