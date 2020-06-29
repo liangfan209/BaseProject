@@ -66,6 +66,7 @@
             android:hint="详细地址，例：1号楼2层202室"
             style="@style/ui_edit_txt_style"
             android:textSize="@dimen/h4_font_size"
+            android:textColor="@color/ui_txt_normal_color"
             android:layout_centerVertical="true"
             android:layout_marginLeft="97dp"
 
@@ -154,14 +155,17 @@
             android:layout_marginLeft="16dp"
             android:layout_centerVertical="true"
             />
-
+<!--        style="@style/ui_switch_style"-->
+<!--        <item name="android:thumb">@drawable/ui_switch_thumb</item>-->
+<!--        <item name="android:track">@drawable/ui_switch_track_selector</item>-->
         <Switch
             android:id="@+id/switchView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
-            style="@style/ui_switch_style"
+            android:thumb="@drawable/ui_switch_thumb"
+            android:track="@drawable/ui_switch_track_selector"
             android:layout_centerVertical="true"
             />
 

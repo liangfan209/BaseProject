@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bq.walletapp" >
+    <application>
+        <activity android:name=".wallet.ui.MyWalletActivity"
+            android:label="login"
+            android:configChanges="orientation|screenSize"/>
+    </application>
+</manifest>

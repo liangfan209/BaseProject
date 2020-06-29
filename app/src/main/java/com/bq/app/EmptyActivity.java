@@ -34,7 +34,7 @@ public class EmptyActivity extends BaseAcitivty {
         byte[] bts = FileIOUtils.readFile2BytesByStream(file);
         System.out.println("====>"+ bts);
         //跳转到登录界面
-        ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
+        ARouter.getInstance().build(AppArouter.WALLET_MY_ACTIVITY).navigation();
         finish();
     }
 }

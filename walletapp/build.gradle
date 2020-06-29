@@ -1,0 +1,37 @@
+apply from:"../common_component_build.gradle"
+apply from:"../base_nexus.gradle"
+apply plugin: 'maven'
+
+
+android {
+    resourcePrefix "wallet_" //给 Module 内的资源名增加前缀, 避免资源名冲突
+}
+dependencies {
+    implementation project(path: ':common-library')
+//    implementation "com.android.bq.comm:commLib:0.0.3"
+}
+
+
+//Properties properties = new Properties()
+//InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream() ;
+//properties.load( inputStream )
+//def userName = properties.getProperty('NEXUS_USERNAME')
+//def userPwd = properties.getProperty('NEXUS_PASSWORD')
+//def uploadUrl = properties.getProperty('RELEASE_REPOSITORY_URL')
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            //仓库地址
+//            repository(url: uploadUrl) {
+//                //私服账户信息
+//                authentication(userName: userName, password: userPwd)
+//            }
+//            //pom必需的参数
+//            pom.project {
+//                groupId "com.android.bq.app.login"
+//                artifactId "login"
+//                version "0.0.5"
+//            }
+//        }
+//    }
+//}

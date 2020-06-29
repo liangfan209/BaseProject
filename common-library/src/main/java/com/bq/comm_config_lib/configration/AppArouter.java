@@ -35,9 +35,12 @@ public class AppArouter {
     public static final String USER_CENTER_ADDRESS_OPTION = USER_CENTER+"/AddAddressActivity";
     public static final String USER_CENTER_USER_INFO_ACTIVITY = USER_CENTER+"/UserInfoActivity";
     public static final String USER_CENTER_ABOUT_US_ACTIVITY = USER_CENTER+"/AboutUsActivity";
-
     public static final String USER_CENTER_SERVICE = USER_CENTER+"/service";
 
+    //我的钱包
+    public static final String WALLET = "/wallet";
+    public static final String WALLET_MY_ACTIVITY = WALLET+"/MyWalletActivity";
+    public static final String WALLET_BILL_DETAIL_ACTIVITY = WALLET+"/BillDetailActivity";
 
     //h5页面
     public static final String H5_ACTIVITY = "/h5/H5Activity";

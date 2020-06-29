@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rlt_month"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="#F8F8F8"
+    android:clickable="true">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/iv_jiantou"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="收入¥8.81   转出20,000.00"
+                android:textColor="@color/ui_txt_normal_color"
+                android:textSize="@dimen/h5_font_size" />
+            />
+
+            <TextView
+                android:id="@+id/tv_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#ff999999"
+                android:textSize="12sp"
+                android:visibility="gone"/>
+            />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_jiantou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:background="@mipmap/next_step" />
+    </LinearLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/tv_change_time"
+        style="@style/time_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:drawableRight="@mipmap/hui_tao_sanjiao"
+        android:drawablePadding="10dp"
+        android:text="本月"
+        android:textColor="#ff232323"
+        android:textSize="13sp" />
+
+
+</RelativeLayout>

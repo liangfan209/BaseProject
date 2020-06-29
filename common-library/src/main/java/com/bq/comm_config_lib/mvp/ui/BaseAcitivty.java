@@ -10,13 +10,17 @@ import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
 import com.fan.baseuilibrary.view.dialog.LoadingDialog;
-import com.wind.me.xskinloader.SkinInflaterFactory;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.app.SkinAppCompatDelegateImpl;
 import androidx.lifecycle.LifecycleOwner;
 import butterknife.ButterKnife;
+import skin.support.SkinCompatManager;
+import skin.support.widget.SkinCompatSupportable;
 
 /**
  * 文件名：
@@ -25,7 +29,7 @@ import butterknife.ButterKnife;
  * 时间：2020/5/28
  * 版权：
  */
-public abstract class BaseAcitivty extends AppCompatActivity implements BaseIView, LifecycleOwner {
+public abstract class BaseAcitivty extends AppCompatActivity implements BaseIView, LifecycleOwner, SkinCompatSupportable {
 
     private LoadingDialog mLoadingDialog;
     public MyRefreshLayout mRefreshLayout;
@@ -33,9 +37,9 @@ public abstract class BaseAcitivty extends AppCompatActivity implements BaseIVie
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        SkinInflaterFactory.setFactory(this);
         super.onCreate(savedInstanceState);
         setContentView(getContentViewLayout());
+        SkinCompatManager.getInstance().loadSkin("red", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
         mLoadingDialog = new LoadingDialog(this);
         ButterKnife.bind(this);
         View backIv = findViewById(R.id.iv_title_left);
@@ -75,6 +79,18 @@ public abstract class BaseAcitivty extends AppCompatActivity implements BaseIVie
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
         }
+    }
+
+    @NonNull
+    @Override
+    public AppCompatDelegate getDelegate() {
+        return SkinAppCompatDelegateImpl.get(this, this);
+    }
+
+    @Override
+    public void applySkin() {
+//        if (tv != null)
+//            tv.setTextColor(SkinCompatResources.getColor(this, R.color.colorPrimary));
     }
 
     protected abstract @LayoutRes int getContentViewLayout();

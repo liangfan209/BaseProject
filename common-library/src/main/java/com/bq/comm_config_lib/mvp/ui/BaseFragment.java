@@ -27,15 +27,16 @@ public abstract class BaseFragment extends Fragment implements BaseIView {
 
     private LoadingDialog mLoadingDialog;
     public MyRefreshLayout mRefreshLayout;
+    public View contentView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view =inflater.inflate(getContentViewLayout(),null);
+        contentView =inflater.inflate(getContentViewLayout(),null);
         mLoadingDialog = new LoadingDialog(this.getContext());
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this,contentView);
         attach();
-        return view;
+        return contentView;
     }
 
     @Override

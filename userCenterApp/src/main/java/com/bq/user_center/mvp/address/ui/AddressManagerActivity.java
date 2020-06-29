@@ -3,6 +3,7 @@ package com.bq.user_center.mvp.address.ui;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -25,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.appcompat.widget.AppCompatCheckBox;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -88,7 +88,7 @@ public class AddressManagerActivity extends BaseAcitivty implements MyRefreshLay
 //                helper.setText(R.id.tv_name, s.getName());
 //                helper.setText(R.id.tv_phone, s.getPhoneNumber());
 //                helper.setText(R.id.tv_detail, s.getProvinces() + " " + s.getDetailAddress());
-                AppCompatCheckBox cb = helper.getView(R.id.cb_address);
+                RadioButton cb = helper.getView(R.id.cb_address);
                 cb.setChecked(s.getType() == 1 ? true : false);
 
                 cb.setOnClickListener(v->{

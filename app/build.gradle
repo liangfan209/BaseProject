@@ -24,6 +24,13 @@ android {
             }
         }
     }
+
+//    sourceSets {
+//        main {
+////            res.srcDirs = ['src/main/res',]
+//            res.srcDirs = ['src/main/res_red']
+//        }
+//    }
 }
 
 dependencies {
@@ -31,6 +38,7 @@ dependencies {
     if (!isBuildModule.toBoolean()) {
         implementation project(":loginApp")
         implementation project(":userCenterApp")
+        implementation project(":walletapp")
     }
     annotationProcessor rootProject.ext.dependencies["butterknife.compiler"]
     annotationProcessor rootProject.ext.dependencies["arouter.compiler"]
