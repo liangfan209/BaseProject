@@ -1,6 +1,5 @@
 package com.bq.user_center.mvp.user.ui;
 
-import android.os.Build;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,13 +24,11 @@ import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.CircleImageView;
 import com.fan.baseuilibrary.view.SimpleDividerItemDecoration;
 import com.google.gson.Gson;
-import com.wind.me.xskinloader.SkinManager;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -95,24 +92,13 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         TextView tvTitle =view.findViewById(R.id.tv_title);
         int itemResource = -1;
         BaseQuickAdapter<UserCenterConfigBean.ModuleListBean.TabListBean, BaseViewHolder> adapter;
+
         if (moduleListBean.getType().equals("grid")) {
             GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 4);
             recyclerView.setLayoutManager(gridLayoutManager);
             itemResource = R.layout.user_center_item_user_grid;
             tvTitle.setText(moduleListBean.getName());
-            adapter = new
-                    BaseQuickAdapter<UserCenterConfigBean.ModuleListBean.TabListBean, BaseViewHolder>(itemResource, moduleListBean.getTabList()) {
-                        @Override
-                        protected void convert(@NotNull BaseViewHolder helper,
-                                               UserCenterConfigBean.ModuleListBean.TabListBean tabListBean) {
-                            helper.setText(R.id.tv_name,tabListBean.getName());
-                            int resId = getResources().getIdentifier(tabListBean.getIcon(), "drawable",
-                                    UserFragment.this.getActivity().getPackageName());
-                            ImageView ivImg = helper.getView(R.id.iv_img);
-                            SkinManager.get().setImageDrawable(ivImg,resId);
-//                            ivImg.setBackgroundResource(resId);
-                        }
-                    };
+
         } else {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
             recyclerView.setLayoutManager(linearLayoutManager);
@@ -120,22 +106,20 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
             tvTitle.setVisibility(View.GONE);
             recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this.getContext(),R.color.ui_recycleview_item_line_color,1
                 , AppUtils.dp2px(this.getContext(),20),AppUtils.dp2px(this.getContext(),10)));
-            adapter = new
-                    BaseQuickAdapter<UserCenterConfigBean.ModuleListBean.TabListBean, BaseViewHolder>(itemResource, moduleListBean.getTabList()) {
-                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-                        @Override
-                        protected void convert(@NotNull BaseViewHolder helper,
-                                               UserCenterConfigBean.ModuleListBean.TabListBean tabListBean) {
-                            TextView tvName = helper.getView(R.id.tv_name);
-                            tvName.setText(tabListBean.getName());
-                            int resId = getResources().getIdentifier(tabListBean.getIcon(), "drawable",
-                                    UserFragment.this.getActivity().getPackageName());
-                            ImageView ivImg = helper.getView(R.id.iv_img);
-                            SkinManager.get().setImageDrawable(ivImg,resId);
-//                            tvName.setCompoundDrawablesRelativeWithIntrinsicBounds(resId,0,0,0);
-                        }
-                    };
+
         }
+        adapter = new
+                BaseQuickAdapter<UserCenterConfigBean.ModuleListBean.TabListBean, BaseViewHolder>(itemResource, moduleListBean.getTabList()) {
+                    @Override
+                    protected void convert(@NotNull BaseViewHolder helper,
+                                           UserCenterConfigBean.ModuleListBean.TabListBean tabListBean) {
+                        helper.setText(R.id.tv_name,tabListBean.getName());
+                        int resId = getResources().getIdentifier(tabListBean.getIcon(), "mipmap",
+                                UserFragment.this.getActivity().getPackageName());
+                        ImageView ivImg = helper.getView(R.id.iv_img);
+                        ivImg.setBackgroundResource(resId);
+                    }
+                };
 
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener((adapter1, view1, position) -> {
@@ -149,7 +133,10 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
             }
 
         });
-        mLltContent.addView(view);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.topMargin = AppUtils.dp2px(this.getContext(),-10);
+        params.bottomMargin = AppUtils.dp2px(this.getContext(),-10);
+        mLltContent.addView(view,params);
     }
 
     @OnClick({R2.id.rlt_head})

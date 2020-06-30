@@ -1,4 +1,4 @@
-package com.bq.walletapp.wallet.ui;
+package com.bq.walletapp.mvp.ui;
 
 import com.bq.comm_config_lib.mvp.BaseIView;
 import com.bq.walletapp.api.bean.BankCard;

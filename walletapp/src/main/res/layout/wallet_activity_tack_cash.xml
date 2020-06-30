@@ -9,6 +9,10 @@
     <include
         android:id="@+id/title"
         layout="@layout/layout_public_title" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#F8F8F8"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -107,7 +111,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:background="@color/white">
 
             <TextView
@@ -118,6 +122,7 @@
                 android:textSize="@dimen/h3_font_size"
                 android:layout_marginLeft="25dp"
                 android:gravity="center_vertical"
+                android:textStyle="bold"
                 />
             <TextView
                 android:id="@+id/tv_add_bankcard"
@@ -128,7 +133,7 @@
                 android:textSize="13sp"
                 android:layout_marginRight="23dp"
                 android:layout_alignParentRight="true"
-                android:drawableLeft="@mipmap/icon_tackcash_bank"
+                android:drawableLeft="@mipmap/icon_small_add"
                 android:drawablePadding="3dp"
                 android:gravity="center_vertical"
                 />
@@ -186,7 +191,12 @@
 
         </RelativeLayout>
 
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#cccccc"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="96dp"
@@ -195,34 +205,30 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:text="支付宝"
-                android:textColor="#ffcccccc"
-                android:textSize="@dimen/h5_font_size"
                 android:drawableLeft="@mipmap/icon_pay_zhifubao"
+                android:text="支付宝"
+                android:textColor="@color/ui_txt_normal_color"
+                android:textSize="@dimen/h3_font_size"
                 android:gravity="center_vertical"
-                android:drawablePadding="4dp"
+                android:drawablePadding="10dp"
                 android:layout_marginLeft="24dp"
+                android:textStyle="bold"
                 />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="#cccccc"
-                android:layout_marginTop="48dp"
-                android:layout_marginLeft="19dp"
-                android:layout_marginRight="19dp"/>
+
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="微信"
-                android:textColor="#ffcccccc"
-                android:textSize="12sp"
+                android:textColor="@color/ui_txt_normal_color"
+                android:textSize="@dimen/h3_font_size"
                 android:drawableLeft="@mipmap/icon_pay_wechat"
                 android:gravity="center_vertical"
-                android:drawablePadding="4dp"
+                android:drawablePadding="10dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="48dp"
+                android:textStyle="bold"
                 />
 
             <TextView

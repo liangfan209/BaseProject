@@ -1,4 +1,4 @@
-package com.bq.walletapp.wallet.presenter;
+package com.bq.walletapp.mvp.presenter;
 
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.msgService.MessageBody;
@@ -6,7 +6,7 @@ import com.bq.comm_config_lib.msgService.MessageEvent;
 import com.bq.comm_config_lib.msgService.MessageInter;
 import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.walletapp.api.bean.BankCard;
-import com.bq.walletapp.wallet.ui.TackCashIView;
+import com.bq.walletapp.mvp.ui.TackCashIView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

@@ -1,4 +1,4 @@
-package com.bq.walletapp.wallet.ui;
+package com.bq.walletapp.mvp.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -122,4 +122,11 @@ public class WalletListFragment extends BaseStickTimerFragment<EarningsListBean.
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(adapter != null){
+            adapter.notifyDataSetChanged();
+        }
+    }
 }

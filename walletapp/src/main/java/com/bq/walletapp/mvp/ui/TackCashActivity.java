@@ -1,4 +1,4 @@
-package com.bq.walletapp.wallet.ui;
+package com.bq.walletapp.mvp.ui;
 
 import android.graphics.Typeface;
 import android.text.Editable;
@@ -19,7 +19,7 @@ import com.bq.comm_config_lib.utils.Utils;
 import com.bq.walletapp.R;
 import com.bq.walletapp.R2;
 import com.bq.walletapp.api.bean.BankCard;
-import com.bq.walletapp.wallet.presenter.TackCashPresenter;
+import com.bq.walletapp.mvp.presenter.TackCashPresenter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.view.DeletableEditText;
@@ -34,7 +34,8 @@ import butterknife.OnClick;
 
 @Route(path = AppArouter.WALLET_TACK_CASH_ACTIVITY)
 public class TackCashActivity extends BaseAcitivty implements TackCashIView {
-
+    @BindView(R2.id.tv_title)
+    TextView mTvTitle;
     @BindView(R2.id.et_tack_money)
     DeletableEditText mEtTackMoney;
     @BindView(R2.id.tv_hint)
@@ -71,6 +72,7 @@ public class TackCashActivity extends BaseAcitivty implements TackCashIView {
 
     @Override
     protected void attach() {
+        mTvTitle.setText("提现");
         initEditView();
         mTackCashPresenter.getBankCardList();
     }

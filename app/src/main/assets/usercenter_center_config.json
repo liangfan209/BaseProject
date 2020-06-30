@@ -104,6 +104,13 @@
           "jumpType": "arouter"
         },
         {
+          "name": "账单记录",
+          "remark": "",
+          "icon": "icon_usercenter_address_manager",
+          "path": "/wallet/MyWalletActivity",
+          "jumpType": "arouter"
+        },
+        {
           "name": "银行卡",
           "remark": "",
           "icon": "icon_usercenter_bank_manager",
@@ -122,13 +129,6 @@
           "remark": "",
           "icon": "icon_usercenter_address_manager",
           "path": "/userCenter/AddressSelectActivity",
-          "jumpType": "arouter"
-        },
-        {
-          "name": "账单记录",
-          "remark": "",
-          "icon": "icon_usercenter_address_manager",
-          "path": "/wallet/MyWalletActivity",
           "jumpType": "arouter"
         },
         {

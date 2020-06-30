@@ -1,13 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bq.walletapp" >
     <application>
-        <activity android:name=".wallet.ui.MyWalletActivity"
+        <activity android:name=".mvp.ui.MyWalletActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".wallet.ui.BillDetailActivity"
+        <activity android:name=".mvp.ui.BillDetailActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".wallet.ui.RechargeActivity"
+        <activity android:name=".mvp.ui.RechargeActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".wallet.ui.TackCashActivity"
+        <activity android:name=".mvp.ui.TackCashActivity"
             android:configChanges="orientation|screenSize"/>
     </application>
 </manifest>

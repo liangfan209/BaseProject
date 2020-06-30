@@ -1,4 +1,4 @@
-package com.bq.walletapp.wallet.ui;
+package com.bq.walletapp.mvp.ui;
 
 import android.view.View;
 import android.widget.ImageView;

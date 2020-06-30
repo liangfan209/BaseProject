@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:ignore="ResourceName">
     <include layout="@layout/layout_public_title" />
 
@@ -11,6 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="167dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/ui_shap_primary_bg">
 
         <TextView
@@ -55,6 +57,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_take_cash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="34dp"

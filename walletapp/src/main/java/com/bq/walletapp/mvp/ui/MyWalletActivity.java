@@ -1,4 +1,4 @@
-package com.bq.walletapp.wallet.ui;
+package com.bq.walletapp.mvp.ui;
 
 import android.view.View;
 import android.widget.FrameLayout;
@@ -34,6 +34,8 @@ public class MyWalletActivity extends BaseAcitivty {
     TextView mTvTitle;
     @BindView(R2.id.tv_right)
     TextView mTvRight;
+    @BindView(R2.id.tv_take_cash)
+    TextView mTvTakeCash;
     @BindView(R2.id.view_line)
     View mViewLine;
     @BindView(R2.id.rlt_title)
@@ -65,9 +67,11 @@ public class MyWalletActivity extends BaseAcitivty {
     }
 
 
-    @OnClick({R2.id.tv_title, R2.id.tv_right})
+    @OnClick({R2.id.tv_title, R2.id.tv_right, R2.id.tv_take_cash})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.tv_right){
+            ARouter.getInstance().build(AppArouter.WALLET_TACK_CASH_ACTIVITY).navigation();
+        }else if(view.getId() == R.id.tv_take_cash){
             ARouter.getInstance().build(AppArouter.WALLET_TACK_CASH_ACTIVITY).navigation();
         }
     }

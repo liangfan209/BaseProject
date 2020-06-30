@@ -25,12 +25,12 @@ android {
         }
     }
 
-//    sourceSets {
-//        main {
-////            res.srcDirs = ['src/main/res',]
-//            res.srcDirs = ['src/main/res_red']
-//        }
-//    }
+    sourceSets {
+        main {
+            res.srcDirs = ['src/main/res']
+//            res.srcDirs = ['src/main/res','src/main/res-red']
+        }
+    }
 }
 
 dependencies {

@@ -73,7 +73,7 @@
             android:id="@+id/iv_type_bg"
             android:layout_width="100dp"
             android:layout_height="80dp"
-            android:background="@mipmap/bill_blue_type"
+            android:background="@mipmap/bill_type"
             android:layout_marginLeft="98dp"
             android:layout_marginTop="17dp"/>
         <ImageView

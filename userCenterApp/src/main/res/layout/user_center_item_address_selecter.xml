@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="默认"
             android:padding="1dp"
-            android:textColor="#ff196aff"
+            android:textColor="@color/ui_primary_color"
             android:textSize="10sp"
             android:background="@drawable/ui_shap_small_button_bg"
             />
