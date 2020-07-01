@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.comm_config_lib.mvp.ui.BaseStickTimerFragment;
 import com.bq.walletapp.R;
 import com.bq.walletapp.api.bean.EarningsListBean;
@@ -48,6 +49,11 @@ public class WalletListFragment extends BaseStickTimerFragment<EarningsListBean.
         });
         return view;
 
+    }
+
+    @Override
+    protected BasePersenter createPersenter() {
+        return null;
     }
 
     @Override

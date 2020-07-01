@@ -1,5 +1,6 @@
 package com.bq.comm_config_lib.request;
 
+import com.bq.comm_config_lib.BaseApplication;
 import com.bq.utilslib.rsa.RSA;
 import com.lzy.okgo.request.base.Request;
 
@@ -27,16 +28,12 @@ public class RequsetUtils {
         try {
             Field filed = Request.class.getDeclaredField("url");
             filed.setAccessible(true);
-            filed.set(request,"http://192.168.3.213:8769/interface");
+//            filed.set(request,"http://192.168.3.154:8011/interface/");
+            filed.set(request, BaseApplication.baseUrl);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        request.params("platform", "0");
-        request.params("clientType", "1");
-        request.params("flag", "customer");
-        request.params("version", "1");
-        request.params("signType", "sha");
-        request.params("proType", "cs");
+        request.params("flag", "customer-mobile");
         request.params("timestamp", String.valueOf(System.currentTimeMillis()));
         LinkedHashMap<String, List<String>> urlParamsMap = request.getParams().urlParamsMap;
         StringBuilder sb = new StringBuilder();

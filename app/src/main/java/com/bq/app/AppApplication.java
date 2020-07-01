@@ -30,6 +30,7 @@ import skin.support.design.app.SkinMaterialViewInflater;
  */
 public class AppApplication extends BaseApplication {
 
+
     {
         PlatformConfig.setWeixin("wx22a8fc65e8d220af", "f90d0b596034a8c92ed578f9c9a7773a");
         PlatformConfig.setQQZone("123", "123");
@@ -43,6 +44,8 @@ public class AppApplication extends BaseApplication {
         super.onCreate();
         //2.注册组件中暴露的服务
         Servicemanager.getInstance().resiter(this,"com.bq");
+
+        baseUrl = "http://education.bq.com/interface/";
 
         // android 7.0系统拍照兼容
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -97,4 +100,5 @@ public class AppApplication extends BaseApplication {
         }
         SkinManager.get().loadSkin(file.getAbsolutePath());
     }
+
 }

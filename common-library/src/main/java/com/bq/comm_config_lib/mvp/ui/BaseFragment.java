@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bq.comm_config_lib.mvp.BaseIView;
+import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
 import com.fan.baseuilibrary.view.dialog.LoadingDialog;
@@ -14,6 +15,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import butterknife.ButterKnife;
 
 /**
@@ -23,7 +25,7 @@ import butterknife.ButterKnife;
  * 时间：2020/5/28
  * 版权：
  */
-public abstract class BaseFragment extends Fragment implements BaseIView {
+public abstract class BaseFragment extends Fragment implements BaseIView, LifecycleOwner {
 
     private LoadingDialog mLoadingDialog;
     public MyRefreshLayout mRefreshLayout;
@@ -35,6 +37,10 @@ public abstract class BaseFragment extends Fragment implements BaseIView {
         contentView =inflater.inflate(getContentViewLayout(),null);
         mLoadingDialog = new LoadingDialog(this.getContext());
         ButterKnife.bind(this,contentView);
+        BasePersenter presenter = createPersenter();
+        if(presenter != null){
+            getLifecycle().addObserver(presenter);
+        }
         attach();
         return contentView;
     }
@@ -61,6 +67,7 @@ public abstract class BaseFragment extends Fragment implements BaseIView {
         }
     }
 
+    protected abstract BasePersenter createPersenter();
     protected abstract @LayoutRes int getContentViewLayout();
     protected abstract void attach();
 

@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="请选择地区"
-            android:textColor="@color/ui_txt_hint_color"
+            android:textColor="@color/ui_txt_normal_color"
             android:layout_centerVertical="true"
             android:layout_marginLeft="97dp"
             />
@@ -101,6 +101,7 @@
             android:textSize="@dimen/h4_font_size"
             android:layout_centerVertical="true"
             android:layout_marginLeft="97dp"
+            android:maxLength="10"
             />
 
         <ImageView
@@ -120,7 +121,8 @@
             android:id="@+id/rb_man"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="先生"
+            android:text="男"
+            android:checked="true"
             style="@style/ui_checkbox_style"
             android:layout_marginLeft="99dp"
             android:textSize="@dimen/h4_font_size"
@@ -131,7 +133,7 @@
             android:id="@+id/rb_woman"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="女士"
+            android:text="女"
             style="@style/ui_checkbox_style"
             android:textSize="@dimen/h4_font_size"
             android:layout_centerVertical="true"
@@ -139,6 +141,39 @@
             />
 
     </RadioGroup>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ui_h3_normal_style"
+            android:text="手机号"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            />
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/det_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请填写手机号"
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="97dp"
+            android:inputType="phone"
+            android:maxLength="13"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ffeeeeee"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="10dp"
@@ -158,15 +193,17 @@
 <!--        style="@style/ui_switch_style"-->
 <!--        <item name="android:thumb">@drawable/ui_switch_thumb</item>-->
 <!--        <item name="android:track">@drawable/ui_switch_track_selector</item>-->
-        <Switch
+<!--        android:thumb="@drawable/ui_switch_thumb"-->
+<!--        android:track="@drawable/ui_switch_track_selector"-->
+        <skin.support.widget.SkinCompatCheckBox
             android:id="@+id/switchView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
-            android:thumb="@drawable/ui_switch_thumb"
-            android:track="@drawable/ui_switch_track_selector"
+            android:background="@drawable/ui_switch_select"
             android:layout_centerVertical="true"
+            android:button="@null"
             />
 
         <ImageView

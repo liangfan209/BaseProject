@@ -1,7 +1,7 @@
 package com.bq.user_center.mvp.address.ui;
 
 import com.bq.comm_config_lib.mvp.BaseIView;
-import com.bq.user_center.requset.bean.AddressBean;
+import com.bq.user_center.requset.bean.AddressInfo;
 
 import java.util.List;
 
@@ -13,8 +13,9 @@ import java.util.List;
  * 版权：
  */
 public interface AddressBaseIView extends BaseIView {
-    default void getAddressList(List<AddressBean> list){};
+    default void getAddressList(List<AddressInfo> list){};
     default void addAdress(){};
     default void deleteAddress(){}
-    default void editeAddress(){}
+    default void updateAddress(){}
+    default void getAddressById(AddressInfo info){}
 }

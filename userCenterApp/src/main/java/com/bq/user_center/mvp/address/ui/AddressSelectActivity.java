@@ -15,7 +15,8 @@ import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.mvp.address.presenter.AddressManagerPresenter;
 import com.bq.user_center.mvp.bankcard.presenter.BankCardPresenter;
-import com.bq.user_center.requset.bean.AddressBean;
+import com.bq.user_center.requset.bean.AddressInfo;
+import com.bq.user_center.requset.bean.AddressListBean;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
@@ -36,7 +37,8 @@ import butterknife.OnClick;
  * 版权：
  */
 @Route(path = AppArouter.USER_CENTER_ADDRESS_SELECT)
-public class AddressSelectActivity extends BaseAcitivty implements MyRefreshLayout.LayoutInterface<AddressBean>,AddressBaseIView {
+public class AddressSelectActivity extends BaseAcitivty implements MyRefreshLayout.LayoutInterface<AddressInfo>,
+        AddressBaseIView {
 
     @BindView(R2.id.flt_content)
     FrameLayout mFltContent;
@@ -46,7 +48,6 @@ public class AddressSelectActivity extends BaseAcitivty implements MyRefreshLayo
     @BindView(R2.id.rlt_add_address)
     RelativeLayout mRltAddAddress;
     private AddressManagerPresenter mAddressManagerPresenter;
-
 
 
     @Override
@@ -63,10 +64,10 @@ public class AddressSelectActivity extends BaseAcitivty implements MyRefreshLayo
     @Override
     protected void attach() {
         mTvTitle.setText("选择地址");
-        mRefreshLayout = new MyRefreshLayout<AddressBean>(this, this);
+        mRefreshLayout = new MyRefreshLayout<AddressListBean>(this, this);
         mRefreshLayout.setbackgroundColor(R.color.white);
         mFltContent.addView(mRefreshLayout);
-        mRefreshLayout.setRefresh(false,false);
+        mRefreshLayout.setRefresh(false, false);
         //选择某一个类型
         mRefreshLayout.adapter.setOnItemClickListener((adapter, view, position) -> {
         });
@@ -74,32 +75,33 @@ public class AddressSelectActivity extends BaseAcitivty implements MyRefreshLayo
 
 
     @Override
-    public BaseQuickAdapter<AddressBean, ? extends BaseViewHolder> createAdapter() {
-        return new CommomMultiItemQuickAdapter<AddressBean,BaseViewHolder>(new ArrayList<>()){
+    public BaseQuickAdapter<AddressInfo, ? extends BaseViewHolder> createAdapter() {
+        return new CommomMultiItemQuickAdapter<AddressInfo, BaseViewHolder>(new ArrayList<>()) {
             @Override
-            protected void convert(@NotNull BaseViewHolder baseViewHolder, AddressBean addressBean) {
-                baseViewHolder.getView(R.id.tv_edit).setOnClickListener(v->{
+            protected void convert(@NotNull BaseViewHolder baseViewHolder, AddressInfo addressBean) {
+                baseViewHolder.getView(R.id.tv_edit).setOnClickListener(v -> {
                     ARouter.getInstance().build(AppArouter.USER_CENTER_ADDRESS_OPTION)
-                            .withInt("optionType", AddressOptionActivity.ADDRESS_EDIT).navigation();
+                            .withInt("optionType", AddressOptionActivity.ADDRESS_EDIT)
+                            .withSerializable("mAddressInfo", addressBean).navigation();
                 });
-                if(baseViewHolder.getItemViewType() == 1){
-                   TextView tv =  baseViewHolder.getView(R.id.tv_txt);
-                   tv.setText("         "+ "湖北省武汉市江夏区佛祖岭 街道58号达尚城1栋2单元402号");
-                }else if(baseViewHolder.getItemViewType() == 2){
+                if (baseViewHolder.getItemViewType() == 1) {
+                    TextView tv = baseViewHolder.getView(R.id.tv_txt);
+                    tv.setText("         " + "湖北省武汉市江夏区佛祖岭 街道58号达尚城1栋2单元402号");
+                } else if (baseViewHolder.getItemViewType() == 2) {
 
                 }
             }
 
             @Override
             public void addType() {
-                addItemType(1,R.layout.user_center_item_address_selecter);
-                addItemType(2,R.layout.user_center_item_address_unselecter);
+                addItemType(1, R.layout.user_center_item_address_selecter);
+                addItemType(0, R.layout.user_center_item_address_unselecter);
             }
         };
     }
 
     @Override
-    public void getAddressList(List<AddressBean> list) {
+    public void getAddressList(List<AddressInfo> list) {
         mRefreshLayout.adapter.setNewData(list);
         mRefreshLayout.adapter.notifyDataSetChanged();
     }
@@ -111,7 +113,7 @@ public class AddressSelectActivity extends BaseAcitivty implements MyRefreshLayo
 
     @OnClick(R2.id.rlt_add_address)
     public void onViewClicked(View view) {
-        if(view.getId() == R.id.rlt_add_address){
+        if (view.getId() == R.id.rlt_add_address) {
             ARouter.getInstance().build(AppArouter.USER_CENTER_ADDRESS_OPTION)
                     .withInt("optionType", AddressOptionActivity.ADDRESS_ADD).navigation();
         }

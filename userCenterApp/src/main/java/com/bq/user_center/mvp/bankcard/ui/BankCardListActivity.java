@@ -14,10 +14,11 @@ import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.mvp.bankcard.presenter.BankCardPresenter;
-import com.bq.user_center.requset.bean.BankCard;
+import com.bq.user_center.requset.bean.BankCardInfo;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemLongClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
 
 import org.jetbrains.annotations.NotNull;
@@ -36,9 +37,9 @@ import butterknife.BindView;
  * 版权：
  */
 @Route(path = AppArouter.USER_CENTER_BANK_LIST)
-public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIView, MyRefreshLayout.LayoutInterface<BankCard> {
+public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIView, MyRefreshLayout.LayoutInterface<BankCardInfo> {
 
-    public static final String UPDATE_BANK = "update_bank";
+
     @BindView(R2.id.flt_content)
     FrameLayout mFltContent;
     BankCardPresenter mBankCardPersenter;
@@ -65,7 +66,7 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIV
         ARouter.getInstance().inject(this);
         mTvTitle.setText("银行卡列表");
 
-        mRefreshLayout = new MyRefreshLayout<BankCard>(this, this);
+        mRefreshLayout = new MyRefreshLayout<BankCardInfo>(this, this);
         mRefreshLayout.setRefresh(false, false);
         mFltContent.addView(mRefreshLayout);
     }
@@ -82,23 +83,22 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIV
 
 
     @Override
-    public void getBankListView(List<BankCard> list,int page) {
-        if(page == 1){
-            mRefreshLayout.adapter.setNewData(list);
-            mRefreshLayout.adapter.notifyDataSetChanged();
-        }else{
-            mRefreshLayout.addData(list);
-        }
+    public void getBankListView(List<BankCardInfo> list) {
+        mRefreshLayout.adapter.setNewData(list);
+        mRefreshLayout.adapter.notifyDataSetChanged();
     }
 
     @Override
-    public BaseQuickAdapter<BankCard, ? extends BaseViewHolder> createAdapter() {
-        BaseQuickAdapter adapter =  new BaseQuickAdapter<BankCard, BaseViewHolder>(R.layout.user_center_item_banklist,new ArrayList<BankCard>()) {
+    public void removeSuccess() {
+        ToastUtils.showToastOk(this,"解绑成功");
+    }
+
+    @Override
+    public BaseQuickAdapter<BankCardInfo, ? extends BaseViewHolder> createAdapter() {
+        BaseQuickAdapter adapter =  new BaseQuickAdapter<BankCardInfo, BaseViewHolder>(R.layout.user_center_item_banklist,new ArrayList<BankCardInfo>()) {
             @Override
-            protected void convert(@NotNull BaseViewHolder helper, BankCard item) {
-                helper.setText(R.id.tv_card_number, item.getCardNo());
-                helper.setText(R.id.tv_card_name, item.getBankName());
-                helper.setText(R.id.tv_card_type, item.getCardType());
+            protected void convert(@NotNull BaseViewHolder helper, BankCardInfo item) {
+                helper.setText(R.id.tv_card_number, item.getNumber());
                 ImageView ivCard = helper.getView(R.id.iv_bank);
             }
         };
@@ -109,7 +109,8 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIV
                         .showBottomView(new BankCardOption.BankCardOptionInter() {
                             @Override
                             public void unBind() {
-
+                                BankCardInfo info = (BankCardInfo) adapter.getData().get(position);
+                                mBankCardPersenter.deleteBank(info.getId());
                             }
                         });
                 return false;
@@ -120,7 +121,7 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIV
 
     @Override
     public void loadData(int page, int pageSize) {
-        mBankCardPersenter.getBankList(page);
+        mBankCardPersenter.getBankList();
     }
 
 }

@@ -38,7 +38,9 @@ public class SignJsonCallBack<T> extends JsonCallback<T> {
     public void onSuccess(Response<T> response) {
         T body = response.body();
         if (body instanceof BaseResponse) {
-            if (10000 != ((BaseResponse) body).code) {
+            if ("ok".equals(((BaseResponse) body).status)) {
+                mRequestCallBack.onSuccess(((BaseResponse) body).result);
+            }else{
                 mRequestCallBack.onError(((BaseResponse) body).msg);
             }
         }

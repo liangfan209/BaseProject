@@ -1,7 +1,7 @@
 package com.bq.user_center.mvp.bankcard.ui;
 
 import com.bq.comm_config_lib.mvp.BaseIView;
-import com.bq.user_center.requset.bean.BankCard;
+import com.bq.user_center.requset.bean.BankCardInfo;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface BankCardBaseIView extends BaseIView {
     //获取列表
-    default void getBankListView(List<BankCard> list,int page){};
+    default void getBankListView(List<BankCardInfo> list){};
     default void addBankSuccess(){};
-    default void deleteBank(String bankId){};
+    default void removeSuccess(){};
 }

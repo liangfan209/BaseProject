@@ -16,16 +16,16 @@ import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.mvp.bankcard.presenter.BankCardPresenter;
-import com.bq.user_center.requset.bean.BankCard;
+import com.bq.user_center.requset.bean.BankCardInfo;
 import com.bq.utilslib.AccountValidatorUtil;
 import com.bq.utilslib.EditFormatUtils;
 import com.fan.baseuilibrary.utils.CountDownHelper;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
 
-import androidx.appcompat.widget.AppCompatCheckBox;
 import butterknife.BindView;
 import butterknife.OnClick;
+import skin.support.widget.SkinCompatCheckBox;
 
 /**
  * 文件名：
@@ -57,7 +57,7 @@ public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
     @BindView(R2.id.tv_get_verification_code)
     TextView mTvGetVerificationCode;
     @BindView(R2.id.rb_protocol)
-    AppCompatCheckBox mRbProtocol;
+    SkinCompatCheckBox mRbProtocol;
     @BindView(R2.id.tv_comfirm_form)
     TextView mTvComfirmForm;
 
@@ -117,6 +117,11 @@ public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
         return mBankCardPersenter;
     }
 
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        mBankCardPersenter.unRegister();
+    }
 
     @OnClick({R2.id.tv_get_verification_code, R2.id.tv_comfirm_form})
     public void onViewClicked(View view) {
@@ -128,23 +133,29 @@ public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
             String idNum = mEtIdCard.getText().toString();
             String phoneNum = mEtPhone.getText().toString();
             String name = mEtName.getText().toString();
+            String code = mEtVerticalCode.getText().toString();
             if(StringUtils.isEmpty(cardNum)){
-                ToastUtils.showToast(this,"银行卡号不能为空");
+                ToastUtils.showToast(this,"请输入银行卡号");
+                return;
+            }
+
+            if(StringUtils.isEmpty(name)){
+                ToastUtils.showToast(this,"请输入开户姓名");
                 return;
             }
             if(StringUtils.isEmpty(idNum)){
-                ToastUtils.showToast(this,"身份证号不能为空");
-                return;
-            }
-            if(StringUtils.isEmpty(name)){
-                ToastUtils.showToast(this,"姓名不能为空");
+                ToastUtils.showToast(this,"请输入身份证号");
                 return;
             }
             if(StringUtils.isEmpty(phoneNum)){
-                ToastUtils.showToast(this,"手机号不能为空");
+                ToastUtils.showToast(this,"请输入银行卡预留手机号");
                 return;
             }
-            mBankCardPersenter.addBankCard(new BankCard("工商银行",cardNum));
+            if(StringUtils.isEmpty(code)){
+                ToastUtils.showToast(this,"请输入短信验证码");
+                return;
+            }
+            mBankCardPersenter.addBankCard(new BankCardInfo(name,cardNum,phoneNum,idNum,code));
         }
     }
 

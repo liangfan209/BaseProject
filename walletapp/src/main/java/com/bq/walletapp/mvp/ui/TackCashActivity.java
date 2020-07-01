@@ -169,7 +169,7 @@ public class TackCashActivity extends BaseAcitivty implements TackCashIView {
             @Override
             protected void convert(BaseViewHolder helper, BankCard item) {
                 CheckBox cbBank = helper.getView(R.id.rb_bank);
-                cbBank.setText(item.getBankName()+" "+item.getCardNo());
+                cbBank.setText(item.getNumber());
                 cbBank.setChecked(item.isCheck());
                 cbBank.setOnClickListener(v -> {
                     mPosition = adpater.getData().indexOf(item);

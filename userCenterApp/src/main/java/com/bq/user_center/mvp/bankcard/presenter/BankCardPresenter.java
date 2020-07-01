@@ -1,15 +1,18 @@
 package com.bq.user_center.mvp.bankcard.presenter;
 
 import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.request.AbstractReqeustCallback;
+import com.bq.user_center.api.UserCenterEventKey;
 import com.bq.user_center.mvp.bankcard.ui.BankCardBaseIView;
-import com.bq.user_center.mvp.bankcard.ui.BankCardListActivity;
-import com.bq.user_center.requset.bean.BankCard;
+import com.bq.user_center.requset.UserCenterHttpReqeustImp;
+import com.bq.user_center.requset.bean.BankCardInfo;
+import com.bq.user_center.requset.bean.BankListBean;
+import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -24,6 +27,7 @@ import androidx.lifecycle.LifecycleOwner;
  */
 public class BankCardPresenter implements BasePersenter {
     private BankCardBaseIView mBankCardView;
+    private UserCenterHttpReqeustImp mUserCenterHttpReqeustImp;
 
 
     public BankCardPresenter() {
@@ -31,37 +35,47 @@ public class BankCardPresenter implements BasePersenter {
     }
     public BankCardPresenter(BankCardBaseIView bankCardView) {
         mBankCardView = bankCardView;
+        mUserCenterHttpReqeustImp = new UserCenterHttpReqeustImp();
     }
 
-    public static List<BankCard> bankCardList ;
+    public static List<BankCardInfo> bankCardList ;
 
 
-    public List<BankCard> getBankList(){
-        if(bankCardList == null){
-            bankCardList = new ArrayList<>();
-            bankCardList.add(new BankCard("name1","**** **** **** 1234"));
-        }
-        return bankCardList;
+//    public List<BankCardInfo> getBankList(){
+//        return bankCardList;
+//    }
+
+
+
+    public void getBankList() {
+        mUserCenterHttpReqeustImp.getBankList(new AbstractReqeustCallback<BankListBean>(mBankCardView) {
+            @Override
+            public void onSuccess(BankListBean bean) {
+                mBankCardView.getBankListView(bean.getBankcard_list());
+            }
+        });
     }
 
-    public void getBankList(int page) {
-//        new UserCenterHttpReqeustImp().getBankList(new AbstractReqeustCallback<List<BankCard>>(mBankCardView) {
-//            @Override
-//            public void onSuccess(List<BankCard> list) {
-//                mBankCardView.getBankListView(list);
-//            }
-//        });
-        if(bankCardList == null){
-            bankCardList = new ArrayList<>();
-            bankCardList.add(new BankCard("name1","**** **** **** 1234"));
-        }
-        mBankCardView.getBankListView(bankCardList,page);
+    public void addBankCard(BankCardInfo bankCard){
+        String info = new Gson().toJson(bankCard);
+        mUserCenterHttpReqeustImp.addBank(info, new AbstractReqeustCallback(mBankCardView) {
+            @Override
+            public void onSuccess(Object o) {
+                mBankCardView.addBankSuccess();
+                EventBus.getDefault().post(UserCenterEventKey.UPDATE_BANK);
+            }
+        });
     }
 
-    public void addBankCard(BankCard bankCard){
-        bankCardList.add(bankCard);
-        EventBus.getDefault().post(BankCardListActivity.UPDATE_BANK);
-        mBankCardView.addBankSuccess();
+    public void deleteBank(String id){
+        mUserCenterHttpReqeustImp.deleteBank(id, new AbstractReqeustCallback(mBankCardView) {
+            @Override
+            public void onSuccess(Object o) {
+                mBankCardView.removeSuccess();
+                EventBus.getDefault().post(UserCenterEventKey.UPDATE_BANK);
+            }
+        });
+
     }
 
 
@@ -75,10 +89,15 @@ public class BankCardPresenter implements BasePersenter {
         EventBus.getDefault().unregister(this);
     }
 
+    public void unRegister(){
+        EventBus.getDefault().unregister(this);
+    }
+
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateAddress(String event) {
-        if(BankCardListActivity.UPDATE_BANK.equals(event)){
-            getBankList(1);
+        if(UserCenterEventKey.UPDATE_BANK.equals(event)){
+            getBankList();
         }
     }
 

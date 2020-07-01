@@ -21,4 +21,7 @@ public interface LoginHttpReqeustInter {
 
     //忘记密码
    void forgetPwd(String type, String phone, RequestCallBackInter callBack);
+
+   //注册
+    void register(String code,String password,String phone, RequestCallBackInter callBack);
 }

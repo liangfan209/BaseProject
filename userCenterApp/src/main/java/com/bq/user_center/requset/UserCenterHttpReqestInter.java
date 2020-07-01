@@ -11,9 +11,20 @@ import com.bq.comm_config_lib.request.RequestCallBackInter;
  */
 public interface UserCenterHttpReqestInter {
 
+    //银行卡
     void getBankList(RequestCallBackInter callBack);
+    void addBank(String bankinfo,RequestCallBackInter callBack);
+    void deleteBank(String id,RequestCallBackInter callBack);
 
+    //用户
     void showUserInfo(RequestCallBackInter callBack);
+    void updateUserInfo(String userInfo,RequestCallBackInter callBack);
 
-    void addBank(RequestCallBackInter callBack);
+    //地址
+    void getAddressList(RequestCallBackInter callBack);
+    void addAddress(String addressInfo,RequestCallBackInter callBack);
+    void deleteAddress(String id,RequestCallBackInter callBack);
+    void updateAddress(String id,String addressInfo,RequestCallBackInter callBack);
+    void getAddressById(String id,RequestCallBackInter callBack);
+
 }

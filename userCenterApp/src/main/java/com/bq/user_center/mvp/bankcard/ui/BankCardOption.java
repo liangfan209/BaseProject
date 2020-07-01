@@ -57,6 +57,9 @@ public class BankCardOption {
             @Override
             public void onClick(View view) {
                 mCustomPopWindow.dissmiss();
+                if(view.getId() == R.id.tv_unbind){
+                    callBack.unBind();
+                }
             }
         };
         contentView.findViewById(R.id.tv_unbind).setOnClickListener(listener);

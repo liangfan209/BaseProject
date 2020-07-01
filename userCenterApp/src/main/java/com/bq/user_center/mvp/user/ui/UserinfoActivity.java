@@ -8,7 +8,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
@@ -20,6 +19,8 @@ import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.api.bean.UserInfoConfigBean;
+import com.bq.user_center.mvp.user.presenter.UserPresenter;
+import com.bq.user_center.requset.bean.UserInfo;
 import com.bq.utilslib.AppUtils;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -51,7 +52,7 @@ import butterknife.OnClick;
  * 版权：
  */
 @Route(path = AppArouter.USER_CENTER_USER_INFO_ACTIVITY)
-public class UserinfoActivity extends BaseAcitivty {
+public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
     @BindView(R2.id.iv_title_left)
     ImageView mIvTitleLeft;
     @BindView(R2.id.tv_title)
@@ -72,6 +73,8 @@ public class UserinfoActivity extends BaseAcitivty {
     BaseQuickAdapter mBaseQuickAdapter;
     UserPicture pictureUtils;
 
+    private UserPresenter mUserPresenter;
+
     @Override
     protected int getContentViewLayout() {
         return R.layout.user_center_activity_userinfo;
@@ -79,7 +82,8 @@ public class UserinfoActivity extends BaseAcitivty {
 
     @Override
     protected BasePersenter createPersenter() {
-        return null;
+        mUserPresenter = new UserPresenter(this);
+        return mUserPresenter;
     }
 
     @Override
@@ -88,6 +92,31 @@ public class UserinfoActivity extends BaseAcitivty {
         String jsonStr = AppUtils.getAssetJson(this, "usercenter_userinfo_config.json");
         mUserInfoConfigBean = new Gson().fromJson(jsonStr, UserInfoConfigBean.class);
         updateView();
+        mUserPresenter.showUserInfo();
+    }
+
+    @Override
+    public void showUser(UserInfo info) {
+        UserInfo.CustomerInfoBean customerInfo = info.getCustomer_info();
+        List<UserInfoConfigBean.ModuleListBean> moduleList = mUserInfoConfigBean.getModuleList();
+        for (UserInfoConfigBean.ModuleListBean moduleListBean : moduleList) {
+            if(moduleListBean.getType().equals("name")){
+                moduleListBean.setValue(customerInfo.getName());
+            }else if(moduleListBean.getType().equals("gender")){
+                moduleListBean.setValue(customerInfo.getGender());
+            }else if(moduleListBean.getType().equals("birthday")){
+                moduleListBean.setValue(customerInfo.getBirthday());
+            }else if(moduleListBean.getType().equals("phone")){
+                moduleListBean.setValue(customerInfo.getPhone());
+            }else if(moduleListBean.getType().equals("email")){
+                moduleListBean.setValue(customerInfo.getEmail());
+            }else if(moduleListBean.getType().equals("qq")){
+                moduleListBean.setValue(customerInfo.getQq());
+            }else if(moduleListBean.getType().equals("education")){
+                moduleListBean.setValue(customerInfo.getEducation());
+            }
+        }
+        mBaseQuickAdapter.notifyDataSetChanged();
     }
 
     private void updateView() {
@@ -111,24 +140,19 @@ public class UserinfoActivity extends BaseAcitivty {
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 UserInfoConfigBean.ModuleListBean module = (UserInfoConfigBean.ModuleListBean) adapter.getData().get(position);
                 String type = module.getType();
-                if ("sex".equals(type)) {
+                if ("gender".equals(type)) {
                     chooseSex();
                     return;
-                } else if ("address".equals(type)) {
-                    ARouter.getInstance().build(AppArouter.USER_CENTER_ADDRESS_LIST).navigation();
-                    return;
-                } else if ("area".equals(type)) {
-
-                } else if ("profession".equals(type)) {
-
-                } else if ("bindPhoneNumber".equals(type)) {
-
                 }
                 changeValueDialog(module);
             }
         });
     }
 
+    /**
+     * 弹出对话框，修改用户资料
+     * @param module
+     */
     void changeValueDialog(UserInfoConfigBean.ModuleListBean module) {
         View view = LinearLayout.inflate(this, R.layout.user_center_input_view, null);
         final DeletableEditText etValue = view.findViewById(R.id.et_value);
@@ -137,13 +161,7 @@ public class UserinfoActivity extends BaseAcitivty {
             @Override
             public void ok() {
                 String text = etValue.getText().toString();
-                module.setValue(text);
-                mBaseQuickAdapter.notifyDataSetChanged();
-//                List<UserInfoConfigBean.ModuleListBean> data = mBaseQuickAdapter.getData();
-//                for (int i = 0; i <data.size() ; i++) {
-//                    if(module.getType().equals(data.get(i).getType())){
-//                    }
-//                }
+                mUserPresenter.updateUserInfo(module.getType(),text);
             }
 
             @Override
@@ -151,6 +169,7 @@ public class UserinfoActivity extends BaseAcitivty {
             }
         });
     }
+
 
     void chooseSex() {
         KeyboardUtils.hideSoftInput(this);
@@ -161,14 +180,7 @@ public class UserinfoActivity extends BaseAcitivty {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 String s = dataList.get(options1);
-                List<UserInfoConfigBean.ModuleListBean> moduleList = mUserInfoConfigBean.getModuleList();
-                for (int i = 0; i < moduleList.size(); i++) {
-                    if (moduleList.get(i).getType().equals("sex")) {
-                        moduleList.get(i).setValue(s);
-                        mBaseQuickAdapter.notifyDataSetChanged();
-                        break;
-                    }
-                }
+                mUserPresenter.updateUserInfo("gender",s);
             }
         }).setSubmitColor(ColorUtils.getColor(com.fan.baseuilibrary.R.color.ui_primary_color))
                 .setCancelColor(ColorUtils.getColor(com.fan.baseuilibrary.R.color.ui_primary_color)).build();
@@ -186,15 +198,6 @@ public class UserinfoActivity extends BaseAcitivty {
             } else if (requestCode == UserPicture.CROP_PHOTO) {
                 //处理裁剪返回结果
                 Glide.with(this).load(pictureUtils.mCropImgUri).into(mCivHeader);
-//                try {
-//                    File file = new File(new URI(pictureUtils.mCropImgUri.toString()));
-//                    uploadStart(file);
-//                } catch (URISyntaxException e) {
-//                    e.printStackTrace();
-//                }
-
-
-//                mPresenter.requestUpload(mPresenter.mCropImgUri.getPath());
             } else if (requestCode == pictureUtils.SELECT_PIC_CODE) {
                 //处理从相册返回结果
                 if (data != null) {

@@ -7,6 +7,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import androidx.multidex.MultiDex;
 
 public class BaseApplication extends Application {
+
+    public static String baseUrl = "";
     @Override
     public void onCreate() {
         super.onCreate();

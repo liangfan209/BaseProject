@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.mvp.BasePersenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
@@ -59,6 +60,12 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
     private UserCenterConfigBean userConfig;
 
     @Override
+    protected BasePersenter createPersenter() {
+        mUserPersenter = new UserPresenter(this);
+        return mUserPersenter;
+    }
+
+    @Override
     protected int getContentViewLayout() {
         return R.layout.user_center_fragment_user;
     }
@@ -69,8 +76,7 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         userConfig = new Gson().fromJson(jsonStr, UserCenterConfigBean.class);
         updateView();
         //获取用户信息
-//        mUserPersenter = new UserPresenter(this);
-//        mUserPersenter.showUserInfo();
+        mUserPersenter.showUserInfo();
     }
 
 
@@ -156,6 +162,6 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
 
     @Override
     public void showUser(UserInfo info) {
-        mTvNickName.setText(info.getUser_nick());
+        mTvNickName.setText(info.getCustomer_info().getName());
     }
 }

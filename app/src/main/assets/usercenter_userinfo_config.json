@@ -2,44 +2,53 @@
   "moduleList": [
     {
       "name": "昵称",
-      "value": "安安宝",
-      "type": "nikeName",
-      "hasInterval": false
-    },
-    {
-      "name": "地址管理",
       "value": "",
-      "type": "address",
-      "hasInterval": true
+      "type": "name",
+      "hasInterval": false
     },
     {
       "name": "性别",
-      "value": "未知",
-      "type": "sex",
+      "value": "",
+      "type": "gender",
+      "hasInterval": true
+    },
+
+    {
+      "name": "生日",
+      "value": "",
+      "type": "birthday",
       "hasInterval": false
     },
+
     {
-      "name": "地区",
-      "value": "未知",
-      "type": "area",
+      "name": "手机号",
+      "value": "",
+      "type": "phone",
       "hasInterval": false
     },
     {
       "name": "职业",
-      "value": "未设置",
-      "type": "profession",
+      "value": "",
+      "type": "education",
       "hasInterval": true
     },
+
     {
-      "name": "绑定手机号",
-      "value": "未绑定",
-      "type": "bindPhoneNumber",
+      "name": "邮箱",
+      "value": "",
+      "type": "email",
       "hasInterval": false
     },
     {
-      "name": "实名认证",
-      "value": "未实名",
-      "type": "certification",
+      "name": "微信",
+      "value": "",
+      "type": "wechat",
+      "hasInterval": false
+    },
+    {
+      "name": "QQ",
+      "value": "",
+      "type": "qq",
       "hasInterval": false
     }
   ]

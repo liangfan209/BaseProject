@@ -17,10 +17,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
+import skin.support.SkinCompatManager;
 
 @Route(path = AppArouter.MAIN_ACTIVITY)
 public class MainActivity extends BaseAcitivty {
@@ -42,12 +44,15 @@ public class MainActivity extends BaseAcitivty {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void attach() {
+
+
         List<String> strings = Arrays.asList(tabs);
         for (String str : strings) {
             View view = LayoutInflater.from(this).inflate(R.layout.item_tab, null);
             TextView tvName = view.findViewById(R.id.tv_name);
             tvName.setText(str);
-            tvName.setCompoundDrawablesRelativeWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.tab_home_selector)
+
+            tvName.setCompoundDrawablesRelativeWithIntrinsicBounds(null,  AppCompatResources.getDrawable(this,R.drawable.tab_home_selector)
                     , null, null);
             mTablayout.addTab(mTablayout.newTab().setCustomView(view));
         }
@@ -70,7 +75,7 @@ public class MainActivity extends BaseAcitivty {
 
             }
         });
-
+        SkinCompatManager.getInstance().loadSkin("myskin.skin", null, SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
     }
 
     /**

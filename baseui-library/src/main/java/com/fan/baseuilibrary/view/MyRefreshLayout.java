@@ -118,7 +118,7 @@ public class MyRefreshLayout<T> extends SmartRefreshLayout {
     /**
      * 重新开始刷新，adapter能够添加新数据
      */
-    protected void initRefreshBoo() {
+    public void initRefreshBoo() {
         page = 1;
         refreshBoo = true;
         loadmoreBoo = false;

@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.SkinAppCompatDelegateImpl;
 import androidx.lifecycle.LifecycleOwner;
 import butterknife.ButterKnife;
-import skin.support.SkinCompatManager;
 import skin.support.widget.SkinCompatSupportable;
 
 /**
@@ -39,7 +38,6 @@ public abstract class BaseAcitivty extends AppCompatActivity implements BaseIVie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentViewLayout());
-        SkinCompatManager.getInstance().loadSkin("red", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
         mLoadingDialog = new LoadingDialog(this);
         ButterKnife.bind(this);
         View backIv = findViewById(R.id.iv_title_left);
@@ -56,7 +54,7 @@ public abstract class BaseAcitivty extends AppCompatActivity implements BaseIVie
             getLifecycle().addObserver(presenter);
         }
         attach();
-
+//        SkinCompatManager.getInstance().loadSkin("myskin.skin", null, SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
     }
 
     @Override

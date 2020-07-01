@@ -11,12 +11,20 @@ package com.bq.user_center.requset;
 public class ApiUserCenter {
 
     //银行卡
-    public static final String API_BANK_LIST = "partner.account.banklist";
-    public static final String API_BANK_ADD = "partner.account.bindexamine";
-    public static final String API_BANK_DEL = "partner.account.bankdelete";
+    public static final String API_BANK_LIST = "customer.myself.bankcard.all";
+    public static final String API_BANK_ADD = "customer.myself.bankcard.add";
+    public static final String API_BANK_DEL = "customer.myself.bankcard.remove";
 
     //用户
-    public static final String API_USER_INFO = "partner.account.userinfo";
+    public static final String API_USER_INFO = "customer.myself.get";
+    public static final String API_UPDATE_USER_INFO = "customer.myself.update";
+
+    //地址列表
+    public static final String API_ADDRESS_LIST = "customer.myself.address.all";
+    public static final String API_ADDRESS_ADD = "customer.myself.address.add";
+    public static final String API_ADDRESS_DEL = "customer.myself.address.remove";
+    public static final String API_ADDRESS_UPDATE = "customer.myself.address.update";
+    public static final String API_ADDRESS_BY_ID = "customer.myself.address.get";
 
 
 }

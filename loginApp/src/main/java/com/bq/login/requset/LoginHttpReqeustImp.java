@@ -24,14 +24,13 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
     @Override
     public void login(String name, String pwd, RequestCallBackInter callBack) {
         Map<String,String> map = new HashMap<>();
-        map.put("api", ApiLogin.API_LOGIN);
+        map.put("api", ApiLogin.API_LOGIN_LOGIN);
         map.put("username",name);
         map.put("password",pwd);
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<LoginInfo>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<LoginInfo>> response) {
                 super.onSuccess(response);
-                callBack.onSuccess(response.body().result);
             }
         });
     }
@@ -46,7 +45,6 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
             @Override
             public void onSuccess(Response<BaseResponse<String>> response) {
                 super.onSuccess(response);
-                callBack.onSuccess(response.body().result);
             }
         });
     }
@@ -70,5 +68,21 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
         map.put("type",type);
         map.put("phone",phone);
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack));
+    }
+
+    @Override
+    public void register(String phone, String password, String code, RequestCallBackInter callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiLogin.API_LOGIN_REGISTER);
+        map.put("phone", phone);
+        map.put("password", password);
+        map.put("code", code);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<String>> response) {
+                super.onSuccess(response);
+                callBack.onSuccess(response.body().result);
+            }
+        });
     }
 }

@@ -9,8 +9,10 @@ package com.bq.login.requset;
  * 版权：
  */
 public class ApiLogin {
-    public static final String API_LOGIN = "partner.account.login";
+    public static final String API_LOGIN_LOGIN = "customer.account.login";
     public static final String API_LOGOUT = "partner.account.logout";
     public static final String API_GET_VERTIFICAT_CODE = "app.sms.checkCode";
     public static final String API_FORGET_PWD = "app.forgetPassword";
+
+    public static final String API_LOGIN_REGISTER = "customer.account.register";
 }

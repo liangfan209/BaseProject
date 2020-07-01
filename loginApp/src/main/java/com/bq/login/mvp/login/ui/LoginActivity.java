@@ -28,9 +28,9 @@ import com.fan.baseuilibrary.view.DeletableEditText;
 import com.fan.baseuilibrary.view.captcha.Captcha;
 import com.fan.baseuilibrary.view.dialog.CaptchaDialog;
 
-import androidx.appcompat.widget.AppCompatCheckBox;
 import butterknife.BindView;
 import butterknife.OnClick;
+import skin.support.widget.SkinCompatCheckBox;
 
 @Route(path = AppArouter.LOGIN_ACTVITY)
 public class LoginActivity extends BaseAcitivty implements LoginBaseIView {
@@ -61,7 +61,7 @@ public class LoginActivity extends BaseAcitivty implements LoginBaseIView {
             RelativeLayout mRltPwd;
 
     @BindView(R2.id.cb_login_type)
-    AppCompatCheckBox mCbLoginType;
+    SkinCompatCheckBox mCbLoginType;
     private LoginPresenter mLoginPresenter;
     private LoginConfigBean loginConfig;
     CountDownHelper countDownHelper;//计时器
@@ -163,10 +163,7 @@ public class LoginActivity extends BaseAcitivty implements LoginBaseIView {
 //        mEtPhone.setText("13260606900");
 //        mEtPwd.setText("123456");
         String phoneNumber = mEtPhone.getText().toString().replaceAll(" ", "").trim();
-        if (!AccountValidatorUtil.isMobile(phoneNumber)) {
-            ToastUtils.showToast(this, "请输入正确的手机号码");
-            return;
-        }
+
         String pwd = mEtPwd.getText().toString().trim();
         pwd = Md5Utils.md5(pwd);
         mLoginPresenter.login(phoneNumber, pwd);
@@ -175,9 +172,9 @@ public class LoginActivity extends BaseAcitivty implements LoginBaseIView {
     @Override
     public void loginView(LoginInfo info) {
         //将token保存到本地sp中
-        CommSpUtils.saveToken(info.getAuth_token());
+        CommSpUtils.saveToken(info.getAccess_token());
         //跳转到主页面中
-        ARouter.getInstance().build(AppArouter.LOGIN_SETTING_ACTIVITY).navigation();
+        ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
         finish();
     }
 

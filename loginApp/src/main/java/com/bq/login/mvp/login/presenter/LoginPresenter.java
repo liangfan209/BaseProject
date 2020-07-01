@@ -2,15 +2,19 @@ package com.bq.login.mvp.login.presenter;
 
 import android.text.TextUtils;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.msgService.MessageBody;
 import com.bq.comm_config_lib.msgService.MessageEvent;
 import com.bq.comm_config_lib.msgService.MessageInter;
 import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.comm_config_lib.utils.CheckUtils;
 import com.bq.login.R;
 import com.bq.login.api.bean.LoginConfigBean;
 import com.bq.login.mvp.login.ui.LoginBaseIView;
+import com.bq.login.requset.LoginHttpReqeustImp;
 import com.bq.login.requset.bean.LoginInfo;
+import com.bq.utilslib.AccountValidatorUtil;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.google.gson.Gson;
 
@@ -49,14 +53,27 @@ public class LoginPresenter implements BasePersenter {
         }
     }
 
-    public void login(String name, String pwd) {
-//        new LoginHttpReqeustImp().login(name, pwd, new AbstractReqeustCallback<LoginInfo>(mIView) {
-//            @Override
-//            public void onSuccess(LoginInfo loginInfo) {
-//                mIView.loginView(loginInfo);
-//            }
-//        });
-        mIView.loginView(new LoginInfo(""));
+    /**
+     * 登陆
+     * @param phoneNumber
+     * @param pwd
+     */
+    public void login(String phoneNumber, String pwd) {
+        if (!AccountValidatorUtil.isMobile(phoneNumber)) {
+            ToastUtils.showToast(mIView.getActivity(), "请输入正确的手机号码");
+            return;
+        }
+        if(StringUtils.isEmpty(pwd)){
+            ToastUtils.showToast(mIView.getActivity(), "密码不能为空");
+            return;
+        }
+
+        new LoginHttpReqeustImp().login(phoneNumber, pwd, new AbstractReqeustCallback<LoginInfo>(mIView) {
+            @Override
+            public void onSuccess(LoginInfo loginInfo) {
+                mIView.loginView(loginInfo);
+            }
+        });
 
     }
 
@@ -68,7 +85,13 @@ public class LoginPresenter implements BasePersenter {
     }
 
     public void register(String phone, String pwd, String checkCode) {
-        mIView.registerView();
+        new LoginHttpReqeustImp().register(phone, pwd, checkCode,new AbstractReqeustCallback<LoginInfo>(mIView) {
+            @Override
+            public void onSuccess(LoginInfo loginInfo) {
+                mIView.registerView();
+            }
+        });
+
     }
 
     /**
@@ -103,6 +126,7 @@ public class LoginPresenter implements BasePersenter {
         }
         return true;
     }
+
 
     /**
      * 设置密码

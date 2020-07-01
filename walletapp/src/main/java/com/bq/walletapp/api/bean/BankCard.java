@@ -11,129 +11,60 @@ import java.io.Serializable;
  */
 public class BankCard implements Serializable {
 
-    /**
-     * userId : 1197047394227892224
-     * bankName : null
-     * cardNo : 6217002870052254776
-     * idCard : 420821198911160751
-     * payeeName : 刘冬
-     * mobile : 13918383354
-     * isDelete : 0
-     * pid : 1252940492428546048
-     * createTime : 2020-04-22 20:41:07
-     */
+    private String id;
+    private String name;
+    private String number;
+    private String phone;
+    private String identification;
+    private String code;
+    private boolean check;
 
-    private String userId;
-    private String bankName;
-    private String cardNo;
-    private String idCard;
-    private String payeeName;
-    private String mobile;
-    private int isDelete;
-    private String pid;
-    private String createTime;
-    private String cardType;
-    private String bankCode;
-    private boolean isCheck;
-
-    public BankCard(String bankName, String cardNo) {
-        this.bankName = bankName;
-        this.cardNo = cardNo;
-    }
 
     public boolean isCheck() {
-        return isCheck;
+        return check;
     }
 
     public void setCheck(boolean check) {
-        isCheck = check;
+        this.check = check;
     }
 
-    public String getBankCode() {
-        return bankCode;
+    public String getId() {
+        return id;
     }
 
-    public void setBankCode(String bankCode) {
-        this.bankCode = bankCode;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getCardType() {
-        return cardType;
+    public String getName() {
+        return name;
     }
 
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getNumber() {
+        return number;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public String getBankName() {
-        return bankName;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getCardNo() {
-        return cardNo;
+    public String getIdentification() {
+        return identification;
     }
 
-    public void setCardNo(String cardNo) {
-        this.cardNo = cardNo;
-    }
-
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
-    }
-
-    public String getPayeeName() {
-        return payeeName;
-    }
-
-    public void setPayeeName(String payeeName) {
-        this.payeeName = payeeName;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public int getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(int isDelete) {
-        this.isDelete = isDelete;
-    }
-
-    public String getPid() {
-        return pid;
-    }
-
-    public void setPid(String pid) {
-        this.pid = pid;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
+    public void setIdentification(String identification) {
+        this.identification = identification;
     }
 }
