@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:skin="http://schemas.android.com/android/skin"
@@ -15,19 +16,35 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp"
         />
+<!--    tl:tl_indicator_color="@color/t2_3_tl_indicator_color"-->
+<!--    tl:tl_underline_color="@color/t2_3_tl_underline_color"-->
 
-
-    <com.google.android.material.tabs.TabLayout
+    <com.fan.baseuilibrary.view.flycotablayout.widget.SkinCommonTabLayout
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:tabIndicatorColor="@color/transparent"
-        app:tabTextColor="@color/ui_txt_hint_color"
-        app:tabSelectedTextColor="@color/ui_primary_color"
         android:layout_alignParentBottom="true"
-        app:tabTextAppearance="@style/tab_test"
-        app:tabRippleColor="@color/transparent"
+        tl:tl_iconGravity="TOP"
+        tl:tl_iconHeight="18dp"
+        tl:tl_iconWidth="18dp"
+        tl:tl_iconMargin="2dp"
+        tl:tl_textSelectColor="@color/ui_primary_color"
+        tl:tl_textUnselectColor="@color/ui_txt_normal_color"
+        tl:tl_textsize="@dimen/h5_font_size"
         />
+
+
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tablayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        app:tabIndicatorColor="@color/transparent"-->
+<!--        app:tabTextColor="@color/ui_txt_hint_color"-->
+<!--        app:tabSelectedTextColor="@color/ui_primary_color"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        app:tabTextAppearance="@style/tab_test"-->
+<!--        app:tabRippleColor="@color/transparent"-->
+<!--        />-->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"

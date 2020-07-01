@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="com.bq.app.EmptyActivity">
+        <activity android:name="com.bq.app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -29,7 +29,7 @@
         </activity>
 
         <activity android:name="com.bq.app.H5Activity"/>
-        <activity android:name="com.bq.app.MainActivity"></activity>
+<!--        <activity android:name="com.bq.app.MainActivity"></activity>-->
 
         <meta-data
             android:name="design_width_in_dp"
