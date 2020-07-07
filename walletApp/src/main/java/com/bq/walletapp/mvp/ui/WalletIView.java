@@ -25,7 +25,7 @@ public interface WalletIView extends BaseIView {
     default void transactionMonthListView(List<TransactionMonthInfo> list){};
 
      //交易详情
-     default void transactionDetailView(){};
+     default void transactionDetailView(TransactionInfo info){};
      //充值
      default void rechargeView(){};
      //提现

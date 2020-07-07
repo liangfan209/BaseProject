@@ -31,8 +31,16 @@ public class TransactionInfo implements Serializable {
 
 
     public String getStatus() {
-        return status == null?"":status;
+        if("pay_finish".equals(status)){
+            return "付款成功";
+        }else if("transaction_dealing".equals(status)){
+            return "交易处理中";
+        }else if("transaction_finish".equals(status)){
+            return "到账成功";
+        }
+        return "";
     }
+
 
     public void setStatus(String status) {
         this.status = status;

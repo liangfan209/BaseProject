@@ -3,6 +3,7 @@ package com.bq.walletapp.mvp.presenter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.walletapp.api.WalletEventKey;
+import com.bq.walletapp.api.bean.TransactionInfoBean;
 import com.bq.walletapp.api.bean.TransactionListBean;
 import com.bq.walletapp.api.bean.TransactionMonthListBean;
 import com.bq.walletapp.mvp.ui.WalletIView;
@@ -63,9 +64,10 @@ public class WalletPresenter implements BasePresenter {
 
     //交易详情
     public void transactionDetail(String id) {
-        mWalletHttpReqeustImp.transactionDetail(id, new AbstractReqeustCallback(mWalletIView) {
+        mWalletHttpReqeustImp.transactionDetail(id, new AbstractReqeustCallback<TransactionInfoBean>(mWalletIView) {
             @Override
-            public void onSuccess(Object o) {
+            public void onSuccess(TransactionInfoBean bean) {
+                mWalletIView.transactionDetailView(bean.getTransaction_info());
             }
         });
     }

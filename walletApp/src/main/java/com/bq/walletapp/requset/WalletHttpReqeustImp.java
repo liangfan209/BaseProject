@@ -5,6 +5,7 @@ import com.bq.comm_config_lib.request.SignJsonCallBack;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.netlibrary.NetManager;
 import com.bq.netlibrary.http.BaseResponse;
+import com.bq.walletapp.api.bean.TransactionInfoBean;
 import com.bq.walletapp.api.bean.TransactionListBean;
 import com.bq.walletapp.api.bean.TransactionMonthListBean;
 import com.bq.walletapp.requset.bean.BalanceBean;
@@ -51,7 +52,16 @@ public class WalletHttpReqeustImp implements WalletHttpReqeustInter {
 
     @Override
     public void transactionDetail(String id, RequestCallBackInter callBackInter) {
-
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiWallet.API_TRANSATIONS_DETAIL);
+        map.put("auth", CommSpUtils.getToken());
+        map.put("transaction_id", id);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<TransactionInfoBean>>(callBackInter){
+            @Override
+            public void onSuccess(Response<BaseResponse<TransactionInfoBean>> response) {
+                super.onSuccess(response);
+            }
+        });
     }
 
     @Override

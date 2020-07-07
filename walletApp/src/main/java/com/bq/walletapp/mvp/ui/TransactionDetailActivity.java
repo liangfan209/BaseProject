@@ -15,6 +15,7 @@ import com.bq.comm_config_lib.utils.Utils;
 import com.bq.walletapp.R;
 import com.bq.walletapp.R2;
 import com.bq.walletapp.api.bean.TransactionInfo;
+import com.bq.walletapp.mvp.presenter.WalletPresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,7 +28,7 @@ import butterknife.OnClick;
  * 版权：
  */
 @Route(path = AppArouter.WALLET_TRANSACTION_DETAIL_ACTIVITY)
-public class TransactionDetailActivity extends BaseAcitivty {
+public class TransactionDetailActivity extends BaseAcitivty implements WalletIView{
 
 
     @BindView(R2.id.iv_title_left)
@@ -58,6 +59,8 @@ public class TransactionDetailActivity extends BaseAcitivty {
     @Autowired
     TransactionInfo mTransactionInfo;
 
+    private WalletPresenter mWalletPresenter;
+
     @Override
     protected int getContentViewLayout() {
         return R.layout.wallet_activity_transaction_detail;
@@ -65,24 +68,38 @@ public class TransactionDetailActivity extends BaseAcitivty {
 
     @Override
     protected BasePresenter createPersenter() {
-        return null;
+        mWalletPresenter = new WalletPresenter(this);
+        return mWalletPresenter;
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        mWalletPresenter.unRegister();
     }
 
     @Override
     protected void attach() {
         ARouter.getInstance().inject(this);
         mTvTitle.setText("充值详情");
+
         if(mTransactionInfo != null){
-            mTvType.setText(mTransactionInfo.getPay_type()+"充值");
-            mTvAmount.setText(Utils.getDouble2(mTransactionInfo.getAmount()));
-            mTvStatus.setText(mTransactionInfo.getStatus()+"");
-            mTvPayType.setText(mTransactionInfo.getPay_type()+"");
-            mTvRemark.setText(mTransactionInfo.getRemark()+"");
-            mTvTime.setText(mTransactionInfo.getCreate_time()+"");
-            mTvOrderId.setText(mTransactionInfo.getNumber()+"");
+            mWalletPresenter.transactionDetail(mTransactionInfo.getId()+"");
+
         }
     }
 
+    @Override
+    public void transactionDetailView(TransactionInfo info) {
+        mTransactionInfo = info;
+        mTvType.setText(mTransactionInfo.getPay_type()+"充值");
+        mTvAmount.setText(Utils.getDouble2(mTransactionInfo.getAmount()));
+        mTvStatus.setText(mTransactionInfo.getStatus()+"");
+        mTvPayType.setText(mTransactionInfo.getPay_type()+"");
+        mTvRemark.setText(mTransactionInfo.getRemark()+"");
+        mTvTime.setText(mTransactionInfo.getCreate_time()+"");
+        mTvOrderId.setText(mTransactionInfo.getNumber()+"");
+    }
 
     @OnClick({R2.id.iv_title_left, R2.id.tv_title})
     public void onViewClicked(View view) {
