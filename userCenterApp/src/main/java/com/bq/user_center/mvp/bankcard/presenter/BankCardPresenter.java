@@ -1,6 +1,6 @@
 package com.bq.user_center.mvp.bankcard.presenter;
 
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.user_center.api.UserCenterEventKey;
 import com.bq.user_center.mvp.bankcard.ui.BankCardBaseIView;
@@ -25,7 +25,7 @@ import androidx.lifecycle.LifecycleOwner;
  * 时间：2020/6/11
  * 版权：
  */
-public class BankCardPresenter implements BasePersenter {
+public class BankCardPresenter implements BasePresenter {
     private BankCardBaseIView mBankCardView;
     private UserCenterHttpReqeustImp mUserCenterHttpReqeustImp;
 
@@ -46,7 +46,9 @@ public class BankCardPresenter implements BasePersenter {
 //    }
 
 
-
+    /**
+     * 获取银行卡列表
+     */
     public void getBankList() {
         mUserCenterHttpReqeustImp.getBankList(new AbstractReqeustCallback<BankListBean>(mBankCardView) {
             @Override
@@ -56,6 +58,10 @@ public class BankCardPresenter implements BasePersenter {
         });
     }
 
+    /**
+     * 添加银行卡
+     * @param bankCard
+     */
     public void addBankCard(BankCardInfo bankCard){
         String info = new Gson().toJson(bankCard);
         mUserCenterHttpReqeustImp.addBank(info, new AbstractReqeustCallback(mBankCardView) {
@@ -67,6 +73,10 @@ public class BankCardPresenter implements BasePersenter {
         });
     }
 
+    /**
+     * 删除银行卡
+     * @param id
+     */
     public void deleteBank(String id){
         mUserCenterHttpReqeustImp.deleteBank(id, new AbstractReqeustCallback(mBankCardView) {
             @Override

@@ -4,7 +4,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.FileIOUtils;
 import com.bq.base.R;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 
 import java.io.File;
@@ -23,7 +23,7 @@ public class EmptyActivity extends BaseAcitivty {
     }
 
     @Override
-    protected BasePersenter createPersenter() {
+    protected BasePresenter createPersenter() {
         return null;
     }
     @Override

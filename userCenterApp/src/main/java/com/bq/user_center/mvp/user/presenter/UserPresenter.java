@@ -2,7 +2,7 @@ package com.bq.user_center.mvp.user.presenter;
 
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.msgService.MessageBody;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.user_center.api.ComponentService;
 import com.bq.user_center.api.UserCenterEventKey;
@@ -26,7 +26,7 @@ import androidx.lifecycle.LifecycleOwner;
  * 时间：2020/6/11
  * 版权：
  */
-public class UserPresenter implements BasePersenter {
+public class UserPresenter implements BasePresenter {
     private UserBaseIView mUserIView;
     private UserCenterHttpReqeustImp mUserCenterHttpReqeustImp;
 
@@ -35,6 +35,9 @@ public class UserPresenter implements BasePersenter {
         mUserCenterHttpReqeustImp = new UserCenterHttpReqeustImp();
     }
 
+    /**
+     * 获取用户信息
+     */
     public void showUserInfo(){
         mUserCenterHttpReqeustImp.showUserInfo(new AbstractReqeustCallback<UserInfo>(mUserIView) {
             @Override
@@ -44,6 +47,11 @@ public class UserPresenter implements BasePersenter {
         });
     }
 
+    /**
+     * 更新用户信息
+     * @param tpye
+     * @param value
+     */
     public void updateUserInfo(String tpye,String value){
         if(StringUtils.isEmpty(value)){
             ToastUtils.showToast(mUserIView.getActivity(),"内容不能空");
@@ -59,8 +67,11 @@ public class UserPresenter implements BasePersenter {
         });
     }
 
+    //退出登录
     public void logout(){
+        mUserIView.showLoading();
         ComponentService.logout((data)->{
+            mUserIView.onComplete();
             if(data.getCode() == MessageBody.SUCCESS_CODE){
                 mUserIView.logout();
             }else{

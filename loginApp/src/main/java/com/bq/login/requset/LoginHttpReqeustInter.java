@@ -17,11 +17,14 @@ public interface LoginHttpReqeustInter {
     void logout(RequestCallBackInter callBack);
 
     //获取验证码
-    void getVertificatCode(String type, String phone, RequestCallBackInter callBack);
+    void getVertificatCode(String phone, RequestCallBackInter callBack);
 
     //忘记密码
-   void forgetPwd(String type, String phone, RequestCallBackInter callBack);
+   void forgetPwd(String phone, String password, String code, RequestCallBackInter callBack);
 
    //注册
     void register(String code,String password,String phone, RequestCallBackInter callBack);
+
+    //修改密码
+    void modify(String oldPwd,String newPwd,RequestCallBackInter callBack);
 }

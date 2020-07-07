@@ -12,7 +12,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
@@ -69,7 +69,7 @@ public class AddressOptionActivity extends BaseAcitivty implements AddressBaseIV
 
 
     @Override
-    protected BasePersenter createPersenter() {
+    protected BasePresenter createPersenter() {
         mAddressManagerPresenter = new AddressManagerPresenter(this);
         return mAddressManagerPresenter;
     }
@@ -84,8 +84,7 @@ public class AddressOptionActivity extends BaseAcitivty implements AddressBaseIV
         ARouter.getInstance().inject(this);
         mTvTitle.setText(optionType == ADDRESS_ADD ? "新增地址" : "编辑地址");
         mBtAddAddress.setText(optionType == ADDRESS_ADD ? "添加新地址" : "保存地址");
-
-
+        EditFormatUtils.phoneNumAddSpace(mDetPhone);
         if(optionType == ADDRESS_EDIT){
             updateView();
         }
@@ -106,7 +105,6 @@ public class AddressOptionActivity extends BaseAcitivty implements AddressBaseIV
         mDetAddress.setClearDrawableVisible(false);
         mDetName.setClearDrawableVisible(false);
         mDetPhone.setClearDrawableVisible(false);
-        EditFormatUtils.phoneNumAddSpace(mDetPhone);
 
         String gender = mAddressInfo.getGender();
         if("男".equals(gender)){
@@ -124,7 +122,7 @@ public class AddressOptionActivity extends BaseAcitivty implements AddressBaseIV
             String city = mTvProvinece.getText().toString();
             String address = mDetAddress.getText().toString();
             String name = mDetName.getText().toString();
-            String phone = mDetPhone.getText().toString();
+            String phone = mDetPhone.getText().toString().replaceAll(" ","").trim();
             String gender = "";
             boolean isDefault = mSwitchView.isChecked();
             if (mRbMan.isChecked()) {

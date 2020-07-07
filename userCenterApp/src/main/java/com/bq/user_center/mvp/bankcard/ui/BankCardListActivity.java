@@ -8,8 +8,9 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
@@ -55,7 +56,7 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIV
 
 
     @Override
-    protected BasePersenter createPersenter() {
+    protected BasePresenter createPersenter() {
         mBankCardPersenter = new BankCardPresenter(this);
         return mBankCardPersenter;
     }
@@ -98,8 +99,24 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIV
         BaseQuickAdapter adapter =  new BaseQuickAdapter<BankCardInfo, BaseViewHolder>(R.layout.user_center_item_banklist,new ArrayList<BankCardInfo>()) {
             @Override
             protected void convert(@NotNull BaseViewHolder helper, BankCardInfo item) {
-                helper.setText(R.id.tv_card_number, item.getNumber());
+                String bankNumber = item.getBank_number();
+                if(bankNumber.length() > 4){
+                    helper.setText(R.id.tv_card_number,String.format("**** **** **** %s",bankNumber.substring(bankNumber.length()-4)));
+                }
+                helper.setText(R.id.tv_card_name, item.getBank_name());
                 ImageView ivCard = helper.getView(R.id.iv_bank);
+                if (!StringUtils.isEmpty(item.getBank_code())) {
+                    String bankCode = item.getBank_code().toLowerCase();
+                    int resId = getResources().getIdentifier("bank_icon_" + bankCode, "mipmap",
+                            getPackageName());
+                    try {
+                        ivCard.setBackground(getResources().getDrawable(resId));
+                    } catch (Exception e) {
+                        ivCard.setBackground(getResources().getDrawable(R.mipmap.bank_icon_cgb));
+                        e.printStackTrace();
+                    }
+                }
+
             }
         };
         adapter.setOnItemLongClickListener(new OnItemLongClickListener() {

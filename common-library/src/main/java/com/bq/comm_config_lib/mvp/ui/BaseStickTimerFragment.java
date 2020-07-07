@@ -51,7 +51,7 @@ public abstract class BaseStickTimerFragment<T> extends BaseFragment {
     public ImageView mIvJiantou;
 
     protected BaseQuickAdapter<T, ? extends BaseViewHolder> adapter;
-    protected int page = 1;
+    public int mPage = 1;
     protected int pageSize = 10;
     protected boolean refreshBoo = false;
     protected boolean loadmoreBoo = false;
@@ -101,7 +101,7 @@ public abstract class BaseStickTimerFragment<T> extends BaseFragment {
             public void onLoadmore(RefreshLayout refreshlayout) {
                 refreshBoo = false;
                 loadmoreBoo = true;
-                loadData(packageData(getFilterTime(selectTime)));
+                loadData(mPage,packageData(getFilterTime(selectTime)));
             }
 
             @Override
@@ -112,7 +112,7 @@ public abstract class BaseStickTimerFragment<T> extends BaseFragment {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 initRefreshBoo();
-                loadData(packageData(getFilterTime(selectTime)));
+                loadData(mPage,packageData(getFilterTime(selectTime)));
             }
         });
         adapter = new BaseQuickAdapter<T, BaseViewHolder>(getItemRes(), data) {
@@ -136,7 +136,7 @@ public abstract class BaseStickTimerFragment<T> extends BaseFragment {
         mRecyclerView.setAdapter(adapter);
         mRefreshLayout.setEnableRefresh(false);
         initRefreshBoo();
-        loadData(packageData(getFilterTime(selectTime)));
+        loadData(mPage,packageData(getFilterTime(selectTime)));
         initRecycleView();
     }
 
@@ -244,7 +244,7 @@ public abstract class BaseStickTimerFragment<T> extends BaseFragment {
 
     protected abstract void updateHeadView(int firstVisibleItemPosition);
 
-    protected abstract void loadData(String info);
+    protected abstract void loadData(int page,String info);
 
     protected abstract int getItemRes();
 
@@ -257,7 +257,7 @@ public abstract class BaseStickTimerFragment<T> extends BaseFragment {
                 selectTime = date;
                 mTvChangeTime.setText(selectTime);
                 initRefreshBoo();
-                loadData(packageData(getFilterTime(date)));
+                loadData(1,packageData(getFilterTime(date)));
             }
         }, mTvChangeTime.getText().toString());
     }
@@ -278,7 +278,7 @@ public abstract class BaseStickTimerFragment<T> extends BaseFragment {
      * 重新开始刷新，adapter能够添加新数据
      */
     protected void initRefreshBoo() {
-        page = 1;
+        mPage = 1;
         refreshBoo = true;
         loadmoreBoo = false;
     }

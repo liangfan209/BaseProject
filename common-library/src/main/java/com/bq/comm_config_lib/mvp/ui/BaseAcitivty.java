@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import com.bq.comm_config_lib.R;
 import com.bq.comm_config_lib.mvp.BaseIView;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
 import com.fan.baseuilibrary.view.dialog.LoadingDialog;
@@ -49,7 +49,7 @@ public abstract class BaseAcitivty extends AppCompatActivity implements BaseIVie
                 }
             });
         }
-        BasePersenter presenter = createPersenter();
+        BasePresenter presenter = createPersenter();
         if(presenter != null){
             getLifecycle().addObserver(presenter);
         }
@@ -92,6 +92,6 @@ public abstract class BaseAcitivty extends AppCompatActivity implements BaseIVie
     }
 
     protected abstract @LayoutRes int getContentViewLayout();
-    protected abstract BasePersenter createPersenter();
+    protected abstract BasePresenter createPersenter();
     protected abstract void attach();
 }

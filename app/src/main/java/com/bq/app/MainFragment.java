@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.bq.base.R;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
 
 import butterknife.BindView;
@@ -27,7 +27,7 @@ public class MainFragment extends BaseFragment {
     Button mBtRed;
 
     @Override
-    protected BasePersenter createPersenter() {
+    protected BasePresenter createPersenter() {
         return null;
     }
 
@@ -48,7 +48,7 @@ public class MainFragment extends BaseFragment {
                 SkinCompatManager.getInstance().restoreDefaultTheme();
                 break;
             case R.id.bt_red:
-                SkinCompatManager.getInstance().loadSkin("myskin.skin", null, SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
+                SkinCompatManager.getInstance().loadSkin("appskin-debug.apk", null, SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
                 break;
         }
     }

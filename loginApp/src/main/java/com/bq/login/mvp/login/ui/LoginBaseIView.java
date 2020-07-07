@@ -17,6 +17,7 @@ public interface LoginBaseIView extends BaseIView {
     default void forgetPwdView(){};
     default void registerView(){}
     default void settingPwdView(){}
+    default void modifyPwdView(){}
     default void getVerticalCodeView(){};
 
 }

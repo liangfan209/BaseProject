@@ -11,10 +11,9 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
-import com.blankj.utilcode.util.ColorUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
@@ -43,6 +42,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
+import skin.support.content.res.SkinCompatResources;
 
 /**
  * 文件名：
@@ -81,7 +81,7 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
     }
 
     @Override
-    protected BasePersenter createPersenter() {
+    protected BasePresenter createPersenter() {
         mUserPresenter = new UserPresenter(this);
         return mUserPresenter;
     }
@@ -182,8 +182,8 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
                 String s = dataList.get(options1);
                 mUserPresenter.updateUserInfo("gender",s);
             }
-        }).setSubmitColor(ColorUtils.getColor(com.fan.baseuilibrary.R.color.ui_primary_color))
-                .setCancelColor(ColorUtils.getColor(com.fan.baseuilibrary.R.color.ui_primary_color)).build();
+        }).setSubmitColor(SkinCompatResources.getColor(this,R.color.ui_primary_color))
+                .setCancelColor(SkinCompatResources.getColor(this,R.color.ui_primary_color)).build();
         pvOptions.setPicker(dataList);
         pvOptions.show();
     }

@@ -51,4 +51,22 @@ public class Utils {
     public static String getDouble2(double value){
         return String.format("%.2f", value);
     }
+
+
+    /**
+     *  拆分时间
+     * @param time 2020-07-06 12:46:36
+     * @return
+     */
+    public static int getMonthByTime(String time){
+        String splitStr = time.substring(5,7);
+        Integer integer = Integer.valueOf(splitStr);
+        return integer;
+    }
+
+    public static int getYearByTime(String time){
+        String splitStr = time.substring(0,4);
+        Integer integer = Integer.valueOf(splitStr);
+        return integer;
+    }
 }

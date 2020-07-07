@@ -51,7 +51,8 @@ public class CountDownHelper {
                 } else if(type == 2){
                     timeStr = "(" + ((time + 15) / 1000) + "s)后重发";
                     mButton.setTextColor(mButton.getContext().getResources().getColor(R.color.white));
-                    mButton.setBackground(mButton.getResources().getDrawable(R.drawable.ui_shap_button_bg_selector));
+                    mButton.setEnabled(false);
+//                    mButton.setBackground(mButton.getResources().getDrawable(R.drawable.ui_shap_button_bg_selector));
 //                    mButton.setTextSize(10);
                 }else {
                     timeStr = ((time + 15) / 1000) + "s";

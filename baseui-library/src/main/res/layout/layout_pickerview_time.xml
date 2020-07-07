@@ -29,7 +29,7 @@
         android:paddingRight="18dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:enabled="false"
+        android:enabled="true"
         />
     
     <RadioGroup
@@ -46,8 +46,8 @@
             android:layout_height="30dp"
             android:layout_centerInParent="true"
             android:button="@null"
-            android:textColor="@color/time_text_color_selector"
-            android:background="@drawable/shap_bottom_line_shadow"
+            android:textColor="@color/ui_time_text_color_selector"
+            android:background="@drawable/ui_picker_bottom_line_selecter"
             android:text=""
             android:gravity="center"
             android:checked="true"
@@ -71,8 +71,8 @@
             android:layout_centerInParent="true"
             android:layout_marginRight="15dp"
             android:button="@null"
-            android:textColor="@color/time_text_color_selector"
-            android:background="@drawable/picker_xiahuaxian_selecter"
+            android:textColor="@color/ui_time_text_color_selector"
+            android:background="@drawable/ui_picker_bottom_line_selecter"
             android:text=""
             android:gravity="center"
             android:checked="true"
@@ -89,8 +89,8 @@
             android:layout_centerInParent="true"
             android:button="@null"
             android:layout_marginRight="15dp"
-            android:textColor="@color/time_text_color_selector"
-            android:background="@drawable/picker_xiahuaxian_selecter"
+            android:textColor="@color/ui_time_text_color_selector"
+            android:background="@drawable/ui_picker_bottom_line_selecter"
             android:text=""
             android:gravity="center"
             />

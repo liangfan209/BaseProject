@@ -11,9 +11,12 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.bigkoo.pickerview.listener.OnTimeSelectChangeListener;
+import com.fan.baseuilibrary.R;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import skin.support.content.res.SkinCompatResources;
 
 /**
  * 文件名：
@@ -62,6 +65,8 @@ public class PickerUtils {
                 .setLineSpacingMultiplier(2.0f)
                 .isAlphaGradient(true)
                 .setTitleText("选择时间")
+                .setSubmitColor(SkinCompatResources.getColor(context, R.color.ui_primary_color))
+                .setCancelColor(SkinCompatResources.getColor(context,R.color.ui_primary_color))
                 .setRangDate(startDate, endDate)
                 .build(selectTime);
         pvTime.setTimeSelectListener(new MyOnTimeSelectListener() {

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
@@ -60,7 +60,7 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
     private UserCenterConfigBean userConfig;
 
     @Override
-    protected BasePersenter createPersenter() {
+    protected BasePresenter createPersenter() {
         mUserPersenter = new UserPresenter(this);
         return mUserPersenter;
     }
@@ -145,10 +145,12 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         mLltContent.addView(view,params);
     }
 
-    @OnClick({R2.id.rlt_head})
+    @OnClick({R2.id.rlt_head,R2.id.tv_logout})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.rlt_head){
             ARouter.getInstance().build(AppArouter. USER_CENTER_USER_INFO_ACTIVITY).navigation();
+        }else if(view.getId() == R.id.tv_logout){
+            mUserPersenter.logout();
         }
     }
 
@@ -157,6 +159,7 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         ToastUtils.showToast(this.getActivity(), "退出成功");
         new Handler().postDelayed(() -> {
             getActivity().finish();
+            ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
         }, 1000);
     }
 

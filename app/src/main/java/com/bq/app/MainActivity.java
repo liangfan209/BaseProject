@@ -6,7 +6,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.base.R;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.user_center.mvp.user.ui.UserFragment;
 import com.fan.baseuilibrary.view.flycotablayout.TabEntity;
@@ -46,7 +46,7 @@ public class MainActivity extends BaseAcitivty {
         return R.layout.activity_main;
     }
     @Override
-    protected BasePersenter createPersenter() {
+    protected BasePresenter createPersenter() {
         return null;
     }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -69,7 +69,7 @@ public class MainActivity extends BaseAcitivty {
             public void onTabReselect(int position) {
             }
         });
-//        SkinCompatManager.getInstance().loadSkin("myskin.skin", null, SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
+//        SkinCompatManager.getInstance().loadSkin("appskin-debug.apk", null, SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
     }
 
     /**

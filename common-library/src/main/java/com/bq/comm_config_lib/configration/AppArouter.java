@@ -43,6 +43,7 @@ public class AppArouter {
     public static final String WALLET_MY_ACTIVITY = WALLET+"/MyWalletActivity";
     public static final String WALLET_BILL_DETAIL_ACTIVITY = WALLET+"/BillDetailActivity";
     public static final String WALLET_RECHARGE_ACTIVITY = WALLET+"/RechargeActivity";
+    public static final String WALLET_TRANSACTION_DETAIL_ACTIVITY = WALLET+"/TransactionDetailActivity";
     public static final String WALLET_TACK_CASH_ACTIVITY = WALLET+"/TackCashActivity";
 
     //h5页面

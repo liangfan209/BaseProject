@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
@@ -60,7 +60,7 @@ public class AddressManagerActivity extends BaseAcitivty implements MyRefreshLay
     }
 
     @Override
-    protected BasePersenter createPersenter() {
+    protected BasePresenter createPersenter() {
         mAddressManagerPresenter = new AddressManagerPresenter(this);
         return mAddressManagerPresenter;
     }
@@ -90,7 +90,9 @@ public class AddressManagerActivity extends BaseAcitivty implements MyRefreshLay
             @Override
             protected void convert(@NotNull BaseViewHolder helper, AddressInfo info) {
                 helper.setText(R.id.tv_name, info.getContacts());
-                helper.setText(R.id.tv_phone, info.getPhone());
+                String phone = info.getPhone();
+                String formatPhone = phone.subSequence(0,3)+"****"+phone.substring(8);
+                helper.setText(R.id.tv_phone, formatPhone);
                 helper.setText(R.id.tv_detail, info.getCity() + " " +info.getAddress());
                 SkinCompatCheckBox cb = helper.getView(R.id.cb_address);
                 cb.setChecked(info.getIs_default() == 1?true:false);

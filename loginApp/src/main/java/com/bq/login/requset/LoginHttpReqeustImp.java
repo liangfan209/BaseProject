@@ -40,7 +40,7 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
     public void logout(RequestCallBackInter callBack) {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiLogin.API_LOGOUT);
-        map.put("token", CommSpUtils.getToken());
+        map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<String>> response) {
@@ -52,22 +52,32 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
 
     //获取验证码
     @Override
-    public void getVertificatCode(String type, String phone, RequestCallBackInter callBack) {
+    public void getVertificatCode(String phone, RequestCallBackInter callBack) {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiLogin.API_GET_VERTIFICAT_CODE);
-        map.put("type",type);
-        map.put("phone",phone);
-        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack));
+        map.put("number",phone);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<Object>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<Object>> response) {
+                super.onSuccess(response);
+            }
+        });
     }
 
     //忘记密码
     @Override
-    public void forgetPwd(String type, String phone, RequestCallBackInter callBack) {
+    public void forgetPwd(String phone, String password, String code, RequestCallBackInter callBack) {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiLogin.API_FORGET_PWD);
-        map.put("type",type);
-        map.put("phone",phone);
-        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack));
+        map.put("phone", phone);
+        map.put("password", password);
+        map.put("code", code);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<Object>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<Object>> response) {
+                super.onSuccess(response);
+            }
+        });
     }
 
     @Override
@@ -77,11 +87,25 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
         map.put("phone", phone);
         map.put("password", password);
         map.put("code", code);
-        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack){
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<LoginInfo>>(callBack){
             @Override
-            public void onSuccess(Response<BaseResponse<String>> response) {
+            public void onSuccess(Response<BaseResponse<LoginInfo>> response) {
                 super.onSuccess(response);
-                callBack.onSuccess(response.body().result);
+            }
+        });
+    }
+
+    @Override
+    public void modify(String oldPwd, String newPwd, RequestCallBackInter callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiLogin.API_MODIFY_PWD);
+        map.put("auth", CommSpUtils.getToken());
+        map.put("old_password", oldPwd);
+        map.put("new_password", newPwd);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<Object>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<Object>> response) {
+                super.onSuccess(response);
             }
         });
     }

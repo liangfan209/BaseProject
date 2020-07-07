@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:ignore="ResourceName">
+    <include layout="@layout/layout_public_title" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="167dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ui_shap_primary_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="43dp"
+            android:text="全部余额（元）"
+            android:textColor="@color/white"
+            android:textSize="@dimen/h5_font_size" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥"
+            android:textSize="@dimen/h3_font_size"
+            android:textColor="@color/white"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="92dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_momey_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="36sp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="70dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_money_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/h1_font_size"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@+id/tv_momey_left"
+            android:layout_marginTop="88dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_take_cash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="34dp"
+            android:paddingRight="34dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/shap_white_radius_30"
+            android:text="提现"
+            android:textSize="@dimen/h3_font_size"
+            android:textColor="@color/ui_primary_color"
+            android:layout_marginTop="80dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="资金明细"
+        android:textColor="@color/ui_txt_normal_color"
+        android:textSize="@dimen/h3_font_size"
+        android:paddingLeft="16dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="18dp"
+        android:background="@color/white"
+        />
+
+    <FrameLayout
+        android:id="@+id/flt_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

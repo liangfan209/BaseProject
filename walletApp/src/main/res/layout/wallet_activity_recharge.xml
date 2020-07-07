@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:ignore="MissingDefaultResource">
+
+
+    <include layout="@layout/layout_public_title"/>
+
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/det_recharge"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            style="@style/ui_edit_txt_style"
+            android:layout_marginTop="20dp"
+            android:hint="请输入充值金额"
+            android:inputType="number"
+            android:textSize="@dimen/h5_font_size"
+            android:maxLength="10"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+
+
+    <TextView
+        android:id="@+id/tv_commit"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        style="@style/ui_h3_button_primary_style"
+        android:text="充值"
+        android:gravity="center"
+        android:layout_margin="15dp"
+        />
+
+</LinearLayout>

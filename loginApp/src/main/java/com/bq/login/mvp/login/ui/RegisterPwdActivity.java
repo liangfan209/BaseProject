@@ -12,7 +12,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.login.R;
 import com.bq.login.R2;
@@ -65,7 +65,7 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
     }
 
     @Override
-    protected BasePersenter createPersenter() {
+    protected BasePresenter createPersenter() {
         mLoginPresenter = new LoginPresenter(this);
         return mLoginPresenter;
     }
@@ -149,10 +149,12 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
     @OnClick({R2.id.tv_get_verification_code, R2.id.tv_comfirm_form, R2.id.iv_title_left})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.tv_get_verification_code) {
-//            phoneNumber = mEtPhone.getText().toString().replaceAll(" ", "").trim();
+            phoneNumber = mEtPhone.getText().toString().replaceAll(" ", "").trim();
 //            if (CheckUtils.checkPhoneNumber(this, phoneNumber)) {
 //                mLoginPresenter.getVertificatCode("1", phoneNumber);
 //            }
+
+            mLoginPresenter.getVertificatCode(phoneNumber);
             countDownHelper = new CountDownHelper(mTvGetVerticalCode, "获取验证码", "重新获取", 60, 1,2);
             countDownHelper.start();
         } else if (view.getId() == R.id.tv_comfirm_form) {

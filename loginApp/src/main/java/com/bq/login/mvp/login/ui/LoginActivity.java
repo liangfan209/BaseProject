@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.login.R;
@@ -72,7 +72,7 @@ public class LoginActivity extends BaseAcitivty implements LoginBaseIView {
     }
 
     @Override
-    protected BasePersenter createPersenter() {
+    protected BasePresenter createPersenter() {
         mLoginPresenter = new LoginPresenter(this,true);
         return mLoginPresenter;
     }

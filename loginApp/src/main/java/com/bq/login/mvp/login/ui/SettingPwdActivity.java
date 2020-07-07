@@ -1,5 +1,6 @@
 package com.bq.login.mvp.login.ui;
 
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -8,11 +9,12 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.login.R;
 import com.bq.login.R2;
 import com.bq.login.mvp.login.presenter.LoginPresenter;
+import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
 
 import butterknife.BindView;
@@ -52,7 +54,7 @@ public class SettingPwdActivity extends BaseAcitivty implements LoginBaseIView{
     }
 
     @Override
-    protected BasePersenter createPersenter() {
+    protected BasePresenter createPersenter() {
         mLoginPresenter = new LoginPresenter(this,false);
         return mLoginPresenter;
     }
@@ -65,8 +67,12 @@ public class SettingPwdActivity extends BaseAcitivty implements LoginBaseIView{
 
     @Override
     public void settingPwdView() {
-        ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
-        finish();
+        ToastUtils.showToastOk(this,"设置成功");
+        new Handler().postDelayed(()->{
+            ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
+            finish();
+        },1000);
+
     }
 
     @OnClick({R2.id.iv_title_left, R2.id.tv_jump, R2.id.tv_setting})

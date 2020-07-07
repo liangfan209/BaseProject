@@ -10,7 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.base.R;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.fan.baseuilibrary.view.dialog.LoadingDialog;
 
@@ -38,7 +38,7 @@ public class H5Activity extends BaseAcitivty{
         return R.layout.activity_webview;
     }
     @Override
-    protected BasePersenter createPersenter() {
+    protected BasePresenter createPersenter() {
         return null;
     }
 

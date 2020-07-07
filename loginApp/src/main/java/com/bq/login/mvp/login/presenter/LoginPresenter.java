@@ -6,7 +6,7 @@ import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.msgService.MessageBody;
 import com.bq.comm_config_lib.msgService.MessageEvent;
 import com.bq.comm_config_lib.msgService.MessageInter;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.comm_config_lib.utils.CheckUtils;
 import com.bq.login.R;
@@ -30,17 +30,18 @@ import androidx.lifecycle.LifecycleOwner;
  * 时间：2020/6/2
  * 版权：
  */
-public class LoginPresenter implements BasePersenter {
+public class LoginPresenter implements BasePresenter {
     private LoginBaseIView mIView;
     private LoginConfigBean mLoginConfigBean;
+    private LoginHttpReqeustImp mLoginHttpReqeustImp;
 //    private LoginModel mLoginModel;
 
     public LoginPresenter(LoginBaseIView IView) {
         this(IView, false);
     }
-
     public LoginPresenter(LoginBaseIView IView, boolean hasConfig) {
         this.mIView = IView;
+        mLoginHttpReqeustImp = new LoginHttpReqeustImp();
         if (hasConfig) {
             //发送消息读取配置文件
             EventBus.getDefault().post(new MessageEvent("config/login", new MessageInter() {
@@ -68,7 +69,13 @@ public class LoginPresenter implements BasePersenter {
             return;
         }
 
-        new LoginHttpReqeustImp().login(phoneNumber, pwd, new AbstractReqeustCallback<LoginInfo>(mIView) {
+        mLoginHttpReqeustImp.login(phoneNumber, pwd, new AbstractReqeustCallback<LoginInfo>(mIView) {
+
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+
             @Override
             public void onSuccess(LoginInfo loginInfo) {
                 mIView.loginView(loginInfo);
@@ -77,15 +84,37 @@ public class LoginPresenter implements BasePersenter {
 
     }
 
-    public void getVertificatCode(String type, String phone) {
+    /**
+     * 获取验证码
+     * @param phone
+     */
+    public void getVertificatCode(String phone) {
+        mLoginHttpReqeustImp.getVertificatCode(phone, new AbstractReqeustCallback<Object>(mIView) {
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+
+            @Override
+            public void onSuccess(Object obj) {
+            }
+        });
     }
 
-    public void forgetPwd(String phone, String pwd, String checkCode) {
-        mIView.forgetPwdView();
-    }
 
+    /**
+     * 注册
+     * @param phone
+     * @param pwd
+     * @param checkCode
+     */
     public void register(String phone, String pwd, String checkCode) {
-        new LoginHttpReqeustImp().register(phone, pwd, checkCode,new AbstractReqeustCallback<LoginInfo>(mIView) {
+        mLoginHttpReqeustImp.register(phone, pwd, checkCode,new AbstractReqeustCallback<LoginInfo>(mIView) {
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+
             @Override
             public void onSuccess(LoginInfo loginInfo) {
                 mIView.registerView();
@@ -94,9 +123,53 @@ public class LoginPresenter implements BasePersenter {
 
     }
 
+    public void forgetPwd(String phone, String pwd, String checkCode) {
+        mLoginHttpReqeustImp.forgetPwd(phone, pwd, checkCode,new AbstractReqeustCallback<Object>(mIView) {
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+
+            @Override
+            public void onSuccess(Object loginInfo) {
+                mIView.forgetPwdView();
+            }
+        });
+    }
+
+    public void modifypwd(String oldPwd,String newPwd){
+        mLoginHttpReqeustImp.modify(oldPwd, newPwd, new AbstractReqeustCallback<Object>(mIView) {
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+
+            @Override
+            public void onSuccess(Object o) {
+                mIView.modifyPwdView();
+            }
+        });
+    }
+
+    /**
+     * 设置密码
+     */
+    public void setPwd(String pwd) {
+        mIView.settingPwdView();
+    }
+
+    @Override
+    public void onCreate(@NonNull LifecycleOwner owner) {
+
+    }
+
+    @Override
+    public void onDestroy(@NonNull LifecycleOwner owner) {
+
+    }
+
     /**
      * 验证注册表单
-     *
      * @param phoneNumber
      * @param newPwd
      * @param rePwd
@@ -126,24 +199,5 @@ public class LoginPresenter implements BasePersenter {
         }
         return true;
     }
-
-
-    /**
-     * 设置密码
-     */
-    public void setPwd(String pwd) {
-        mIView.settingPwdView();
-    }
-
-    @Override
-    public void onCreate(@NonNull LifecycleOwner owner) {
-
-    }
-
-    @Override
-    public void onDestroy(@NonNull LifecycleOwner owner) {
-
-    }
-
 
 }

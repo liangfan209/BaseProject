@@ -1,6 +1,6 @@
 package com.bq.user_center.mvp.address.presenter;
 
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.user_center.api.UserCenterEventKey;
 import com.bq.user_center.mvp.address.ui.AddressBaseIView;
@@ -24,7 +24,7 @@ import androidx.lifecycle.LifecycleOwner;
  * 时间：2020/6/21/021
  * 版权：
  */
-public class AddressManagerPresenter implements BasePersenter{
+public class AddressManagerPresenter implements BasePresenter {
     private AddressBaseIView mAddressBaseIView;
     private UserCenterHttpReqeustImp mUserCenterHttpReqeustImp;
 

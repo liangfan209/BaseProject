@@ -22,10 +22,10 @@ public class UserCenterConfigBean {
         /**
          * name : 我的订单
          * type : horizontal
-         * tabList : [{"name":"待付款","icon":"icon_order_wait_payment","path":"/order/orderManager","parmas":0,
-         * "jumpType":"arouter"},{"name":"待发货","icon":"icon_order_wait_sent_out","path":"/order/orderManager","parmas":1,
-         * "jumpType":"arouter"},{"name":"待收货","icon":"icon_order_wait_receive","path":"/order/orderManager","parmas":2,
-         * "jumpType":"arouter"},{"name":"已完成","icon":"icon_order_complet","path":"/order/orderManager","parmas":2,
+         * tabList : [{"name":"待付款","icon":"user_center_icon_order_wait_payment","path":"/order/orderManager","parmas":0,
+         * "jumpType":"arouter"},{"name":"待发货","icon":"user_center_icon_order_wait_sent_out","path":"/order/orderManager","parmas":1,
+         * "jumpType":"arouter"},{"name":"待收货","icon":"user_center_icon_order_wait_receive","path":"/order/orderManager","parmas":2,
+         * "jumpType":"arouter"},{"name":"已完成","icon":"user_center_icon_order_complet","path":"/order/orderManager","parmas":2,
          * "jumpType":"arouter"}]
          */
 
@@ -60,7 +60,7 @@ public class UserCenterConfigBean {
         public static class TabListBean {
             /**
              * name : 待付款
-             * icon : icon_order_wait_payment
+             * icon : user_center_icon_order_wait_payment
              * path : /order/orderManager
              * parmas : 0
              * jumpType : arouter

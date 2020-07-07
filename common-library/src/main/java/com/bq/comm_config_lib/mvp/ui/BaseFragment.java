@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bq.comm_config_lib.mvp.BaseIView;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
 import com.fan.baseuilibrary.view.dialog.LoadingDialog;
@@ -37,7 +37,7 @@ public abstract class BaseFragment extends Fragment implements BaseIView, Lifecy
         contentView =inflater.inflate(getContentViewLayout(),null);
         mLoadingDialog = new LoadingDialog(this.getContext());
         ButterKnife.bind(this,contentView);
-        BasePersenter presenter = createPersenter();
+        BasePresenter presenter = createPersenter();
         if(presenter != null){
             getLifecycle().addObserver(presenter);
         }
@@ -67,7 +67,7 @@ public abstract class BaseFragment extends Fragment implements BaseIView, Lifecy
         }
     }
 
-    protected abstract BasePersenter createPersenter();
+    protected abstract BasePresenter createPersenter();
     protected abstract @LayoutRes int getContentViewLayout();
     protected abstract void attach();
 

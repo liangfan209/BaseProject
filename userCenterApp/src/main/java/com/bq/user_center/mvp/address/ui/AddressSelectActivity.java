@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.mvp.BasePersenter;
+import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.comm_config_lib.mvp.ui.CommomMultiItemQuickAdapter;
 import com.bq.user_center.R;
@@ -56,7 +56,7 @@ public class AddressSelectActivity extends BaseAcitivty implements MyRefreshLayo
     }
 
     @Override
-    protected BasePersenter createPersenter() {
+    protected BasePresenter createPersenter() {
         mAddressManagerPresenter = new AddressManagerPresenter(this);
         return mAddressManagerPresenter;
     }
@@ -84,10 +84,17 @@ public class AddressSelectActivity extends BaseAcitivty implements MyRefreshLayo
                             .withInt("optionType", AddressOptionActivity.ADDRESS_EDIT)
                             .withSerializable("mAddressInfo", addressBean).navigation();
                 });
+                    TextView tvAdress = baseViewHolder.getView(R.id.tv_txt);
+                    TextView tvName = baseViewHolder.getView(R.id.tv_name);
+                    TextView tvPhone = baseViewHolder.getView(R.id.tv_phone);
+                    tvName.setText(addressBean.getContacts());
+                    String phone = addressBean.getPhone();
+                    String formatPhone = phone.substring(0,3)+"****"+phone.substring(8);
+                    tvPhone.setText(formatPhone);
                 if (baseViewHolder.getItemViewType() == 1) {
-                    TextView tv = baseViewHolder.getView(R.id.tv_txt);
-                    tv.setText("         " + "湖北省武汉市江夏区佛祖岭 街道58号达尚城1栋2单元402号");
+                    tvAdress.setText("         " + addressBean.getCity()+" "+addressBean.getAddress());
                 } else if (baseViewHolder.getItemViewType() == 2) {
+                    tvAdress.setText(addressBean.getCity()+" "+addressBean.getAddress());
 
                 }
             }

@@ -27,7 +27,7 @@
                 android:id="@+id/tv_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="收入¥8.81   转出20,000.00"
+                android:text=""
                 android:textColor="@color/ui_txt_normal_color"
                 android:textSize="@dimen/h5_font_size" />
             />
@@ -65,7 +65,7 @@
         android:layout_marginLeft="10dp"
         android:drawableRight="@mipmap/hui_tao_sanjiao"
         android:drawablePadding="10dp"
-        android:text="本月"
+        android:text=""
         android:textColor="#ff232323"
         android:textSize="13sp" />
 
