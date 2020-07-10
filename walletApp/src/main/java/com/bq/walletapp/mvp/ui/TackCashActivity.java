@@ -217,7 +217,9 @@ public class TackCashActivity extends BaseAcitivty implements WalletIView {
         }else if(view.getId() == R.id.tv_confirm){
             //确认提现
             String money = mEtTackMoney.getText().toString();
-            mWalletPresenter.tackCash(money,"");
+            Double moneyDouble = Double.valueOf(money);
+            int moneyInt = (int) (moneyDouble*100);
+            mWalletPresenter.tackCash(moneyInt+"","");
         }
     }
 

@@ -5,7 +5,7 @@
             android:configChanges="orientation|screenSize"/>
         <activity android:name=".mvp.ui.BillDetailActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".mvp.ui.TransactionDetailActivity"
+        <activity android:name=".mvp.ui.RechargeDetailActivity"
             android:configChanges="orientation|screenSize"/>
         <activity android:name=".mvp.ui.TackCashActivity"
             android:configChanges="orientation|screenSize"/>

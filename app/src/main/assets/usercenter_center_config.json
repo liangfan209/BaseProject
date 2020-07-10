@@ -61,7 +61,7 @@
         {
           "name": "账单记录",
           "remark": "",
-          "icon": "user_center_icon_usercenter_address_manager",
+          "icon": "user_center_icon_usercenter_bank_manager",
           "path": "/wallet/MyWalletActivity",
           "jumpType": "arouter"
         },

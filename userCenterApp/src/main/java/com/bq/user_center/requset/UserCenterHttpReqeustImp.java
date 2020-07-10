@@ -83,7 +83,6 @@ public class UserCenterHttpReqeustImp implements UserCenterHttpReqestInter {
             @Override
             public void onSuccess(Response<BaseResponse<UserInfo>> response) {
                 super.onSuccess(response);
-                callBack.onSuccess(response.body().result);
             }
         });
     }

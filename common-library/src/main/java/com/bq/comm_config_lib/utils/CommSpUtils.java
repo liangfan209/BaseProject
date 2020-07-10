@@ -1,7 +1,9 @@
 package com.bq.comm_config_lib.utils;
 
 import com.bq.comm_config_lib.configration.SpField;
+import com.bq.comm_config_lib.request.LoginBean;
 import com.bq.utilslib.SPUtils;
+import com.google.gson.Gson;
 
 /**
  * 文件名：
@@ -12,12 +14,42 @@ import com.bq.utilslib.SPUtils;
  */
 public class CommSpUtils {
 
-    public static void saveToken(String token){
-        SPUtils.getInstance(SpField.AUTH_TOKEN).put(SpField.AUTH_TOKEN,token);
+    public static void clearLoginInfo() {
+        SPUtils.getInstance(SpField.AUTH_TOKEN).put(SpField.AUTH_TOKEN, "");
     }
 
-    public static String getToken(){
-//        return "9p6bK8VpBW2fFpriw2-2AlidciIAXGBGCjQGGMBkRVysVNWH4rqrx0Jl-Z-TH3Ep";
-        return SPUtils.getInstance(SpField.AUTH_TOKEN).getString(SpField.AUTH_TOKEN);
+    public static void saveLoginInfo(String loginInfo) {
+        SPUtils.getInstance(SpField.AUTH_TOKEN).put(SpField.AUTH_TOKEN, loginInfo);
+    }
+
+    public static String getToken() {
+        LoginBean loginBean = getLoginBean();
+        if (loginBean != null) {
+            return loginBean.getAccess_token();
+        } else {
+            return "";
+        }
+
+
+    }
+
+    public static String getRenewFlag() {
+        LoginBean loginBean = getLoginBean();
+        if (loginBean != null)
+            return loginBean.getRenew_flag();
+        return "";
+    }
+
+    public static String getExpireTime() {
+        LoginBean loginBean = getLoginBean();
+        if (loginBean != null)
+            return loginBean.getExpire_time();
+        return "";
+    }
+
+    public static LoginBean getLoginBean() {
+        String loginInfoStr = SPUtils.getInstance(SpField.AUTH_TOKEN).getString(SpField.AUTH_TOKEN);
+        LoginBean loginBean = new Gson().fromJson(loginInfoStr, LoginBean.class);
+        return loginBean;
     }
 }

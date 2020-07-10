@@ -5,8 +5,6 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-
-
     <include layout="@layout/layout_public_title"/>
 
     <!--手机号-->
@@ -44,7 +42,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="27dp"
-        android:layout_marginTop="13dp"
         android:layout_marginRight="16dp">
 
        <EditText
@@ -77,8 +74,8 @@
                 android:paddingRight="15dp"
                 android:paddingTop="7dp"
                 android:paddingBottom="7dp"
-                android:textColor="@color/ui_button_txt_primary_color"
-                android:background="@drawable/ui_shap_button_bg_selector"
+                android:textColor="@color/ui_verification_code_color_selector"
+                android:background="@drawable/ui_shap_verification_code_selecter"
                 android:enabled="false"
                 android:layout_centerVertical="true"
                 />
@@ -94,25 +91,32 @@
 
 
     <!--新密码-->
-    <RelativeLayout
+
+    <com.fan.baseuilibrary.view.EyeRelativeLayout
+        android:id="@+id/eye_pwd"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="13dp">
+        />
 
-       <com.fan.baseuilibrary.view.DeletableEditText
-            android:id="@+id/et_new_pwd"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@null"
-            android:hint="请输入6位数密码"
-            android:layout_marginRight="21dp"
-            android:inputType="textPassword"
-            android:maxLength="13"
-           style="@style/ui_edit_txt_style"
-            android:textSize="@dimen/h4_font_size" />
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginLeft="27dp"-->
+<!--        android:layout_marginTop="13dp">-->
 
-    </RelativeLayout>
+<!--       <com.fan.baseuilibrary.view.DeletableEditText-->
+<!--            android:id="@+id/et_new_pwd"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:background="@null"-->
+<!--            android:hint="请输入6位数密码"-->
+<!--            android:layout_marginRight="21dp"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:maxLength="13"-->
+<!--           style="@style/ui_edit_txt_style"-->
+<!--            android:textSize="@dimen/h4_font_size" />-->
+
+<!--    </RelativeLayout>-->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
@@ -122,25 +126,29 @@
 
 
     <!--重复新密码-->
-    <RelativeLayout
+    <com.fan.baseuilibrary.view.EyeRelativeLayout
+        android:id="@+id/eye_repwd"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="13dp">
+        />
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginLeft="27dp">-->
 
-       <com.fan.baseuilibrary.view.DeletableEditText
-            android:id="@+id/et_repwd"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@null"
-            android:hint="请与设置密码保持一致"
-            android:inputType="textPassword"
-            android:maxLength="13"
-           style="@style/ui_edit_txt_style"
-           android:textSize="@dimen/h4_font_size"
-            android:layout_marginRight="21dp"/>
+<!--       <com.fan.baseuilibrary.view.DeletableEditText-->
+<!--            android:id="@+id/et_repwd"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:background="@null"-->
+<!--            android:hint="请与设置密码保持一致"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:maxLength="13"-->
+<!--           style="@style/ui_edit_txt_style"-->
+<!--           android:textSize="@dimen/h4_font_size"-->
+<!--            android:layout_marginRight="21dp"/>-->
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"

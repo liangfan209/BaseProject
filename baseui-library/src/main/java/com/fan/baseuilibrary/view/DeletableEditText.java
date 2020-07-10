@@ -1,7 +1,9 @@
 package com.fan.baseuilibrary.view;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -98,6 +100,17 @@ public class DeletableEditText extends AppCompatEditText {
             boolean isVisible = getText().toString().length() >= 1;
             //显示右边的图标
             setClearDrawableVisible(isVisible);
+            int inputType = getInputType();
+            setSelection(getText().toString().length());
+            if(inputType == 129) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    setLetterSpacing(isVisible ? 0.6f : 0f);
+                }
+            }else{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    setLetterSpacing(0f);
+                }
+            }
         }
 
         @Override
@@ -145,4 +158,10 @@ public class DeletableEditText extends AppCompatEditText {
         return translateAnimation;
     }
 
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        super.dispatchDraw(canvas);
+        //画出小眼睛
+
+    }
 }

@@ -288,7 +288,7 @@ public final class AppUtils {
      * 将double转换为String
      */
     public static String getDouble2(double value){
-        return String.format("%.2f", value);
+        return String.format("%.2f", value/100);
     }
 
 

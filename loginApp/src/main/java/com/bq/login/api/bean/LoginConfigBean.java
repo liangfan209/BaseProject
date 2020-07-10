@@ -12,8 +12,19 @@ public class LoginConfigBean {
     /**
      * isImgInvalidate : false
      * loginType : pwd
+     * templet:2
      */
     private int loginType;
+    private boolean hasImageVirification;
+    private int templet;
+
+    public int getTemplet() {
+        return templet;
+    }
+
+    public void setTemplet(int templet) {
+        this.templet = templet;
+    }
 
     public boolean isHasImageVirification() {
         return hasImageVirification;
@@ -23,7 +34,6 @@ public class LoginConfigBean {
         this.hasImageVirification = hasImageVirification;
     }
 
-    private boolean hasImageVirification;
 
     public int getLoginType() {
         return loginType;

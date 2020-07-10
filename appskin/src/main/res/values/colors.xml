@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ui_primary_color">#FD541F</color>
-    <color name="ui_button_start_color">#9CFD541F</color>
-    <color name="ui_button_end_color">#FD541F</color>
-    <color name="ui_button_unselecter">#9CF8815C</color>
-    <color name="ui_small_button_bg_color">#FFFFEBDF</color>
+    <color name="ui_primary_color">#FF43C58E</color>
+    <color name="ui_button_start_color">#FF4CCA79</color>
+    <color name="ui_button_end_color">#FF43C590</color>
+
+    <color name="ui_button_unselecter">#B9ECCB</color>
+<!--    <color name="ui_small_button_bg_color">#FFFFEBDF</color>-->
     <color name="ui_txt_normal_color">#333333</color>
     <color name="ui_txt_hint_color">#999999</color>
     <color name="transparent">#00000000</color>
 
-    <!--    <color name="ui_button_txt_primary_color">#999999</color>-->
-
-<!--    <color name="ui_txt_normal_color">#aaaaaa</color>-->
-<!--    <color name="ui_title_txt_color">#aa0000</color>-->
-<!--    <color name="ui_title_bg_color">#aa000099</color>-->
+    <color name="white">#ffffff</color>
 </resources>

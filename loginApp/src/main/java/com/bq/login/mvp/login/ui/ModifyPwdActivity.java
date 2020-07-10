@@ -7,7 +7,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
@@ -17,7 +16,7 @@ import com.bq.login.R2;
 import com.bq.login.mvp.login.presenter.LoginPresenter;
 import com.bq.utilslib.Md5Utils;
 import com.fan.baseuilibrary.utils.ToastUtils;
-import com.fan.baseuilibrary.view.DeletableEditText;
+import com.fan.baseuilibrary.view.EyeRelativeLayout;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,12 +38,20 @@ public class ModifyPwdActivity extends BaseAcitivty implements LoginBaseIView{
     TextView mTvRight;
     @BindView(R2.id.rlt_title)
     RelativeLayout mRltTitle;
-    @BindView(R2.id.et_old_pwd)
-    DeletableEditText mEtOldPwd;
-    @BindView(R2.id.et_pwd)
-    DeletableEditText mEtPwd;
-    @BindView(R2.id.et_re_pwd)
-    DeletableEditText mEtRePwd;
+
+    @BindView(R2.id.eye_old_pwd)
+    EyeRelativeLayout mEyeOldPwd;
+    @BindView(R2.id.eye_pwd)
+    EyeRelativeLayout mEyePwd;
+    @BindView(R2.id.eye_re_pwd)
+    EyeRelativeLayout mEyeRePwd;
+
+//    @BindView(R2.id.et_old_pwd)
+//    DeletableEditText mEtOldPwd;
+//    @BindView(R2.id.et_pwd)
+//    DeletableEditText mEtPwd;
+//    @BindView(R2.id.et_re_pwd)
+//    DeletableEditText mEtRePwd;
     @BindView(R2.id.tv_modify)
     TextView mtvModify;
 
@@ -64,6 +71,9 @@ public class ModifyPwdActivity extends BaseAcitivty implements LoginBaseIView{
     @Override
     protected void attach() {
         mTvTitle.setText("修改密码");
+        mEyeOldPwd.setHintText("请输入原密码");
+        mEyePwd.setHintText("请设置新密码");
+        mEyeRePwd.setHintText("请确认新密码");
     }
 
 
@@ -71,7 +81,6 @@ public class ModifyPwdActivity extends BaseAcitivty implements LoginBaseIView{
     public void modifyPwdView() {
         ToastUtils.showToastOk(this,"修改成功");
         new Handler().postDelayed(()->{
-            ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
             finish();
         },1000);
     }
@@ -79,9 +88,12 @@ public class ModifyPwdActivity extends BaseAcitivty implements LoginBaseIView{
     @OnClick({R2.id.iv_title_left, R2.id.tv_modify})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.tv_modify){
-            String oldPwd = mEtOldPwd.getText().toString();
-            String newPwd = mEtPwd.getText().toString();
-            String rePwd = mEtRePwd.getText().toString();
+//            String oldPwd = mEtOldPwd.getText().toString();
+//            String newPwd = mEtPwd.getText().toString();
+//            String rePwd = mEtRePwd.getText().toString();
+            String oldPwd = mEyeOldPwd.getText();
+            String newPwd = mEyePwd.getText().toString();
+            String rePwd = mEyeRePwd.getText().toString();
 
             if(StringUtils.isEmpty(oldPwd)){
                 ToastUtils.showToast(this,"请输入原密码");

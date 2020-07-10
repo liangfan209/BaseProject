@@ -1,12 +1,12 @@
 package com.bq.walletapp.mvp.ui;
 
 import android.os.Handler;
+import android.text.InputType;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
@@ -14,7 +14,6 @@ import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.walletapp.R;
 import com.bq.walletapp.R2;
-import com.bq.walletapp.api.bean.TransactionInfo;
 import com.bq.walletapp.mvp.presenter.WalletPresenter;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
@@ -66,6 +65,7 @@ public class RechargeActivity extends BaseAcitivty implements WalletIView{
     @Override
     protected void attach() {
         mTvTitle.setText("充值");
+        mDetRecharge.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
     }
 
 
@@ -85,7 +85,9 @@ public class RechargeActivity extends BaseAcitivty implements WalletIView{
                 ToastUtils.showToast(this,"请输入充值金额");
                 return;
             }
-            mWalletPresenter.recharge(rechargeMoney);
+            Double moneyDouble = Double.valueOf(rechargeMoney);
+            int moneyInt = (int) (moneyDouble*100);
+            mWalletPresenter.recharge(moneyInt+"");
         }
     }
 

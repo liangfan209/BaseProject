@@ -5,10 +5,10 @@ import com.bq.comm_config_lib.request.SignJsonCallBack;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.netlibrary.NetManager;
 import com.bq.netlibrary.http.BaseResponse;
-import com.bq.walletapp.api.bean.TransactionInfoBean;
-import com.bq.walletapp.api.bean.TransactionListBean;
-import com.bq.walletapp.api.bean.TransactionMonthListBean;
 import com.bq.walletapp.requset.bean.BalanceBean;
+import com.bq.walletapp.requset.bean.TransactionInfoBean;
+import com.bq.walletapp.requset.bean.TransactionListBean;
+import com.bq.walletapp.requset.bean.TransactionMonthListBean;
 import com.lzy.okgo.model.Response;
 
 import java.util.HashMap;

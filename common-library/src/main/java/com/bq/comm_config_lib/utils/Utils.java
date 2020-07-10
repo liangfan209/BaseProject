@@ -49,6 +49,7 @@ public class Utils {
     }
 
     public static String getDouble2(double value){
+        value = value/100;
         return String.format("%.2f", value);
     }
 

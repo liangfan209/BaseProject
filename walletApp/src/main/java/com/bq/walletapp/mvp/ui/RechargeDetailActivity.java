@@ -14,8 +14,8 @@ import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.walletapp.R;
 import com.bq.walletapp.R2;
-import com.bq.walletapp.api.bean.TransactionInfo;
 import com.bq.walletapp.mvp.presenter.WalletPresenter;
+import com.bq.walletapp.requset.bean.TransactionInfo;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -28,7 +28,7 @@ import butterknife.OnClick;
  * 版权：
  */
 @Route(path = AppArouter.WALLET_TRANSACTION_DETAIL_ACTIVITY)
-public class TransactionDetailActivity extends BaseAcitivty implements WalletIView{
+public class RechargeDetailActivity extends BaseAcitivty implements WalletIView{
 
 
     @BindView(R2.id.iv_title_left)

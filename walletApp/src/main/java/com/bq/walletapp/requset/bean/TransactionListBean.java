@@ -1,4 +1,4 @@
-package com.bq.walletapp.api.bean;
+package com.bq.walletapp.requset.bean;
 
 import java.io.Serializable;
 import java.util.List;

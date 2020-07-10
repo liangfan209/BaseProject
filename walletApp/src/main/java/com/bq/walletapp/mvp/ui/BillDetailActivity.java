@@ -1,5 +1,6 @@
 package com.bq.walletapp.mvp.ui;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -14,10 +15,12 @@ import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.walletapp.R;
 import com.bq.walletapp.R2;
-import com.bq.walletapp.api.bean.TransactionInfo;
 import com.bq.walletapp.mvp.presenter.WalletPresenter;
+import com.bq.walletapp.requset.bean.TransactionInfo;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import skin.support.content.res.SkinCompatResources;
 
 /**
  * 文件名：
@@ -27,7 +30,7 @@ import butterknife.BindView;
  * 版权：
  */
 @Route(path = AppArouter.WALLET_BILL_DETAIL_ACTIVITY)
-public class BillDetailActivity extends BaseAcitivty implements WalletIView{
+public class BillDetailActivity extends BaseAcitivty implements WalletIView {
 
 
     @BindView(R2.id.iv_title_left)
@@ -54,6 +57,27 @@ public class BillDetailActivity extends BaseAcitivty implements WalletIView{
     TextView mTvOrderId;
     @BindView(R2.id.tv_transaction_type)
     TextView mTvTransactionType;
+    @BindView(R2.id.iv_type1)
+    ImageView mIvType1;
+    @BindView(R2.id.iv_line1)
+    ImageView mIvLine1;
+    @BindView(R2.id.iv_line2)
+    ImageView mIvLine2;
+    @BindView(R2.id.iv_type2)
+    ImageView mIvType2;
+    @BindView(R2.id.iv_line3)
+    ImageView mIvLine3;
+    @BindView(R2.id.iv_line4)
+    ImageView mIvLine4;
+    @BindView(R2.id.iv_type3)
+    ImageView mIvType3;
+    @BindView(R2.id.tv1)
+    TextView mTv1;
+    @BindView(R2.id.tv2)
+    TextView mTv2;
+    @BindView(R2.id.tv3)
+    TextView mTv3;
+
 
     private String payType;
 
@@ -76,21 +100,72 @@ public class BillDetailActivity extends BaseAcitivty implements WalletIView{
     protected void attach() {
         ARouter.getInstance().inject(this);
         mTvTitle.setText("账单详情");
-        if(mTransactionInfo != null){
-            mWalletPresenter.transactionDetail(mTransactionInfo.getId()+"");
+        if (mTransactionInfo != null) {
+            mWalletPresenter.transactionDetail(mTransactionInfo.getId() + "");
         }
     }
 
     @Override
     public void transactionDetailView(TransactionInfo info) {
         mTransactionInfo = info;
-        mTvTransactionType.setText(mTransactionInfo.getPay_type()+"提现");
+        mTvTransactionType.setText(mTransactionInfo.getPay_type() + "提现");
         mTvAmount.setText(Utils.getDouble2(mTransactionInfo.getAmount()));
-        mTvStatus.setText(mTransactionInfo.getStatus()+"");
+        mTvStatus.setText(mTransactionInfo.getStatus() + "");
         mTvPayTpye.setText(mTransactionInfo.getPay_type());
-        mTvTime.setText(mTransactionInfo.getCreate_time()+"");
-        mTvOrderId.setText(mTransactionInfo.getNumber()+"");
+        mTvTime.setText(mTransactionInfo.getCreate_time() + "");
+        mTvOrderId.setText(mTransactionInfo.getNumber() + "");
+        
+        updateTransactionStatus();
+    }
+
+    private void updateTransactionStatus() {
+        if("付款成功".equals(mTransactionInfo.getStatus())){
+            mIvType1.setBackgroundDrawable(SkinCompatResources.getDrawable(this,R.mipmap.ui_checkbox_select));
+            mIvType2.setBackgroundDrawable(SkinCompatResources.getDrawable(this,R.mipmap.ui_checkbox_unselect));
+            mIvType3.setBackgroundDrawable(SkinCompatResources.getDrawable(this,R.mipmap.ui_checkbox_unselect));
+            mIvLine1.setBackgroundColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+            mIvLine2.setBackgroundColor(SkinCompatResources.getColor(this,R.color.ui_txt_hint_color));
+            mIvLine3.setBackgroundColor(SkinCompatResources.getColor(this,R.color.ui_txt_hint_color));
+            mIvLine4.setBackgroundColor(SkinCompatResources.getColor(this,R.color.ui_txt_hint_color));
+
+            mTv1.setTextColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+            mTv2.setTextColor(SkinCompatResources.getColor(this,R.color.ui_txt_hint_color));
+            mTv3.setTextColor(SkinCompatResources.getColor(this,R.color.ui_txt_hint_color));
+
+        }else if("交易处理中".equals(mTransactionInfo.getStatus())){
+            mIvType1.setBackgroundDrawable(SkinCompatResources.getDrawable(this,R.mipmap.ui_checkbox_select));
+            mIvType2.setBackgroundDrawable(SkinCompatResources.getDrawable(this,R.mipmap.ui_checkbox_select));
+            mIvType3.setBackgroundDrawable(SkinCompatResources.getDrawable(this,R.mipmap.ui_checkbox_unselect));
+
+            mIvLine1.setBackgroundColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+            mIvLine2.setBackgroundColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+            mIvLine3.setBackgroundColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+            mIvLine4.setBackgroundColor(SkinCompatResources.getColor(this,R.color.ui_txt_hint_color));
+
+            mTv1.setTextColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+            mTv2.setTextColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+            mTv3.setTextColor(SkinCompatResources.getColor(this,R.color.ui_txt_hint_color));
+        }else if("到账成功".equals(mTransactionInfo.getStatus())){
+            mIvType1.setBackgroundDrawable(SkinCompatResources.getDrawable(this,R.mipmap.ui_checkbox_select));
+            mIvType2.setBackgroundDrawable(SkinCompatResources.getDrawable(this,R.mipmap.ui_checkbox_select));
+            mIvType3.setBackgroundDrawable(SkinCompatResources.getDrawable(this,R.mipmap.ui_checkbox_select));
+
+            mIvLine1.setBackgroundColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+            mIvLine2.setBackgroundColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+            mIvLine3.setBackgroundColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+            mIvLine4.setBackgroundColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+
+            mTv1.setTextColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+            mTv2.setTextColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+            mTv3.setTextColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
+        }
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

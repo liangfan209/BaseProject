@@ -24,6 +24,7 @@ import com.bq.utilslib.Md5Utils;
 import com.fan.baseuilibrary.utils.CountDownHelper;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
+import com.fan.baseuilibrary.view.EyeRelativeLayout;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -41,10 +42,10 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
     EditText mEtVerticalCode;
     @BindView(R2.id.tv_get_verification_code)
     TextView mTvGetVerticalCode;
-    @BindView(R2.id.et_new_pwd)
-    DeletableEditText mEtNewPwd;
-    @BindView(R2.id.et_repwd)
-    DeletableEditText mEtRepwd;
+//    @BindView(R2.id.et_new_pwd)
+//    DeletableEditText mEtNewPwd;
+//    @BindView(R2.id.et_repwd)
+//    DeletableEditText mEtRepwd;
     @BindView(R2.id.tv_comfirm_form)
     TextView mTvComfirmLogin;
     String phoneNumber = "";
@@ -53,6 +54,11 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
     ImageView mIvTitleLeft;
     @BindView(R2.id.tv_title)
     TextView mTvTitle;
+
+    @BindView(R2.id.eye_pwd)
+    EyeRelativeLayout mEyePwd;
+    @BindView(R2.id.eye_repwd)
+    EyeRelativeLayout mEyeRepwd;
 
     @Autowired(required = true)
     int optionType;
@@ -76,6 +82,9 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
         initView();
         mTvTitle.setText(optionType == FORGET_PWD ? "忘记密码" : "注册");
         mTvComfirmLogin.setText(optionType == FORGET_PWD ? "完成" : "注册");
+        mEyePwd.setEye(true);
+        mEyePwd.setHintText("请输入6位数密码");
+        mEyeRepwd.setHintText("请与设置密码保持一致");
     }
 
     private void initView() {
@@ -131,8 +140,10 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
      * 提交表单
      */
     private void CommitForm() {
-        newPwd = mEtNewPwd.getText().toString().trim();
-        String rePwd = mEtRepwd.getText().toString().trim();
+//        newPwd = mEtNewPwd.getText().toString().trim();
+        newPwd = mEyePwd.getText();
+
+        String rePwd = mEyeRepwd.getText();
         String code = mEtVerticalCode.getText().toString().trim();
         String phoneNumber = mEtPhone.getText().toString().replaceAll(" ", "").trim();
         if(!mLoginPresenter.checkRegisterFrom(phoneNumber,newPwd,rePwd,code)){

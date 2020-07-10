@@ -2,5 +2,6 @@
 
 {
   "hasImageVirification": false,
-  "loginType": 3
+  "loginType": 3,
+  "templet":2
 }

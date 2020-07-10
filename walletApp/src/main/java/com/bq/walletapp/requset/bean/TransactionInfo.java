@@ -1,4 +1,4 @@
-package com.bq.walletapp.api.bean;
+package com.bq.walletapp.requset.bean;
 
 import java.io.Serializable;
 
@@ -35,7 +35,7 @@ public class TransactionInfo implements Serializable {
             return "付款成功";
         }else if("transaction_dealing".equals(status)){
             return "交易处理中";
-        }else if("transaction_finish".equals(status)){
+        }else if("account_finish".equals(status)){
             return "到账成功";
         }
         return "";

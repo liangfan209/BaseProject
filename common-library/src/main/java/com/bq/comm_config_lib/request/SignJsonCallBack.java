@@ -18,6 +18,10 @@ public class SignJsonCallBack<T> extends JsonCallback<T> {
     private String mUrl;
     private RequestCallBackInter mRequestCallBack;
 
+    public SignJsonCallBack() {
+        this(null, null);
+    }
+
     public SignJsonCallBack(RequestCallBackInter callBack) {
         this(callBack, null);
     }
@@ -30,8 +34,11 @@ public class SignJsonCallBack<T> extends JsonCallback<T> {
 
     @Override
     public void onStart(Request<T, ? extends Request> request) {
+        //检查是否续签
+        ReNewFlagHelper.renewFlag(request);
         super.onStart(RequsetUtils.signRequestParmas(request));
-        mRequestCallBack.onStart();
+        if (mRequestCallBack != null)
+            mRequestCallBack.onStart();
     }
 
     @Override
@@ -39,9 +46,11 @@ public class SignJsonCallBack<T> extends JsonCallback<T> {
         T body = response.body();
         if (body instanceof BaseResponse) {
             if ("ok".equals(((BaseResponse) body).status)) {
-                mRequestCallBack.onSuccess(((BaseResponse) body).result);
-            }else{
-                mRequestCallBack.onError(((BaseResponse) body).msg);
+                if (mRequestCallBack != null)
+                    mRequestCallBack.onSuccess(((BaseResponse) body).result);
+            } else {
+                if (mRequestCallBack != null)
+                    mRequestCallBack.onError(((BaseResponse) body).msg);
             }
         }
     }
@@ -51,8 +60,9 @@ public class SignJsonCallBack<T> extends JsonCallback<T> {
     public void onError(Response<T> response) {
         super.onError(response);
         Throwable ex = response.getException();
-        if(ex instanceof ConnectException){
-            mRequestCallBack.onError("网络连接异常");
+        if (ex instanceof ConnectException) {
+            if (mRequestCallBack != null)
+                mRequestCallBack.onError("网络连接异常");
         }
         //异常部分统一处理
     }
@@ -61,6 +71,7 @@ public class SignJsonCallBack<T> extends JsonCallback<T> {
     @Override
     public void onFinish() {
         super.onFinish();
-        mRequestCallBack.onComplete();
+        if (mRequestCallBack != null)
+            mRequestCallBack.onComplete();
     }
 }

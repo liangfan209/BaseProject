@@ -5,6 +5,7 @@ import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.msgService.MessageBody;
 import com.bq.comm_config_lib.msgService.MessageEvent;
 import com.bq.comm_config_lib.request.RequestCallBackInter;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.login.requset.LoginHttpReqeustImp;
 import com.google.gson.Gson;
 
@@ -30,6 +31,7 @@ public class LoginProvider {
                 @Override
                 public void onSuccess(Object o) {
                     event.eventInterface.callBack(new MessageBody(MessageBody.SUCCESS_CODE,new Gson().toJson(o)));
+                    CommSpUtils.clearLoginInfo();
                 }
                 @Override
                 public void onError(String msg) {

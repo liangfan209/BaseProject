@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginLeft="27dp">
+
+    <com.fan.baseuilibrary.view.DeletableEditText
+        android:id="@+id/et_pwd"
+        style="@style/ui_edit_txt_style"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="45dp"
+        android:background="@null"
+        android:hint="请输入登录密码"
+        android:inputType="textPassword"
+        android:maxLength="13"
+        android:textSize="@dimen/h4_font_size" />
+
+    <skin.support.widget.SkinCompatCheckBox
+        android:id="@+id/cb_eye"
+        android:layout_width="20dp"
+        android:layout_height="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/ui_shap_eye_selecter"
+        android:button="@null"
+        android:checked="false" />
+
+</RelativeLayout>

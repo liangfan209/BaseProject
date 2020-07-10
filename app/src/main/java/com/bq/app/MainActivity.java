@@ -1,13 +1,17 @@
 package com.bq.app;
 
 import android.os.Build;
+import android.os.Bundle;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.StringUtils;
 import com.bq.base.R;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.user_center.mvp.user.ui.UserFragment;
 import com.fan.baseuilibrary.view.flycotablayout.TabEntity;
 import com.fan.baseuilibrary.view.flycotablayout.widget.SkinCommonTabLayout;
@@ -26,6 +30,9 @@ import butterknife.BindView;
 public class MainActivity extends BaseAcitivty {
     @BindView(R.id.tablayout)
     SkinCommonTabLayout mTablayout;
+
+    @Autowired
+    Bundle mBundle;
 
 
     private String[] tabs = new String[]{"tab1", "tab2", "个人中心"};
@@ -52,6 +59,7 @@ public class MainActivity extends BaseAcitivty {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void attach() {
+        ARouter.getInstance().inject(this);
         for (String title : tabs) {
             mFragments.add(new UserFragment());
         }
@@ -69,6 +77,11 @@ public class MainActivity extends BaseAcitivty {
             public void onTabReselect(int position) {
             }
         });
+        if(mBundle != null){
+            int index = mBundle.getInt("index");
+            mTablayout.setCurrentTab(index);
+            selectFragment(index);
+        }
 //        SkinCompatManager.getInstance().loadSkin("appskin-debug.apk", null, SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
     }
 
@@ -91,6 +104,18 @@ public class MainActivity extends BaseAcitivty {
                 }
                 break;
             case 2:
+                //判断下token
+                String token = CommSpUtils.getToken();
+                if(StringUtils.isEmpty(token)){
+                    //跳转到登录界面
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("index",index);
+                    ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY)
+                            .withString("mPath",AppArouter.MAIN_ACTIVITY)
+                            .withBundle("mBundle",bundle).navigation();
+                    return;
+                }
+
                 if (mUserFragment == null) {
                     mUserFragment = (Fragment) ARouter.getInstance().build(AppArouter.USER_CENTER_USER_FRAGMENT).navigation();
                     transaction.add(R.id.flt_content, mUserFragment, "flag" + index);

@@ -102,6 +102,8 @@ public class BankCardListActivity extends BaseAcitivty implements BankCardBaseIV
                 String bankNumber = item.getBank_number();
                 if(bankNumber.length() > 4){
                     helper.setText(R.id.tv_card_number,String.format("**** **** **** %s",bankNumber.substring(bankNumber.length()-4)));
+                }else{
+                    helper.setText(R.id.tv_card_number,bankNumber);
                 }
                 helper.setText(R.id.tv_card_name, item.getBank_name());
                 ImageView ivCard = helper.getView(R.id.iv_bank);

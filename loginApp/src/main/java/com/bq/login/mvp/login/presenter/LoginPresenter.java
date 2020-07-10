@@ -3,9 +3,6 @@ package com.bq.login.mvp.login.presenter;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.StringUtils;
-import com.bq.comm_config_lib.msgService.MessageBody;
-import com.bq.comm_config_lib.msgService.MessageEvent;
-import com.bq.comm_config_lib.msgService.MessageInter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.comm_config_lib.utils.CheckUtils;
@@ -16,9 +13,6 @@ import com.bq.login.requset.LoginHttpReqeustImp;
 import com.bq.login.requset.bean.LoginInfo;
 import com.bq.utilslib.AccountValidatorUtil;
 import com.fan.baseuilibrary.utils.ToastUtils;
-import com.google.gson.Gson;
-
-import org.greenrobot.eventbus.EventBus;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
@@ -42,16 +36,16 @@ public class LoginPresenter implements BasePresenter {
     public LoginPresenter(LoginBaseIView IView, boolean hasConfig) {
         this.mIView = IView;
         mLoginHttpReqeustImp = new LoginHttpReqeustImp();
-        if (hasConfig) {
-            //发送消息读取配置文件
-            EventBus.getDefault().post(new MessageEvent("config/login", new MessageInter() {
-                @Override
-                public void callBack(MessageBody data) {
-                    mLoginConfigBean = new Gson().fromJson(data.getContent(), LoginConfigBean.class);
-                    mIView.updateView(mLoginConfigBean);
-                }
-            }));
-        }
+//        if (hasConfig) {
+//            //发送消息读取配置文件
+//            EventBus.getDefault().post(new MessageEvent("config/login", new MessageInter() {
+//                @Override
+//                public void callBack(MessageBody data) {
+//                    mLoginConfigBean = new Gson().fromJson(data.getContent(), LoginConfigBean.class);
+//                    mIView.updateView(mLoginConfigBean);
+//                }
+//            }));
+//        }
     }
 
     /**

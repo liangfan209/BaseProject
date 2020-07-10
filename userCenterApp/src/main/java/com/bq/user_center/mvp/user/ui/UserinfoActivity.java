@@ -12,15 +12,18 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.blankj.utilcode.util.KeyboardUtils;
+import com.bq.comm_config_lib.BaseApplication;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.api.bean.UserInfoConfigBean;
 import com.bq.user_center.mvp.user.presenter.UserPresenter;
 import com.bq.user_center.requset.bean.UserInfo;
 import com.bq.utilslib.AppUtils;
+import com.bq.utilslib.rsa.RSA;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -33,8 +36,15 @@ import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +52,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import skin.support.content.res.SkinCompatResources;
 
 /**
@@ -74,6 +90,7 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
     UserPicture pictureUtils;
 
     private UserPresenter mUserPresenter;
+    OkHttpClient mOkHttpClient;
 
     @Override
     protected int getContentViewLayout() {
@@ -93,6 +110,7 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
         mUserInfoConfigBean = new Gson().fromJson(jsonStr, UserInfoConfigBean.class);
         updateView();
         mUserPresenter.showUserInfo();
+        mOkHttpClient = new OkHttpClient();
     }
 
     @Override
@@ -198,6 +216,12 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
             } else if (requestCode == UserPicture.CROP_PHOTO) {
                 //处理裁剪返回结果
                 Glide.with(this).load(pictureUtils.mCropImgUri).into(mCivHeader);
+                try {
+                    File file = new File(new URI(pictureUtils.mCropImgUri.toString()));
+                    uploadStart(file);
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
             } else if (requestCode == pictureUtils.SELECT_PIC_CODE) {
                 //处理从相册返回结果
                 if (data != null) {
@@ -215,4 +239,62 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
         }
         pictureUtils.chooseHeadImg();
     }
+
+
+
+    private void uploadStart(File file) {
+        new Thread(() -> {
+            MultipartBody.Builder builder = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM);
+            Map<String,String> map = new HashMap();
+            map.put("api","file.upload");
+            map.put("role","customer");
+            map.put("timestamp",String.valueOf(System.currentTimeMillis()));
+            map.put("flag","file");
+            map.put("auth", CommSpUtils.getToken());
+            map.put("store_type","1");
+
+//            map.put("token",token);
+
+            Set<Map.Entry<String, String>> entries = map.entrySet();
+            StringBuilder sb = new StringBuilder();
+            for(Map.Entry<String,String> entry: entries){
+                String key = entry.getKey();
+                sb.append(entry.getKey()+"="+entry.getValue()+"&");
+
+                builder.addFormDataPart(entry.getKey(),entry.getValue());
+            }
+            String bufferStr = sb.toString();
+            bufferStr =   bufferStr.substring(0,bufferStr.length()-1);
+            String unSign = RSA.getSign(bufferStr);
+            String s1 = RSA.sha1(unSign);
+            String sign = RSA.sampling(s1, RSA.requestBodyStr2Map(bufferStr), 1.4);
+
+            System.out.println();
+
+
+            builder.addFormDataPart("sign",sign);
+            builder.addFormDataPart("image", file.getName(),
+                    RequestBody.create(MediaType.parse("image/png"), file));
+            RequestBody requestBody = builder.build();
+            Request request = new Request.Builder()
+                    .url(BaseApplication.baseUrl)
+                    .post(requestBody)
+                    .build();
+            try {
+                Response response = mOkHttpClient.newCall(request).execute();
+                String responseBody = response.body().string();
+//                UploadImgBean uploadBean = new Gson().fromJson(responseBody,  UploadImgBean.class);
+//                if ("10000".equals(uploadBean.getCode())) {
+//                    String result = uploadBean.getResult();
+//                    toMainTheardSaveUser(result);
+//                    //将结果上传到服务器
+//                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+
 }

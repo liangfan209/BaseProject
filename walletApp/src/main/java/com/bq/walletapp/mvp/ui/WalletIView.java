@@ -2,8 +2,8 @@ package com.bq.walletapp.mvp.ui;
 
 import com.bq.comm_config_lib.mvp.BaseIView;
 import com.bq.walletapp.api.bean.BankCard;
-import com.bq.walletapp.api.bean.TransactionInfo;
-import com.bq.walletapp.api.bean.TransactionMonthInfo;
+import com.bq.walletapp.requset.bean.TransactionInfo;
+import com.bq.walletapp.requset.bean.TransactionMonthInfo;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public interface WalletIView extends BaseIView {
     default void getBankList(List<BankCard> list){};
     //交易列表
-    default void transactionListView(List<TransactionInfo> list){};
+    default void transactionListView(int page,List<TransactionInfo> list){};
 
     default void loadComplete(){};
 

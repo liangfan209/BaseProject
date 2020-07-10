@@ -3,12 +3,14 @@ package com.bq.walletapp.mvp.presenter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.walletapp.api.WalletEventKey;
-import com.bq.walletapp.api.bean.TransactionInfoBean;
-import com.bq.walletapp.api.bean.TransactionListBean;
-import com.bq.walletapp.api.bean.TransactionMonthListBean;
+import com.bq.walletapp.mvp.ui.MyWalletActivity;
 import com.bq.walletapp.mvp.ui.WalletIView;
+import com.bq.walletapp.mvp.ui.WalletListFragment;
 import com.bq.walletapp.requset.WalletHttpReqeustImp;
 import com.bq.walletapp.requset.bean.BalanceBean;
+import com.bq.walletapp.requset.bean.TransactionInfoBean;
+import com.bq.walletapp.requset.bean.TransactionListBean;
+import com.bq.walletapp.requset.bean.TransactionMonthListBean;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -38,7 +40,7 @@ public class WalletPresenter implements BasePresenter {
         mWalletHttpReqeustImp.transactionList(currentPage,searchInfo,new AbstractReqeustCallback<TransactionListBean>(mWalletIView) {
             @Override
             public void onSuccess(TransactionListBean bean) {
-                mWalletIView.transactionListView(bean.getData_list());
+                mWalletIView.transactionListView(currentPage,bean.getData_list());
             }
 
             @Override
@@ -121,7 +123,11 @@ public class WalletPresenter implements BasePresenter {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateBalance(String event){
         if(WalletEventKey.UPDATE_BALANCE.equals(event)){
-            getBalance();
+            if( mWalletIView != null && mWalletIView instanceof MyWalletActivity){
+                getBalance();
+            }else if(mWalletIView != null && mWalletIView instanceof WalletListFragment){
+                transactionList(1,"{}");
+            }
         }
     }
 

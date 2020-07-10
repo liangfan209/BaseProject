@@ -14,9 +14,9 @@ import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseStickTimerFragment;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.walletapp.R;
-import com.bq.walletapp.api.bean.TransactionInfo;
-import com.bq.walletapp.api.bean.TransactionMonthInfo;
 import com.bq.walletapp.mvp.presenter.WalletPresenter;
+import com.bq.walletapp.requset.bean.TransactionInfo;
+import com.bq.walletapp.requset.bean.TransactionMonthInfo;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -99,7 +99,7 @@ public class WalletListFragment extends BaseStickTimerFragment<TransactionInfo> 
     }
 
     @Override
-    public void transactionListView(List<TransactionInfo> list) {
+    public void transactionListView(int page,List<TransactionInfo> list) {
         //开始组装数据
         //1.拿之前的数据最后一条，如果之前的列表是空，那么第一条加入头，
         //2 如果之前的列表最后一条的月份与当前列表该月不一致，那么加入头
@@ -107,7 +107,7 @@ public class WalletListFragment extends BaseStickTimerFragment<TransactionInfo> 
 
         TransactionInfo currentTransactionInfo = null; //当前比较数据源
         List<TransactionInfo> oldDataList = adapter.getData();
-        if(oldDataList.size() > 0){
+        if(oldDataList.size() > 0 && page != 1){
             //获取老数据的最后一条
             TransactionInfo oldLastInfo = oldDataList.get(oldDataList.size() - 1);
 
@@ -140,7 +140,12 @@ public class WalletListFragment extends BaseStickTimerFragment<TransactionInfo> 
                 currentTransactionInfo = list.get(i);
             }
         }
-        addData(list);
+        if(page == 1){
+            adapter.setNewData(list);
+            adapter.notifyDataSetChanged();
+        }else{
+            addData(list);
+        }
     }
 
     /**
@@ -167,11 +172,6 @@ public class WalletListFragment extends BaseStickTimerFragment<TransactionInfo> 
         mPage++;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mWalletPresenter.unRegister();
-    }
 
     @Override
     protected int getItemRes() {

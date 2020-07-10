@@ -1,7 +1,6 @@
 package com.bq.login.mvp.login.ui;
 
 import com.bq.comm_config_lib.mvp.BaseIView;
-import com.bq.login.api.bean.LoginConfigBean;
 import com.bq.login.requset.bean.LoginInfo;
 
 /**
@@ -12,7 +11,7 @@ import com.bq.login.requset.bean.LoginInfo;
  * 版权：
  */
 public interface LoginBaseIView extends BaseIView {
-    default void updateView(LoginConfigBean type){}
+//    default void updateView(LoginConfigBean type){}
     default void loginView(LoginInfo info){};
     default void forgetPwdView(){};
     default void registerView(){}

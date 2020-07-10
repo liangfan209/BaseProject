@@ -76,6 +76,8 @@ public class AppApplication extends BaseApplication {
                 .loadSkin();
 
 
+        //模板一
+
     }
 
     //销毁组件中的服务

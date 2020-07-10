@@ -8,25 +8,30 @@
     tools:ignore="MissingDefaultResource">
     <include layout="@layout/layout_public_title" />
 
-    <RelativeLayout
+
+    <com.fan.baseuilibrary.view.EyeRelativeLayout
+        android:id="@+id/eye_old_pwd"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="13dp">
+        />
 
-        <com.fan.baseuilibrary.view.DeletableEditText
-            android:id="@+id/et_old_pwd"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@null"
-            android:hint="请输入原密码"
-            android:inputType="textPassword"
-            android:maxLength="13"
-            style="@style/ui_edit_txt_style"
-            android:textSize="@dimen/h4_font_size"
-            android:layout_marginRight="21dp"/>
-
-    </RelativeLayout>
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginLeft="27dp"-->
+<!--        android:layout_marginTop="13dp">-->
+<!--        <com.fan.baseuilibrary.view.DeletableEditText-->
+<!--            android:id="@+id/et_old_pwd"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:background="@null"-->
+<!--            android:hint="请输入原密码"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:maxLength="13"-->
+<!--            style="@style/ui_edit_txt_style"-->
+<!--            android:textSize="@dimen/h4_font_size"-->
+<!--            android:layout_marginRight="21dp"/>-->
+<!--    </RelativeLayout>-->
 
     <ImageView
         android:layout_width="match_parent"
@@ -36,25 +41,30 @@
         android:background="@color/ui_recycleview_item_line_color" />
 
 
-    <RelativeLayout
+    <com.fan.baseuilibrary.view.EyeRelativeLayout
+        android:id="@+id/eye_pwd"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="13dp">
+        />
 
-        <com.fan.baseuilibrary.view.DeletableEditText
-            android:id="@+id/et_pwd"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@null"
-            android:hint="请设置新密码"
-            android:inputType="textPassword"
-            android:maxLength="13"
-            style="@style/ui_edit_txt_style"
-            android:textSize="@dimen/h4_font_size"
-            android:layout_marginRight="21dp"/>
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginLeft="27dp">-->
 
-    </RelativeLayout>
+<!--        <com.fan.baseuilibrary.view.DeletableEditText-->
+<!--            android:id="@+id/et_pwd"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:background="@null"-->
+<!--            android:hint="请设置新密码"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:maxLength="13"-->
+<!--            style="@style/ui_edit_txt_style"-->
+<!--            android:textSize="@dimen/h4_font_size"-->
+<!--            android:layout_marginRight="21dp"/>-->
+
+<!--    </RelativeLayout>-->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
@@ -62,25 +72,30 @@
         android:layout_marginRight="14dp"
         android:background="@color/ui_recycleview_item_line_color"  />
 
-    <RelativeLayout
+    <com.fan.baseuilibrary.view.EyeRelativeLayout
+        android:id="@+id/eye_re_pwd"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="13dp">
+        />
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginLeft="27dp"-->
+<!--        android:layout_marginTop="13dp">-->
 
-        <com.fan.baseuilibrary.view.DeletableEditText
-            android:id="@+id/et_re_pwd"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@null"
-            android:hint="请确认新密码"
-            android:inputType="textPassword"
-            android:maxLength="13"
-            style="@style/ui_edit_txt_style"
-            android:textSize="@dimen/h4_font_size"
-            android:layout_marginRight="21dp"/>
+<!--        <com.fan.baseuilibrary.view.DeletableEditText-->
+<!--            android:id="@+id/et_re_pwd"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:background="@null"-->
+<!--            android:hint="请确认新密码"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:maxLength="13"-->
+<!--            style="@style/ui_edit_txt_style"-->
+<!--            android:textSize="@dimen/h4_font_size"-->
+<!--            android:layout_marginRight="21dp"/>-->
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
