@@ -30,7 +30,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.view.CircleImageView;
 import com.fan.baseuilibrary.view.DeletableEditText;
-import com.fan.baseuilibrary.view.UserPicture;
+import com.fan.baseuilibrary.view.PictureViewUtils;
 import com.fan.baseuilibrary.view.dialog.CustomDialog;
 import com.google.gson.Gson;
 
@@ -87,7 +87,7 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
 
     private UserInfoConfigBean mUserInfoConfigBean;
     BaseQuickAdapter mBaseQuickAdapter;
-    UserPicture pictureUtils;
+    PictureViewUtils pictureUtils;
 
     private UserPresenter mUserPresenter;
     OkHttpClient mOkHttpClient;
@@ -132,6 +132,8 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
                 moduleListBean.setValue(customerInfo.getQq());
             }else if(moduleListBean.getType().equals("education")){
                 moduleListBean.setValue(customerInfo.getEducation());
+            }else if(moduleListBean.getType().equals("wechat")){
+                moduleListBean.setValue(customerInfo.getWechat());
             }
         }
         mBaseQuickAdapter.notifyDataSetChanged();
@@ -160,6 +162,9 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
                 String type = module.getType();
                 if ("gender".equals(type)) {
                     chooseSex();
+                    return;
+                }else if("education".equals(type)){
+                    chooseEducation();
                     return;
                 }
                 changeValueDialog(module);
@@ -206,14 +211,56 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
         pvOptions.show();
     }
 
+    void chooseEducation(){
+        KeyboardUtils.hideSoftInput(this);
+        List<String> dataList = new ArrayList<>();
+        dataList.add("研究生");
+        dataList.add("本科");
+        dataList.add("高中");
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                String s = dataList.get(options1);
+                mUserPresenter.updateUserInfo("education",s);
+            }
+        }).setSubmitColor(SkinCompatResources.getColor(this,R.color.ui_primary_color))
+                .setCancelColor(SkinCompatResources.getColor(this,R.color.ui_primary_color)).build();
+        pvOptions.setPicker(dataList);
+        pvOptions.show();
+    }
+
+    //选择出生日期
+    void chooseBirthday(){
+//        OptionsPickerBuilder pvTime = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+//            @Override
+//            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+//
+//            }
+//        })
+//                .setCancelText("Cancel")//取消按钮文字
+//                .setSubmitText("Sure")//确认按钮文字
+//                .setTitleText("Title")//标题文字
+//                .setOutSideCancelable(false)//点击屏幕，点在控件外部范围时，是否取消显示
+//                .setTitleColor(Color.BLACK)//标题文字颜色
+//                .setSubmitColor(Color.BLUE)//确定按钮文字颜色
+//                .setCancelColor(Color.BLUE)//取消按钮文字颜色
+//                .setTitleBgColor(0xFF666666)//标题背景颜色 Night mode
+//                .setBgColor(0xFF333333)//滚轮背景颜色 Night mode
+//                .setRange(calendar.get(Calendar.YEAR) - 20, calendar.get(Calendar.YEAR) + 20)//默认是1900-2100年
+//                .setDate(new Date())// 默认是系统时间*/
+//                .setLabel("年","月","日")
+//                .build();
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == UserPicture.TAKE_PHOTO_CODE) {
+            if (requestCode == PictureViewUtils.TAKE_PHOTO_CODE) {
                 //处理拍照返回结果
                 pictureUtils.startPhotoCrop(pictureUtils.mImageUri);
-            } else if (requestCode == UserPicture.CROP_PHOTO) {
+            } else if (requestCode == PictureViewUtils.CROP_PHOTO) {
                 //处理裁剪返回结果
                 Glide.with(this).load(pictureUtils.mCropImgUri).into(mCivHeader);
                 try {
@@ -235,7 +282,7 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
     @OnClick({R2.id.civ_header, R2.id.rlt_head})
     public void onViewClicked(View view) {
         if (pictureUtils == null) {
-            pictureUtils = new UserPicture(this);
+            pictureUtils = new PictureViewUtils(this);
         }
         pictureUtils.chooseHeadImg();
     }

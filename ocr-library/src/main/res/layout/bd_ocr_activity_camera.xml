@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 Baidu, Inc. All Rights Reserved.
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+        <RelativeLayout
+            android:id="@+id/rlt_title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+            <RelativeLayout
+                android:id="@+id/public_toolbar_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_title_left"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="14dp"
+                    android:paddingLeft="14dp"
+                    android:paddingBottom="14dp"
+                    android:src="@mipmap/public_ic_arrow_back_white" />
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/public_toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                tools:text="拍照" />
+
+        </RelativeLayout>
+
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/take_picture_container"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            layout="@layout/bd_ocr_take_picture"/>
+
+        <include
+            android:id="@+id/crop_container"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            layout="@layout/bd_ocr_crop"/>
+
+        <include
+            android:id="@+id/confirm_result_container"
+            layout="@layout/bd_ocr_confirm_result"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
+</LinearLayout>
+
+
+

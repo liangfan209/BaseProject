@@ -16,7 +16,8 @@
             android:id="@+id/rlt_head"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp">
 
             <com.fan.baseuilibrary.view.CircleImageView
                 android:id="@+id/iv_head"

@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="交易成功"
-            android:textColor="@color/ui_txt_hint_color"
+            android:textColor="@color/ui_primary_color"
             android:textSize="@dimen/h3_font_size"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="64dp"

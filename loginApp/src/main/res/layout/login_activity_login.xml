@@ -86,7 +86,7 @@
             android:layout_height="50dp"
             android:background="@null"
             android:hint="请输入验证码"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:layout_marginRight="15dp"
             android:maxLength="6"
             android:minWidth="200dp"

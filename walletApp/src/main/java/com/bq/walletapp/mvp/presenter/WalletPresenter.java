@@ -126,7 +126,8 @@ public class WalletPresenter implements BasePresenter {
             if( mWalletIView != null && mWalletIView instanceof MyWalletActivity){
                 getBalance();
             }else if(mWalletIView != null && mWalletIView instanceof WalletListFragment){
-                transactionList(1,"{}");
+//                transactionList(1,"{}");
+                getTransactionMonthist();
             }
         }
     }

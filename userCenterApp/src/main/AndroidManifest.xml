@@ -10,5 +10,6 @@
         <activity android:name=".mvp.user.ui.UserinfoActivity"/>
         <activity android:name=".mvp.bankcard.ui.AddBankActivity"/>
         <activity android:name=".mvp.user.ui.AboutUsActivity"/>
+        <activity android:name=".mvp.user.ui.CertificationActivity"/>
     </application>
 </manifest>

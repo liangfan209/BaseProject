@@ -3,8 +3,6 @@ package com.fan.baseuilibrary.utils;
 import android.os.CountDownTimer;
 import android.widget.TextView;
 
-import com.fan.baseuilibrary.R;
-
 
 /**
  * 文件名：
@@ -42,7 +40,7 @@ public class CountDownHelper {
 
             @Override
             public void onTick(long time) {
-                mButton.setTextColor(mButton.getContext().getResources().getColor(R.color.color_999999));
+//                mButton.setTextColor(mButton.getContext().getResources().getColor(R.color.color_999999));
                 // 第一次调用会有1-10ms的误差，因此需要+15ms，防止第一个数不显示，第二个数显示2s
                 String timeStr = "";
 
@@ -64,7 +62,7 @@ public class CountDownHelper {
             @Override
             public void onFinish() {
                 mButton.setEnabled(true);
-                mButton.setTextColor(mButton.getContext().getResources().getColor(R.color.white));
+//                mButton.setTextColor(mButton.getContext().getResources().getColor(R.color.white));
                 mButton.setText(hintString);
                 if (listener != null) {
                     listener.finish();

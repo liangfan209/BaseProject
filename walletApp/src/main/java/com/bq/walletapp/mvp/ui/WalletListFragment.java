@@ -113,13 +113,13 @@ public class WalletListFragment extends BaseStickTimerFragment<TransactionInfo> 
 
             for (int i = 0; i < list.size(); i++) {
                 if(i == 0){
-                    if(Utils.getMonthByTime(oldLastInfo.getCreate_time()) != Utils.getMonthByTime(list.get(i).getCreate_time())){
-                        list.get(i).setMonthInfo(getMonthDataDtoByMonth(Utils.getYearByTime(list.get(0).getCreate_time()),Utils.getMonthByTime(list.get(0).getCreate_time())));
+                    if(!(Utils.getYearMonthByTime(oldLastInfo.getCreate_time()).equals(Utils.getYearMonthByTime(list.get(i).getCreate_time())))){
+                        list.get(i).setMonthInfo(getMonthDataDtoByMonth(list.get(i).getCreate_time()));
                     }
                 }else{
                     if(currentTransactionInfo != null){
-                        if(Utils.getMonthByTime(currentTransactionInfo.getCreate_time()) != Utils.getMonthByTime(list.get(i).getCreate_time())){
-                            list.get(i).setMonthInfo(getMonthDataDtoByMonth(Utils.getYearByTime(list.get(0).getCreate_time()),Utils.getMonthByTime(list.get(i).getCreate_time())));
+                        if(!(Utils.getYearMonthByTime(currentTransactionInfo.getCreate_time()).equals(Utils.getYearMonthByTime(list.get(i).getCreate_time())))){
+                            list.get(i).setMonthInfo(getMonthDataDtoByMonth(list.get(i).getCreate_time()));
                         }
                     }
                 }
@@ -129,11 +129,11 @@ public class WalletListFragment extends BaseStickTimerFragment<TransactionInfo> 
             //第一条数据必须加入
             for (int i = 0; i < list.size(); i++) {
                 if(i == 0){
-                    list.get(i).setMonthInfo(getMonthDataDtoByMonth(Utils.getYearByTime(list.get(0).getCreate_time()), Utils.getMonthByTime(list.get(0).getCreate_time())));
+                    list.get(i).setMonthInfo(getMonthDataDtoByMonth(list.get(i).getCreate_time()));
                 }else{
                     if(currentTransactionInfo != null){
-                        if(Utils.getMonthByTime(currentTransactionInfo.getCreate_time()) != Utils.getMonthByTime(list.get(i).getCreate_time())){
-                            list.get(i).setMonthInfo(getMonthDataDtoByMonth(Utils.getYearByTime(list.get(0).getCreate_time()),Utils.getMonthByTime(list.get(i).getCreate_time())));
+                        if(!(Utils.getYearMonthByTime(currentTransactionInfo.getCreate_time()).equals(Utils.getYearMonthByTime(list.get(i).getCreate_time())))){
+                            list.get(i).setMonthInfo(getMonthDataDtoByMonth(list.get(i).getCreate_time()));
                         }
                     }
                 }
@@ -150,12 +150,13 @@ public class WalletListFragment extends BaseStickTimerFragment<TransactionInfo> 
 
     /**
      * 匹配到相关的月份
-     * @param monthByTime
+     * @param time
      * @return
      */
-    private TransactionMonthInfo getMonthDataDtoByMonth(int year,int monthByTime) {
+    private TransactionMonthInfo getMonthDataDtoByMonth(String time) {
+        time = Utils.getYearMonthByTime(time);
         for (TransactionMonthInfo transactionMonthInfo : mTransactionMonthInfos) {
-            if(monthByTime == transactionMonthInfo.getMonth() && year == transactionMonthInfo.getYear()){
+            if(time.equals(transactionMonthInfo.getYear()+"-"+transactionMonthInfo.getMonth())){
                 return transactionMonthInfo;
             }
         }

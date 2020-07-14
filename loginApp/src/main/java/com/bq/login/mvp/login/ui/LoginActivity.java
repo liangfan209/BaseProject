@@ -209,10 +209,15 @@ public class LoginActivity extends BaseAcitivty implements LoginBaseIView {
 //        mEtPhone.setText("13260606900");
 //        mEtPwd.setText("123456");
         String phoneNumber = mEtPhone.getText().toString().replaceAll(" ", "").trim();
-
         String pwd = mEtPwd.getText().toString().trim();
         pwd = Md5Utils.md5(pwd);
-        mLoginPresenter.login(phoneNumber, pwd);
+
+        if(mCbLoginType.isChecked() || mCbLoginType.getVisibility() == View.GONE){
+            mLoginPresenter.login(phoneNumber, pwd);
+        }else{
+            ToastUtils.showToast(this,"验证码登陆正在开发中...");
+        }
+
     }
 
     @Override

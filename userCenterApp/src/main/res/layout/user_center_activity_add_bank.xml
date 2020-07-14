@@ -157,8 +157,8 @@
                 android:paddingRight="15dp"
                 android:paddingTop="7dp"
                 android:paddingBottom="7dp"
-                android:textColor="@color/ui_button_txt_primary_color"
-                android:background="@drawable/ui_shap_button_bg_selector"
+                android:textColor="@color/ui_verification_code_color_selector"
+                android:background="@drawable/ui_shap_verification_code_selecter"
                 android:enabled="false"
                 android:layout_centerVertical="true"
                 />

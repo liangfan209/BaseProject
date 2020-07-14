@@ -4,6 +4,11 @@ import android.os.Build;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
 
+import com.baidu.ocr.sdk.OCR;
+import com.baidu.ocr.sdk.OnResultListener;
+import com.baidu.ocr.sdk.exception.OCRError;
+import com.baidu.ocr.sdk.model.AccessToken;
+import com.blankj.utilcode.util.LogUtils;
 import com.bq.comm_config_lib.BaseApplication;
 import com.bq.comm_config_lib.msgService.Servicemanager;
 import com.fan.baseuilibrary.utils.provinces.CityUtils;
@@ -75,9 +80,8 @@ public class AppApplication extends BaseApplication {
                 .setSkinWindowBackgroundEnable(false)                   // 关闭windowBackground换肤，默认打开[可选]
                 .loadSkin();
 
-
-        //模板一
-
+        //初始化orc
+        initAccessTokenWithAkSk();
     }
 
     //销毁组件中的服务
@@ -101,6 +105,29 @@ public class AppApplication extends BaseApplication {
             AssetFileUtils.copyAssetFile(this, asset_dir, saveDir, savefileName);
         }
         SkinManager.get().loadSkin(file.getAbsolutePath());
+    }
+
+
+    /**
+     * 用明文ak，sk初始化
+     */
+    private void initAccessTokenWithAkSk() {
+        OCR.getInstance(this).initAccessTokenWithAkSk(new OnResultListener<AccessToken>() {
+            @Override
+            public void onResult(AccessToken result) {
+                String token = result.getAccessToken();
+//                hasGotToken = true;
+                LogUtils.e("token 获取成功");
+            }
+
+            @Override
+            public void onError(OCRError error) {
+                error.printStackTrace();
+                LogUtils.e("token 获取失败");
+//                ToastUtils.showShort("token 获取失败");
+//                alertText("AK，SK方式获取token失败", error.getMessage());
+            }
+        }, getApplicationContext(),  "RXTHlx7rBgksHVk3sdC0iYpX", "1mG2sIZsIFX89EGjqpNWSXhs0or7EqCg");
     }
 
 }

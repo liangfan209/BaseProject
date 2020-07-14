@@ -21,7 +21,7 @@ public class TransactionMonthInfo implements Serializable {
 
     private int year;
     private int income;
-    private int month;
+    private String month;
     private String expense;
 
     public int getYear() {
@@ -40,11 +40,14 @@ public class TransactionMonthInfo implements Serializable {
         this.income = income;
     }
 
-    public int getMonth() {
+    public String getMonth() {
+        if(month.length() == 1){
+            month = "0"+month;
+        }
         return month;
     }
 
-    public void setMonth(int month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 

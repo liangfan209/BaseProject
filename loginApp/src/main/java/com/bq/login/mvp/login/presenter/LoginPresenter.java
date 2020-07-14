@@ -6,6 +6,7 @@ import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.comm_config_lib.utils.CheckUtils;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.login.R;
 import com.bq.login.api.bean.LoginConfigBean;
 import com.bq.login.mvp.login.ui.LoginBaseIView;
@@ -13,6 +14,7 @@ import com.bq.login.requset.LoginHttpReqeustImp;
 import com.bq.login.requset.bean.LoginInfo;
 import com.bq.utilslib.AccountValidatorUtil;
 import com.fan.baseuilibrary.utils.ToastUtils;
+import com.google.gson.Gson;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
@@ -111,6 +113,7 @@ public class LoginPresenter implements BasePresenter {
 
             @Override
             public void onSuccess(LoginInfo loginInfo) {
+                CommSpUtils.saveLoginInfo(new Gson().toJson(loginInfo));
                 mIView.registerView();
             }
         });

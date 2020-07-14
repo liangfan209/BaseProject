@@ -59,10 +59,9 @@ public class Utils {
      * @param time 2020-07-06 12:46:36
      * @return
      */
-    public static int getMonthByTime(String time){
-        String splitStr = time.substring(5,7);
-        Integer integer = Integer.valueOf(splitStr);
-        return integer;
+    public static String getYearMonthByTime(String time){
+        String splitStr = time.substring(0,7);
+        return splitStr;
     }
 
     public static int getYearByTime(String time){

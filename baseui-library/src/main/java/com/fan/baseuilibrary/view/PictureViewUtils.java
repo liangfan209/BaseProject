@@ -19,7 +19,7 @@ import java.io.IOException;
 import io.reactivex.functions.Consumer;
 
 
-public class UserPicture {
+public class PictureViewUtils {
 
     //使用照相机拍照
     public static final int TAKE_PHOTO_CODE = 1;
@@ -31,7 +31,7 @@ public class UserPicture {
     public Uri mCropImgUri;
     private Activity mActivity;
 
-    public UserPicture(Activity activity) {
+    public PictureViewUtils(Activity activity) {
         this.mActivity = activity;
     }
 
@@ -108,6 +108,44 @@ public class UserPicture {
         intent.putExtra("outputY", 200);
         intent.putExtra("scale", true);
         intent.putExtra("circleCrop", true);
+        //设置目的地址uri
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropImgUri);
+        //设置图片格式
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        //data不需要返回,避免图片太大异常
+        intent.putExtra("return-data", false);
+        // no face detection
+        intent.putExtra("noFaceDetection", true);
+        mActivity.startActivityForResult(intent, CROP_PHOTO);
+    }
+
+    /**
+     * 方形裁剪
+     * @param imageUri
+     */
+    public void startPhotoRectCrop(Uri imageUri) {
+        //创建file文件，用于存储剪裁后的照片
+        String imageName = System.currentTimeMillis() + "crop_image.jpg";
+        File cropImage = new File(mActivity.getExternalCacheDir(), imageName);
+        try {
+            if (cropImage.exists()) {
+                cropImage.delete();
+            }
+            cropImage.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mCropImgUri = Uri.fromFile(cropImage);
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        //设置源地址uri
+        intent.setDataAndType(imageUri, "image/*");
+//        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 5);
+        intent.putExtra("aspectY", 3);
+        intent.putExtra("outputX", 400);
+        intent.putExtra("outputY", 200);
+//        intent.putExtra("scale", true);
+//        intent.putExtra("circleCrop", true);
         //设置目的地址uri
         intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropImgUri);
         //设置图片格式

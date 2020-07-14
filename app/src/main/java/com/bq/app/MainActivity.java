@@ -39,11 +39,11 @@ public class MainActivity extends BaseAcitivty {
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
     private int[] mIconUnselectIds = {
-            R.mipmap.icon_dark_home, R.mipmap.icon_dark_home,
-            R.mipmap.icon_dark_home};
+            R.mipmap.icon_home_study_unselect, R.mipmap.icon_home_find_unselect,
+            R.mipmap.icon_home_mine_unselect};
     private int[] mIconSelectIds = {
-            R.mipmap.icon_bottom_home, R.mipmap.icon_bottom_home,
-            R.mipmap.icon_bottom_home};
+            R.mipmap.icon_home_study_select, R.mipmap.icon_home_find_select,
+            R.mipmap.icon_home_mine_select};
     private ArrayList<Fragment> mFragments = new ArrayList<>();
 
     private Fragment mUserFragment,skinFragment;

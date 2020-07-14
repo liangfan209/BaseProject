@@ -15,6 +15,6 @@
         android:id="@+id/bt_red"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="红色主题"
+        android:text="绿色主题"
         />
 </LinearLayout>

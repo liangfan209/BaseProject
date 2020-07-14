@@ -35,6 +35,9 @@ public class AppArouter {
     public static final String USER_CENTER_ADDRESS_OPTION = USER_CENTER+"/AddAddressActivity";
     public static final String USER_CENTER_USER_INFO_ACTIVITY = USER_CENTER+"/UserInfoActivity";
     public static final String USER_CENTER_ABOUT_US_ACTIVITY = USER_CENTER+"/AboutUsActivity";
+    public static final String USER_CENTER_CETIFICATION_ACTIVITY = USER_CENTER+"/CertificationActivity";
+
+
     public static final String USER_CENTER_SERVICE = USER_CENTER+"/service";
     public static final String USER_CENTER_BANK_LIST_SERVICE = USER_CENTER+"/BankListService";
 

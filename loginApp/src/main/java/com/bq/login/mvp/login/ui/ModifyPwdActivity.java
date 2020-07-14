@@ -7,16 +7,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.login.R;
 import com.bq.login.R2;
+import com.bq.login.api.bean.LoginConfigBean;
 import com.bq.login.mvp.login.presenter.LoginPresenter;
+import com.bq.utilslib.AppUtils;
 import com.bq.utilslib.Md5Utils;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.EyeRelativeLayout;
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -56,6 +62,7 @@ public class ModifyPwdActivity extends BaseAcitivty implements LoginBaseIView{
     TextView mtvModify;
 
     private LoginPresenter mLoginPresenter;
+    private LoginConfigBean loginConfig;
 
     @Override
     protected int getContentViewLayout() {
@@ -70,6 +77,8 @@ public class ModifyPwdActivity extends BaseAcitivty implements LoginBaseIView{
 
     @Override
     protected void attach() {
+        String jsonStr = AppUtils.getAssetJson(this,"login_login_config.json");
+        loginConfig = new Gson().fromJson(jsonStr, LoginConfigBean.class);
         mTvTitle.setText("修改密码");
         mEyeOldPwd.setHintText("请输入原密码");
         mEyePwd.setHintText("请设置新密码");
@@ -82,6 +91,10 @@ public class ModifyPwdActivity extends BaseAcitivty implements LoginBaseIView{
         ToastUtils.showToastOk(this,"修改成功");
         new Handler().postDelayed(()->{
             finish();
+            CommSpUtils.saveLoginInfo("");
+            ActivityUtils.finishAllActivities();
+            ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
+
         },1000);
     }
 
@@ -94,6 +107,11 @@ public class ModifyPwdActivity extends BaseAcitivty implements LoginBaseIView{
             String oldPwd = mEyeOldPwd.getText();
             String newPwd = mEyePwd.getText().toString();
             String rePwd = mEyeRePwd.getText().toString();
+            if(loginConfig.getTemplet() != 2){
+                mEyeOldPwd.setEye(false);
+                mEyePwd.setEye(false);
+                mEyeRePwd.setEye(false);
+            }
 
             if(StringUtils.isEmpty(oldPwd)){
                 ToastUtils.showToast(this,"请输入原密码");

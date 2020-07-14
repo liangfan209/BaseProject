@@ -11,20 +11,24 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
 import com.bq.login.R;
 import com.bq.login.R2;
+import com.bq.login.api.bean.LoginConfigBean;
 import com.bq.login.mvp.login.presenter.LoginPresenter;
 import com.bq.login.requset.bean.LoginInfo;
 import com.bq.utilslib.AccountValidatorUtil;
+import com.bq.utilslib.AppUtils;
 import com.bq.utilslib.EditFormatUtils;
 import com.bq.utilslib.Md5Utils;
 import com.fan.baseuilibrary.utils.CountDownHelper;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
 import com.fan.baseuilibrary.view.EyeRelativeLayout;
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -64,6 +68,7 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
     int optionType;
     private LoginPresenter mLoginPresenter;
     CountDownHelper countDownHelper;
+    private LoginConfigBean loginConfig;
 
     @Override
     protected int getContentViewLayout() {
@@ -79,12 +84,18 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
     @Override
     protected void attach() {
         ARouter.getInstance().inject(this);
+        String jsonStr = AppUtils.getAssetJson(this,"login_login_config.json");
+        loginConfig = new Gson().fromJson(jsonStr, LoginConfigBean.class);
         initView();
         mTvTitle.setText(optionType == FORGET_PWD ? "忘记密码" : "注册");
         mTvComfirmLogin.setText(optionType == FORGET_PWD ? "完成" : "注册");
         mEyePwd.setEye(true);
         mEyePwd.setHintText("请输入6位数密码");
         mEyeRepwd.setHintText("请与设置密码保持一致");
+        if(loginConfig.getTemplet() != 2){
+            mEyePwd.setEye(false);
+            mEyeRepwd.setEye(false);
+        }
     }
 
     private void initView() {
@@ -124,6 +135,8 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
         ToastUtils.showToastOk(this,"注册成功");
         new Handler().postDelayed(()->{
             finish();
+            ActivityUtils.finishAllActivities();
+            ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
         },1000);
     }
 
@@ -132,6 +145,8 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
         ToastUtils.showToastOk(this,"修改成功");
         new Handler().postDelayed(()->{
             finish();
+            ActivityUtils.finishAllActivities();
+            ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
         },1000);
     }
 
