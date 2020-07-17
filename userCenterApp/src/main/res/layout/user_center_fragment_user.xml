@@ -64,12 +64,13 @@
 
             <TextView
                 android:id="@+id/tv_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:textSize="@dimen/h3_font_size"
                 android:textColor="@color/ui_txt_normal_color"
                 android:textStyle="bold"
                 android:text="退出登录"
+                android:gravity="center"
                 skin:enable="true"
                 android:layout_centerInParent="true"
                 />

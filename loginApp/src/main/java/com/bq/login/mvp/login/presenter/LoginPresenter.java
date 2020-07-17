@@ -93,6 +93,7 @@ public class LoginPresenter implements BasePresenter {
 
             @Override
             public void onSuccess(Object obj) {
+                mIView.getVerticalCodeView();
             }
         });
     }
@@ -121,14 +122,15 @@ public class LoginPresenter implements BasePresenter {
     }
 
     public void forgetPwd(String phone, String pwd, String checkCode) {
-        mLoginHttpReqeustImp.forgetPwd(phone, pwd, checkCode,new AbstractReqeustCallback<Object>(mIView) {
+        mLoginHttpReqeustImp.forgetPwd(phone, pwd, checkCode,new AbstractReqeustCallback<LoginInfo>(mIView) {
             @Override
             public void onStart() {
                 mIView.showLoading();
             }
 
             @Override
-            public void onSuccess(Object loginInfo) {
+            public void onSuccess(LoginInfo loginInfo) {
+                CommSpUtils.saveLoginInfo(new Gson().toJson(loginInfo));
                 mIView.forgetPwdView();
             }
         });

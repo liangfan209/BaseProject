@@ -5,34 +5,34 @@
       "type": "grid",
       "tabList": [
         {
-          "name": "我的订单",
+          "name": "商品详情",
           "remark": "",
           "icon": "user_center_icon_order_wait_payment",
-          "path": "/order/orderManager",
+          "path": "/order/ProductDetailActivity",
           "params": 0,
           "jumpType": "arouter"
         },
         {
-          "name": "我的合同",
+          "name": "订单列表",
           "remark": "",
           "icon": "user_center_icon_order_wait_sent_out",
-          "path": "/order/orderManager",
+          "path": "/order/OrderListActivity",
           "params": 1,
           "jumpType": "arouter"
         },
         {
-          "name": "我的课本",
+          "name": "订单详情",
           "remark": "",
           "icon": "user_center_icon_order_wait_receive",
-          "path": "/order/orderManager",
+          "path": "/order/OrderDetaiActivity",
           "params": 2,
           "jumpType": "arouter"
         },
         {
-          "name": "考务安排",
+          "name": "提交订单",
           "remark": "",
           "icon": "user_center_icon_order_complet",
-          "path": "/order/orderManager",
+          "path": "/order/OrderCommitActivity",
           "params": 2,
           "jumpType": "arouter"
         }
@@ -46,7 +46,7 @@
         {
           "name": "模拟题库",
           "remark": "",
-          "icon": "user_center_icon_order_wait_payment",
+          "icon": "user_center_icon_order_tiku",
           "path": "/order/orderManager",
           "params": 0,
           "jumpType": "arouter"
@@ -54,7 +54,7 @@
         {
           "name": "我的收藏",
           "remark": "",
-          "icon": "user_center_icon_order_wait_sent_out",
+          "icon": "user_center_icon_order_shouchang",
           "path": "/order/orderManager",
           "params": 1,
           "jumpType": "arouter"
@@ -75,7 +75,7 @@
           "jumpType": "arouter"
         },
         {
-          "name": "钱包",
+          "name": "我的钱包",
           "remark": "",
           "icon": "user_center_icon_usercenter_bank_manager",
           "path": "/wallet/MyWalletActivity",

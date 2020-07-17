@@ -18,6 +18,7 @@ import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.mvp.address.presenter.AddressManagerPresenter;
 import com.bq.user_center.requset.bean.AddressInfo;
+import com.bq.utilslib.AccountValidatorUtil;
 import com.bq.utilslib.EditFormatUtils;
 import com.bq.utilslib.KeyboardUtils;
 import com.fan.baseuilibrary.utils.ToastUtils;
@@ -83,7 +84,7 @@ public class AddressOptionActivity extends BaseAcitivty implements AddressBaseIV
     protected void attach() {
         ARouter.getInstance().inject(this);
         mTvTitle.setText(optionType == ADDRESS_ADD ? "新增地址" : "编辑地址");
-        mBtAddAddress.setText(optionType == ADDRESS_ADD ? "添加新地址" : "保存地址");
+        mBtAddAddress.setText(optionType == ADDRESS_ADD ? "确定" : "保存");
         EditFormatUtils.phoneNumAddSpace(mDetPhone);
         if(optionType == ADDRESS_EDIT){
             updateView();
@@ -140,6 +141,14 @@ public class AddressOptionActivity extends BaseAcitivty implements AddressBaseIV
             }
             if (StringUtils.isEmpty(city)) {
                 ToastUtils.showToast(this, "请填写联系人");
+                return;
+            }
+            if(StringUtils.isEmpty(phone)){
+                ToastUtils.showToast(this, "请填写手机号");
+                return;
+            }
+            if(!AccountValidatorUtil.isMobile(phone)){
+                ToastUtils.showToast(this, "请填写正确的手机号");
                 return;
             }
             AddressInfo info = new AddressInfo(name, gender, phone, city, address, isDefault ? 1 : 0);

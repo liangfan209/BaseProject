@@ -43,11 +43,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="处理中"
-            android:textColor="@color/ui_primary_color"
+            android:textColor="@color/red"
             android:textSize="@dimen/h3_font_size"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="64dp"
-            android:textStyle="bold"
             />
     </RelativeLayout>
 
@@ -146,7 +145,7 @@
                 android:id="@+id/tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="交易处理"
+                android:text="交易处理中"
                 android:layout_toRightOf="@id/iv_type1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="32dp"

@@ -93,7 +93,7 @@ public class AddressManagerActivity extends BaseAcitivty implements MyRefreshLay
                 String phone = info.getPhone();
                 String formatPhone = phone.subSequence(0,3)+"****"+phone.substring(8);
                 helper.setText(R.id.tv_phone, formatPhone);
-                helper.setText(R.id.tv_detail, info.getCity() + " " +info.getAddress());
+                helper.setText(R.id.tv_detail, info.getCity()  +info.getAddress());
                 SkinCompatCheckBox cb = helper.getView(R.id.cb_address);
                 cb.setChecked(info.getIs_default() == 1?true:false);
                 cb.setOnClickListener(v->{

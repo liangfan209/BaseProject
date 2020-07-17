@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/layout_public_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#fff9f9f9">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="报考信息"
+                    android:textColor="@color/ui_txt_normal_color"
+                    android:textSize="@dimen/h2_font_size"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    />
+                <ImageView
+                    android:id="@+id/iv_item"
+                    android:layout_width="115dp"
+                    android:layout_height="65dp"
+                    android:scaleType="fitXY"
+                    android:background="@mipmap/order_icon_item_img"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="45dp"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/llt_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="141dp">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="45dp"
+                        android:layout_marginRight="15dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="国开专升本"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h3_font_size" />
+
+                    <TextView
+                        android:id="@+id/tv_remark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="视屏精讲班"
+                        android:textColor="#ff999999"
+                        android:textSize="12sp"
+                        android:layout_marginTop="7dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="5dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="国开"
+                            android:textColor="#FF43C590"
+                            android:background="@drawable/shap_green_radius_2"
+                            android:padding="2dp"
+                            android:textSize="10sp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="专升本"
+                            android:textColor="#FFFF9500"
+                            android:background="@drawable/shap_yellow_radius_2"
+                            android:padding="2dp"
+                            android:layout_marginLeft="7dp"
+                            android:textSize="10sp"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_after_sale"
+                    android:layout_width="75dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/ui_shap_verification_code_unselect"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/llt_type"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:text="申请售后"
+                    android:gravity="center"
+                    android:textColor="@color/ui_txt_normal_color"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/h5_font_size"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_after_sale"
+                    android:layout_marginTop="10dp"
+                    >
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_marginLeft="15dp"
+                        android:background="@color/ui_recycleview_item_line_color"
+                        />
+                    <TextView
+                        android:id="@+id/tv_total_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="总价： ¥199.88"
+                        android:layout_marginRight="15dp"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/h5_font_size"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_total_acount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="数量：x1"
+                        android:layout_marginRight="15dp"
+                        android:layout_toLeftOf="@id/tv_total_price"
+                        android:textColor="@color/ui_txt_hint_color"
+                        android:textSize="@dimen/h5_font_size"
+                        android:layout_marginLeft="15dp"
+                        />
+                </RelativeLayout>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingBottom="15dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="服务项"
+                    android:textColor="@color/ui_txt_normal_color"
+                    android:textSize="@dimen/h2_font_size"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="8dp"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="跟踪督学"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h3_font_size"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="入学至取证全程督学、管理、跟进、提醒 提醒"
+                        android:textColor="@color/ui_txt_hint_color"
+                        android:textSize="@dimen/h4_font_size"
+                        android:layout_marginLeft="80dp"
+                        />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="报名注册"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h3_font_size"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="代理报名、报考、学籍注册等"
+                        android:textColor="@color/ui_txt_hint_color"
+                        android:textSize="@dimen/h4_font_size"
+                        android:layout_marginLeft="80dp"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="书本资料"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h3_font_size"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="报考专业相关书籍"
+                        android:textColor="@color/ui_txt_hint_color"
+                        android:textSize="@dimen/h4_font_size"
+                        android:layout_marginLeft="80dp"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="专业网课"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h3_font_size"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="课程网络学习"
+                        android:textColor="@color/ui_txt_hint_color"
+                        android:textSize="@dimen/h4_font_size"
+                        android:layout_marginLeft="80dp"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="订单信息"
+                    android:textColor="@color/ui_txt_normal_color"
+                    android:textSize="@dimen/h2_font_size"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="8dp"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="订单编号"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h3_font_size"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="32423423545464646"
+                        android:textColor="@color/ui_txt_hint_color"
+                        android:textSize="@dimen/h4_font_size"
+                        android:layout_marginLeft="80dp"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="下单时间"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h3_font_size"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2020-06-18 10:37"
+                        android:textColor="@color/ui_txt_hint_color"
+                        android:textSize="@dimen/h4_font_size"
+                        android:layout_marginLeft="80dp"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="付款方式"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h3_font_size"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="支付宝"
+                        android:textColor="@color/ui_txt_hint_color"
+                        android:textSize="@dimen/h4_font_size"
+                        android:layout_marginLeft="80dp"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="付款单号"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h3_font_size"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="21423543645756"
+                        android:textColor="@color/ui_txt_hint_color"
+                        android:textSize="@dimen/h4_font_size"
+                        android:layout_marginLeft="80dp"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="付款时间"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h3_font_size"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2020-06-18 10:37"
+                        android:textColor="@color/ui_txt_hint_color"
+                        android:textSize="@dimen/h4_font_size"
+                        android:layout_marginLeft="80dp"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="客服"
+            android:textColor="@color/ui_txt_hint_color"
+            android:textSize="@dimen/h5_font_size"
+            android:layout_marginLeft="25dp"
+            android:drawableTop="@mipmap/order_icon_service"
+            android:layout_marginTop="11dp"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_buy"
+            android:layout_width="110dp"
+            android:layout_height="28dp"
+            android:text="立即支付"
+            android:textSize="@dimen/h5_font_size"
+            android:gravity="center"
+            android:textColor="@color/ui_primary_color"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:drawablePadding="4dp"
+            android:background="@drawable/ui_shap_verification_code_select"
+            />
+    </RelativeLayout>
+</RelativeLayout>

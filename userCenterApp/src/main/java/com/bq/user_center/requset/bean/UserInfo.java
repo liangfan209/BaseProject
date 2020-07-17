@@ -128,6 +128,9 @@ public class UserInfo implements Serializable{
         }
 
         public String getEducation() {
+            if("other".equals(education)){
+                return "未知";
+            }
             return education;
         }
 

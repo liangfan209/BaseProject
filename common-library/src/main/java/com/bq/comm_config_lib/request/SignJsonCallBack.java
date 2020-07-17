@@ -1,5 +1,9 @@
 package com.bq.comm_config_lib.request;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.ActivityUtils;
+import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.netlibrary.http.BaseResponse;
 import com.bq.netlibrary.http.JsonCallback;
 import com.lzy.okgo.model.Response;
@@ -49,6 +53,11 @@ public class SignJsonCallBack<T> extends JsonCallback<T> {
                 if (mRequestCallBack != null)
                     mRequestCallBack.onSuccess(((BaseResponse) body).result);
             } else {
+                if(30008 ==((BaseResponse) body).code){
+                    ActivityUtils.finishAllActivities();
+                    CommSpUtils.saveLoginInfo("");
+                    ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
+                }
                 if (mRequestCallBack != null)
                     mRequestCallBack.onError(((BaseResponse) body).msg);
             }

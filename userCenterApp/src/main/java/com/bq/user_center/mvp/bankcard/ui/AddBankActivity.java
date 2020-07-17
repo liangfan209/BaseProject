@@ -1,5 +1,7 @@
 package com.bq.user_center.mvp.bankcard.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.baidu.ocr.ui.RecognizeService;
+import com.baidu.ocr.ui.camera.CameraActivity;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
@@ -23,6 +27,9 @@ import com.fan.baseuilibrary.utils.CountDownHelper;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
 
+import java.io.File;
+
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.OnClick;
 import skin.support.widget.SkinCompatCheckBox;
@@ -60,7 +67,10 @@ public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
     SkinCompatCheckBox mRbProtocol;
     @BindView(R2.id.tv_comfirm_form)
     TextView mTvComfirmForm;
-
+    @BindView(R2.id.iv_scan)
+    ImageView mIvScan;
+    @BindView(R2.id.iv_scan1)
+    ImageView mIvScan1;
     CountDownHelper countDownHelper;//计时器
 
     @Override
@@ -123,7 +133,7 @@ public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
         mBankCardPersenter.unRegister();
     }
 
-    @OnClick({R2.id.tv_get_verification_code, R2.id.tv_comfirm_form})
+    @OnClick({R2.id.tv_get_verification_code, R2.id.tv_comfirm_form,R2.id.iv_scan,R2.id.iv_scan1})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.tv_get_verification_code){
             countDownHelper = new CountDownHelper(mTvGetVerificationCode, "获取验证码", "重新获取", 60, 1,2);
@@ -156,6 +166,33 @@ public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
                 return;
             }
             mBankCardPersenter.addBankCard(new BankCardInfo(name,cardNum,phoneNum,idNum,code));
+        } else if (view.getId() == R.id.iv_scan || view.getId() == R.id.iv_scan1) {
+            File file = new File(this.getFilesDir(), "bankcard.jpg");
+            Intent intent = new Intent(this, CameraActivity.class);
+            intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+                    file.getAbsolutePath());
+            intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
+                    CameraActivity.CONTENT_TYPE_BANK_CARD);
+            startActivityForResult(intent, 111);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 111 &&  resultCode == Activity.RESULT_OK){
+            File file = new File(this.getFilesDir(), "bankcard.jpg");
+            RecognizeService.recBankCard(this, file.getAbsolutePath(),
+                    new RecognizeService.ServiceListener() {
+                        @Override
+                        public void onResult(String result) {
+                            if(result.contains("erro")){
+                                return;
+                            }
+                            mEtBank.setText(result);
+                            mEtBank.setSelection(result.length());
+                        }
+                    });
         }
     }
 

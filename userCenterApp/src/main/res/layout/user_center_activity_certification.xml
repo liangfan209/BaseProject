@@ -66,11 +66,20 @@
                     />
                 <com.fan.baseuilibrary.view.DeletableEditText
                     android:id="@+id/det_id"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     style="@style/ui_edit_txt_style"
                     android:hint="请输入完整的身份证号"
+                    android:maxLength="21"
                     android:textSize="@dimen/h4_font_size"
+                    android:minWidth="230dp"
+                    />
+                <ImageView
+                    android:id="@+id/iv_scan"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@mipmap/saoyisao"
+                    android:layout_gravity="center_vertical"
                     />
             </LinearLayout>
 

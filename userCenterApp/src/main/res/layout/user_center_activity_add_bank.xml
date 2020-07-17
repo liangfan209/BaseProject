@@ -28,6 +28,15 @@
             style="@style/ui_edit_txt_style"
             android:layout_marginRight="21dp"/>
 
+        <ImageView
+            android:id="@+id/iv_scan"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@mipmap/saoyisao"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            />
     </RelativeLayout>
     <ImageView
         android:layout_width="match_parent"
@@ -81,6 +90,16 @@
             style="@style/ui_edit_txt_style"
             android:textSize="@dimen/h4_font_size"
             android:layout_marginRight="21dp"/>
+
+        <ImageView
+            android:id="@+id/iv_scan1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@mipmap/saoyisao"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            />
 
     </RelativeLayout>
     <ImageView

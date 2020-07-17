@@ -9,9 +9,12 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.bigkoo.pickerview.view.TimePickerView;
 import com.blankj.utilcode.util.KeyboardUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.BaseApplication;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
@@ -22,12 +25,14 @@ import com.bq.user_center.R2;
 import com.bq.user_center.api.bean.UserInfoConfigBean;
 import com.bq.user_center.mvp.user.presenter.UserPresenter;
 import com.bq.user_center.requset.bean.UserInfo;
+import com.bq.utilslib.AccountValidatorUtil;
 import com.bq.utilslib.AppUtils;
 import com.bq.utilslib.rsa.RSA;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.CircleImageView;
 import com.fan.baseuilibrary.view.DeletableEditText;
 import com.fan.baseuilibrary.view.PictureViewUtils;
@@ -40,7 +45,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -161,10 +168,15 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
                 UserInfoConfigBean.ModuleListBean module = (UserInfoConfigBean.ModuleListBean) adapter.getData().get(position);
                 String type = module.getType();
                 if ("gender".equals(type)) {
-                    chooseSex();
+                    chooseSex(module);
                     return;
                 }else if("education".equals(type)){
-                    chooseEducation();
+                    chooseEducation(module);
+                    return;
+                }else if("birthday".equals(type)){
+                    chooseBirthday(module);
+                    return;
+                }else if("phone".equals(type)){
                     return;
                 }
                 changeValueDialog(module);
@@ -180,10 +192,20 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
         View view = LinearLayout.inflate(this, R.layout.user_center_input_view, null);
         final DeletableEditText etValue = view.findViewById(R.id.et_value);
         etValue.setHint("请输入" + module.getName());
+        if(!StringUtils.isEmpty(module.getValue())){
+            etValue.setText(module.getValue());
+        }
         new CustomDialog().showCustonViewDialog(this, view, "修改" + module.getName(), new CustomDialog.ClickCallBack() {
             @Override
             public void ok() {
                 String text = etValue.getText().toString();
+                String type = module.getType();
+                if("email".equals(type)){
+                    if(!AccountValidatorUtil.isEmail(text)){
+                        ToastUtils.showToast(UserinfoActivity.this,"邮箱输入不正确！");
+                        return;
+                    }
+                }
                 mUserPresenter.updateUserInfo(module.getType(),text);
             }
 
@@ -194,7 +216,7 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
     }
 
 
-    void chooseSex() {
+    void chooseSex(UserInfoConfigBean.ModuleListBean module) {
         KeyboardUtils.hideSoftInput(this);
         List<String> dataList = new ArrayList<>();
         dataList.add("男");
@@ -207,15 +229,25 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
             }
         }).setSubmitColor(SkinCompatResources.getColor(this,R.color.ui_primary_color))
                 .setCancelColor(SkinCompatResources.getColor(this,R.color.ui_primary_color)).build();
+        String sexStr = module.getValue();
+        if("女".equals(sexStr)){
+            pvOptions.setSelectOptions(1);
+        }else{
+            pvOptions.setSelectOptions(0);
+        }
+
         pvOptions.setPicker(dataList);
+
+
         pvOptions.show();
     }
 
-    void chooseEducation(){
+    void chooseEducation(UserInfoConfigBean.ModuleListBean module){
         KeyboardUtils.hideSoftInput(this);
         List<String> dataList = new ArrayList<>();
         dataList.add("研究生");
         dataList.add("本科");
+        dataList.add("专科");
         dataList.add("高中");
         OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
@@ -226,30 +258,49 @@ public class UserinfoActivity extends BaseAcitivty implements UserBaseIView{
         }).setSubmitColor(SkinCompatResources.getColor(this,R.color.ui_primary_color))
                 .setCancelColor(SkinCompatResources.getColor(this,R.color.ui_primary_color)).build();
         pvOptions.setPicker(dataList);
+        int index = 0;
+        for (int i = 0; i <dataList.size() ; i++) {
+            if(module.getValue().equals(dataList.get(i))){
+                index = i;
+                break;
+            }
+        }
+        pvOptions.setSelectOptions(index);
         pvOptions.show();
+
     }
 
     //选择出生日期
-    void chooseBirthday(){
-//        OptionsPickerBuilder pvTime = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
-//            @Override
-//            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-//
-//            }
-//        })
-//                .setCancelText("Cancel")//取消按钮文字
-//                .setSubmitText("Sure")//确认按钮文字
-//                .setTitleText("Title")//标题文字
-//                .setOutSideCancelable(false)//点击屏幕，点在控件外部范围时，是否取消显示
-//                .setTitleColor(Color.BLACK)//标题文字颜色
-//                .setSubmitColor(Color.BLUE)//确定按钮文字颜色
-//                .setCancelColor(Color.BLUE)//取消按钮文字颜色
-//                .setTitleBgColor(0xFF666666)//标题背景颜色 Night mode
-//                .setBgColor(0xFF333333)//滚轮背景颜色 Night mode
-//                .setRange(calendar.get(Calendar.YEAR) - 20, calendar.get(Calendar.YEAR) + 20)//默认是1900-2100年
-//                .setDate(new Date())// 默认是系统时间*/
-//                .setLabel("年","月","日")
-//                .build();
+    void chooseBirthday(UserInfoConfigBean.ModuleListBean module){
+        Calendar selectedDate = Calendar.getInstance();//系统当前时间
+        selectedDate.set(1990, 1, 1);
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(1970, 1, 1);
+        Calendar endDate = Calendar.getInstance();
+        //endDate.set(2069, 2, 28);
+        TimePickerView pvTime = new TimePickerBuilder(this, (date, v) -> {//选中事件回调
+            String s =new SimpleDateFormat("yyyy-MM-dd").format(date);
+            mUserPresenter.updateUserInfo("birthday",s);
+        }).setDate(selectedDate)
+                .setRangDate(startDate, endDate)
+                .setContentTextSize(18)
+                .setType(new boolean[]{true, true, true, false, false, false})
+                .setLabel("年", "月", "日", null, null, null)
+                .setTextXOffset(0, 0, 0, 40, 0, -40)
+                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+                .setSubmitColor(SkinCompatResources.getColor(this,R.color.ui_primary_color))
+                .setCancelColor(SkinCompatResources.getColor(this,R.color.ui_primary_color))
+                .build();
+
+        String valueStr = module.getValue();
+        if(!StringUtils.isEmpty(valueStr) && valueStr.contains("-")){
+            String[] split = valueStr.split("-");
+            Calendar instance = Calendar.getInstance();
+            instance.set(Integer.valueOf(split[0]),Integer.valueOf(split[1])-1,Integer.valueOf(split[2]));
+            pvTime.setDate(instance);
+        }
+//        pvTime.setDate();
+        pvTime.show();
     }
 
 

@@ -35,7 +35,7 @@ import butterknife.OnClick;
  * 版权：
  */
 @Route(path = AppArouter.LOGIN_MODIFY_ACTIVITY)
-public class ModifyPwdActivity extends BaseAcitivty implements LoginBaseIView{
+public class ModifyPwdActivity extends BaseAcitivty implements LoginBaseIView {
     @BindView(R2.id.iv_title_left)
     ImageView mIvTitleLeft;
     @BindView(R2.id.tv_title)
@@ -52,7 +52,7 @@ public class ModifyPwdActivity extends BaseAcitivty implements LoginBaseIView{
     @BindView(R2.id.eye_re_pwd)
     EyeRelativeLayout mEyeRePwd;
 
-//    @BindView(R2.id.et_old_pwd)
+    //    @BindView(R2.id.et_old_pwd)
 //    DeletableEditText mEtOldPwd;
 //    @BindView(R2.id.et_pwd)
 //    DeletableEditText mEtPwd;
@@ -71,65 +71,64 @@ public class ModifyPwdActivity extends BaseAcitivty implements LoginBaseIView{
 
     @Override
     protected BasePresenter createPersenter() {
-        mLoginPresenter = new LoginPresenter(this,false);
+        mLoginPresenter = new LoginPresenter(this, false);
         return mLoginPresenter;
     }
 
     @Override
     protected void attach() {
-        String jsonStr = AppUtils.getAssetJson(this,"login_login_config.json");
+        String jsonStr = AppUtils.getAssetJson(this, "login_login_config.json");
         loginConfig = new Gson().fromJson(jsonStr, LoginConfigBean.class);
         mTvTitle.setText("修改密码");
         mEyeOldPwd.setHintText("请输入原密码");
         mEyePwd.setHintText("请设置新密码");
         mEyeRePwd.setHintText("请确认新密码");
+        mEyeOldPwd.setEye(false);
+        mEyePwd.setEye(false);
+        mEyeRePwd.setEye(false);
     }
 
 
     @Override
     public void modifyPwdView() {
-        ToastUtils.showToastOk(this,"修改成功");
-        new Handler().postDelayed(()->{
+        ToastUtils.showToastOk(this, "修改成功");
+        new Handler().postDelayed(() -> {
             finish();
             CommSpUtils.saveLoginInfo("");
             ActivityUtils.finishAllActivities();
             ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
 
-        },1000);
+        }, 1000);
     }
 
     @OnClick({R2.id.iv_title_left, R2.id.tv_modify})
     public void onViewClicked(View view) {
-        if(view.getId() == R.id.tv_modify){
+        if (view.getId() == R.id.tv_modify) {
 //            String oldPwd = mEtOldPwd.getText().toString();
 //            String newPwd = mEtPwd.getText().toString();
 //            String rePwd = mEtRePwd.getText().toString();
             String oldPwd = mEyeOldPwd.getText();
             String newPwd = mEyePwd.getText().toString();
             String rePwd = mEyeRePwd.getText().toString();
-            if(loginConfig.getTemplet() != 2){
-                mEyeOldPwd.setEye(false);
-                mEyePwd.setEye(false);
-                mEyeRePwd.setEye(false);
-            }
 
-            if(StringUtils.isEmpty(oldPwd)){
-                ToastUtils.showToast(this,"请输入原密码");
+
+            if (StringUtils.isEmpty(oldPwd)) {
+                ToastUtils.showToast(this, "请输入原密码");
                 return;
             }
-            if(StringUtils.isEmpty(newPwd)){
-                ToastUtils.showToast(this,"请输入新密码");
+            if (StringUtils.isEmpty(newPwd)) {
+                ToastUtils.showToast(this, "请输入新密码");
                 return;
             }
-            if(StringUtils.isEmpty(rePwd)){
-                ToastUtils.showToast(this,"请确认新密码");
+            if (StringUtils.isEmpty(rePwd)) {
+                ToastUtils.showToast(this, "请确认新密码");
                 return;
             }
-            if(!newPwd.equals(rePwd)){
-                ToastUtils.showToast(this,"确认密码不一致");
+            if (!newPwd.equals(rePwd)) {
+                ToastUtils.showToast(this, "确认密码不一致");
                 return;
             }
-            mLoginPresenter.modifypwd(Md5Utils.md5(oldPwd),Md5Utils.md5(newPwd));
+            mLoginPresenter.modifypwd(Md5Utils.md5(oldPwd), Md5Utils.md5(newPwd));
         }
     }
 }

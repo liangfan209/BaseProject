@@ -61,8 +61,8 @@
 
         <skin.support.widget.SkinCompatCheckBox
             android:id="@+id/cb_eye"
-            android:layout_width="20dp"
-            android:layout_height="10dp"
+            android:layout_width="18dp"
+            android:layout_height="11dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="25dp"
             android:layout_centerVertical="true"

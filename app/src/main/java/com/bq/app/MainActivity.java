@@ -35,7 +35,7 @@ public class MainActivity extends BaseAcitivty {
     Bundle mBundle;
 
 
-    private String[] tabs = new String[]{"tab1", "tab2", "个人中心"};
+    private String[] tabs = new String[]{"学习", "发现", "我的"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
     private int[] mIconUnselectIds = {

@@ -45,6 +45,7 @@ dependencies {
         implementation project(":loginApp")
         implementation project(":userCenterApp")
         implementation project(":walletApp")
+        implementation project(":orderApp")
     }
     annotationProcessor rootProject.ext.dependencies["butterknife.compiler"]
     annotationProcessor rootProject.ext.dependencies["arouter.compiler"]

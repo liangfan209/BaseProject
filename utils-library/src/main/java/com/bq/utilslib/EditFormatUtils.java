@@ -1,7 +1,6 @@
 package com.bq.utilslib;
 
 import android.text.Editable;
-import android.text.InputType;
 import android.text.Selection;
 import android.text.TextWatcher;
 import android.widget.EditText;
@@ -245,11 +244,11 @@ public class EditFormatUtils {
                     Editable etable = mEditText.getText();
                     Selection.setSelection(etable, 1);
                 }
-                if (mEditText.length() == 20) {
-                    mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
-                } else {
-                    mEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-                }
+//                if (mEditText.length() == 20) {
+//                    mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+//                } else {
+//                    mEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+//                }
                 if (isChanged) {
                     location = mEditText.getSelectionEnd();
                     int index = 0;

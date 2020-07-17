@@ -72,9 +72,9 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
         map.put("phone", phone);
         map.put("password", password);
         map.put("code", code);
-        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<Object>>(callBack){
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<LoginInfo>>(callBack){
             @Override
-            public void onSuccess(Response<BaseResponse<Object>> response) {
+            public void onSuccess(Response<BaseResponse<LoginInfo>> response) {
                 super.onSuccess(response);
             }
         });

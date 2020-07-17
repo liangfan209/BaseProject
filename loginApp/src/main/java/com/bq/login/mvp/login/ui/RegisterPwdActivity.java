@@ -46,7 +46,7 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
     EditText mEtVerticalCode;
     @BindView(R2.id.tv_get_verification_code)
     TextView mTvGetVerticalCode;
-//    @BindView(R2.id.et_new_pwd)
+    //    @BindView(R2.id.et_new_pwd)
 //    DeletableEditText mEtNewPwd;
 //    @BindView(R2.id.et_repwd)
 //    DeletableEditText mEtRepwd;
@@ -84,7 +84,7 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
     @Override
     protected void attach() {
         ARouter.getInstance().inject(this);
-        String jsonStr = AppUtils.getAssetJson(this,"login_login_config.json");
+        String jsonStr = AppUtils.getAssetJson(this, "login_login_config.json");
         loginConfig = new Gson().fromJson(jsonStr, LoginConfigBean.class);
         initView();
         mTvTitle.setText(optionType == FORGET_PWD ? "忘记密码" : "注册");
@@ -92,10 +92,8 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
         mEyePwd.setEye(true);
         mEyePwd.setHintText("请输入6位数密码");
         mEyeRepwd.setHintText("请与设置密码保持一致");
-        if(loginConfig.getTemplet() != 2){
-            mEyePwd.setEye(false);
-            mEyeRepwd.setEye(false);
-        }
+        mEyePwd.setEye(false);
+        mEyeRepwd.setEye(false);
     }
 
     private void initView() {
@@ -120,7 +118,7 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
 
     @Override
     public void getVerticalCodeView() {
-        ToastUtils.showToast(this, "验证码获取成功");
+        ToastUtils.showToastOk(this, "验证码获取成功");
     }
 
 
@@ -132,22 +130,22 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
 
     @Override
     public void registerView() {
-        ToastUtils.showToastOk(this,"注册成功");
-        new Handler().postDelayed(()->{
+        ToastUtils.showToastOk(this, "注册成功");
+        new Handler().postDelayed(() -> {
             finish();
             ActivityUtils.finishAllActivities();
             ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
-        },1000);
+        }, 1000);
     }
 
     @Override
     public void forgetPwdView() {
-        ToastUtils.showToastOk(this,"修改成功");
-        new Handler().postDelayed(()->{
+        ToastUtils.showToastOk(this, "修改成功");
+        new Handler().postDelayed(() -> {
             finish();
             ActivityUtils.finishAllActivities();
             ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
-        },1000);
+        }, 1000);
     }
 
 
@@ -161,13 +159,13 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
         String rePwd = mEyeRepwd.getText();
         String code = mEtVerticalCode.getText().toString().trim();
         String phoneNumber = mEtPhone.getText().toString().replaceAll(" ", "").trim();
-        if(!mLoginPresenter.checkRegisterFrom(phoneNumber,newPwd,rePwd,code)){
+        if (!mLoginPresenter.checkRegisterFrom(phoneNumber, newPwd, rePwd, code)) {
             return;
         }
         newPwd = Md5Utils.md5(newPwd);
-        if(optionType == REGISTER){
+        if (optionType == REGISTER) {
             mLoginPresenter.register(phoneNumber, newPwd, code);
-        }else if(optionType == FORGET_PWD){
+        } else if (optionType == FORGET_PWD) {
             mLoginPresenter.forgetPwd(phoneNumber, newPwd, code);
         }
     }
@@ -181,7 +179,7 @@ public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView 
 //            }
 
             mLoginPresenter.getVertificatCode(phoneNumber);
-            countDownHelper = new CountDownHelper(mTvGetVerticalCode, "获取验证码", "重新获取", 60, 1,2);
+            countDownHelper = new CountDownHelper(mTvGetVerticalCode, "获取验证码", "重新获取", 60, 1, 2);
             countDownHelper.start();
         } else if (view.getId() == R.id.tv_comfirm_form) {
             //忘记密码

@@ -24,6 +24,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.CircleImageView;
 import com.fan.baseuilibrary.view.SimpleDividerItemDecoration;
+import com.fan.baseuilibrary.view.dialog.CustomDialog;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
@@ -150,13 +151,22 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         if(view.getId() == R.id.rlt_head){
             ARouter.getInstance().build(AppArouter. USER_CENTER_USER_INFO_ACTIVITY).navigation();
         }else if(view.getId() == R.id.tv_logout){
-            mUserPersenter.logout();
+            new CustomDialog().showDialogDialog(this.getContext(), "退出登录", "确定退出登录吗？", new CustomDialog.ClickCallBack() {
+                @Override
+                public void ok() {
+                    mUserPersenter.logout();
+                }
+
+                @Override
+                public void cacel() {
+                }
+            });
         }
     }
 
     @Override
     public void logout() {
-        ToastUtils.showToast(this.getActivity(), "退出成功");
+        ToastUtils.showToastOk(this.getActivity(), "退出成功");
         new Handler().postDelayed(() -> {
             getActivity().finish();
             ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();

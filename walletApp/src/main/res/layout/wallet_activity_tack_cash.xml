@@ -68,18 +68,10 @@
                     android:textCursorDrawable="@drawable/ui_edit_cursor"
                     android:inputType="number"
                     />
+
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_erro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="转出金额超限"
-                android:textColor="#fff82d22"
-                android:textSize="@dimen/h5_font_size"
-                android:visibility="gone"
-                android:layout_marginLeft="23dp"
-                />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -89,18 +81,38 @@
                 android:layout_marginTop="10dp"
                 />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tv_hint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="当前账户资产19029.30元"
-                android:textColor="@color/ui_txt_hint_color"
-                android:textSize="@dimen/h5_font_size"
-                android:layout_marginLeft="26dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                />
+                <TextView
+                    android:id="@+id/tv_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="当前账户资产19029.30元"
+                    android:textColor="@color/ui_txt_hint_color"
+                    android:textSize="@dimen/h5_font_size"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_erro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="转出金额超限"
+                    android:textColor="#fff82d22"
+                    android:textSize="@dimen/h5_font_size"
+                    android:visibility="gone"
+                    android:layout_marginLeft="23dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    />
+            </RelativeLayout>
+
+
         </LinearLayout>
 
 
@@ -175,13 +187,14 @@
                     android:textColor="#ff232323"
                     android:textSize="12sp"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:layout_marginTop="15dp"
                     />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="18dp"
-                    android:text="请先添加银行卡"
+                    android:layout_height="match_parent"
+                    android:text="暂未绑定银行卡"
                     android:textColor="#ff999999"
                     android:textSize="12sp"
                     android:gravity="center"
@@ -259,7 +272,7 @@
             android:id="@+id/tv_confirm"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:text="确认提现"
+            android:text="提现"
             android:layout_marginLeft="21dp"
             android:layout_marginRight="21dp"
             android:layout_marginTop="29dp"

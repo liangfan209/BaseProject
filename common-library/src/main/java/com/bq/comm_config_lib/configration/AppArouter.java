@@ -49,6 +49,14 @@ public class AppArouter {
     public static final String WALLET_TRANSACTION_DETAIL_ACTIVITY = WALLET+"/TransactionDetailActivity";
     public static final String WALLET_TACK_CASH_ACTIVITY = WALLET+"/TackCashActivity";
 
+
+    //我的订单
+    public static final String ORDER= "/order";
+    public static final String ORDER_PRODUCT_DETAIL_ACTIVITY = ORDER+"/ProductDetailActivity";
+    public static final String ORDER_LIST_ACTIVITY = ORDER+"/OrderListActivity";
+    public static final String ORDER_ORDER_DETAIL_ACTIVITY = ORDER+"/OrderDetaiActivity";
+    public static final String ORDER_ORDER_COMMIT_ACTIVITY = ORDER+"/OrderCommitActivity";
+
     //h5页面
     public static final String H5_ACTIVITY = "/h5/H5Activity";
 
