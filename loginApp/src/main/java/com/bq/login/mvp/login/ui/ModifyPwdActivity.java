@@ -12,7 +12,7 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
-import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.login.R;
 import com.bq.login.R2;
@@ -35,7 +35,7 @@ import butterknife.OnClick;
  * 版权：
  */
 @Route(path = AppArouter.LOGIN_MODIFY_ACTIVITY)
-public class ModifyPwdActivity extends BaseAcitivty implements LoginBaseIView {
+public class ModifyPwdActivity extends BaseActivity implements LoginBaseIView {
     @BindView(R2.id.iv_title_left)
     ImageView mIvTitleLeft;
     @BindView(R2.id.tv_title)

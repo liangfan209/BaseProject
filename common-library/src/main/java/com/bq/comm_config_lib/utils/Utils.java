@@ -9,6 +9,7 @@ import com.bq.comm_config_lib.R;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
+
 /**
  * 文件名：
  * 描述：
@@ -53,7 +54,6 @@ public class Utils {
         return String.format("%.2f", value);
     }
 
-
     /**
      *  拆分时间
      * @param time 2020-07-06 12:46:36
@@ -69,4 +69,7 @@ public class Utils {
         Integer integer = Integer.valueOf(splitStr);
         return integer;
     }
+
+
+
 }

@@ -28,17 +28,10 @@
     },
 
     {
-      "name": "学历",
-      "value": "",
-      "type": "education",
-      "hasInterval": true
-    },
-
-    {
       "name": "邮箱",
       "value": "",
       "type": "email",
-      "hasInterval": false
+      "hasInterval": true
     },
     {
       "name": "微信",

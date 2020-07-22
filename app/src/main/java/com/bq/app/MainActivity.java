@@ -7,12 +7,12 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
-import com.bq.base.R;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
-import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.user_center.mvp.user.ui.UserFragment;
+import com.bquan.app.R;
 import com.fan.baseuilibrary.view.flycotablayout.TabEntity;
 import com.fan.baseuilibrary.view.flycotablayout.widget.SkinCommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -27,7 +27,7 @@ import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 
 @Route(path = AppArouter.MAIN_ACTIVITY)
-public class MainActivity extends BaseAcitivty {
+public class MainActivity extends BaseActivity {
     @BindView(R.id.tablayout)
     SkinCommonTabLayout mTablayout;
 
@@ -47,6 +47,7 @@ public class MainActivity extends BaseAcitivty {
     private ArrayList<Fragment> mFragments = new ArrayList<>();
 
     private Fragment mUserFragment,skinFragment;
+    private int currentIndex = 0;
 
     @Override
     protected int getContentViewLayout() {
@@ -71,6 +72,22 @@ public class MainActivity extends BaseAcitivty {
         mTablayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
+                if(position == 2){
+                    //判断下token
+                    String token = CommSpUtils.getToken();
+                    if(StringUtils.isEmpty(token)){
+                        //跳转到登录界面
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("index",position);
+                        ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY)
+                                .withString("mPath",AppArouter.MAIN_ACTIVITY)
+                                .withBundle("mBundle",bundle).navigation();
+                        mTablayout.setCurrentTab(currentIndex);
+                        return;
+                    }
+                }else{
+                    currentIndex = position;
+                }
                 selectFragment(position);
             }
             @Override
@@ -104,17 +121,7 @@ public class MainActivity extends BaseAcitivty {
                 }
                 break;
             case 2:
-                //判断下token
-                String token = CommSpUtils.getToken();
-                if(StringUtils.isEmpty(token)){
-                    //跳转到登录界面
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("index",index);
-                    ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY)
-                            .withString("mPath",AppArouter.MAIN_ACTIVITY)
-                            .withBundle("mBundle",bundle).navigation();
-                    return;
-                }
+
 
                 if (mUserFragment == null) {
                     mUserFragment = (Fragment) ARouter.getInstance().build(AppArouter.USER_CENTER_USER_FRAGMENT).navigation();

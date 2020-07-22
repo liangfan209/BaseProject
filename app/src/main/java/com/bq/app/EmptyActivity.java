@@ -2,10 +2,10 @@ package com.bq.app;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.FileIOUtils;
-import com.bq.base.R;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
-import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
+import com.bquan.app.R;
 
 import java.io.File;
 
@@ -16,7 +16,7 @@ import java.io.File;
  * 时间：2020/6/11
  * 版权：
  */
-public class EmptyActivity extends BaseAcitivty {
+public class EmptyActivity extends BaseActivity {
     @Override
     protected int getContentViewLayout() {
         return R.layout.activity_empty;

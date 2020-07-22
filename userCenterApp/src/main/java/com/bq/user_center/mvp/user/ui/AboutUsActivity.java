@@ -9,7 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
-import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.api.bean.UserInfoConfigBean;
@@ -37,7 +37,7 @@ import butterknife.OnClick;
  * 版权：
  */
 @Route(path = AppArouter.USER_CENTER_ABOUT_US_ACTIVITY)
-public class AboutUsActivity extends BaseAcitivty {
+public class AboutUsActivity extends BaseActivity {
     @BindView(R2.id.iv_title_left)
     ImageView mIvTitleLeft;
     @BindView(R2.id.tv_title)

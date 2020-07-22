@@ -8,7 +8,10 @@ import com.bq.netlibrary.http.BaseResponse;
 import com.bq.user_center.requset.bean.AddressInfoBean;
 import com.bq.user_center.requset.bean.AddressListBean;
 import com.bq.user_center.requset.bean.BankListBean;
+import com.bq.user_center.requset.bean.CertificationBean;
+import com.bq.user_center.requset.bean.CertificationInfo;
 import com.bq.user_center.requset.bean.UserInfo;
+import com.google.gson.Gson;
 import com.lzy.okgo.model.Response;
 
 import java.util.HashMap;
@@ -105,6 +108,42 @@ public class UserCenterHttpReqeustImp implements UserCenterHttpReqestInter {
         });
     }
 
+    /*
+     *上传实名认证
+     */
+    @Override
+    public void certification(String name, String id, String idFront, String idBack, String idHand,
+                              RequestCallBackInter callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiUserCenter.API_AUTHENTICATGION);
+        map.put("auth", CommSpUtils.getToken());
+        String info = new Gson().toJson(new CertificationInfo(name,id,idFront,idBack,idHand));
+        map.put("certification_info", info);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<String>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+
+    /**
+     * 获取实名认证信息
+     * @param callBack
+     */
+    @Override
+    public void getCertification(RequestCallBackInter callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiUserCenter.API_AUTHENTICATGION_GET);
+        map.put("auth", CommSpUtils.getToken());
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<CertificationBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<CertificationBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
 
 
     /**
@@ -127,12 +166,12 @@ public class UserCenterHttpReqeustImp implements UserCenterHttpReqestInter {
     /**
      * 添加地址
      * @param addressInfo
-     * @param callBack
      */
     @Override
-    public void addAddress(String addressInfo, RequestCallBackInter callBack) {
+    public void addAddress(String addressInfo,int isDefault, RequestCallBackInter callBack) {
         Map<String,String> map = new HashMap<>();
         map.put("address_info", addressInfo);
+        map.put("is_default", isDefault+"");
         map.put("api", ApiUserCenter.API_ADDRESS_ADD);
         map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack){
@@ -168,10 +207,11 @@ public class UserCenterHttpReqeustImp implements UserCenterHttpReqestInter {
      * @param callBack
      */
     @Override
-    public void updateAddress(String id,String addressInfo, RequestCallBackInter callBack) {
+    public void updateAddress(String id,String addressInfo,int isDefault, RequestCallBackInter callBack) {
         Map<String,String> map = new HashMap<>();
         map.put("address_id", id);
         map.put("update_info", addressInfo);
+        map.put("is_default", isDefault+"");
         map.put("api", ApiUserCenter.API_ADDRESS_UPDATE);
         map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<Object>>(callBack){

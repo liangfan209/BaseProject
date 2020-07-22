@@ -13,12 +13,14 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
+import com.bq.comm_config_lib.request.Api;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.api.bean.UserCenterConfigBean;
 import com.bq.user_center.mvp.user.presenter.UserPresenter;
 import com.bq.user_center.requset.bean.UserInfo;
 import com.bq.utilslib.AppUtils;
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.utils.ToastUtils;
@@ -29,6 +31,7 @@ import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -59,6 +62,10 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
     LinearLayout mLltContent;
     private UserPresenter mUserPersenter;
     private UserCenterConfigBean userConfig;
+    private UserInfo mUserinfo;
+
+    private List<BaseQuickAdapter<UserCenterConfigBean.ModuleListBean.TabListBean, BaseViewHolder>> mBaseQuickAdapters = new ArrayList<>();
+    BaseQuickAdapter<UserCenterConfigBean.ModuleListBean.TabListBean, BaseViewHolder> adapter;
 
     @Override
     protected BasePresenter createPersenter() {
@@ -98,7 +105,7 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         RecyclerView recyclerView = view.findViewById(R.id.rcyView);
         TextView tvTitle =view.findViewById(R.id.tv_title);
         int itemResource = -1;
-        BaseQuickAdapter<UserCenterConfigBean.ModuleListBean.TabListBean, BaseViewHolder> adapter;
+
 
         if (moduleListBean.getType().equals("grid")) {
             GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 4);
@@ -121,12 +128,14 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
                     protected void convert(@NotNull BaseViewHolder helper,
                                            UserCenterConfigBean.ModuleListBean.TabListBean tabListBean) {
                         helper.setText(R.id.tv_name,tabListBean.getName());
+                        helper.setText(R.id.tv_right,tabListBean.getValue());
                         int resId = getResources().getIdentifier(tabListBean.getIcon(), "mipmap",
                                 UserFragment.this.getActivity().getPackageName());
                         ImageView ivImg = helper.getView(R.id.iv_img);
                         ivImg.setBackgroundResource(resId);
                     }
                 };
+        mBaseQuickAdapters.add(adapter);
 
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener((adapter1, view1, position) -> {
@@ -136,7 +145,11 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
                 ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
                         .withString("h5url",path).navigation();
             }else{
-                ARouter.getInstance().build(path).navigation();
+                if("实名认证".equals(tabBean.getName())){
+                    ARouter.getInstance().build(path).withInt("isCertication",mUserinfo.getCustomer_info().getIs_certify()).navigation();
+                }else{
+                    ARouter.getInstance().build(path).navigation();
+                }
             }
 
         });
@@ -175,6 +188,19 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
 
     @Override
     public void showUser(UserInfo info) {
+        for (BaseQuickAdapter<UserCenterConfigBean.ModuleListBean.TabListBean, BaseViewHolder> baseQuickAdapter :
+                mBaseQuickAdapters) {
+            List<UserCenterConfigBean.ModuleListBean.TabListBean> data = baseQuickAdapter.getData();
+            for (UserCenterConfigBean.ModuleListBean.TabListBean datum : data) {
+                if(datum.getName().equals("实名认证")) {
+                    datum.setValue(info.getCustomer_info().getIs_certify() == 1 ? "已实名" : "未实名");
+                }
+                baseQuickAdapter.notifyDataSetChanged();
+            }
+        }
+        this.mUserinfo = info;
         mTvNickName.setText(info.getCustomer_info().getName());
+        Glide.with(this).load(Api.BASE_API+ info.getCustomer_info().getHead_url()).into(mIvHead);
+
     }
 }

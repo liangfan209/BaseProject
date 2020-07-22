@@ -29,6 +29,7 @@ public class CustomDialog {
     private TextView titleTv, msgTv;
     private LinearLayout contentLlt, llt_bottom, llt_dialog, llt_bottom1;
     private ClickCallBack mClickCallBack;
+    private boolean isClose = true;
 
 
     /**
@@ -55,6 +56,16 @@ public class CustomDialog {
     }
 
     public void showCustonViewDialog(Context context, View view, String title,ClickCallBack mClickCallBack) {
+        initLayoutView(context, mClickCallBack, 0.8f, Gravity.CENTER);
+        titleTv.setText(title);
+        if (contentLlt != null) {
+            contentLlt.removeAllViews();
+            contentLlt.addView(view);
+        }
+    }
+
+    public void showCustonViewDialog(Context context, View view, String title,boolean isClose,ClickCallBack mClickCallBack) {
+        this.isClose = isClose;
         initLayoutView(context, mClickCallBack, 0.8f, Gravity.CENTER);
         titleTv.setText(title);
         if (contentLlt != null) {
@@ -141,7 +152,9 @@ public class CustomDialog {
             sureBt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dissMissLoginDialog();
+                    if(isClose){
+                        dissMissLoginDialog();
+                    }
                     mClickCallBack.ok();
                 }
             });

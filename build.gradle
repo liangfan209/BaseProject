@@ -30,6 +30,10 @@ allprojects {
         jcenter()
         maven { url 'https://dl.bintray.com/umsdk/release' }
         maven { url 'https://jitpack.io' }
+
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 

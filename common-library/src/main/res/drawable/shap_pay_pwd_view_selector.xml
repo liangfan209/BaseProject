@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke  android:width="1px"  android:color="@color/ui_txt_hint_color" /> <!-- 边框颜色，边框大小-->
+    <solid   android:color="@color/white" /> <!-- 填充的颜色：这里设置背景 -->
+    <corners android:radius="3dip" /><!-- android:radius 弧形的半径 -->
+</shape>

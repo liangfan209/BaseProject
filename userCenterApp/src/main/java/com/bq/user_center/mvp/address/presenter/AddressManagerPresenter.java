@@ -36,7 +36,7 @@ public class AddressManagerPresenter implements BasePresenter {
     /**
      * 获取地址列表
      */
-    public void getAddressList(){
+    public void getAddressList() {
         mUserCenterHttpReqeustImp.getAddressList(new AbstractReqeustCallback<AddressListBean>(mAddressBaseIView) {
             @Override
             public void onSuccess(AddressListBean bean) {
@@ -47,11 +47,12 @@ public class AddressManagerPresenter implements BasePresenter {
 
     /**
      * 添加地址
+     *
      * @param address
      */
-    public void addAddress(AddressInfo address){
+    public void addAddress(AddressInfo address) {
         String info = new Gson().toJson(address);
-        mUserCenterHttpReqeustImp.addAddress(info, new AbstractReqeustCallback<String>(mAddressBaseIView) {
+        mUserCenterHttpReqeustImp.addAddress(info,address.getIs_default(), new AbstractReqeustCallback<String>(mAddressBaseIView) {
             @Override
             public void onSuccess(String str) {
                 mAddressBaseIView.addAdress();
@@ -63,9 +64,10 @@ public class AddressManagerPresenter implements BasePresenter {
 
     /**
      * 删除地址
+     *
      * @param id
      */
-    public void deleteAddress(String id){
+    public void deleteAddress(String id) {
         mUserCenterHttpReqeustImp.deleteAddress(id, new AbstractReqeustCallback<String>(mAddressBaseIView) {
             @Override
             public void onSuccess(String str) {
@@ -78,12 +80,14 @@ public class AddressManagerPresenter implements BasePresenter {
 
     /**
      * 修改地址
+     *
      * @param id
      * @param address
      */
-    public void updateAddress(String id, AddressInfo address){
+    public void updateAddress(String id, AddressInfo address) {
         String info = new Gson().toJson(address);
-        mUserCenterHttpReqeustImp.updateAddress(id, info, new AbstractReqeustCallback<Object>(mAddressBaseIView) {
+        int isDefault = address.getIs_default();
+        mUserCenterHttpReqeustImp.updateAddress(id, info,isDefault, new AbstractReqeustCallback<Object>(mAddressBaseIView) {
             @Override
             public void onSuccess(Object obj) {
                 mAddressBaseIView.updateAddress();
@@ -93,7 +97,7 @@ public class AddressManagerPresenter implements BasePresenter {
     }
 
 
-    public void getAddressById(String id){
+    public void getAddressById(String id) {
         mUserCenterHttpReqeustImp.getAddressById(id, new AbstractReqeustCallback<AddressInfoBean>(mAddressBaseIView) {
             @Override
             public void onSuccess(AddressInfoBean info) {
@@ -104,7 +108,7 @@ public class AddressManagerPresenter implements BasePresenter {
     }
 
 
-    public void unRegister(){
+    public void unRegister() {
         EventBus.getDefault().unregister(this);
     }
 
@@ -120,7 +124,7 @@ public class AddressManagerPresenter implements BasePresenter {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateAddressList(String event) {
-        if(UserCenterEventKey.UPDATE_ADDRESS.equals(event)){
+        if (UserCenterEventKey.UPDATE_ADDRESS.equals(event)) {
             getAddressList();
         }
     }

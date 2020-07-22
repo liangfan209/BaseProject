@@ -1,8 +1,10 @@
 package com.bq.app;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
+import android.view.View;
 
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
@@ -11,15 +13,20 @@ import com.baidu.ocr.sdk.model.AccessToken;
 import com.blankj.utilcode.util.LogUtils;
 import com.bq.comm_config_lib.BaseApplication;
 import com.bq.comm_config_lib.msgService.Servicemanager;
+import com.bq.comm_config_lib.request.Api;
+import com.bquan.app.R;
 import com.fan.baseuilibrary.utils.provinces.CityUtils;
+import com.fan.baseuilibrary.view.MyClassicsHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreater;
+import com.scwang.smartrefresh.layout.api.RefreshHeader;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.wind.me.xskinloader.SkinInflaterFactory;
-import com.wind.me.xskinloader.SkinManager;
-import com.wind.me.xskinloader.util.AssetFileUtils;
 
-import java.io.File;
-
+import androidx.annotation.NonNull;
 import skin.support.SkinCompatManager;
 import skin.support.app.SkinAppCompatViewInflater;
 import skin.support.app.SkinCardViewInflater;
@@ -35,8 +42,35 @@ import skin.support.design.app.SkinMaterialViewInflater;
  */
 public class AppApplication extends BaseApplication {
 
+    //static 代码段可以防止内存泄露
+    static {
+        SmartRefreshLayout.setDefaultRefreshHeaderCreater(new DefaultRefreshHeaderCreater() {
+            @NonNull
+            @Override
+            public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
+                ClassicsHeader.REFRESH_HEADER_PULLDOWN = "下拉刷新";
+                ClassicsHeader.REFRESH_HEADER_REFRESHING = "刷新中...";
+                ClassicsHeader.REFRESH_HEADER_LOADING = "刷新中...";
+                ClassicsHeader.REFRESH_HEADER_RELEASE = "释放即可刷新";
+                ClassicsHeader.REFRESH_HEADER_FINISH = "刷新完成";
+                ClassicsHeader.REFRESH_HEADER_FAILED = "刷新失败";
 
-    {
+                layout.setPrimaryColorsId(R.color.white, R.color.color_999999);//全局设置主题颜色
+                MyClassicsHeader header = new MyClassicsHeader(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
+                header.setAccentColor(context.getResources().getColor(R.color.white));
+                header.getTitleText().setTextSize(12);
+                header.getLastUpdateText().setVisibility(View.GONE);
+                header.setProgressBitmap(null);
+                header.getProgressView().setVisibility(View.GONE);
+                header.setArrowBitmap(null);
+                header.setEnableLastTime(false);
+                return header;
+            }
+        });
+    }
+
+
+        {
         PlatformConfig.setWeixin("wx22a8fc65e8d220af", "f90d0b596034a8c92ed578f9c9a7773a");
         PlatformConfig.setQQZone("123", "123");
     }
@@ -50,7 +84,7 @@ public class AppApplication extends BaseApplication {
         //2.注册组件中暴露的服务
         Servicemanager.getInstance().resiter(this,"com.bq");
 
-        baseUrl = "http://education.bq.com/interface/";
+        baseUrl = Api.BASE_API+ Api.INTER;
 
         // android 7.0系统拍照兼容
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -58,8 +92,6 @@ public class AppApplication extends BaseApplication {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             builder.detectFileUriExposure();
         }
-        //替换皮肤
-//        changeSkin();
 
         //友盟
         UMConfigure.setLogEnabled(true);
@@ -93,19 +125,6 @@ public class AppApplication extends BaseApplication {
     }
 
 
-    /**
-     * 替换资源文件
-     */
-    private void changeSkin() {
-        String saveDir = getCacheDir().getAbsolutePath() + "/skins";
-        String savefileName = "/cc.skin";
-        String asset_dir = "skin-apk-debug.apk";
-        File file = new File(saveDir + File.separator + savefileName);
-        if (!file.exists()) {
-            AssetFileUtils.copyAssetFile(this, asset_dir, saveDir, savefileName);
-        }
-        SkinManager.get().loadSkin(file.getAbsolutePath());
-    }
 
 
     /**

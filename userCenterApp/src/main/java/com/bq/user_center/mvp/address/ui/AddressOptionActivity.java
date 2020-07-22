@@ -13,7 +13,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
-import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.mvp.address.presenter.AddressManagerPresenter;
@@ -37,7 +37,7 @@ import skin.support.widget.SkinCompatCheckBox;
  * 版权：
  */
 @Route(path = AppArouter.USER_CENTER_ADDRESS_OPTION)
-public class AddressOptionActivity extends BaseAcitivty implements AddressBaseIView {
+public class AddressOptionActivity extends BaseActivity implements AddressBaseIView {
     public static final int ADDRESS_ADD = 1;
     public static final int ADDRESS_EDIT = 2;
     @BindView(R2.id.tv_title)

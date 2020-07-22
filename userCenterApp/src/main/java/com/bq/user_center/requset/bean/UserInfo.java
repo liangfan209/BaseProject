@@ -47,8 +47,35 @@ public class UserInfo implements Serializable{
         private String wechat;
         private String qq;
         private String education;
+        private String head_url;
+        private String nick;
+        private int is_certify;
 
-        public CustomerInfoBean(String nameType,String value) {
+        public int getIs_certify() {
+            return is_certify;
+        }
+
+        public void setIs_certify(int is_certify) {
+            this.is_certify = is_certify;
+        }
+
+        public String getHead_url() {
+            return head_url;
+        }
+
+        public void setHead_url(String head_url) {
+            this.head_url = head_url;
+        }
+
+        public String getNick() {
+            return nick;
+        }
+
+        public void setNick(String nick) {
+            this.nick = nick;
+        }
+
+        public CustomerInfoBean(String nameType, String value) {
             if("name".equals(nameType)){
                 this.name = value;
             }else if("gender".equals(nameType)){
@@ -63,9 +90,14 @@ public class UserInfo implements Serializable{
                 this.wechat = value;
             }else if("qq".equals(nameType)){
                 this.qq = value;
-            }else if("education".equals(nameType)){
-                this.education = value;
+            }else if("nick".equals(nameType)){
+                this.nick = value;
+            }else if("head_url".equals(nameType)){
+                this.head_url = value;
             }
+//            else if("education".equals(nameType)){
+//                this.education = value;
+//            }
         }
 
         public String getName() {

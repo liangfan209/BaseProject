@@ -1,11 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bq.order" >
+    package="com.bq.wallet" >
     <application>
-        <activity android:name="com.bq.order.mvp.ui.ProductDetailActivity"
+        <activity android:name="com.bq.wallet.mvp.ui.ProductDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:screenOrientation="portrait"/>
-        <activity android:name=".mvp.ui.OrderListActivity"/>
-        <activity android:name=".mvp.ui.OrderCommitActivity"/>
-        <activity android:name=".mvp.ui.OrderDetaiActivity"/>
+        <activity android:name="com.bq.wallet.mvp.ui.OrderListActivity"/>
+        <activity android:name="com.bq.wallet.mvp.ui.OrderCommitActivity"/>
+        <activity android:name="com.bq.wallet.mvp.ui.OrderDetaiActivity"/>
     </application>
 </manifest>

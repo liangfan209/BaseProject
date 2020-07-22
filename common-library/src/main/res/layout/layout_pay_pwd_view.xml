@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    >
+    <LinearLayout
+        android:id="@+id/llt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/shap_pay_pwd_view_selector"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <!--======1======-->
+        <TextView
+            android:id="@+id/tv_pass1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="numberPassword"
+            android:gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="42sp" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/ui_txt_hint_color"/>
+        <!--=====2=====-->
+        <TextView
+            android:id="@+id/tv_pass2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="numberPassword"
+            android:gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="42sp" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/ui_txt_hint_color"/>
+
+        <!--=====3=====-->
+        <TextView
+            android:id="@+id/tv_pass3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="numberPassword"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="42sp"
+            android:gravity="center"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/ui_txt_hint_color"/>
+        <!--=====4=======-->
+        <TextView
+            android:id="@+id/tv_pass4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="numberPassword"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="42sp"
+            android:gravity="center"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/ui_txt_hint_color"/>
+        <!--=======5==========-->
+        <TextView
+            android:id="@+id/tv_pass5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="numberPassword"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="42sp"
+            android:gravity="center"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/ui_txt_hint_color"/>
+        <!--=========6=======-->
+        <TextView
+            android:id="@+id/tv_pass6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="numberPassword"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="42sp"
+            android:gravity="center"/>
+    </LinearLayout>
+</RelativeLayout>
+

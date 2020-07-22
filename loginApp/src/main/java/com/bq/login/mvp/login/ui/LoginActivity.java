@@ -15,7 +15,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
-import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.login.R;
 import com.bq.login.R2;
@@ -38,7 +38,7 @@ import butterknife.OnClick;
 import skin.support.widget.SkinCompatCheckBox;
 
 @Route(path = AppArouter.LOGIN_ACTVITY)
-public class LoginActivity extends BaseAcitivty implements LoginBaseIView {
+public class LoginActivity extends BaseActivity implements LoginBaseIView {
 
     @BindView(R2.id.et_phone)
     DeletableEditText mEtPhone;

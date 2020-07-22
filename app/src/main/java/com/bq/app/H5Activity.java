@@ -8,10 +8,10 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bq.base.R;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
-import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
+import com.bquan.app.R;
 import com.fan.baseuilibrary.view.dialog.LoadingDialog;
 
 /**
@@ -23,7 +23,7 @@ import com.fan.baseuilibrary.view.dialog.LoadingDialog;
  */
 
 @Route( path= AppArouter.H5_ACTIVITY)
-public class H5Activity extends BaseAcitivty{
+public class H5Activity extends BaseActivity{
 
     private WebView mWebView;
     private TextView titleTv;

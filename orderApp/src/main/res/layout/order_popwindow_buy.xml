@@ -63,28 +63,19 @@
                 android:textColor="@color/ui_primary_color"
                 android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/tv_rmb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/h5_font_size"
-                android:text="¥"
-                android:layout_marginTop="16dp"
-                android:layout_toRightOf="@id/tv_real_price"
-                android:layout_marginLeft="24dp"
-                android:textColor="@color/ui_txt_hint_color"/>
 
             <TextView
                 android:id="@+id/tv_initial_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/h5_font_size"
-                android:text="19888.88"
-                android:layout_marginLeft="12dp"
+                android:text="¥  19888.88"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="16dp"
                 android:textColor="@color/ui_txt_hint_color"
                 android:textStyle="bold"
-                android:layout_toRightOf="@id/tv_rmb"/>
+                android:layout_toRightOf="@id/tv_real_price"
+               />
         </RelativeLayout>
 
     </RelativeLayout>
@@ -114,28 +105,28 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:button="@null"
-               android:background="@drawable/ui_shap_verification_code_selecter"
+               android:background="@drawable/ui_shap_radio_bt_selecter"
                android:text="普通版"
-               android:textColor="@color/ui_primary_color"
+               android:textColor="@color/ui_radio_bt_color_selector"
                android:paddingLeft="12dp"
                android:paddingRight="12dp"
                android:paddingTop="5dp"
                android:paddingBottom="5dp"
-               android:enabled="true"/>
+              />
 
            <skin.support.widget.SkinCompatRadioButton
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:button="@null"
-               android:background="@drawable/ui_shap_verification_code_selecter"
+               android:background="@drawable/ui_shap_radio_bt_selecter"
                android:text="视频精讲班"
-               android:textColor="@color/ui_txt_hint_color"
+               android:textColor="@color/ui_radio_bt_color_selector"
                android:paddingLeft="12dp"
                android:paddingRight="12dp"
                android:paddingTop="5dp"
                android:paddingBottom="5dp"
                android:layout_marginTop="7dp"
-               android:enabled="false"/>
+               />
        </skin.support.widget.SkinCompatRadioGroup>
 
 
@@ -159,6 +150,7 @@
             android:layout_marginRight="18dp">
             
             <RelativeLayout
+                android:id="@+id/rlt_subtract"
                 android:layout_width="21dp"
                 android:layout_height="21dp"
                 android:background="@drawable/shap_white_radius_4"
@@ -178,6 +170,7 @@
                 android:background="@drawable/shap_white_radius_4"
                 android:layout_marginTop="-5dp">
                 <TextView
+                    android:id="@+id/tv_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1"
@@ -188,6 +181,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rlt_add"
                 android:layout_width="21dp"
                 android:layout_height="21dp"
                 android:layout_marginRight="4dp"
@@ -202,6 +196,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_buy"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             style="@style/ui_h3_button_primary_style"

@@ -1,15 +1,16 @@
 package com.bq.user_center.mvp.user.presenter;
 
-import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.msgService.MessageBody;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.user_center.api.ComponentService;
 import com.bq.user_center.api.UserCenterEventKey;
 import com.bq.user_center.mvp.user.ui.UserBaseIView;
+import com.bq.user_center.mvp.user.ui.UserFragment;
+import com.bq.user_center.mvp.user.ui.UserinfoActivity;
 import com.bq.user_center.requset.UserCenterHttpReqeustImp;
+import com.bq.user_center.requset.bean.CertificationBean;
 import com.bq.user_center.requset.bean.UserInfo;
-import com.fan.baseuilibrary.utils.ToastUtils;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
@@ -53,15 +54,11 @@ public class UserPresenter implements BasePresenter {
      * @param value
      */
     public void updateUserInfo(String tpye,String value){
-        if(StringUtils.isEmpty(value)){
-            ToastUtils.showToast(mUserIView.getActivity(),"内容不能空");
-            return;
-        }
         String updateInfo = new Gson().toJson(new UserInfo.CustomerInfoBean(tpye, value));
         mUserCenterHttpReqeustImp.updateUserInfo(updateInfo, new AbstractReqeustCallback<String>(mUserIView) {
             @Override
             public void onSuccess(String str) {
-                ToastUtils.showToastOk(mUserIView.getActivity(),"修改成功");
+//                ToastUtils.showToastOk(mUserIView.getActivity(),"修改成功");
                 EventBus.getDefault().post(UserCenterEventKey.UPDATE_USER);
             }
         });
@@ -81,10 +78,32 @@ public class UserPresenter implements BasePresenter {
     }
 
 
+    public void certification(String name, String id,String font,String back,String hand){
+        mUserCenterHttpReqeustImp.certification(name,id,font,back,hand, new AbstractReqeustCallback<String>(mUserIView) {
+            @Override
+            public void onSuccess(String str) {
+                EventBus.getDefault().post(UserCenterEventKey.UPDATE_USER);
+                mUserIView.certificationView();
+            }
+        });
+    }
+
+    public void getCertification(){
+        mUserCenterHttpReqeustImp.getCertification(new AbstractReqeustCallback<CertificationBean>(mUserIView) {
+            @Override
+            public void onSuccess(CertificationBean info) {
+                mUserIView.getCertificationView(info.getCertification_info());
+            }
+        });
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateUser(String key){
         if(key.equals(UserCenterEventKey.UPDATE_USER)){
-            showUserInfo();
+            if( mUserIView != null && (mUserIView instanceof UserFragment ||
+                    mUserIView instanceof UserinfoActivity)) {
+                showUserInfo();
+            }
         }
     }
 

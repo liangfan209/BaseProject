@@ -1,15 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bq.order" >
+    package="com.bq.wallet" >
     <application>
-        <activity android:name="com.bq.order.mvp.ui.MyWalletActivity"
+        <activity android:name="com.bq.wallet.mvp.ui.MyWalletActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.bq.order.mvp.ui.BillDetailActivity"
+        <activity android:name="com.bq.wallet.mvp.ui.BillDetailActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.bq.order.mvp.ui.RechargeDetailActivity"
+        <activity android:name="com.bq.wallet.mvp.ui.RechargeDetailActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.bq.order.mvp.ui.TackCashActivity"
+        <activity android:name="com.bq.wallet.mvp.ui.TackCashActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.bq.order.mvp.ui.RechargeActivity"
+        <activity android:name="com.bq.wallet.mvp.ui.RechargeActivity"
             android:configChanges="orientation|screenSize"/>
     </application>
 </manifest>

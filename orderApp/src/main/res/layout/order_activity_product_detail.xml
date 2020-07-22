@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white">
     <include layout="@layout/layout_public_title"/>
@@ -18,10 +19,62 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <com.zhpan.bannerview.BannerViewPager
-                android:id="@+id/banner_view"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="300dp">
+                <com.zhpan.bannerview.BannerViewPager
+                    android:id="@+id/banner_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    app:bvp_indicator_visibility="gone"/>
+
+                <skin.support.widget.SkinCompatRadioGroup
+                    android:id="@+id/rg_video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="30dp">
+
+                    <skin.support.widget.SkinCompatRadioButton
+                        android:id="@+id/rb_video"
+                        android:layout_width="50dp"
+                        android:layout_height="22dp"
+                        android:background="@drawable/red_gray_button_bg_selector"
+                        android:button="@null"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/white_black_color_selector"
+                        android:text="视频"
+                        android:textSize="@dimen/h5_font_size"
+                        android:gravity="center"
+                        android:checked="true"/>
+                    <skin.support.widget.SkinCompatRadioButton
+                        android:id="@+id/rb_img"
+                        android:layout_width="50dp"
+                        android:layout_height="22dp"
+                        android:background="@drawable/red_gray_button_bg_selector"
+                        android:button="@null"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/white_black_color_selector"
+                        android:text="图片"
+                        android:textSize="@dimen/h5_font_size"
+                        android:gravity="center"
+                        android:checked="false"/>
+                </skin.support.widget.SkinCompatRadioGroup>
+
+                <TextView
+                    android:id="@+id/tv_index"
+                    android:layout_width="50dp"
+                    android:layout_height="22dp"
+                    android:background="@drawable/alpha_gray_button_unselect"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="30dp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    />
+            </FrameLayout>
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
@@ -32,48 +85,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/h5_font_size"
-                    android:text="¥"
-                    android:layout_marginLeft="27dp"
-                    android:layout_marginTop="16dp"
-                    android:textColor="@color/ui_primary_color"/>
 
                 <TextView
                     android:id="@+id/tv_real_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/h1_font_size"
-                    android:text="16688.88"
+                    android:text="¥  16688.88"
                     android:layout_marginLeft="37dp"
                     android:layout_marginTop="8dp"
                     android:textColor="@color/ui_primary_color"
                     android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/tv_rmb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/h5_font_size"
-                    android:text="¥"
-                    android:layout_marginTop="16dp"
-                    android:layout_toRightOf="@id/tv_real_price"
-                    android:layout_marginLeft="24dp"
-                    android:textColor="@color/ui_txt_hint_color"/>
 
                 <TextView
                     android:id="@+id/tv_initial_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/h5_font_size"
-                    android:text="19888.88"
-                    android:layout_marginLeft="12dp"
+                    android:text="¥ 19888.88"
+                    android:layout_marginLeft="18dp"
                     android:layout_marginTop="16dp"
                     android:textColor="@color/ui_txt_hint_color"
                     android:textStyle="bold"
-                    android:layout_toRightOf="@id/tv_rmb"/>
+                    android:layout_toRightOf="@id/tv_real_price"/>
             </RelativeLayout>
 
             <ImageView
@@ -102,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:text="学前教育/市场营销/工商管理/测绘理工类/经管类/艺术类/文史类…"
                 android:textColor="@color/ui_txt_hint_color"
-                android:textSize="@dimen/h3_font_size"
+                android:textSize="@dimen/h5_font_size"
                 android:textStyle="bold"
                 android:layout_marginLeft="27dp"
                 android:layout_marginRight="30dp"
@@ -128,7 +163,7 @@
                     android:textColor="@color/ui_txt_normal_color"
                     android:textSize="@dimen/h3_font_size"
                     android:layout_marginLeft="27dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_centerVertical="true"
                     android:textStyle="bold"
                     />
 
@@ -140,7 +175,7 @@
                     android:textColor="@color/ui_txt_normal_color"
                     android:textSize="@dimen/h3_font_size"
                     android:layout_marginLeft="21dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/tv_shipping_key"
                     />
 
@@ -150,7 +185,7 @@
                     android:text="月销88"
                     android:textColor="@color/ui_txt_hint_color"
                     android:textSize="@dimen/h4_font_size"
-                    android:layout_marginTop="12dp"
+                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="40dp"
                     />
@@ -306,6 +341,7 @@
             android:layout_marginLeft="25dp"
             android:drawableTop="@mipmap/order_icon_service"
             android:layout_marginTop="11dp"
+            android:drawablePadding="4dp"
             />
 
         <TextView

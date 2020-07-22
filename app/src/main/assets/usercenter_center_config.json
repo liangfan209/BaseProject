@@ -72,6 +72,7 @@
           "remark": "",
           "icon": "user_center_icon_modify_pwd",
           "path": "/userCenter/CertificationActivity",
+          "value": "",
           "jumpType": "arouter"
         },
         {

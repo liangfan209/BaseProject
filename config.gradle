@@ -32,7 +32,7 @@ ext {
             "androidx.navigation-ui:"             : "androidx.navigation:navigation-ui:2.1.0",
 
 
-            //network
+            //network_config1
             "retrofit"                 : "com.squareup.retrofit2:retrofit:${version["retrofitSdkVersion"]}",
             "retrofit.converter.gson"  : "com.squareup.retrofit2:converter-gson:${version["retrofitSdkVersion"]}",
             "retrofit.adapter.rxjava2" : "com.squareup.retrofit2:adapter-rxjava2:${version["retrofitSdkVersion"]}",

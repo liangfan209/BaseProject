@@ -11,12 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.baidu.ocr.ui.RecognizeService;
-import com.baidu.ocr.ui.camera.CameraActivity;
+import com.baidu.ocr.sdk.model.IDCardResult;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
-import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
+import com.bq.comm_config_lib.utils.ScanHelper;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.mvp.bankcard.presenter.BankCardPresenter;
@@ -26,8 +26,6 @@ import com.bq.utilslib.EditFormatUtils;
 import com.fan.baseuilibrary.utils.CountDownHelper;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
-
-import java.io.File;
 
 import androidx.annotation.Nullable;
 import butterknife.BindView;
@@ -42,7 +40,7 @@ import skin.support.widget.SkinCompatCheckBox;
  * 版权：
  */
 @Route(path = AppArouter.USER_CENTER_BANK_ADD_ACTIVITY)
-public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
+public class AddBankActivity extends BaseActivity implements BankCardBaseIView {
 
     BankCardPresenter mBankCardPersenter;
     @BindView(R2.id.iv_title_left)
@@ -72,6 +70,7 @@ public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
     @BindView(R2.id.iv_scan1)
     ImageView mIvScan1;
     CountDownHelper countDownHelper;//计时器
+    private ScanHelper mScanHelper;
 
     @Override
     public void addBankSuccess() {
@@ -89,6 +88,11 @@ public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
     @Override
     protected void attach() {
         mTvTitle.setText("添加银行卡");
+
+        //给scanHelper绑定生命周期
+        mScanHelper = new ScanHelper(this);
+        getLifecycle().addObserver(mScanHelper);
+
         initView();
     }
 
@@ -166,33 +170,32 @@ public class AddBankActivity extends BaseAcitivty implements BankCardBaseIView {
                 return;
             }
             mBankCardPersenter.addBankCard(new BankCardInfo(name,cardNum,phoneNum,idNum,code));
-        } else if (view.getId() == R.id.iv_scan || view.getId() == R.id.iv_scan1) {
-            File file = new File(this.getFilesDir(), "bankcard.jpg");
-            Intent intent = new Intent(this, CameraActivity.class);
-            intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                    file.getAbsolutePath());
-            intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
-                    CameraActivity.CONTENT_TYPE_BANK_CARD);
-            startActivityForResult(intent, 111);
+        } else if (view.getId() == R.id.iv_scan) {
+            mScanHelper.startScan(ScanHelper.BANK_CARD);
+        } else if(view.getId() == R.id.iv_scan1){
+            mScanHelper.startScan(ScanHelper.ID_CARD);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 111 &&  resultCode == Activity.RESULT_OK){
-            File file = new File(this.getFilesDir(), "bankcard.jpg");
-            RecognizeService.recBankCard(this, file.getAbsolutePath(),
-                    new RecognizeService.ServiceListener() {
-                        @Override
-                        public void onResult(String result) {
-                            if(result.contains("erro")){
-                                return;
-                            }
-                            mEtBank.setText(result);
-                            mEtBank.setSelection(result.length());
-                        }
-                    });
+        if( resultCode == Activity.RESULT_OK){
+            if(resultCode == 111){
+                mScanHelper.paseData(data,ScanHelper.ID_CARD,new ScanHelper.IdCardInter(){
+                    @Override
+                    public void idCardCallBack(IDCardResult result) {
+                        mEtIdCard.setText(result.getIdNumber().toString());
+                        mEtIdCard.setClearDrawableVisible(false);
+                    }
+                });
+            }else if(requestCode == 112){
+                mScanHelper.paseData(data,ScanHelper.BANK_CARD,new ScanHelper.IdCardInter(){
+                    @Override
+                    public void bankCard(String bankCardId) {
+                    }
+                });
+            }
         }
     }
 

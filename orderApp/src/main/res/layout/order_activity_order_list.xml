@@ -21,7 +21,7 @@
         app:tl_tab_space_equal="true"
         app:tl_iconVisible="false"/>
 
-    <androidx.viewpager.widget.ViewPager
+    <com.fan.baseuilibrary.view.NoAnimationViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

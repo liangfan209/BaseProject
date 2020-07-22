@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        android:background="@drawable/shap_white_radius_4">
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:background="@mipmap/icon_chacha"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="17dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="付款详情"
+            android:textColor="#ff232323"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#CCCCCC"
+            android:layout_marginTop="50dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="69dp"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥"
+                android:textColor="#ff232323"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:textColor="#ff232323"
+                android:textSize="31sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                />
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="54dp"
+                android:layout_height="19dp"
+                android:text="付款方式"
+                android:textColor="#ff232323"
+                android:textSize="13sp"
+                android:layout_marginLeft="17dp"
+                />
+
+            <skin.support.widget.SkinCompatRadioGroup
+                android:id="@+id/rg_pay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <skin.support.widget.SkinCompatRadioButton
+                    android:id="@+id/rbt_balence"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:button="@null"
+                    android:text="余额"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15sp"
+                    android:layout_marginRight="20dp"
+                    android:background="@null"
+                    android:textColor="#666666"
+                    android:drawableRight="@drawable/ui_checkbox_select"
+                    android:drawableLeft="@mipmap/icon_balence"
+                    android:checked="true"
+                    android:drawablePadding="10dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#cccccc"/>
+                
+                <skin.support.widget.SkinCompatRadioButton
+                    android:id="@+id/rbt_zhifubao"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:button="@null"
+                    android:textSize="15sp"
+                    android:background="@null"
+                    android:textColor="#666666"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="支付宝支付"
+                    android:drawableRight="@drawable/ui_checkbox_select"
+                    android:drawableLeft="@mipmap/icon_pay_zhifubao"
+                    android:drawablePadding="10dp"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#cccccc"/>
+
+                <skin.support.widget.SkinCompatRadioButton
+                    android:id="@+id/rbt_wexin"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:button="@null"
+                    android:textColor="#666666"
+                    android:text="微信支付"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15sp"
+                    android:layout_marginRight="20dp"
+                    android:background="@null"
+                    android:drawableRight="@drawable/ui_checkbox_select"
+                    android:drawableLeft="@mipmap/icon_pay_wechat"
+                    android:drawablePadding="10dp"/>
+            </skin.support.widget.SkinCompatRadioGroup>
+        </LinearLayout>
+
+
+
+
+        <TextView
+            android:id="@+id/tv_buy"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginBottom="14dp"
+            style="@style/ui_h3_button_primary_style"
+            android:gravity="center"
+            android:text="立即付款"
+            android:textColor="#ffffffff"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

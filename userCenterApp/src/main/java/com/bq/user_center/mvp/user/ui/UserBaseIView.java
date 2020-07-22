@@ -1,6 +1,7 @@
 package com.bq.user_center.mvp.user.ui;
 
 import com.bq.comm_config_lib.mvp.BaseIView;
+import com.bq.user_center.requset.bean.CertificationInfo;
 import com.bq.user_center.requset.bean.UserInfo;
 
 /**
@@ -11,6 +12,9 @@ import com.bq.user_center.requset.bean.UserInfo;
  * 版权：
  */
 public interface UserBaseIView extends BaseIView {
-    void showUser(UserInfo info);
+    default void showUser(UserInfo info){};
     default void logout(){};
+    default void certificationView(){};
+    default void getCertificationView(CertificationInfo info){}
+
 }

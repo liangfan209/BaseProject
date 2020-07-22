@@ -15,7 +15,7 @@
         android:layout_marginLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:maxLength="15"
+        android:maxLength="25"
         android:maxLines="1"/>
     <ImageView
         android:layout_width="match_parent"

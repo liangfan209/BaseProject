@@ -11,6 +11,7 @@ android {
     }
 
     defaultConfig {
+        applicationId "com.bquan.app"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
@@ -23,6 +24,10 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+        manifestPlaceholders = [JPUSH_PKGNAME: "com.bquan.app",
+                                JPUSH_APPKEY : "e38664ecb4acf5db15e6c465", //JPush 上注册的包名对应的 Appkey.
+                                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
 
         ndk {
             //选择要添加的对应 cpu 类型的 .so 库。
@@ -37,6 +42,23 @@ android {
 //            res.srcDirs = ['src/main/res','src/main/res-red']
 //        }
 //    }
+
+
+    signingConfigs {
+        release {
+            storeFile file(KEY_PATH)
+            storePassword KEY_PASS
+            keyAlias ALIAS_NAME
+            keyPassword ALIAS_PASS
+            v2SigningEnabled false
+        }
+        debug {
+            storeFile file(KEY_PATH)
+            storePassword KEY_PASS
+            keyAlias ALIAS_NAME
+            keyPassword ALIAS_PASS
+        }
+    }
 }
 
 dependencies {
@@ -49,4 +71,6 @@ dependencies {
     }
     annotationProcessor rootProject.ext.dependencies["butterknife.compiler"]
     annotationProcessor rootProject.ext.dependencies["arouter.compiler"]
+
+//    compile(name: 'alipaySdk-15.6.4-20190611174341', ext: 'aar')
 }

@@ -9,7 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
-import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.comm_config_lib.mvp.ui.CommomMultiItemQuickAdapter;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
@@ -37,7 +37,7 @@ import butterknife.OnClick;
  * 版权：
  */
 @Route(path = AppArouter.USER_CENTER_ADDRESS_SELECT)
-public class AddressSelectActivity extends BaseAcitivty implements MyRefreshLayout.LayoutInterface<AddressInfo>,
+public class AddressSelectActivity extends BaseActivity implements MyRefreshLayout.LayoutInterface<AddressInfo>,
         AddressBaseIView {
 
     @BindView(R2.id.flt_content)

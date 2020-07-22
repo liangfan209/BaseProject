@@ -9,7 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
-import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.mvp.address.presenter.AddressManagerPresenter;
@@ -38,7 +38,7 @@ import skin.support.widget.SkinCompatCheckBox;
  * 版权：
  */
 @Route(path = AppArouter.USER_CENTER_ADDRESS_LIST)
-public class AddressManagerActivity extends BaseAcitivty implements MyRefreshLayout.LayoutInterface<AddressInfo>,
+public class AddressManagerActivity extends BaseActivity implements MyRefreshLayout.LayoutInterface<AddressInfo>,
         AddressBaseIView {
 
 

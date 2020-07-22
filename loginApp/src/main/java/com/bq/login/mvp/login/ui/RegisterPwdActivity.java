@@ -14,7 +14,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
-import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.login.R;
 import com.bq.login.R2;
 import com.bq.login.api.bean.LoginConfigBean;
@@ -34,7 +34,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 @Route(path = AppArouter.FORGET_PWD_ACTIVITY)
-public class RegisterPwdActivity extends BaseAcitivty implements LoginBaseIView {
+public class RegisterPwdActivity extends BaseActivity implements LoginBaseIView {
 
     public static final int REGISTER = 1;
     public static final int FORGET_PWD = 2;

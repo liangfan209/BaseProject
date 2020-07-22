@@ -50,7 +50,7 @@ public class CountDownHelper {
                     timeStr = "(" + ((time + 15) / 1000) + "s)后重发";
 //                    mButton.setTextColor(mButton.getContext().getResources().getColor(R.color.white));
                     mButton.setEnabled(false);
-//                    mButton.setBackground(mButton.getResources().getDrawable(R.drawable.ui_shap_button_bg_selector));
+//                    mButton.setBackground(mButton.getResources().getDrawable(R.drawable.red_gray_button_bg_selector));
 //                    mButton.setTextSize(10);
                 }else {
                     timeStr = ((time + 15) / 1000) + "s";

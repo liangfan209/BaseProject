@@ -70,7 +70,13 @@ dependencies {
     api 'com.github.zhpanvip:BannerViewPager:3.1.4'
     api 'androidx.viewpager2:viewpager2:1.0.0'
     api 'com.shuyu:GSYVideoPlayer:7.1.4'
+    api 'com.github.SherlockGougou:BigImageViewPager:androidx-6.0.1'
 
+
+
+
+    //动画效果
+    api 'com.airbnb.android:lottie:2.7.0'
     api 'com.umeng.umsdk:analytics:8.0.0'
     api 'com.umeng.umsdk:common:2.0.0'
     implementation files('libs/umeng-shareboard-widget-6.9.6.jar')

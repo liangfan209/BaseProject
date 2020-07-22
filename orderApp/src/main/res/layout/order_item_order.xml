@@ -2,119 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#f2f2f2">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="18dp"
         android:background="@color/white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="报考信息"
-            android:textColor="@color/ui_txt_normal_color"
-            android:textSize="@dimen/h2_font_size"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold"
-            />
-        <ImageView
-            android:id="@+id/iv_item"
-            android:layout_width="115dp"
-            android:layout_height="65dp"
-            android:scaleType="fitXY"
-            android:background="@mipmap/order_icon_item_img"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="45dp"
-            />
-
         <LinearLayout
-            android:id="@+id/llt_type"
+            android:id="@+id/llt_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="141dp">
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
-                android:layout_marginRight="15dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="国开专升本"
-                android:textColor="@color/ui_txt_normal_color"
-                android:textSize="@dimen/h3_font_size" />
-
-            <TextView
-                android:id="@+id/tv_remark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="视屏精讲班"
-                android:textColor="#ff999999"
-                android:textSize="12sp"
-                android:layout_marginTop="7dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="国开"
-                    android:textColor="#FF43C590"
-                    android:background="@drawable/shap_green_radius_2"
-                    android:padding="2dp"
-                    android:textSize="10sp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="专升本"
-                    android:textColor="#FFFF9500"
-                    android:background="@drawable/shap_yellow_radius_2"
-                    android:padding="2dp"
-                    android:layout_marginLeft="7dp"
-                    android:textSize="10sp"
-                    />
-            </LinearLayout>
+            android:layout_height="wrap_content">
+            <include layout="@layout/order_item_layout"/>
         </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/tv_after_sale"
-            android:layout_width="75dp"
-            android:layout_height="28dp"
-            android:background="@drawable/ui_shap_verification_code_unselect"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/llt_type"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
-            android:text="申请售后"
-            android:gravity="center"
-            android:textColor="@color/ui_txt_normal_color"
-            android:textStyle="bold"
-            android:textSize="@dimen/h5_font_size"
-            />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_after_sale"
-            android:layout_marginTop="10dp"
+            android:layout_below="@id/llt_content"
+
             >
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginLeft="15dp"
-                android:background="@color/ui_recycleview_item_line_color"
-                />
             <TextView
                 android:id="@+id/tv_total_price"
                 android:layout_width="wrap_content"
@@ -142,8 +50,58 @@
                 android:textSize="@dimen/h5_font_size"
                 android:layout_marginLeft="15dp"
                 />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="46dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                >
+
+                <TextView
+                    android:id="@+id/tv_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ui_shap_verification_code_unselect"
+                    android:text="取消"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/ui_txt_hint_color"
+                    android:gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textSize="@dimen/h5_font_size"/>
+                <TextView
+                    android:id="@+id/tv_primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ui_shap_verification_code_select"
+                    android:text="支付"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/ui_primary_color"
+                    android:gravity="center"
+                    android:textSize="@dimen/h5_font_size"/>
+
+            </LinearLayout>
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="待收货"
+            android:textColor="@color/ui_primary_color"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"/>
     </RelativeLayout>
 
 </LinearLayout>

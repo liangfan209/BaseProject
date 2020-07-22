@@ -8,7 +8,9 @@ android {
 }
 dependencies {
     implementation project(path: ':common-library')
-//    implementation "com.android.bq.comm:commLib:0.0.3"
+    //    implementation "com.android.bq.comm:commLib:0.0.3"
+    implementation files('libs/libammsdk.jar')
+//    compile(name: 'alipaySdk-15.6.4-20190611174341', ext: 'aar')
 }
 
 

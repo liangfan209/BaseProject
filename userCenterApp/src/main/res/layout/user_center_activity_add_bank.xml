@@ -26,7 +26,7 @@
             android:textSize="@dimen/h4_font_size"
             android:maxLength="24"
             style="@style/ui_edit_txt_style"
-            android:layout_marginRight="21dp"/>
+            android:layout_marginRight="28dp"/>
 
         <ImageView
             android:id="@+id/iv_scan"
@@ -89,7 +89,7 @@
             android:hint="请输入身份证号"
             style="@style/ui_edit_txt_style"
             android:textSize="@dimen/h4_font_size"
-            android:layout_marginRight="21dp"/>
+            android:layout_marginRight="28dp"/>
 
         <ImageView
             android:id="@+id/iv_scan1"

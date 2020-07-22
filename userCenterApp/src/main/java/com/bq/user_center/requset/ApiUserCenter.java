@@ -17,6 +17,10 @@ public class ApiUserCenter {
     //用户
     public static final String API_USER_INFO = "customer.myself.get";
     public static final String API_UPDATE_USER_INFO = "customer.myself.update";
+    public static final String API_AUTHENTICATGION = "customer.myself.real.authenticate";
+    public static final String API_AUTHENTICATGION_GET = "customer.myself.real.get";
+
+
 
     //地址列表
     public static final String API_ADDRESS_LIST = "customer.myself.address.all";

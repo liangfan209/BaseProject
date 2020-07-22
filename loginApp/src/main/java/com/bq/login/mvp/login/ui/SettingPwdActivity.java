@@ -10,7 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
-import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.login.R;
 import com.bq.login.R2;
 import com.bq.login.mvp.login.presenter.LoginPresenter;
@@ -28,7 +28,7 @@ import butterknife.OnClick;
  * 版权：
  */
 @Route(path = AppArouter.LOGIN_SETTING_ACTIVITY)
-public class SettingPwdActivity extends BaseAcitivty implements LoginBaseIView{
+public class SettingPwdActivity extends BaseActivity implements LoginBaseIView{
     @BindView(R2.id.iv_title_left)
     ImageView mIvTitleLeft;
     @BindView(R2.id.tv_title)

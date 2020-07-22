@@ -2,7 +2,7 @@ package com.bq.comm_config_lib.mvp;
 
 import android.app.Activity;
 
-import com.bq.comm_config_lib.mvp.ui.BaseAcitivty;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
 
 /**
@@ -18,7 +18,7 @@ public interface BaseIView {
     void onComplete();
 
     default Activity getActivity() {
-        if(this instanceof BaseAcitivty){
+        if(this instanceof BaseActivity){
             return (Activity) this;
         }else if(this instanceof BaseFragment){
             return (Activity) this.getActivity();

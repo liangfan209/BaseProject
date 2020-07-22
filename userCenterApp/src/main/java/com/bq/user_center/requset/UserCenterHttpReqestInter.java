@@ -19,12 +19,15 @@ public interface UserCenterHttpReqestInter {
     //用户
     void showUserInfo(RequestCallBackInter callBack);
     void updateUserInfo(String userInfo,RequestCallBackInter callBack);
+    void certification(String name, String id,String idFront,String idBack,String idHand,RequestCallBackInter callBack);
+    void getCertification(RequestCallBackInter callBack);
+
 
     //地址
     void getAddressList(RequestCallBackInter callBack);
-    void addAddress(String addressInfo,RequestCallBackInter callBack);
+    void addAddress(String addressInfo,int isDefault,RequestCallBackInter callBack);
     void deleteAddress(String id,RequestCallBackInter callBack);
-    void updateAddress(String id,String addressInfo,RequestCallBackInter callBack);
+    void updateAddress(String id,String addressInfo,int isDefault,RequestCallBackInter callBack);
     void getAddressById(String id,RequestCallBackInter callBack);
 
 }

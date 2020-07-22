@@ -7,6 +7,7 @@
     android:layout_height="56dp">
 
     <TextView
+        android:id="@+id/tv_right"
         style="@style/user_center_item_right"
         android:drawableRight="@mipmap/next_step"
         skin:enable="true"/>
