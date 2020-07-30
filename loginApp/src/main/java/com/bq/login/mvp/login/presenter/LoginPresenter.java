@@ -84,8 +84,8 @@ public class LoginPresenter implements BasePresenter {
      * 获取验证码
      * @param phone
      */
-    public void getVertificatCode(String phone) {
-        mLoginHttpReqeustImp.getVertificatCode(phone, new AbstractReqeustCallback<Object>(mIView) {
+    public void getVertificatCode(String phone,String type) {
+        mLoginHttpReqeustImp.getVertificatCode(phone,type, new AbstractReqeustCallback<Object>(mIView) {
             @Override
             public void onStart() {
                 mIView.showLoading();

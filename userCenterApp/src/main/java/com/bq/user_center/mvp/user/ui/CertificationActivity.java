@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.baidu.ocr.sdk.model.IDCardResult;
+import com.baidu.ocr.ui.camera.CameraActivity;
 import com.baidu.ocr.ui.camera.CameraNativeHelper;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -22,6 +23,7 @@ import com.bq.comm_config_lib.request.Api;
 import com.bq.comm_config_lib.request.upload.UploadBean;
 import com.bq.comm_config_lib.request.upload.UploadHelper;
 import com.bq.comm_config_lib.utils.ScanHelper;
+import com.bq.comm_config_lib.utils.Utils;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.mvp.user.presenter.UserPresenter;
@@ -106,7 +108,7 @@ public class CertificationActivity extends BaseActivity implements UserBaseIView
     protected void attach() {
         ARouter.getInstance().inject(this);
         mTvTitle.setText("实名认证");
-        EditFormatUtils.idCardAddSpace(mDetId);
+//        EditFormatUtils.idCardAddSpace(mDetId);
         //给scanHelper绑定生命周期
         mScanHelper = new ScanHelper(this);
         getLifecycle().addObserver(mScanHelper);
@@ -117,8 +119,13 @@ public class CertificationActivity extends BaseActivity implements UserBaseIView
             mDetId.setEnabled(false);
             mIvFront.setEnabled(false);
             mIvBack.setEnabled(false);
+            mDetId.setTextColor(getResources().getColor(R.color.ui_txt_hint_color));
+            mDetName.setTextColor(getResources().getColor(R.color.ui_txt_hint_color));
             mIvHandIdCard.setEnabled(false);
             mUserPresenter.getCertification();
+            mTvCheck.setVisibility(View.GONE);
+        }else{
+            EditFormatUtils.idCardAddSpace(mDetId);
         }
     }
 
@@ -142,15 +149,29 @@ public class CertificationActivity extends BaseActivity implements UserBaseIView
         KeyboardUtils.hideSoftInput(this);
         if(view.getId() == R.id.iv_front){
             index = 0;
-            pictureUtils.chooseHeadImg();
+            if (!Utils.isFastDoubleClick(mIvFront, 500)) {
+//                pictureUtils.chooseHeadImg();
+//                mScanHelper.startScan(ScanHelper.ID_CARD_FRONT);
+                mScanHelper.startScan(ScanHelper.BANK_CARD);
+            }
+
         }else if(view.getId() == R.id.iv_back){
             index = 1;
-            pictureUtils.chooseHeadImg();
+            if (!Utils.isFastDoubleClick(mIvBack, 500)) {
+//                pictureUtils.chooseHeadImg();
+//                mScanHelper.startScan(ScanHelper.ID_CARD_BACK);
+                mScanHelper.startScan(ScanHelper.BANK_CARD);
+            }
         }else if(view.getId() == R.id.iv_hand_id_card){
             index = 2;
-            pictureUtils.chooseHeadImg();
+            if (!Utils.isFastDoubleClick(mIvHandIdCard, 500)) {
+                mScanHelper.startScan(ScanHelper.BANK_CARD);
+            }
         } else if(view.getId() == R.id.iv_scan){
-            mScanHelper.startScan(ScanHelper.ID_CARD);
+            if (!Utils.isFastDoubleClick(mIvScan, 1000)) {
+                mScanHelper.startScan(ScanHelper.ID_CARD_FRONT);
+            }
+
         }else if(view.getId() == R.id.tv_check){
             String name = mDetName.getText().toString();
             String idNum = mDetId.getText().toString().replaceAll(" ","");
@@ -188,50 +209,85 @@ public class CertificationActivity extends BaseActivity implements UserBaseIView
                 //处理拍照返回结果
                 pictureUtils.startPhotoRectCrop(pictureUtils.mImageUri);
             } else if (requestCode == PictureViewUtils.CROP_PHOTO) {
-                //处理裁剪返回结果
-                if(index == 0){
-                    Glide.with(this).load(pictureUtils.mCropImgUri).into(mIvFront);
-                    //将图片上传到服务器
-                }else if(index == 1){
-                    Glide.with(this).load(pictureUtils.mCropImgUri).into(mIvBack);
-                }else if(index == 2){
-                    Glide.with(this).load(pictureUtils.mCropImgUri).into(mIvHandIdCard);
-                }
-                uploadImage(pictureUtils.mCropImgUri);
+                uploadImage(pictureUtils.mCropImgUri,null);
             } else if (requestCode == pictureUtils.SELECT_PIC_CODE) {
                 //处理从相册返回结果
                 if (data != null) {
                     pictureUtils.startPhotoRectCrop(data.getData());
                 }
             } else if(requestCode == 111){
-                mScanHelper.paseData(data,ScanHelper.ID_CARD,new ScanHelper.IdCardInter(){
+                final String contentType = data.getStringExtra(CameraActivity.KEY_CONTENT_TYPE);
+                mScanHelper.paseData(data,ScanHelper.ID_CARD_FRONT,new ScanHelper.IdCardInter(){
                     @Override
                     public void idCardCallBack(IDCardResult result) {
-                        String idNumber = result.getIdNumber().toString();
-                        mDetId.setText(idNumber);
-                        mDetName.setText(result.getName().toString());
-                        mDetId.setClearDrawableVisible(false);
-                        mDetName.setClearDrawableVisible(false);
+                        if (CameraActivity.CONTENT_TYPE_ID_CARD_FRONT.equals(contentType)) {
+                            String idNumber = result.getIdNumber().toString();
+                            String name = result.getName().toString();
+                            if(StringUtils.isEmpty(idNumber) && StringUtils.isEmpty(name)){
+                                ToastUtils.showToast(CertificationActivity.this,"识别失败");
+                                return;
+                            }
+
+                            mDetId.setText(idNumber);
+                            mDetName.setText(result.getName().toString());
+                            mDetId.setClearDrawableVisible(false);
+                            mDetName.setClearDrawableVisible(false);
+                        } else if (CameraActivity.CONTENT_TYPE_ID_CARD_BACK.equals(contentType)){
+                            //身份证背面
+                            String words = result.getSignDate().getWords();
+                            if(StringUtils.isEmpty(words)){
+                                ToastUtils.showToast(CertificationActivity.this,"识别失败");
+                                return;
+                            }
+                        }
+
+//                        String filePath = mScanHelper.getSaveFile(CertificationActivity.this.getApplicationContext()).getAbsolutePath();
+//                        uploadImage(null,filePath);
+
+                    }
+                    @Override
+                    public void error(String msg) {
+                        ToastUtils.showToast(CertificationActivity.this,msg);
                     }
                 });
+            }else if(requestCode == 112){
+                String filePath = mScanHelper.getSaveFile(CertificationActivity.this.getApplicationContext()).getAbsolutePath();
+                uploadImage(null,filePath);
             }
         }
     }
 
-    private void uploadImage(Uri cropImgUri) {
+    private void uploadImage(Uri cropImgUri,String filePath) {
         try {
-            File file  = new File(new URI(pictureUtils.mCropImgUri.toString()));
-            UploadHelper.getInstance().uploadStart(file,str -> {
-                UploadBean uploadBean = new Gson().fromJson(str,  UploadBean.class);
-                String status = uploadBean.getStatus();
-                if("ok".equals(status)){
-                    if(index == 0){
-                        frontImg = uploadBean.getResult().getFile_paths().get(0);
-                    }else if(index == 1){
-                        backImg = uploadBean.getResult().getFile_paths().get(0);
-                    }else if(index == 2){
-                        handImg = uploadBean.getResult().getFile_paths().get(0);
+            File file = null;
+            if(StringUtils.isEmpty(filePath)){
+                file  = new File(new URI(pictureUtils.mCropImgUri.toString()));
+            }else{
+                file = new File(filePath);
+            }
+            UploadHelper.getInstance().uploadStart(file,new UploadHelper.CallBackInter(){
+                @Override
+                public void callBack(String str) {
+                    UploadBean uploadBean = new Gson().fromJson(str,  UploadBean.class);
+                    String status = uploadBean.getStatus();
+                    if("ok".equals(status)){
+                        if(index == 0){
+                            frontImg = uploadBean.getResult().getFile_paths().get(0);
+                            Glide.with(CertificationActivity.this).load(Api.BASE_API+frontImg).into(mIvFront);
+                        }else if(index == 1){
+                            backImg = uploadBean.getResult().getFile_paths().get(0);
+                            Glide.with(CertificationActivity.this).load(Api.BASE_API+backImg).into(mIvBack);
+                        }else if(index == 2){
+                            handImg = uploadBean.getResult().getFile_paths().get(0);
+                            Glide.with(CertificationActivity.this).load(Api.BASE_API+handImg).into(mIvHandIdCard);
+                        }
+                    }else{
+                        ToastUtils.showToast(CertificationActivity.this,"上传失败");
                     }
+                }
+                @Override
+                public void error() {
+                    ToastUtils.showToast(CertificationActivity.this,"上传失败");
                 }
             });
         } catch (URISyntaxException e) {

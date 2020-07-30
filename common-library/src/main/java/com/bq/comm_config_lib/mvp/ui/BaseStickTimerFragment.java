@@ -63,7 +63,7 @@ public abstract class BaseStickTimerFragment<T> extends BaseFragment {
     protected String selectTime = "";
     public LinearLayout lltNoDataView;
     TextView selectTimeTv;
-    public String mFloadColor = "#f8f8f8";
+    public String mFloadColor = "#dddddd";
 
     public int mBottom = -20;
 
@@ -207,9 +207,9 @@ public abstract class BaseStickTimerFragment<T> extends BaseFragment {
                     int[] position = new int[2];
                     mRecyclerView.getLocationInWindow(position);
                     lltNoDataView.findViewById(R.id.rlt_month).setBackgroundColor(Color.parseColor(mFloadColor));
+                    lltNoDataView.findViewById(R.id.rlt_month).setVisibility(View.GONE);
                     lltNoDataView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                             height - position[1]- AppUtils.dp2px(lltNoDataView.getContext(),mBottom)));
-                    floadView.setVisibility(View.GONE);
                     adapter.addHeaderView(lltNoDataView);
                     mStatusView.showContent(mRecyclerView);
                 }

@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 时间：2020/7/1
  * 版权：
  */
-public class AddressInfo implements MultiItemEntity, Serializable {
+public class AddressInfo implements MultiItemEntity, Serializable , Comparable<AddressInfo> {
     private String id;
     private String contacts;
     private String gender;
@@ -91,5 +91,10 @@ public class AddressInfo implements MultiItemEntity, Serializable {
     @Override
     public int getItemType() {
         return is_default;
+    }
+
+    @Override
+    public int compareTo(AddressInfo o) {
+        return o.is_default - this.is_default;
     }
 }

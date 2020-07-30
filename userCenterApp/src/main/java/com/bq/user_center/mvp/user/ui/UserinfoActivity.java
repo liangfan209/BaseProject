@@ -117,8 +117,8 @@ public class UserinfoActivity extends BaseActivity implements UserBaseIView{
         UserInfo.CustomerInfoBean customerInfo = info.getCustomer_info();
         List<UserInfoConfigBean.ModuleListBean> moduleList = mUserInfoConfigBean.getModuleList();
         for (UserInfoConfigBean.ModuleListBean moduleListBean : moduleList) {
-            if(moduleListBean.getType().equals("name")){
-                moduleListBean.setValue(customerInfo.getName());
+            if(moduleListBean.getType().equals("nick")){
+                moduleListBean.setValue(customerInfo.getNick());
             }else if(moduleListBean.getType().equals("gender")){
                 moduleListBean.setValue(customerInfo.getGender());
             }else if(moduleListBean.getType().equals("birthday")){
@@ -148,7 +148,13 @@ public class UserinfoActivity extends BaseActivity implements UserBaseIView{
                     @Override
                     protected void convert(@NotNull BaseViewHolder helper, UserInfoConfigBean.ModuleListBean moduleListBean) {
                         helper.setText(R.id.tv_name, moduleListBean.getName());
-                        helper.setText(R.id.tv_value, moduleListBean.getValue());
+                        TextView tvValue = helper.getView(R.id.tv_value);
+                        tvValue.setText(moduleListBean.getValue());
+                        if("手机号".equals(moduleListBean.getName())){
+                            tvValue.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+                        }else{
+                            tvValue.setCompoundDrawablesWithIntrinsicBounds(0,0,R.mipmap.next_step,0);
+                        }
                         boolean hasInterval = moduleListBean.isHasInterval();
                         View interValView = helper.getView(R.id.iv_interval);
                         interValView.setVisibility(hasInterval ? View.VISIBLE : View.GONE);
@@ -224,12 +230,17 @@ public class UserinfoActivity extends BaseActivity implements UserBaseIView{
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 String s = dataList.get(options1);
+                if("男".equals(s)){
+                    s = "man";
+                }else{
+                    s = "woman";
+                }
                 mUserPresenter.updateUserInfo("gender",s);
             }
         }).setSubmitColor(SkinCompatResources.getColor(this,R.color.ui_primary_color))
                 .setCancelColor(SkinCompatResources.getColor(this,R.color.ui_primary_color)).build();
         String sexStr = module.getValue();
-        if("女".equals(sexStr)){
+        if("women".equals(sexStr)){
             pvOptions.setSelectOptions(1);
         }else{
             pvOptions.setSelectOptions(0);
@@ -348,6 +359,11 @@ public class UserinfoActivity extends BaseActivity implements UserBaseIView{
                 if("ok".equals(status)){
                     mUserPresenter.updateUserInfo("head_url",uploadBean.getResult().getFile_paths().get(0));
                 }
+            }
+
+            @Override
+            public void error() {
+
             }
         });
     }

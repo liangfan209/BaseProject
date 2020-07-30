@@ -66,6 +66,11 @@ public class BankCardPresenter implements BasePresenter {
         String info = new Gson().toJson(bankCard);
         mUserCenterHttpReqeustImp.addBank(info, new AbstractReqeustCallback(mBankCardView) {
             @Override
+            public void onStart() {
+                mBankCardView.showLoading();
+            }
+
+            @Override
             public void onSuccess(Object o) {
                 mBankCardView.addBankSuccess();
                 EventBus.getDefault().post(UserCenterEventKey.UPDATE_BANK);
@@ -79,6 +84,11 @@ public class BankCardPresenter implements BasePresenter {
      */
     public void deleteBank(String id){
         mUserCenterHttpReqeustImp.deleteBank(id, new AbstractReqeustCallback(mBankCardView) {
+            @Override
+            public void onStart() {
+                mBankCardView.showLoading();
+            }
+
             @Override
             public void onSuccess(Object o) {
                 mBankCardView.removeSuccess();

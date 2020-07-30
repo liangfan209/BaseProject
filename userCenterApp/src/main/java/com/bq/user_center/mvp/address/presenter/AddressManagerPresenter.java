@@ -14,6 +14,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -40,7 +42,9 @@ public class AddressManagerPresenter implements BasePresenter {
         mUserCenterHttpReqeustImp.getAddressList(new AbstractReqeustCallback<AddressListBean>(mAddressBaseIView) {
             @Override
             public void onSuccess(AddressListBean bean) {
-                mAddressBaseIView.getAddressList(bean.getAddress_list());
+                List<AddressInfo> address_list = bean.getAddress_list();
+//               Collections.sort(address_list);
+                mAddressBaseIView.getAddressList(address_list);
             }
         });
     }
@@ -88,6 +92,11 @@ public class AddressManagerPresenter implements BasePresenter {
         String info = new Gson().toJson(address);
         int isDefault = address.getIs_default();
         mUserCenterHttpReqeustImp.updateAddress(id, info,isDefault, new AbstractReqeustCallback<Object>(mAddressBaseIView) {
+            @Override
+            public void onStart() {
+                mAddressBaseIView.showLoading();
+            }
+
             @Override
             public void onSuccess(Object obj) {
                 mAddressBaseIView.updateAddress();

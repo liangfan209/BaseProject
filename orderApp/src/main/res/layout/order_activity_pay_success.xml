@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <include layout="@layout/layout_public_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@mipmap/icon_pay_success"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="支付方式"
+            android:textColor="@color/ui_txt_normal_color"
+            android:textSize="@dimen/h2_font_size"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_synpol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥"
+                android:layout_marginTop="7dp"
+                android:textColor="@color/ui_primary_color"
+                android:textSize="@dimen/h5_font_size"/>
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16688.88"
+                android:textSize="18sp"
+                android:textColor="@color/ui_primary_color"
+                android:layout_marginLeft="10dp"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="60dp"
+            style="@style/ui_h3_button_primary_style"
+            android:text="签约合同"
+            android:gravity="center"
+            android:layout_marginLeft="38dp"
+            android:layout_marginRight="38dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="22dp"
+            style="@style/ui_h3_button_primary_style"
+            android:text="订单详情"
+            android:background="@drawable/ui_shap_verification_code_select"
+            android:gravity="center"
+            android:textColor="@color/ui_primary_color"
+            android:layout_marginLeft="38dp"
+            android:layout_marginRight="38dp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

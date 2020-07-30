@@ -84,6 +84,7 @@ public class AddressOptionActivity extends BaseActivity implements AddressBaseIV
     protected void attach() {
         ARouter.getInstance().inject(this);
         mTvTitle.setText(optionType == ADDRESS_ADD ? "新增地址" : "编辑地址");
+        mTvProvinece.setTextColor(getResources().getColor(optionType == ADDRESS_ADD?R.color.ui_txt_hint_color:R.color.ui_txt_normal_color));
         mBtAddAddress.setText(optionType == ADDRESS_ADD ? "确定" : "保存");
         EditFormatUtils.phoneNumAddSpace(mDetPhone);
         if(optionType == ADDRESS_EDIT){
@@ -108,7 +109,7 @@ public class AddressOptionActivity extends BaseActivity implements AddressBaseIV
         mDetPhone.setClearDrawableVisible(false);
 
         String gender = mAddressInfo.getGender();
-        if("男".equals(gender)){
+        if("man".equals(gender)){
             mRbMan.setChecked(true);
         }else{
             mRbWoman.setChecked(true);
@@ -127,9 +128,9 @@ public class AddressOptionActivity extends BaseActivity implements AddressBaseIV
             String gender = "";
             boolean isDefault = mSwitchView.isChecked();
             if (mRbMan.isChecked()) {
-                gender = mRbMan.getText().toString();
+                gender = "man";
             } else {
-                gender = mRbWoman.getText().toString();
+                gender = "woman";
             }
             if (StringUtils.isEmpty(city)) {
                 ToastUtils.showToast(this, "请选择地区");
@@ -165,6 +166,7 @@ public class AddressOptionActivity extends BaseActivity implements AddressBaseIV
             CityUtils.getInstance(this).showPickerView(this, new CityUtils.CityCallBack() {
                 @Override
                 public void getCitys(String citys) {
+                    mTvProvinece.setTextColor(getResources().getColor(R.color.ui_txt_normal_color));
                     mTvProvinece.setText(citys);
                 }
             }, arestr);

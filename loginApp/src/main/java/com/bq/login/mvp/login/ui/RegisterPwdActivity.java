@@ -119,6 +119,8 @@ public class RegisterPwdActivity extends BaseActivity implements LoginBaseIView 
     @Override
     public void getVerticalCodeView() {
         ToastUtils.showToastOk(this, "验证码获取成功");
+        countDownHelper = new CountDownHelper(mTvGetVerticalCode, "获取验证码", "重新获取", 60, 1, 2);
+        countDownHelper.start();
     }
 
 
@@ -143,8 +145,6 @@ public class RegisterPwdActivity extends BaseActivity implements LoginBaseIView 
         ToastUtils.showToastOk(this, "修改成功");
         new Handler().postDelayed(() -> {
             finish();
-            ActivityUtils.finishAllActivities();
-            ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
         }, 1000);
     }
 
@@ -177,10 +177,8 @@ public class RegisterPwdActivity extends BaseActivity implements LoginBaseIView 
 //            if (CheckUtils.checkPhoneNumber(this, phoneNumber)) {
 //                mLoginPresenter.getVertificatCode("1", phoneNumber);
 //            }
+            mLoginPresenter.getVertificatCode(phoneNumber,optionType == FORGET_PWD?"forget":"register");
 
-            mLoginPresenter.getVertificatCode(phoneNumber);
-            countDownHelper = new CountDownHelper(mTvGetVerticalCode, "获取验证码", "重新获取", 60, 1, 2);
-            countDownHelper.start();
         } else if (view.getId() == R.id.tv_comfirm_form) {
             //忘记密码
             CommitForm();

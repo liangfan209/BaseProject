@@ -257,6 +257,9 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
         } else if (view.getId() == R.id.cb_eye) {
             boolean checked = mCbEye.isChecked();
             mEtPwd.setInputType(checked ? 128 : 129);
+            if(!mEtPwd.hasFocus()){
+                mEtPwd.setClearDrawableVisible(false);
+            }
         }
     }
 

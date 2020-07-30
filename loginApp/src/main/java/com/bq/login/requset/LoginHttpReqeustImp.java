@@ -52,10 +52,11 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
 
     //获取验证码
     @Override
-    public void getVertificatCode(String phone, RequestCallBackInter callBack) {
+    public void getVertificatCode(String phone,String type, RequestCallBackInter callBack) {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiLogin.API_GET_VERTIFICAT_CODE);
         map.put("number",phone);
+        map.put("sms_type",type);
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<Object>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<Object>> response) {

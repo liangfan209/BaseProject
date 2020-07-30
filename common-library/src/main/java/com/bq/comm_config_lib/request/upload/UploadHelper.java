@@ -35,6 +35,7 @@ public class UploadHelper {
 
     public interface CallBackInter{
         void callBack(String str);
+        void error();
     }
 
     private UploadHelper() {
@@ -105,6 +106,12 @@ public class UploadHelper {
 //                }
                 } catch (IOException e) {
                     e.printStackTrace();
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            inter.error();
+                        }
+                    });
                 }
             }
         }).start();

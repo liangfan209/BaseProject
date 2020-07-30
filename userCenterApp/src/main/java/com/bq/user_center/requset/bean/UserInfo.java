@@ -49,13 +49,13 @@ public class UserInfo implements Serializable{
         private String education;
         private String head_url;
         private String nick;
-        private int is_certify;
+        private Integer is_certify;
 
-        public int getIs_certify() {
+        public Integer getIs_certify() {
             return is_certify;
         }
 
-        public void setIs_certify(int is_certify) {
+        public void setIs_certify(Integer is_certify) {
             this.is_certify = is_certify;
         }
 
@@ -111,8 +111,11 @@ public class UserInfo implements Serializable{
         public String getGender() {
             if("unknown".equals(gender)){
                 return "未知";
+            }else if("women".equals(gender)){
+                return "女";
+            }else{
+                return "男";
             }
-            return gender;
         }
 
         public void setGender(String gender) {

@@ -358,7 +358,6 @@ public class MyClassicsHeader extends RelativeLayout implements RefreshHeader {
 
     @Override
     public void onStateChanged(RefreshLayout refreshLayout, RefreshState oldState, RefreshState newState) {
-        System.out.println("====>>>>>  newState"+ newState);
         switch (newState) {
 
             case None:
@@ -389,7 +388,6 @@ public class MyClassicsHeader extends RelativeLayout implements RefreshHeader {
                 mProgressView.setVisibility(GONE);
                 mLastUpdateText.setVisibility(GONE);
                 mTitleText.setText(REFRESH_HEADER_LOADING);
-                System.out.println("====>>>>>  loading");
                 mLottieView.playAnimation();
                 break;
         }

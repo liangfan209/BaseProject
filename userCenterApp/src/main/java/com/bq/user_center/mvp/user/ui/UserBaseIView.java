@@ -12,9 +12,13 @@ import com.bq.user_center.requset.bean.UserInfo;
  * 版权：
  */
 public interface UserBaseIView extends BaseIView {
-    default void showUser(UserInfo info){};
+    default void showUser(UserInfo info){
+        if(info == null)return;
+    };
     default void logout(){};
     default void certificationView(){};
-    default void getCertificationView(CertificationInfo info){}
+    default void getCertificationView(CertificationInfo info){
+
+    }
 
 }

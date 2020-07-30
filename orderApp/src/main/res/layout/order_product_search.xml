@@ -1,0 +1,47 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@drawable/shap_white_radius_4">
+
+    <TextView
+        android:id="@+id/tv_address_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="湖北"
+        android:textSize="@dimen/h5_font_size"
+        android:layout_marginLeft="9dp"
+        android:textColor="@color/ui_txt_normal_color"
+        android:textStyle="bold"
+        android:drawableRight="@mipmap/icon_address_location"
+        android:drawablePadding="7dp"
+        />
+
+    <ImageView
+        android:layout_width="1px"
+        android:layout_height="15dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/ui_txt_hint_color"
+        />
+    <com.fan.baseuilibrary.view.DeletableEditText
+        android:id="@+id/det_search"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:layout_marginLeft="10dp"
+        android:textSize="@dimen/h5_font_size"
+        android:hint="请输入搜索名称"
+        />
+    <RelativeLayout
+        android:id="@+id/rlt_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@mipmap/icon_search"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+</LinearLayout>

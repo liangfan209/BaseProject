@@ -3,7 +3,7 @@
     {
       "name": "昵称",
       "value": "",
-      "type": "name",
+      "type": "nick",
       "hasInterval": false
     },
 
@@ -24,14 +24,14 @@
       "name": "生日",
       "value": "",
       "type": "birthday",
-      "hasInterval": false
+      "hasInterval": true
     },
 
     {
       "name": "邮箱",
       "value": "",
       "type": "email",
-      "hasInterval": true
+      "hasInterval": false
     },
     {
       "name": "微信",

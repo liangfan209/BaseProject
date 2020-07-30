@@ -13,7 +13,6 @@ import com.baidu.ocr.sdk.model.IDCardResult;
 import com.baidu.ocr.ui.RecognizeService;
 import com.baidu.ocr.ui.camera.CameraActivity;
 import com.baidu.ocr.ui.camera.CameraNativeHelper;
-import com.baidu.ocr.ui.camera.CameraView;
 
 import java.io.File;
 
@@ -34,12 +33,14 @@ import androidx.lifecycle.OnLifecycleEvent;
 public class ScanHelper implements LifecycleObserver {
 
     public static final int BANK_CARD = 1;
-    public static final int ID_CARD = 2;
+    public static final int ID_CARD_FRONT = 2;
+    public static final int ID_CARD_BACK = 3;
 
 
     public static interface IdCardInter{
         default void idCardCallBack(IDCardResult result){}
         default void bankCard(String bankCardId){}
+        default void error(String msg){};
     }
 
     private Context mContext;
@@ -52,26 +53,26 @@ public class ScanHelper implements LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate(@NonNull LifecycleOwner owner){
-        CameraNativeHelper.init(mContext, OCR.getInstance(mContext).getLicense(),
-                new CameraNativeHelper.CameraNativeInitCallback() {
-                    @Override
-                    public void onError(int errorCode, Throwable e) {
-                        String msg;
-                        switch (errorCode) {
-                            case CameraView.NATIVE_SOLOAD_FAIL:
-                                msg = "加载so失败，请确保apk中存在ui部分的so";
-                                break;
-                            case CameraView.NATIVE_AUTH_FAIL:
-                                msg = "授权本地质量控制token获取失败";
-                                break;
-                            case CameraView.NATIVE_INIT_FAIL:
-                                msg = "本地质量控制";
-                                break;
-                            default:
-                                msg = String.valueOf(errorCode);
-                        }
-                    }
-                });
+//        CameraNativeHelper.init(mContext, OCR.getInstance(mContext).getLicense(),
+//                new CameraNativeHelper.CameraNativeInitCallback() {
+//                    @Override
+//                    public void onError(int errorCode, Throwable e) {
+//                        String msg;
+//                        switch (errorCode) {
+//                            case CameraView.NATIVE_SOLOAD_FAIL:
+//                                msg = "加载so失败，请确保apk中存在ui部分的so";
+//                                break;
+//                            case CameraView.NATIVE_AUTH_FAIL:
+//                                msg = "授权本地质量控制token获取失败";
+//                                break;
+//                            case CameraView.NATIVE_INIT_FAIL:
+//                                msg = "本地质量控制";
+//                                break;
+//                            default:
+//                                msg = String.valueOf(errorCode);
+//                        }
+//                    }
+//                });
     }
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     void onDestroy(@NonNull LifecycleOwner owner){
@@ -82,7 +83,7 @@ public class ScanHelper implements LifecycleObserver {
     public void paseData(@Nullable Intent data,int type,IdCardInter inter){
         this.mIdCardInter = inter;
         if (data != null) {
-            if(type == ID_CARD){
+            if(type == ID_CARD_FRONT || type == ID_CARD_BACK){
                 String contentType = data.getStringExtra(CameraActivity.KEY_CONTENT_TYPE);
                 String filePath = getSaveFile(mContext.getApplicationContext()).getAbsolutePath();
                 if (!TextUtils.isEmpty(contentType)) {
@@ -104,12 +105,13 @@ public class ScanHelper implements LifecycleObserver {
                 new RecognizeService.ServiceListener() {
                     @Override
                     public void onResult(String result) {
-                        if(result.contains("erro")){
-                            return;
-                        }
                         if(mIdCardInter != null){
                             mIdCardInter.bankCard(result);
                         }
+                        if(result.contains("erro")){
+                            return;
+                        }
+
                     }
                 });
     }
@@ -132,6 +134,8 @@ public class ScanHelper implements LifecycleObserver {
             }
             @Override
             public void onError(OCRError error) {
+                if(mIdCardInter != null)
+                    mIdCardInter.error(error.getMessage());
             }
         });
     }
@@ -142,20 +146,32 @@ public class ScanHelper implements LifecycleObserver {
     }
 
     public void startScan(int type) {
-        if(type == ID_CARD){
+        if(type == ID_CARD_BACK || type == ID_CARD_FRONT){
+//            Intent intent = new Intent(mContext, CameraActivity.class);
+//            intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+//                    getSaveFile(mContext).getAbsolutePath());
+//            intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
+//                    true);
+//            // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
+//            // 请手动使用CameraNativeHelper初始化和释放模型
+//            // 推荐这样做，可以避免一些activity切换导致的不必要的异常
+//            intent.putExtra(CameraActivity.KEY_NATIVE_MANUAL,
+//                    true);
+//            intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);
+//
+//            ((Activity)mContext).startActivityForResult(intent, 111);
+
+
             Intent intent = new Intent(mContext, CameraActivity.class);
             intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
                     getSaveFile(mContext).getAbsolutePath());
-            intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
-                    true);
-            // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
-            // 请手动使用CameraNativeHelper初始化和释放模型
-            // 推荐这样做，可以避免一些activity切换导致的不必要的异常
-            intent.putExtra(CameraActivity.KEY_NATIVE_MANUAL,
-                    true);
-            intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);
-
+            if(type == ID_CARD_FRONT){
+                intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);
+            }else{
+                intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_BACK);
+            }
             ((Activity)mContext).startActivityForResult(intent, 111);
+
         }else if(type == BANK_CARD){
             Intent intent = new Intent(mContext, CameraActivity.class);
             intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,

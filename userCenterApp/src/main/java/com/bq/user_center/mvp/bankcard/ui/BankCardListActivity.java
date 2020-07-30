@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -45,6 +46,15 @@ public class BankCardListActivity extends BaseActivity implements BankCardBaseIV
     FrameLayout mFltContent;
     BankCardPresenter mBankCardPersenter;
 
+    @BindView(R2.id.llt_content)
+    LinearLayout mLltContent;
+    @BindView(R2.id.rlt_content)
+    RelativeLayout mRltContent;
+    @BindView(R2.id.rlt_add)
+    RelativeLayout mRltAdd;
+
+
+
     @BindView(R2.id.tv_title)
     TextView mTvTitle;
 
@@ -65,7 +75,11 @@ public class BankCardListActivity extends BaseActivity implements BankCardBaseIV
     @Override
     protected void attach() {
         ARouter.getInstance().inject(this);
-        mTvTitle.setText("银行卡列表");
+        mTvTitle.setText("我的银行卡");
+
+        mRltAdd.setOnClickListener(v->{
+            ARouter.getInstance().build(AppArouter.USER_CENTER_BANK_ADD_ACTIVITY).navigation();
+        });
 
         mRefreshLayout = new MyRefreshLayout<BankCardInfo>(this, this);
         mRefreshLayout.setRefresh(false, false);
@@ -85,6 +99,13 @@ public class BankCardListActivity extends BaseActivity implements BankCardBaseIV
 
     @Override
     public void getBankListView(List<BankCardInfo> list) {
+        if(list.size() > 0){
+            mLltContent.setVisibility(View.GONE);
+            mRltContent.setVisibility(View.VISIBLE);
+        }else{
+            mLltContent.setVisibility(View.VISIBLE);
+            mRltContent.setVisibility(View.GONE);
+        }
         mRefreshLayout.adapter.setNewData(list);
         mRefreshLayout.adapter.notifyDataSetChanged();
     }
@@ -100,11 +121,13 @@ public class BankCardListActivity extends BaseActivity implements BankCardBaseIV
             @Override
             protected void convert(@NotNull BaseViewHolder helper, BankCardInfo item) {
                 String bankNumber = item.getBank_number();
-                if(bankNumber.length() > 4){
-                    helper.setText(R.id.tv_card_number,String.format("**** **** **** %s",bankNumber.substring(bankNumber.length()-4)));
-                }else{
-                    helper.setText(R.id.tv_card_number,bankNumber);
-                }
+//                if(bankNumber.length() > 4){
+//                    helper.setText(R.id.tv_card_number,String.format("**** **** **** %s",bankNumber.substring(bankNumber.length()-4)));
+//                }else{
+//                    helper.setText(R.id.tv_card_number,bankNumber);
+//                }
+
+                helper.setText(R.id.tv_card_number,bankNumber);
                 helper.setText(R.id.tv_card_name, item.getBank_name());
                 ImageView ivCard = helper.getView(R.id.iv_bank);
                 if (!StringUtils.isEmpty(item.getBank_code())) {

@@ -24,6 +24,8 @@ public class AppArouter {
 
     public static final String LOGIN_SERVER = LOGIN+"/LoginService";
     public static final String LOGOUT_SERVER = LOGIN+"/logoutService";
+    public static final String SMS_SERVER = LOGIN+"/smsService";
+
 
     //用户中心
     public static final String USER_CENTER = "/userCenter";
@@ -48,6 +50,10 @@ public class AppArouter {
     public static final String WALLET_RECHARGE_ACTIVITY = WALLET+"/RechargeActivity";
     public static final String WALLET_TRANSACTION_DETAIL_ACTIVITY = WALLET+"/TransactionDetailActivity";
     public static final String WALLET_TACK_CASH_ACTIVITY = WALLET+"/TackCashActivity";
+
+    public static final String WALLET_SECURITY_SETTIGN_PWD_ACTIVITY = WALLET+"/security/PayPwdSettingActivity";
+
+
 
 
     //我的订单

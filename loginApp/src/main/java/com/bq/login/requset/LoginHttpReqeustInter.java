@@ -17,7 +17,7 @@ public interface LoginHttpReqeustInter {
     void logout(RequestCallBackInter callBack);
 
     //获取验证码
-    void getVertificatCode(String phone, RequestCallBackInter callBack);
+    void getVertificatCode(String phone,String type, RequestCallBackInter callBack);
 
     //忘记密码
    void forgetPwd(String phone, String password, String code, RequestCallBackInter callBack);

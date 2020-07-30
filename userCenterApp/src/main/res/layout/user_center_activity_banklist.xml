@@ -9,7 +9,17 @@
 
     <include layout="@layout/layout_public_title"/>
 
+    <LinearLayout
+        android:id="@+id/llt_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/user_center_layout_add_card"/>
+        <include layout="@layout/no_data_view"/>
+    </LinearLayout>
+
     <RelativeLayout
+        android:id="@+id/rlt_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <FrameLayout

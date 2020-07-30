@@ -128,9 +128,11 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
                     protected void convert(@NotNull BaseViewHolder helper,
                                            UserCenterConfigBean.ModuleListBean.TabListBean tabListBean) {
                         helper.setText(R.id.tv_name,tabListBean.getName());
-                        helper.setText(R.id.tv_right,tabListBean.getValue());
+                        TextView tvRight = helper.getView(R.id.tv_right);
+                        tvRight.setText(tabListBean.getValue());
                         int resId = getResources().getIdentifier(tabListBean.getIcon(), "mipmap",
                                 UserFragment.this.getActivity().getPackageName());
+                        String name = tabListBean.getName();
                         ImageView ivImg = helper.getView(R.id.iv_img);
                         ivImg.setBackgroundResource(resId);
                     }
@@ -145,6 +147,10 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
                 ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
                         .withString("h5url",path).navigation();
             }else{
+                if(mUserinfo == null){
+                    mUserPersenter.showUserInfo();
+                    return;
+                }
                 if("实名认证".equals(tabBean.getName())){
                     ARouter.getInstance().build(path).withInt("isCertication",mUserinfo.getCustomer_info().getIs_certify()).navigation();
                 }else{
@@ -193,13 +199,13 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
             List<UserCenterConfigBean.ModuleListBean.TabListBean> data = baseQuickAdapter.getData();
             for (UserCenterConfigBean.ModuleListBean.TabListBean datum : data) {
                 if(datum.getName().equals("实名认证")) {
-                    datum.setValue(info.getCustomer_info().getIs_certify() == 1 ? "已实名" : "未实名");
+                    datum.setValue(info.getCustomer_info().getIs_certify() == 1 ? "已实名" : "");
                 }
                 baseQuickAdapter.notifyDataSetChanged();
             }
         }
         this.mUserinfo = info;
-        mTvNickName.setText(info.getCustomer_info().getName());
+        mTvNickName.setText(info.getCustomer_info().getNick());
         Glide.with(this).load(Api.BASE_API+ info.getCustomer_info().getHead_url()).into(mIvHead);
 
     }

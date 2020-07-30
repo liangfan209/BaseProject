@@ -61,6 +61,12 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs','../walletApp/libs'
+    }
+}
+
 dependencies {
     implementation project(path: ':common-library')
     if (!isBuildModule.toBoolean()) {
@@ -71,6 +77,4 @@ dependencies {
     }
     annotationProcessor rootProject.ext.dependencies["butterknife.compiler"]
     annotationProcessor rootProject.ext.dependencies["arouter.compiler"]
-
-//    compile(name: 'alipaySdk-15.6.4-20190611174341', ext: 'aar')
 }

@@ -16,7 +16,11 @@ import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
+import com.bq.comm_config_lib.request.SignJsonCallBack;
 import com.bq.comm_config_lib.utils.ScanHelper;
+import com.bq.comm_config_lib.utils.Utils;
+import com.bq.netlibrary.NetManager;
+import com.bq.netlibrary.http.BaseResponse;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.mvp.bankcard.presenter.BankCardPresenter;
@@ -26,6 +30,10 @@ import com.bq.utilslib.EditFormatUtils;
 import com.fan.baseuilibrary.utils.CountDownHelper;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
+import com.lzy.okgo.model.Response;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.annotation.Nullable;
 import butterknife.BindView;
@@ -140,12 +148,27 @@ public class AddBankActivity extends BaseActivity implements BankCardBaseIView {
     @OnClick({R2.id.tv_get_verification_code, R2.id.tv_comfirm_form,R2.id.iv_scan,R2.id.iv_scan1})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.tv_get_verification_code){
-            countDownHelper = new CountDownHelper(mTvGetVerificationCode, "获取验证码", "重新获取", 60, 1,2);
-            countDownHelper.start();
+            showLoading();
+            String phone = mEtPhone.getText().toString().replaceAll(" ","");
+            Map<String,String> map = new HashMap<>();
+            map.put("api", "customer.account.vcode.phone");
+            map.put("number",phone);
+            map.put("sms_type","bindcard");
+            NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<Object>>(){
+                @Override
+                public void onSuccess(Response<BaseResponse<Object>> response) {
+                    super.onSuccess(response);
+                    AddBankActivity.this.onComplete();
+                    countDownHelper = new CountDownHelper(mTvGetVerificationCode, "获取验证码", "重新获取", 60, 1,2);
+                    countDownHelper.start();
+                }
+            });
+
+
         }else if(view.getId() == R.id.tv_comfirm_form){
-            String cardNum = mEtBank.getText().toString();
-            String idNum = mEtIdCard.getText().toString();
-            String phoneNum = mEtPhone.getText().toString();
+            String cardNum = mEtBank.getText().toString().replaceAll(" ","");
+            String idNum = mEtIdCard.getText().toString().replaceAll(" ","");
+            String phoneNum = mEtPhone.getText().toString().replaceAll(" ","");
             String name = mEtName.getText().toString();
             String code = mEtVerticalCode.getText().toString();
             if(StringUtils.isEmpty(cardNum)){
@@ -171,9 +194,13 @@ public class AddBankActivity extends BaseActivity implements BankCardBaseIView {
             }
             mBankCardPersenter.addBankCard(new BankCardInfo(name,cardNum,phoneNum,idNum,code));
         } else if (view.getId() == R.id.iv_scan) {
-            mScanHelper.startScan(ScanHelper.BANK_CARD);
+            if (!Utils.isFastDoubleClick(mIvScan, 1000)) {
+                mScanHelper.startScan(ScanHelper.BANK_CARD);
+            }
         } else if(view.getId() == R.id.iv_scan1){
-            mScanHelper.startScan(ScanHelper.ID_CARD);
+            if (!Utils.isFastDoubleClick(mIvScan1, 1000)) {
+                mScanHelper.startScan(ScanHelper.ID_CARD_FRONT);
+            }
         }
     }
 
@@ -181,18 +208,35 @@ public class AddBankActivity extends BaseActivity implements BankCardBaseIView {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if( resultCode == Activity.RESULT_OK){
-            if(resultCode == 111){
-                mScanHelper.paseData(data,ScanHelper.ID_CARD,new ScanHelper.IdCardInter(){
+            if(requestCode == 111){
+                mScanHelper.paseData(data,ScanHelper.ID_CARD_FRONT,new ScanHelper.IdCardInter(){
                     @Override
                     public void idCardCallBack(IDCardResult result) {
+                        String idNumber = result.getIdNumber().toString();
+                        if(StringUtils.isEmpty(idNumber)){
+                            ToastUtils.showToast(AddBankActivity.this,"识别失败");
+                            return;
+                        }
+
                         mEtIdCard.setText(result.getIdNumber().toString());
                         mEtIdCard.setClearDrawableVisible(false);
+                    }
+
+                    @Override
+                    public void error(String msg) {
+                        ToastUtils.showToast(AddBankActivity.this,msg);
                     }
                 });
             }else if(requestCode == 112){
                 mScanHelper.paseData(data,ScanHelper.BANK_CARD,new ScanHelper.IdCardInter(){
                     @Override
                     public void bankCard(String bankCardId) {
+                        mEtBank.setText(bankCardId);
+                        mEtBank.setClearDrawableVisible(false);
+                    }
+                    @Override
+                    public void error(String msg) {
+                        ToastUtils.showToast(AddBankActivity.this,msg);
                     }
                 });
             }

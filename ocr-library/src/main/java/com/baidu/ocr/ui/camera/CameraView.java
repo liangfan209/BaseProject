@@ -217,6 +217,9 @@ public class CameraView extends FrameLayout {
         }
 
         if (isNeedSetImage) {
+            if( this.maskType == maskView.MASK_TYPE_BANK_CARD){
+                hintView.setVisibility(View.GONE);
+            }
             hintView.setImageResource(hintResourceId);
             hintViewTextWrapper.setVisibility(INVISIBLE);
         }
