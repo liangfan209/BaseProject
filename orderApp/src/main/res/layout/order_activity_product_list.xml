@@ -5,47 +5,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <include layout="@layout/layout_public_title"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2px"/>
+    <include layout="@layout/order_product_search"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="2dp">
-        <include layout="@layout/order_product_search"/>
-
-
-        <com.zhpan.bannerview.BannerViewPager
-            android:id="@+id/banner_advertising"
+       >
+        <ImageView
+            android:id="@+id/iv_advertising"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            app:bvp_indicator_visibility="gone"/>
+            android:background="@mipmap/icon_advertising"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp">
 
             <TextView
+                android:id="@+id/tv_school_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="学校"
+                android:drawableRight="@mipmap/order_icon_xiala_unselect"
+                android:drawablePadding="5dp"
                 android:textSize="@dimen/h3_font_size"
                 android:textColor="@color/ui_txt_normal_color"
                 />
 
             <TextView
+                android:id="@+id/tv_profession_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="专业"
+                android:drawableRight="@mipmap/order_icon_xiala_unselect"
+                android:drawablePadding="5dp"
                 android:textSize="@dimen/h3_font_size"
                 android:textColor="@color/ui_txt_normal_color"
                 android:layout_centerHorizontal="true"
                 />
             <TextView
+                android:id="@+id/tv_year_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="学年"
+                android:drawableRight="@mipmap/order_icon_xiala_unselect"
+                android:drawablePadding="5dp"
                 android:textSize="@dimen/h3_font_size"
                 android:textColor="@color/ui_txt_normal_color"
                 android:layout_alignParentRight="true"
@@ -53,46 +65,65 @@
         </RelativeLayout>
 
         <com.fan.baseuilibrary.view.FlowLayout
+            android:id="@+id/flow_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp">
 
-            <TextView
+            <com.fan.baseuilibrary.view.DeleteTextView
+                android:id="@+id/tv_school"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="华中科技大学 X"
+                android:text="华中科技大学"
                 android:textColor="@color/ui_primary_color"
                 android:padding="6dp"
+                android:drawablePadding="5dp"
                 android:textSize="@dimen/h5_font_size"
+                android:visibility="gone"
+                android:drawableRight="@mipmap/order_icon_pression_del"
                 android:background="@drawable/ui_shap_verification_code_select"/>
 
-            <TextView
+            <com.fan.baseuilibrary.view.DeleteTextView
+                android:id="@+id/tv_profession"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="计算机科学与技术 X"
+                android:text="计算机科学与技术"
+                android:visibility="gone"
                 android:textColor="@color/ui_primary_color"
                 android:padding="6dp"
+                android:drawablePadding="5dp"
                 android:textSize="@dimen/h5_font_size"
+                android:drawableRight="@mipmap/order_icon_pression_del"
                 android:background="@drawable/ui_shap_verification_code_select"
                 android:layout_marginLeft="14dp"/>
 
-            <TextView
+            <com.fan.baseuilibrary.view.DeleteTextView
+                android:id="@+id/tv_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="与技术 X"
+                android:text="3个学年"
                 android:textColor="@color/ui_primary_color"
                 android:padding="6dp"
                 android:textSize="@dimen/h5_font_size"
+                android:drawablePadding="5dp"
+                android:visibility="gone"
+                android:drawableRight="@mipmap/order_icon_pression_del"
                 android:background="@drawable/ui_shap_verification_code_select"
                 android:layout_marginLeft="14dp"/>
         </com.fan.baseuilibrary.view.FlowLayout>
+
+        <FrameLayout
+            android:id="@+id/flt_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_product_list"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-
     </LinearLayout>
 </LinearLayout>

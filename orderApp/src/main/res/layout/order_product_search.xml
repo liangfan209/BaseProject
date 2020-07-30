@@ -4,6 +4,8 @@
     android:layout_height="35dp"
     android:orientation="horizontal"
     android:gravity="center_vertical"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:background="@drawable/shap_white_radius_4">
 
     <TextView
@@ -31,6 +33,7 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:layout_marginLeft="10dp"
+        style="@style/ui_edit_txt_style"
         android:textSize="@dimen/h5_font_size"
         android:hint="请输入搜索名称"
         />

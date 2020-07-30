@@ -3,107 +3,123 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
+    android:background="#f2f2f2"
     android:paddingTop="20dp">
-
     <include layout="@layout/order_product_search" />
-    <ScrollView
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:scrollbars="none"
-        >
-        <LinearLayout
+        android:background="#f2f2f2">
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:id="@+id/flt_home_banner"
+            android:orientation="vertical"
+            android:scrollbars="none"
+            >
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="400dp"/>
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="热门学校"
-                    android:textColor="@color/ui_txt_normal_color"
-                    android:textSize="@dimen/h2_font_size"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:id="@+id/tv_hot_school"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="查看更多>"
-                    android:textColor="@color/ui_primary_color"
-                    android:textSize="@dimen/h5_font_size"
-                    android:layout_alignParentRight="true"
-                    />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_school"
-                    android:layout_marginTop="40dp"
+                <FrameLayout
+                    android:id="@+id/flt_home_banner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </RelativeLayout>
+                    android:layout_height="375dp"/>
 
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="热门资讯"
-                    android:textColor="@color/ui_txt_normal_color"
-                    android:textSize="@dimen/h2_font_size"
-                    android:textStyle="bold"
-                    />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_news"
-                    android:layout_marginTop="40dp"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="-10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="热门学校"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h2_font_size"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:id="@+id/tv_hot_school"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="查看更多>"
+                        android:layout_marginRight="15dp"
+                        android:textColor="@color/ui_primary_color"
+                        android:textSize="@dimen/h5_font_size"
+                        android:layout_alignParentRight="true"
+                        />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_school"
+                        android:layout_marginTop="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        />
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="热门专业"
-                    android:textColor="@color/ui_txt_normal_color"
-                    android:textSize="@dimen/h2_font_size"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:id="@+id/tv_hot_profession"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="查看更多>"
-                    android:textColor="@color/ui_primary_color"
-                    android:textSize="@dimen/h5_font_size"
-                    android:layout_alignParentRight="true"
-                    />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_profession"
-                    android:layout_marginTop="35dp"
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="热门资讯"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h2_font_size"
+                        android:textStyle="bold"
+                        />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_news"
+                        android:layout_marginTop="40dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="热门专业"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h2_font_size"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:id="@+id/tv_hot_profession"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="查看更多>"
+                        android:textColor="@color/ui_primary_color"
+                        android:textSize="@dimen/h5_font_size"
+                        android:layout_alignParentRight="true"
+                        />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_profession"
+                        android:layout_marginTop="35dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"/>
+                </RelativeLayout>
 
 
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
+        </ScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
 </LinearLayout>
 
 

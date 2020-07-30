@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@drawable/shap_white_radius_10"
+    android:layout_marginBottom="15dp">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        >
+        <ImageView
+            android:layout_width="115dp"
+            android:layout_height="65dp"
+            android:src="@mipmap/order_icon_item_img"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="145dp"
+        android:layout_marginTop="18dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/h3_font_size"
+            android:textColor="@color/ui_txt_normal_color"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="华中农业大学"
+            android:textStyle="bold"
+            />
+
+        <com.fan.baseuilibrary.view.FlowLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h5_font_size"
+                android:textColor="@color/ui_txt_normal_color"
+                android:text="专科： 14个专业   本科： 14个专业 "
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h5_font_size"
+                android:layout_marginTop="7dp"
+                android:textColor="@color/ui_txt_normal_color"
+                android:text="考研： 14个专业   资格证： 14个专业 "
+                />
+        </com.fan.baseuilibrary.view.FlowLayout>
+    </LinearLayout>
+
+</RelativeLayout>

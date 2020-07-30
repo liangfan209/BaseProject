@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity {
             R.mipmap.icon_home_mine_select};
     private ArrayList<Fragment> mFragments = new ArrayList<>();
 
-    private Fragment mUserFragment,skinFragment;
+    private Fragment mUserFragment,skinFragment,mHomeFragment;
     private int currentIndex = 0;
 
     @Override
@@ -100,6 +100,7 @@ public class MainActivity extends BaseActivity {
             mTablayout.setCurrentTab(index);
             selectFragment(index);
         }
+        selectFragment(0);
 //        SkinCompatManager.getInstance().loadSkin("appskin-debug.apk", null, SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
     }
 
@@ -113,6 +114,14 @@ public class MainActivity extends BaseActivity {
         FragmentTransaction transaction = fm.beginTransaction();
         hideFragments(transaction);
         switch (index) {
+            case 0:
+                if (mHomeFragment == null) {
+                    mHomeFragment = (Fragment) ARouter.getInstance().build(AppArouter.ORDER_HOME_FRAGMENT).navigation();
+                    transaction.add(R.id.flt_content, mHomeFragment, "flag" + index);
+                }else{
+                    transaction.show(mHomeFragment);
+                }
+                break;
             case 1:
                 if (skinFragment == null) {
                     skinFragment = new MainFragment();
@@ -122,8 +131,6 @@ public class MainActivity extends BaseActivity {
                 }
                 break;
             case 2:
-
-
                 if (mUserFragment == null) {
                     mUserFragment = (Fragment) ARouter.getInstance().build(AppArouter.USER_CENTER_USER_FRAGMENT).navigation();
                     transaction.add(R.id.flt_content, mUserFragment, "flag" + index);
@@ -146,6 +153,9 @@ public class MainActivity extends BaseActivity {
         }
         if(skinFragment != null){
             transaction.hide(skinFragment);
+        }
+        if(mHomeFragment != null){
+            transaction.hide(mHomeFragment);
         }
     }
 

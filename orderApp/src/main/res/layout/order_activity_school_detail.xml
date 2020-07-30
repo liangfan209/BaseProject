@@ -10,26 +10,72 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="100dp"
+            android:background="@drawable/ui_shap_jianbian_primary_bg">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    >
+                    <ImageView
+                        android:layout_width="115dp"
+                        android:layout_height="65dp"
+                        android:src="@mipmap/order_icon_item_img"
+                        />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="145dp"
+                    android:layout_marginTop="18dp">
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/h3_font_size"
+                        android:textColor="@color/white"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:text="华中农业大学"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:id="@+id/tv_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:ellipsize="end"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/h5_font_size"
+                        android:text="学校描述学校描述学校描述学校描述学校描述学校描述学校描述学校描述学校描述学校描述学校描述"
+                        />
+                </LinearLayout>
+
+
         </RelativeLayout>
 
         <com.fan.baseuilibrary.view.flycotablayout.widget.SkinSlidingTabLayout
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
             app:tl_indicator_color="@color/ui_primary_color"
             app:tl_indicator_height="3dp"
             app:tl_textUnselectColor="@color/ui_txt_normal_color"
             app:tl_textSelectColor="@color/ui_primary_color"
             app:tl_textsize="18sp"
-            app:tl_indicator_width_equal_title="true"
-            app:tl_tab_space_equal="true"
-            app:tl_iconVisible="false"/>
+            app:tl_iconVisible="false"
+            app:tl_indicator_width="80dp"
+            />
         <com.fan.baseuilibrary.view.NoAnimationViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"

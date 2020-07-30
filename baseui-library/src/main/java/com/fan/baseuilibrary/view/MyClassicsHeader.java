@@ -148,7 +148,6 @@ public class MyClassicsHeader extends RelativeLayout implements RefreshHeader {
 
         mArrowView.setVisibility(View.GONE);
         mTitleText.setVisibility(View.GONE);
-        mTitleText.setVisibility(View.GONE);
         mProgressView.setVisibility(View.VISIBLE);
 
 //        if (isInEditMode()) {

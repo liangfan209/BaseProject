@@ -16,8 +16,8 @@
 
     <ImageView
         android:id="@+id/iv_img"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         skin:enable="true"/>
 
     <TextView
@@ -25,8 +25,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textColor="@color/ui_txt_hint_color"
+        android:textColor="@color/ui_txt_normal_color"
         android:textSize="@dimen/h5_font_size"
+        android:textStyle="bold"
         skin:enable="true"/>
 
 </LinearLayout>

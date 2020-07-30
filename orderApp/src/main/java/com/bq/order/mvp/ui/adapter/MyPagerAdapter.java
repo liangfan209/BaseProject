@@ -1,4 +1,4 @@
-package com.bq.order.mvp.order.ui.adapter;
+package com.bq.order.mvp.ui.adapter;
 
 import java.util.List;
 

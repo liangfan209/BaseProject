@@ -56,7 +56,8 @@ public class AppApplication extends BaseApplication {
 
                 layout.setPrimaryColorsId(R.color.white, R.color.color_999999);//全局设置主题颜色
                 MyClassicsHeader header = new MyClassicsHeader(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
-                header.setAccentColor(context.getResources().getColor(R.color.white));
+//                header.setAccentColor(context.getResources().getColor(R.color.white));
+                header.setBackgroundColor(context.getResources().getColor(R.color.ui_txt_hint_color));
                 header.getTitleText().setTextSize(12);
                 header.getLastUpdateText().setVisibility(View.GONE);
                 header.setProgressBitmap(null);

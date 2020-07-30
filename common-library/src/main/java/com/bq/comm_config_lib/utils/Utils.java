@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.bq.comm_config_lib.R;
+import com.bumptech.glide.request.RequestOptions;
+import com.fan.baseuilibrary.utils.RoundCornersTransformation;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
@@ -93,6 +95,35 @@ public class Utils {
             mLastClickViewId = viewId;
             return false;
         }
+    }
+
+
+//    public static RequestOptions getRequestOptionRadus(Context context, int dp){
+//        RoundCornersTransformation transformation =
+//                new RoundCornersTransformation(context,
+//                        SizeUtils.dp2px(dp),
+//                        RoundCornersTransformation.CornerType.ALL);
+//        return new RequestOptions().transform(transformation)
+//                .placeholder(R.mipmap.placeholder_small_pic)
+//                .fallback(R.mipmap.placeholder_small_pic);
+//    }
+
+    public static RequestOptions getRequestOptionRadus(Context context, int dp){
+        RoundCornersTransformation transformation =
+                new RoundCornersTransformation(context,
+                        SizeUtils.dp2px(dp),
+                        RoundCornersTransformation.CornerType.ALL);
+        RequestOptions requestOptions = Utils.getRequestOption();
+        requestOptions.transform(transformation);
+        return requestOptions;
+    }
+
+
+    public static RequestOptions getRequestOption() {
+        return new RequestOptions()
+                .placeholder(R.mipmap.placeholder_small_pic)
+                .fallback(R.mipmap.placeholder_small_pic);
+
     }
 
 

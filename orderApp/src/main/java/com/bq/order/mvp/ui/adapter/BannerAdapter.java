@@ -1,10 +1,10 @@
-package com.bq.order.mvp.order.ui.adapter;
+package com.bq.order.mvp.ui.adapter;
 
 import android.view.View;
 
 import com.bq.order.R;
-import com.bq.order.mvp.order.ui.hodler.NetViewHolder;
-import com.bq.order.mvp.order.ui.hodler.NewTypeViewHolder;
+import com.bq.order.mvp.ui.hodler.NetViewHolder;
+import com.bq.order.mvp.ui.hodler.NewTypeViewHolder;
 import com.bq.order.requset.bean.BannerData;
 import com.zhpan.bannerview.BaseBannerAdapter;
 import com.zhpan.bannerview.BaseViewHolder;
@@ -18,6 +18,8 @@ import com.zhpan.bannerview.BaseViewHolder;
 public class BannerAdapter extends BaseBannerAdapter<BannerData, BaseViewHolder<BannerData>> {
 
     private NewTypeViewHolder.HolderInter mHolderInter;
+
+
     @Override
     protected void onBind(BaseViewHolder<BannerData> holder, BannerData data, int position, int pageSize) {
         holder.bindData(data, position, pageSize);
@@ -25,6 +27,9 @@ public class BannerAdapter extends BaseBannerAdapter<BannerData, BaseViewHolder<
 
     public BannerAdapter(NewTypeViewHolder.HolderInter inter) {
         this.mHolderInter = inter;
+    }
+
+    public BannerAdapter() {
     }
 
     @Override

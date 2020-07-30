@@ -7,18 +7,19 @@
     android:layout_marginRight="14dp"
     android:orientation="vertical">
 
-
-
     <com.zhpan.bannerview.BannerViewPager
         android:id="@+id/banner_view"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="182dp"
+        app:bvp_round_corner="7dp"
         app:bvp_indicator_visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_product_type"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"/>
 
     <com.zhpan.bannerview.BannerViewPager
         android:id="@+id/banner_advertising"

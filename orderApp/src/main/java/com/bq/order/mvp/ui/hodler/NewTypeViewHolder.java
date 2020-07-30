@@ -1,4 +1,4 @@
-package com.bq.order.mvp.order.ui.hodler;
+package com.bq.order.mvp.ui.hodler;
 
 import android.view.View;
 
