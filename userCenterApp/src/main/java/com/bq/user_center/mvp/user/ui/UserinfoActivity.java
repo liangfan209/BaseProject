@@ -240,7 +240,7 @@ public class UserinfoActivity extends BaseActivity implements UserBaseIView{
         }).setSubmitColor(SkinCompatResources.getColor(this,R.color.ui_primary_color))
                 .setCancelColor(SkinCompatResources.getColor(this,R.color.ui_primary_color)).build();
         String sexStr = module.getValue();
-        if("women".equals(sexStr)){
+        if("女".equals(sexStr)){
             pvOptions.setSelectOptions(1);
         }else{
             pvOptions.setSelectOptions(0);

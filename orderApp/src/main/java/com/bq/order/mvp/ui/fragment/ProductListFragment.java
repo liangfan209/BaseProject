@@ -1,16 +1,25 @@
 package com.bq.order.mvp.ui.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
+import com.bq.comm_config_lib.request.Api;
+import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
+import com.bq.order.mvp.presenter.ProductPresenter;
+import com.bq.order.mvp.ui.ProductIview;
+import com.bq.order.requset.bean.ProductInfo;
+import com.bq.order.requset.bean.ProductSearchBean;
+import com.bq.utilslib.AppUtils;
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,12 +35,17 @@ import butterknife.BindView;
  * 时间：2020/7/30
  * 版权：
  */
-public class ProductListFragment extends BaseFragment implements MyRefreshLayout.LayoutInterface<String>{
+public class ProductListFragment extends BaseFragment implements MyRefreshLayout.LayoutInterface<ProductInfo>
+        , ProductIview {
+
+    private String mSearchInfo;
 
     @BindView(R2.id.flt_content)
     FrameLayout mFltContent;
-    private List<String> mlist = new ArrayList<>();
+    private List<ProductInfo> mlist = new ArrayList<>();
     private int mtype = 0;
+
+    private ProductPresenter mProductPresenter;
 
     public static ProductListFragment getInstance(int type) {
         ProductListFragment fragment = new ProductListFragment();
@@ -48,7 +62,10 @@ public class ProductListFragment extends BaseFragment implements MyRefreshLayout
 
     @Override
     protected BasePresenter createPersenter() {
-        return null;
+        ProductSearchBean productSearchBean = new ProductSearchBean("湖北","武汉");
+        mSearchInfo = new Gson().toJson(productSearchBean);
+        mProductPresenter = new ProductPresenter(this);
+        return mProductPresenter;
     }
 
     @Override
@@ -60,23 +77,38 @@ public class ProductListFragment extends BaseFragment implements MyRefreshLayout
     }
 
     @Override
-    public BaseQuickAdapter<String, ? extends BaseViewHolder> createAdapter() {
-        return new BaseQuickAdapter<String, BaseViewHolder>(R.layout.order_item_product,mlist) {
+    public BaseQuickAdapter<ProductInfo, ? extends BaseViewHolder> createAdapter() {
+        return new BaseQuickAdapter<ProductInfo, BaseViewHolder>(R.layout.order_item_product,mlist) {
             @Override
-            protected void convert(@NotNull BaseViewHolder helper, String s) {
+            protected void convert(@NotNull BaseViewHolder helper, ProductInfo bean) {
+                ImageView iv = helper.getView(R.id.iv_item);
+                Glide.with(iv).load(Api.BASE_API+bean.getThumbnail())
+                        .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
+                helper.setText(R.id.tv_title,bean.getTitle());
+                helper.setText(R.id.tv_school,bean.getSchool_name());
+                helper.setText(R.id.tv_profession,bean.getMajor_name());
+                helper.setText(R.id.tv_duration,bean.getDuration());
+                helper.setText(R.id.tv_address,bean.getSchool_city());
+                helper.setText(R.id.tv_brand,bean.getBrand_name());
+                helper.setText(R.id.tv_product,bean.getProduction_name());
+                helper.setText(R.id.tv_price, AppUtils.getDouble2(bean.getSale_price()));
             }
         };
     }
 
     @Override
+    public void getProductListView(List<ProductInfo> list) {
+        mRefreshLayout.addData(list);
+    }
+
+    @Override
     public void loadData(int page, int pageSize) {
-        mlist.add("1");
-        mlist.add("1");
-        mlist.add("1");
-        mlist.add("1");
-        mRefreshLayout.addData(mlist);
-        new Handler().postDelayed(()->{
-            onComplete();
-        },1000);
+        mProductPresenter.getSearchProductList(page,mSearchInfo);
+    }
+
+
+    public void updateFragment(String searchInfo){
+        this.mSearchInfo = searchInfo;
+        mRefreshLayout.autoRefresh();
     }
 }

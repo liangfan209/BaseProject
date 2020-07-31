@@ -66,6 +66,8 @@
         <item name="android:textCursorDrawable">@drawable/ui_edit_cursor</item>
         <item name="android:drawableRight">@mipmap/icon_clear</item>
         <item name="android:maxLines">1</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
     </style>
 
     <!-- 地址管理页面  end-->

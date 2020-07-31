@@ -111,7 +111,7 @@ public class UserInfo implements Serializable{
         public String getGender() {
             if("unknown".equals(gender)){
                 return "未知";
-            }else if("women".equals(gender)){
+            }else if("woman".equals(gender)){
                 return "女";
             }else{
                 return "男";

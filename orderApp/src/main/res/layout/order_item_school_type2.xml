@@ -13,8 +13,10 @@
         android:layout_marginLeft="20dp"
         >
         <ImageView
+            android:id="@+id/iv_icon"
             android:layout_width="115dp"
             android:layout_height="65dp"
+            android:scaleType="fitXY"
             android:src="@mipmap/order_icon_item_img"
             />
     </androidx.cardview.widget.CardView>
@@ -27,6 +29,7 @@
         android:layout_marginTop="18dp">
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/h3_font_size"
@@ -37,12 +40,14 @@
             android:textStyle="bold"
             />
 
-        <com.fan.baseuilibrary.view.FlowLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_row1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/h5_font_size"
@@ -50,6 +55,7 @@
                 android:text="专科： 14个专业   本科： 14个专业 "
                 />
             <TextView
+                android:id="@+id/tv_row2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/h5_font_size"
@@ -57,7 +63,7 @@
                 android:textColor="@color/ui_txt_normal_color"
                 android:text="考研： 14个专业   资格证： 14个专业 "
                 />
-        </com.fan.baseuilibrary.view.FlowLayout>
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

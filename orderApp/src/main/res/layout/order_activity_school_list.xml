@@ -23,10 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:background="@mipmap/icon_advertising"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_school_list"
-            android:layout_marginTop="15dp"
+        <FrameLayout
+            android:id="@+id/flt_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

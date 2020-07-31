@@ -3,9 +3,14 @@ package com.bq.comm_config_lib.utils;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.bq.comm_config_lib.R;
+import com.bq.comm_config_lib.request.Api;
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fan.baseuilibrary.utils.RoundCornersTransformation;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -95,6 +100,17 @@ public class Utils {
             mLastClickViewId = viewId;
             return false;
         }
+    }
+
+    //取消键盘，取消焦点事件
+    public static void cancelFocus(EditText et){
+        et.clearFocus();
+        KeyboardUtils.hideSoftInput(et);
+    }
+
+    public static void showImage(String path, ImageView iv){
+        Glide.with(iv).load(Api.BASE_API+path)
+                .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
     }
 
 

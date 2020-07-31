@@ -2,6 +2,7 @@ package com.bq.order.mvp.ui.fragment;
 
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -10,12 +11,23 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
+import com.bq.comm_config_lib.request.Api;
+import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
+import com.bq.order.mvp.presenter.ProductPresenter;
+import com.bq.order.mvp.ui.ProductIview;
+import com.bq.order.requset.bean.ProductInfo;
+import com.bq.order.requset.bean.ProductSearchBean;
+import com.bq.order.requset.bean.SchoolInfo;
+import com.bq.utilslib.AppUtils;
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.fan.baseuilibrary.view.CircleImageView;
 import com.fan.baseuilibrary.view.DeletableEditText;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -38,7 +50,7 @@ import butterknife.OnClick;
  * 版权：
  */
 @Route(path = AppArouter.ORDER_HOME_FRAGMENT)
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements  ProductIview {
     @BindView(R2.id.tv_address_location)
     TextView mTvAddressLocation;
     @BindView(R2.id.det_search)
@@ -59,10 +71,16 @@ public class HomeFragment extends BaseFragment {
     RecyclerView mRvProfession;
 
     private HomeBannerFragment mHomeBannerFragment;
+    private ProductPresenter mProductPresenter;
+    BaseQuickAdapter mSchoolAdapter;
+    BaseQuickAdapter mProductAdapter;
+    List<SchoolInfo> mHostSchoollist = new ArrayList<>();
+    List<ProductInfo> mHostProductlist = new ArrayList<>();
 
     @Override
     protected BasePresenter createPersenter() {
-        return null;
+        mProductPresenter = new ProductPresenter(this);
+        return mProductPresenter;
     }
 
     @Override
@@ -79,28 +97,38 @@ public class HomeFragment extends BaseFragment {
         initHotSchoolView();
         intNewsView();
         intHotProfessionView();
+
+        String searchStr = new Gson().toJson(new ProductSearchBean("湖北","武汉"));
+        mProductPresenter.getHotSchool(searchStr);
+        mProductPresenter.getHotProductList(searchStr);
     }
 
     private void intHotProfessionView() {
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         mRvProfession.setLayoutManager(linearLayoutManager);
 
-        BaseQuickAdapter adapter = new
-                BaseQuickAdapter<String, BaseViewHolder>(R.layout.order_item_product, list) {
+        mProductAdapter = new
+                BaseQuickAdapter<ProductInfo, BaseViewHolder>(R.layout.order_item_product, mHostProductlist) {
                     @Override
                     protected void convert(@NotNull BaseViewHolder helper,
-                                           String bean) {
-//                        ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY).navigation();
+                                           ProductInfo bean) {
+                        ImageView iv = helper.getView(R.id.iv_item);
+                        Glide.with(iv).load(Api.BASE_API+bean.getThumbnail())
+                                .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
+                        helper.setText(R.id.tv_title,bean.getTitle());
+                        helper.setText(R.id.tv_school,bean.getSchool_name());
+                        helper.setText(R.id.tv_profession,bean.getMajor_name());
+                        helper.setText(R.id.tv_duration,bean.getDuration());
+                        helper.setText(R.id.tv_address,bean.getSchool_city());
+                        helper.setText(R.id.tv_brand,bean.getBrand_name());
+                        helper.setText(R.id.tv_product,bean.getProduction_name());
+                        helper.setText(R.id.tv_price, AppUtils.getDouble2(bean.getSale_price()));
+
                     }
                 };
-        mRvProfession.setAdapter(adapter);
+        mRvProfession.setAdapter(mProductAdapter);
 
-        adapter.setOnItemClickListener(new OnItemClickListener() {
+        mProductAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY).navigation();
@@ -108,30 +136,42 @@ public class HomeFragment extends BaseFragment {
         });
     }
 
+    @Override
+    public void getProductListView(List<ProductInfo> list) {
+        mHostProductlist = list;
+        mProductAdapter.setNewData(mHostProductlist);
+        mProductAdapter.notifyDataSetChanged();
+    }
 
     private void initHotSchoolView() {
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
         mRvSchool.setLayoutManager(gridLayoutManager);
-        BaseQuickAdapter adapter = new
-                BaseQuickAdapter<String, BaseViewHolder>(R.layout.order_item_school, list) {
+        mSchoolAdapter = new
+                BaseQuickAdapter<SchoolInfo, BaseViewHolder>(R.layout.order_item_school, mHostSchoollist) {
                     @Override
                     protected void convert(@NotNull BaseViewHolder helper,
-                                           String bean) {
+                                           SchoolInfo bean) {
+                        helper.setText(R.id.tv_name,bean.getName());
+                        helper.setText(R.id.tv_remark,bean.getContent());
+                        CircleImageView iv = helper.getView(R.id.iv_icon);
+                        Glide.with(iv).load(Api.BASE_API+bean.getLogo_url())
+                                .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
                     }
                 };
-        mRvSchool.setAdapter(adapter);
+        mRvSchool.setAdapter(mSchoolAdapter);
 
-        adapter.setOnItemClickListener(new OnItemClickListener() {
+        mSchoolAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 ARouter.getInstance().build(AppArouter.ORDER_SCHOOL_DETAIL_ACTIVITY).navigation();
             }
         });
+    }
+    @Override
+    public void getSchooListlView(List<SchoolInfo> list) {
+        mHostSchoollist = list;
+        mSchoolAdapter.setNewData(mHostSchoollist);
+        mSchoolAdapter.notifyDataSetChanged();
     }
 
     private void intNewsView() {

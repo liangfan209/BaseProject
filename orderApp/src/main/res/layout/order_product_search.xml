@@ -6,6 +6,8 @@
     android:gravity="center_vertical"
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:background="@drawable/shap_white_radius_4">
 
     <TextView

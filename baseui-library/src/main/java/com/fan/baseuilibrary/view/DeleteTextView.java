@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import com.bq.utilslib.AppUtils;
+
 import androidx.appcompat.widget.AppCompatTextView;
 
 public class DeleteTextView extends AppCompatTextView {
@@ -34,7 +36,7 @@ public class DeleteTextView extends AppCompatTextView {
             case MotionEvent.ACTION_UP:
                 //判断是否点击到了右边的图标区域
                 boolean isClean = (event.getX() > (getWidth() - getTotalPaddingRight()))
-                        && (event.getX() < (getWidth() - getPaddingRight()));
+                        && (event.getX() < (getWidth() - getPaddingRight()+ AppUtils.dp2px(this.getContext(),7)));
                 if (isClean) {
                     //清除字符
                     this.mDeleteCallBack.delete();
