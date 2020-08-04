@@ -21,4 +21,7 @@ public class ApiWallet {
     public static final String API_TACK_CASH = "customer.finance.balance.withdraw";
     //客户余额获取接口
     public static final String API_GET_BANLANCE = "customer.finance.balance.get";
+
+    //支付
+    public static final String API_PAY = "customer.order.pay";
 }

@@ -1,5 +1,8 @@
 package com.bq.order.requset.bean;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * 文件名：
  * 描述：
@@ -7,7 +10,7 @@ package com.bq.order.requset.bean;
  * 时间：2020/7/31
  * 版权：
  */
-public class ProductInfo {
+public class ProductInfo implements Serializable {
     private String id;
     private String thumbnail;
     private String title;
@@ -17,7 +20,134 @@ public class ProductInfo {
     private String school_city;
     private String production_name;
     private String brand_name;
+    private String despatch_type;
     private int sale_price;
+    private int month_quantity;
+    private int min_price;
+    private String description;
+    private String  video_display;
+    private List<String> detail;
+    private List<String> slideshow;
+    private List<SpecificationList> specification_list;
+
+    private String imgPath;
+    private String attrubute;
+    private int realPrice;
+    private int count;
+    private int selectPosition;
+
+    public int getSelectPosition() {
+        return selectPosition;
+    }
+
+    public void setSelectPosition(int selectPosition) {
+        this.selectPosition = selectPosition;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public int getRealPrice() {
+        return realPrice;
+    }
+
+    public void setRealPrice(int realPrice) {
+        this.realPrice = realPrice;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
+
+    public String getAttrubute() {
+        return attrubute;
+    }
+
+    public void setAttrubute(String attrubute) {
+        this.attrubute = attrubute;
+    }
+
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getMin_price() {
+        return min_price;
+    }
+
+    public void setMin_price(int min_price) {
+        this.min_price = min_price;
+    }
+
+    public int getMonth_quantity() {
+        return month_quantity;
+    }
+
+    public void setMonth_quantity(int month_quantity) {
+        this.month_quantity = month_quantity;
+    }
+
+    public String getDespatch_type() {
+        if(despatch_type.equals("eduction_contract")){
+            return "教育合同";
+        }else if(despatch_type.equals("top_up_phone")){
+            return "手机充值";
+        }else if(despatch_type.equals("logistics")){
+            return "物流交付";
+        }
+        return despatch_type;
+    }
+
+    public void setDespatch_type(String despatch_type) {
+        this.despatch_type = despatch_type;
+    }
+
+    public String getVideo_display() {
+        return video_display;
+    }
+
+    public void setVideo_display(String video_display) {
+        this.video_display = video_display;
+    }
+
+    public List<String> getDetail() {
+        return detail;
+    }
+
+    public void setDetail(List<String> detail) {
+        this.detail = detail;
+    }
+
+    public List<String> getSlideshow() {
+        return slideshow;
+    }
+
+    public void setSlideshow(List<String> slideshow) {
+        this.slideshow = slideshow;
+    }
+
+    public List<SpecificationList> getSpecification_list() {
+        return specification_list;
+    }
+
+    public void setSpecification_list(List<SpecificationList> specification_list) {
+        this.specification_list = specification_list;
+    }
 
     public String getBrand_name() {
         return brand_name;

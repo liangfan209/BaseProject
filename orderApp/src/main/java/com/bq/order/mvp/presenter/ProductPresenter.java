@@ -4,7 +4,9 @@ import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.order.mvp.ui.ProductIview;
 import com.bq.order.requset.ProductHttpReqeustImp;
-import com.bq.order.requset.bean.ProductListBeanBean;
+import com.bq.order.requset.bean.ProductBean;
+import com.bq.order.requset.bean.ProductListBean;
+import com.bq.order.requset.bean.SchoolBean;
 import com.bq.order.requset.bean.SchoolListBean;
 import com.bq.order.requset.bean.SelecterBean;
 
@@ -58,6 +60,11 @@ public class ProductPresenter implements BasePresenter {
     public void getSchoolAll(String strs){
         mProductHttpReqeustImp.getSchoolAll(strs,new AbstractReqeustCallback<SelecterBean>(mIView) {
             @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+
+            @Override
             public void onSuccess(SelecterBean bean) {
                 mIView.getSchoolAllSelcterView(bean.getData_list());
             }
@@ -67,6 +74,11 @@ public class ProductPresenter implements BasePresenter {
     //获取所有专业
     public void getProfessionAll(String strs){
         mProductHttpReqeustImp.getProfessionAll(strs,new AbstractReqeustCallback<SelecterBean>(mIView) {
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+
             @Override
             public void onSuccess(SelecterBean bean) {
                 mIView.getProfessionAllSelcterView(bean.getData_list());
@@ -78,6 +90,11 @@ public class ProductPresenter implements BasePresenter {
     public void getDurationAll(String strs){
         mProductHttpReqeustImp.getDurationAll(strs,new AbstractReqeustCallback<SelecterBean>(mIView) {
             @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+
+            @Override
             public void onSuccess(SelecterBean bean) {
                 mIView.getDurationAllSelcterView(bean.getData_list());
             }
@@ -86,9 +103,9 @@ public class ProductPresenter implements BasePresenter {
 
     //获取热门产品
     public void getHotProductList(String strs){
-        mProductHttpReqeustImp.getHostProductList(strs, new AbstractReqeustCallback<ProductListBeanBean>(mIView) {
+        mProductHttpReqeustImp.getHostProductList(strs, new AbstractReqeustCallback<ProductListBean>(mIView) {
             @Override
-            public void onSuccess(ProductListBeanBean bean) {
+            public void onSuccess(ProductListBean bean) {
                 mIView.getProductListView(bean.getData_list());
             }
         });
@@ -96,11 +113,38 @@ public class ProductPresenter implements BasePresenter {
 
     //获取搜索产品列表
     public void getSearchProductList(int page,String strs){
-
-        mProductHttpReqeustImp.getSearchProductList(page,strs, new AbstractReqeustCallback<ProductListBeanBean>(mIView) {
+        mProductHttpReqeustImp.getSearchProductList(page,strs, new AbstractReqeustCallback<ProductListBean>(mIView) {
             @Override
-            public void onSuccess(ProductListBeanBean bean) {
+            public void onSuccess(ProductListBean bean) {
                 mIView.getProductListView(bean.getData_list());
+            }
+        });
+    }
+
+    //获取产品详情
+    public void getProductDetail(String id){
+        mProductHttpReqeustImp.getProductionDetail(id, new AbstractReqeustCallback<ProductBean>(mIView) {
+            @Override
+            public void onSuccess(ProductBean bean) {
+                mIView.getProductDetailView(bean.getGoods_info());
+            }
+        });
+    }
+
+
+    /**
+     * 获取学校详情
+     * @param schoolId
+     */
+    public void getSchoolDetail(String schoolId) {
+        mProductHttpReqeustImp.getSchoolDetail(schoolId, new AbstractReqeustCallback<SchoolBean>(mIView) {
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+            @Override
+            public void onSuccess(SchoolBean bean) {
+                mIView.getSchoolDetailView(bean.getSchool_info());
             }
         });
     }

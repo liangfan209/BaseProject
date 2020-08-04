@@ -11,9 +11,11 @@ import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.order.R;
 import com.bq.order.R2;
-import com.bq.order.mvp.order.ui.fragment.OrderListFragment;
+import com.bq.order.mvp.ui.fragment.OrderListFragment;
+import com.bq.order.requset.bean.OrderRequsetBean;
 import com.fan.baseuilibrary.view.NoAnimationViewPager;
 import com.fan.baseuilibrary.view.flycotablayout.widget.SkinSlidingTabLayout;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -45,7 +47,8 @@ public class OrderListActivity extends BaseActivity {
     SkinSlidingTabLayout mTablayout;
     @BindView(R2.id.viewpager)
     NoAnimationViewPager mViewpager;
-    private String[] mTitles = {"全部订单", "待支付", "待收货", "已完成"};
+    String[] mTitles = new String[]{"全部","待支付","待发货","待收货","已完成"};
+    String[] types = new String[]{"{}","order_launched","payment_finished","delivery_finished","order_finished"};
     private ArrayList<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
@@ -61,8 +64,9 @@ public class OrderListActivity extends BaseActivity {
     @Override
     protected void attach() {
         mTvTitle.setText("订单列表");
-        for (int i = 0; i < 4; i++) {
-            mFragmentList.add(OrderListFragment.getInstance(i));
+        for (int i = 0; i < mTitles.length; i++) {
+            String info =i==0?types[i]:new Gson().toJson(new OrderRequsetBean(types[i]));
+            mFragmentList.add(OrderListFragment.getInstance(info));
         }
         mTablayout.setViewPager(mViewpager,mTitles,this,mFragmentList);
     }

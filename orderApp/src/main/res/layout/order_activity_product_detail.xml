@@ -104,6 +104,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/h5_font_size"
                     android:text="¥ 19888.88"
+                    android:visibility="gone"
                     android:layout_marginLeft="18dp"
                     android:layout_marginTop="16dp"
                     android:textColor="@color/ui_txt_hint_color"
@@ -121,6 +122,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_product_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="武汉大学 行政管理 自考专科 有视屏精讲班 OMO通过班"
@@ -133,6 +135,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_product_remark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="学前教育/市场营销/工商管理/测绘理工类/经管类/艺术类/文史类…"
@@ -153,7 +156,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="55dp">
 
                 <TextView
                     android:id="@+id/tv_shipping_key"
@@ -180,6 +183,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tv_month_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="月销88"
@@ -190,12 +194,11 @@
                     android:layout_marginRight="40dp"
                     />
             </RelativeLayout>
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:layout_marginTop="12dp"
                 android:background="#FFF9F9F9"/>
-
             <RelativeLayout
                 android:id="@+id/rlt_type"
                 android:layout_width="match_parent"
@@ -217,7 +220,7 @@
                     android:id="@+id/tv_type_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="普通班/VIP班"
+                    android:text=""
                     android:textColor="@color/ui_txt_normal_color"
                     android:textSize="@dimen/h3_font_size"
                     android:layout_marginLeft="21dp"
@@ -240,8 +243,6 @@
                 android:background="@color/ui_recycleview_item_line_color"
                 android:layout_marginLeft="13dp"
                 android:layout_marginRight="28dp"/>
-
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -315,12 +316,11 @@
                 android:layout_marginRight="28dp"/>
 
             <ImageView
+                android:id="@+id/iv_product_mark"
                 android:layout_width="match_parent"
-                android:layout_height="550dp"
-                android:layout_marginTop="10dp"
-                android:background="@mipmap/product_detail"
+                android:layout_height="300dp"
+                android:scaleType="fitXY"
                 />
-
 
         </LinearLayout>
 

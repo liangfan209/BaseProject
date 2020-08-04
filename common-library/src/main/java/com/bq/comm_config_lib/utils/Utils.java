@@ -1,5 +1,8 @@
 package com.bq.comm_config_lib.utils;
 
+import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +12,10 @@ import android.widget.ImageView;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.bq.comm_config_lib.R;
-import com.bq.comm_config_lib.request.Api;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fan.baseuilibrary.utils.RoundCornersTransformation;
+import com.fan.baseuilibrary.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
@@ -109,7 +112,7 @@ public class Utils {
     }
 
     public static void showImage(String path, ImageView iv){
-        Glide.with(iv).load(Api.BASE_API+path)
+        Glide.with(iv).load(path)
                 .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
     }
 
@@ -140,6 +143,13 @@ public class Utils {
                 .placeholder(R.mipmap.placeholder_small_pic)
                 .fallback(R.mipmap.placeholder_small_pic);
 
+    }
+
+    public static void clipBoard(Activity activity, String content){
+        ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("simple text", content);
+        clipboard.setPrimaryClip(clip);
+        ToastUtils.showToastOk(activity,"复制成功");
     }
 
 

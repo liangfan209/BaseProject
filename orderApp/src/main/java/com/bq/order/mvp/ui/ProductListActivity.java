@@ -8,18 +8,23 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
 import com.bq.order.mvp.presenter.ProductPresenter;
 import com.bq.order.mvp.ui.fragment.ProductListFragment;
+import com.bq.order.mvp.ui.hodler.ProductType;
 import com.bq.order.requset.bean.ProductSearchBean;
 import com.bq.order.requset.bean.SelecterBean;
 import com.fan.baseuilibrary.view.DeletableEditText;
@@ -87,6 +92,10 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
     private List<SelecterBean.SelectInfo> mProfessionList;
     private List<SelecterBean.SelectInfo> mDurationList;
 
+    @Autowired
+    String mSearchInfo;
+    @Autowired
+    String mSearchName;
 
     private ProductPresenter mProductPresenter;
 
@@ -105,6 +114,7 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
 
     @Override
     protected void attach() {
+        ARouter.getInstance().inject(this);
         mTvTitle.setText("商品列表");
         initProductListView();
 
@@ -123,8 +133,6 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
         mTvProfession.setTextColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
         mTvYear.setBackgroundDrawable(SkinCompatResources.getDrawable(this,R.drawable.ui_shap_verification_code_select));
         mTvYear.setTextColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
-
-
         initEditText();
     }
 
@@ -143,10 +151,15 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
                 return true;
             }
         });
+        if(!StringUtils.isEmpty(mSearchName)){
+            mDetSearch.setText(mSearchName);
+        }
+        mDetSearch.setClearDrawableVisible(false);
     }
 
     private void initProductListView() {
-        mProductListFragment = ProductListFragment.getInstance(10);
+        ProductType type =  new ProductType(mSearchInfo,10);
+        mProductListFragment = ProductListFragment.getInstance(type);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.flt_content, mProductListFragment);
         fragmentTransaction.commit();
@@ -162,6 +175,9 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
             chooseType(1);
         } else if (view.getId() == R.id.tv_year_select) {
             chooseType(2);
+        }else if(view.getId() == R.id.rlt_search){
+            Utils.cancelFocus(mDetSearch);
+            updateFragment();
         }
     }
 
@@ -214,7 +230,7 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
                 String serachInfo = new Gson().toJson(new ProductSearchBean());
                 mProductPresenter.getProfessionAll(serachInfo);
             }else{
-                getProfessionAllSelcterView(mSchoolList);
+                getProfessionAllSelcterView(mProfessionList);
             }
         }
 
@@ -288,7 +304,7 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
 
     private void updateFragment(){
         String titleSearch = mDetSearch.getText().toString();
-        ProductSearchBean bean = new ProductSearchBean("湖北","武汉");
+        ProductSearchBean bean = new ProductSearchBean(CommSpUtils.getLocation());
         bean.setTitle(titleSearch);
         Set<Map.Entry<Integer, SelecterBean.SelectInfo>> entries = mProfessionMap.entrySet();
         for (Map.Entry<Integer, SelecterBean.SelectInfo> entry:entries){
@@ -301,7 +317,7 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
             }
             entry.getValue();
         }
-        String searchInfo = new Gson().toJson(bean);
-        mProductListFragment.updateFragment(searchInfo);
+        mSearchInfo = new Gson().toJson(bean);
+        mProductListFragment.updateFragment(mSearchInfo);
     }
 }

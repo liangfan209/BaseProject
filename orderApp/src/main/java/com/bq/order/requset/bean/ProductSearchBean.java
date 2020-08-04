@@ -25,6 +25,10 @@ public class ProductSearchBean {
         this.name = name;
     }
 
+    public ProductSearchBean(String city) {
+        this.city = city;
+    }
+
     public ProductSearchBean(String province, String city) {
         this.province = province;
         this.city = city;

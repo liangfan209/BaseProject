@@ -26,10 +26,9 @@
                     >
                     <ImageView
                         android:id="@+id/iv_icon"
-                        android:layout_width="115dp"
+                        android:layout_width="65dp"
                         android:layout_height="65dp"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/order_icon_item_img"
                         />
                 </androidx.cardview.widget.CardView>
 
@@ -37,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_marginLeft="145dp"
+                    android:layout_marginLeft="105dp"
                     android:layout_marginTop="18dp">
 
                     <TextView

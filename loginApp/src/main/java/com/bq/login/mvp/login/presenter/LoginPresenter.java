@@ -60,6 +60,7 @@ public class LoginPresenter implements BasePresenter {
             ToastUtils.showToast(mIView.getActivity(), "请输入正确的手机号码");
             return;
         }
+
         if(StringUtils.isEmpty(pwd)){
             ToastUtils.showToast(mIView.getActivity(), "密码不能为空");
             return;
@@ -79,6 +80,26 @@ public class LoginPresenter implements BasePresenter {
         });
 
     }
+
+
+    /**
+     * 验证码登录
+     * @param phoneNumber
+     * @param code
+     */
+    public void loginVertificationCode(String phoneNumber, String code) {
+        mLoginHttpReqeustImp.loginVertication(phoneNumber, code, new AbstractReqeustCallback<LoginInfo>(mIView) {
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+            @Override
+            public void onSuccess(LoginInfo loginInfo) {
+                mIView.loginVertificationView(loginInfo);
+            }
+        });
+    }
+
 
     /**
      * 获取验证码
@@ -154,7 +175,18 @@ public class LoginPresenter implements BasePresenter {
      * 设置密码
      */
     public void setPwd(String pwd) {
-        mIView.settingPwdView();
+        mLoginHttpReqeustImp.setPwd(pwd, new AbstractReqeustCallback<Object>(mIView) {
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+
+            @Override
+            public void onSuccess(Object o) {
+                mIView.settingPwdView();
+            }
+        });
+
     }
 
     @Override

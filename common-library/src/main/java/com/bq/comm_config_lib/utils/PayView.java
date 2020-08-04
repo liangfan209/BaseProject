@@ -11,7 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.R;
+import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.msgService.MessageEvent;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.utilslib.AppUtils;
 import com.fan.baseuilibrary.utils.ToastUtils;
@@ -101,7 +104,7 @@ public class PayView {
                     checkUserPay(activity,orderId);
                 } else if (weiXinCheck) {
                     mDialog.dismiss();
-
+                    EventBus.getDefault().post(new MessageEvent(AppArouter.WALLET_PAY_SERVICE,orderId,activity,price));
                 } else if (zhifubaoCheck) {
                     mDialog.dismiss();
 
@@ -143,6 +146,7 @@ public class PayView {
                 });
     }
 
+
     private void payOk(Activity activity, String orderId) {
         EventBus.getDefault().post("update_userinfo");
         activity.setResult(101);
@@ -155,9 +159,10 @@ public class PayView {
     }
     private void payCancel(Activity activity, String orderId) {
 //        toOrderDetail(activity, orderId);
+        //往订单详情页面跳转
+        ARouter.getInstance().build(AppArouter.ORDER_ORDER_DETAIL_ACTIVITY)
+                .withString("mOrderId",orderId).navigation();
     }
-
-
 
 
     Dialog customDialog;
@@ -179,6 +184,4 @@ public class PayView {
         customDialog = numberKeyboardView.showBottomView();
         customDialog.show();
     }
-
-
 }

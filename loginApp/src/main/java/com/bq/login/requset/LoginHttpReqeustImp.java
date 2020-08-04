@@ -35,6 +35,21 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
         });
     }
 
+    //验证码登录
+    public void loginVertication(String name, String verticationCode, RequestCallBackInter callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiLogin.API_VERTIFICATION_LOGIN);
+        map.put("username",name);
+        map.put("verify_code",verticationCode);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<LoginInfo>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<LoginInfo>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+
     //退出登录请求
     @Override
     public void logout(RequestCallBackInter callBack) {
@@ -102,6 +117,20 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
         map.put("api", ApiLogin.API_MODIFY_PWD);
         map.put("auth", CommSpUtils.getToken());
         map.put("old_password", oldPwd);
+        map.put("new_password", newPwd);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<Object>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<Object>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    @Override
+    public void setPwd(String newPwd, RequestCallBackInter callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiLogin.API_SETTING_PWD);
+        map.put("auth", CommSpUtils.getToken());
         map.put("new_password", newPwd);
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<Object>>(callBack){
             @Override

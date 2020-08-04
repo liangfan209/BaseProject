@@ -23,4 +23,9 @@ public interface ProductIview extends BaseIView {
     //所有学年
     default void getDurationAllSelcterView(List<SelecterBean.SelectInfo> list){};
     default void getProductListView(List<ProductInfo> list){};
+
+    //获取商品详细信息
+    default void getProductDetailView(ProductInfo info){}
+    //获取学校详情
+    default void getSchoolDetailView(SchoolInfo info){};
 }

@@ -14,6 +14,7 @@ import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.login.R;
 import com.bq.login.R2;
 import com.bq.login.mvp.login.presenter.LoginPresenter;
+import com.bq.utilslib.Md5Utils;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
 
@@ -81,7 +82,13 @@ public class SettingPwdActivity extends BaseActivity implements LoginBaseIView{
             ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
             finish();
         } else if(view.getId() == R.id.tv_setting){
-            mLoginPresenter.setPwd("");
+            String s = mEtPwd.getText().toString();
+            String rePwd = mEtRePwd.getText().toString();
+            if(!s.equals(rePwd)){
+                ToastUtils.showToastOk(this,"两次密码输入不一致");
+                return;
+            }
+            mLoginPresenter.setPwd(Md5Utils.md5(rePwd));
         }
     }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
@@ -154,7 +155,9 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
                 if("实名认证".equals(tabBean.getName())){
                     ARouter.getInstance().build(path).withInt("isCertication",mUserinfo.getCustomer_info().getIs_certify()).navigation();
                 }else{
-                    ARouter.getInstance().build(path).navigation();
+                    if(!StringUtils.isEmpty(path)){
+                        ARouter.getInstance().build(path).navigation();
+                    }
                 }
             }
 

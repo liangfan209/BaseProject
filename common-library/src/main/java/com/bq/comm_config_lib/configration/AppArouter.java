@@ -51,6 +51,9 @@ public class AppArouter {
     public static final String WALLET_TRANSACTION_DETAIL_ACTIVITY = WALLET+"/TransactionDetailActivity";
     public static final String WALLET_TACK_CASH_ACTIVITY = WALLET+"/TackCashActivity";
     public static final String WALLET_SECURITY_SETTIGN_PWD_ACTIVITY = WALLET+"/security/PayPwdSettingActivity";
+    public static final String WALLET_BALANCE_SERVICE = WALLET+"/banlence/service";
+    public static final String WALLET_PAY_SERVICE = WALLET+"/pay/service";
+
 
 
 
@@ -61,6 +64,9 @@ public class AppArouter {
     public static final String ORDER_LIST_ACTIVITY = ORDER+"/OrderListActivity";
     public static final String ORDER_ORDER_DETAIL_ACTIVITY = ORDER+"/OrderDetaiActivity";
     public static final String ORDER_ORDER_COMMIT_ACTIVITY = ORDER+"/OrderCommitActivity";
+    public static final String ORDER_PAY_SUCCESS_ACTIVITY = ORDER+"/PaySuccessActivity";
+
+
     public static final String ORDER_HOME_FRAGMENT = ORDER +"/HomeFragment";
     //商品列表
     public static final String ORDER_PRODUCT_LIST_ACTIVITY = ORDER +"/ProductListActivity";

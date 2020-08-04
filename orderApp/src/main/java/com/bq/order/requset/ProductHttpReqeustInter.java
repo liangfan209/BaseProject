@@ -24,4 +24,6 @@ public interface ProductHttpReqeustInter {
     public void getProfessionAll(String searchInfo,RequestCallBackInter callBack);
     //学年列表
     public void getDurationAll(String searchInfo,RequestCallBackInter callBack);
+    //商品详情
+    public void getProductionDetail(String id,RequestCallBackInter callBack);
 }

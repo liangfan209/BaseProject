@@ -30,15 +30,16 @@ public abstract class BaseFragment extends Fragment implements BaseIView, Lifecy
     private LoadingDialog mLoadingDialog;
     public MyRefreshLayout mRefreshLayout;
     public View contentView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        contentView =inflater.inflate(getContentViewLayout(),null);
+        contentView = inflater.inflate(getContentViewLayout(), null);
         mLoadingDialog = new LoadingDialog(this.getContext());
-        ButterKnife.bind(this,contentView);
+        ButterKnife.bind(this, contentView);
         BasePresenter presenter = createPersenter();
-        if(presenter != null){
+        if (presenter != null) {
             getLifecycle().addObserver(presenter);
         }
         attach();
@@ -53,7 +54,8 @@ public abstract class BaseFragment extends Fragment implements BaseIView, Lifecy
 
     @Override
     public void onError(String msg) {
-        ToastUtils.showToast(this.getActivity(), msg);
+        if (this.getActivity() != null)
+            ToastUtils.showToast(this.getActivity(), msg);
     }
 
     @Override
@@ -68,7 +70,10 @@ public abstract class BaseFragment extends Fragment implements BaseIView, Lifecy
     }
 
     protected abstract BasePresenter createPersenter();
-    protected abstract @LayoutRes int getContentViewLayout();
+
+    protected abstract @LayoutRes
+    int getContentViewLayout();
+
     protected abstract void attach();
 
 }

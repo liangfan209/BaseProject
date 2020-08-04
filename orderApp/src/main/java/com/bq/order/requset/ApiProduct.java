@@ -22,5 +22,17 @@ public class ApiProduct {
     public static String PRODUCT_PROFESSION_ALL = "university.major.all";
     //所有学年
     public static String PRODUCT_DURATION_ALL = "university.major.duration";
+    //获取商品详情
+    public static String PRODUCT_DETAIL = "production.goods.get";
+
+
+    public static String SCHOOL_DETAIL = "university.school.get";
+
+
+    //客户下单接口
+    public static String ORDER_ADD = "customer.order.add";
+    public static String ORDER_GET_DETAIL = "customer.order.get";
+    //订单列表
+    public static String ORDER_LIST = "customer.order.search";
 
 }

@@ -13,7 +13,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
-import com.bq.comm_config_lib.request.Api;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
@@ -96,7 +95,7 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 SchoolInfo info = (SchoolInfo) adapter.getData().get(position);
                 ARouter.getInstance().build(AppArouter.ORDER_SCHOOL_DETAIL_ACTIVITY)
-                        .withSerializable("mSchoolInfo",info).navigation();
+                        .withSerializable("mSchoolId",info.getId()).navigation();
             }
         });
     }
@@ -134,7 +133,7 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
                     @Override
                     protected void convert(@NotNull BaseViewHolder helper, SchoolInfo bean) {
                         ImageView iv = helper.getView(R.id.iv_icon);
-                        Glide.with(iv).load(Api.BASE_API+bean.getLogo_url())
+                        Glide.with(iv).load(bean.getLogo_url())
                                 .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
                         helper.setText(R.id.tv_title,bean.getName());
                         List<ProfessionList> production_list = bean.getProduction_list();

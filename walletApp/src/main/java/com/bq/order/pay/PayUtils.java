@@ -13,10 +13,12 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
+import com.bq.comm_config_lib.request.RequestCallBackInter;
+import com.bq.comm_config_lib.request.SignJsonCallBack;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.comm_config_lib.utils.PwdAndNumberKeyboardDialog;
-import com.bq.utilslib.AppUtils;
-import com.bq.utilslib.Md5Utils;
+import com.bq.netlibrary.NetManager;
+import com.bq.netlibrary.http.BaseResponse;
 import com.bq.order.R;
 import com.bq.order.pay.callback.IPayCallback;
 import com.bq.order.pay.weixin.WXPay;
@@ -24,10 +26,15 @@ import com.bq.order.pay.weixin.WXPayInfoImpli;
 import com.bq.order.pay.zhifubao.AliPay;
 import com.bq.order.pay.zhifubao.AlipayInfoImpli;
 import com.bq.order.requset.bean.WxBean;
+import com.bq.utilslib.AppUtils;
+import com.bq.utilslib.Md5Utils;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.dialog.CustomDialog;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 文件名：
@@ -129,9 +136,28 @@ public class PayUtils {
             String token = CommSpUtils.getToken();
             if (blanceCheck) {
                 //先检查是否设置了支付密码
-                checkUserPay(activity,orderId);
+//                checkUserPay(activity,orderId);
+
+
             } else if (weiXinCheck) {
                 mDialog.dismiss();
+                Map<String,String> map = new HashMap<>();
+                map.put("api", "customer.order.pay");
+                map.put("order_id", orderId);
+                map.put("pay_type", "wechat");
+                map.put("auth", CommSpUtils.getToken());
+                NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<WxBean>>(new RequestCallBackInter<WxBean>() {
+                    @Override
+                    public void onSuccess(WxBean bean) {
+                        wechatPay(activity,bean.getPay_info());
+                    }
+
+                    @Override
+                    public void onError(String msg) {
+                    }
+                }));
+
+
 //                String weixinInfo = new Gson().toJson(new OrderInfoServiceBean(orderId, "3"));
 //                activity.exeHttpWithDialog(ApiServiceManager.getApi().partnerGetWxOrder("order.pay", "customer", "1",
 //                        token, "sha", weixinInfo))
@@ -297,6 +323,21 @@ public class PayUtils {
 //            intent.putExtra("h5url", Configuration.HHR_H5_API_NET + "/#/?id=" + orderId);
 //            activity.startActivity(intent);
 //        }
+    }
+
+    private void wechatPay(Activity activiy, WxBean.PayInfo info){
+        wexinPay(activiy, info, new IPayCallback() {
+            @Override
+            public void success() {
+                activiy.finish();
+            }
+            @Override
+            public void failed() {
+            }
+            @Override
+            public void cancel() {
+            }
+        });
     }
 
 

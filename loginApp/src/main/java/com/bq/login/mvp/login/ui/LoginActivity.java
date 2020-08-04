@@ -215,9 +215,31 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
         if(mCbLoginType.isChecked() || mCbLoginType.getVisibility() == View.GONE){
             mLoginPresenter.login(phoneNumber, pwd);
         }else{
-            ToastUtils.showToast(this,"验证码登陆正在开发中...");
+            String code = mTvInputVerification.getText().toString();
+            mLoginPresenter.loginVertificationCode(phoneNumber,code);
+//            ToastUtils.showToast(this,"验证码登陆正在开发中...");
+
         }
 
+    }
+
+    @Override
+    public void loginVertificationView(LoginInfo info) {
+        //将token保存到本地sp中
+        CommSpUtils.saveLoginInfo(new Gson().toJson(info));
+        if(info.getIs_password() == 0){
+            ARouter.getInstance().build(AppArouter.LOGIN_SETTING_ACTIVITY).navigation();
+        }else{
+            //跳转到主页面中
+            if (StringUtils.isEmpty(mPath)) {
+                ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
+            } else {
+                ARouter.getInstance().build(mPath)
+                        .withBundle("mBundle", mBundle).navigation();
+            }
+        }
+
+        finish();
     }
 
     @Override
@@ -251,8 +273,9 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
             ARouter.getInstance().build(AppArouter.FORGET_PWD_ACTIVITY).withInt("optionType"
                     , RegisterPwdActivity.REGISTER).navigation();
         } else if (view.getId() == R.id.tv_get_verification_code) {
-            countDownHelper = new CountDownHelper(mTvGetVerificationCode, "获取验证码", "重新获取", 60, 1, 2);
-            countDownHelper.start();
+            //获取登录的验证码
+            String phoneNumber = mEtPhone.getText().toString().replaceAll(" ","");
+            mLoginPresenter.getVertificatCode(phoneNumber,"login");
         } else if (view.getId() == R.id.cb_login_type) {
         } else if (view.getId() == R.id.cb_eye) {
             boolean checked = mCbEye.isChecked();
@@ -261,6 +284,12 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
                 mEtPwd.setClearDrawableVisible(false);
             }
         }
+    }
+
+    @Override
+    public void getVerticalCodeView() {
+        countDownHelper = new CountDownHelper(mTvGetVerificationCode, "获取验证码", "重新获取", 60, 1, 2);
+        countDownHelper.start();
     }
 
     private void showCaptcha() {

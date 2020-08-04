@@ -1,17 +1,24 @@
 package com.bq.order.mvp.ui.fragment;
 
+import android.view.View;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.order.R;
 import com.bq.order.R2;
 import com.bq.order.mvp.ui.adapter.BannerAdapter;
 import com.bq.order.mvp.ui.hodler.NewTypeViewHolder;
 import com.bq.order.requset.bean.BannerData;
+import com.bq.order.requset.bean.ProductSearchBean;
 import com.bq.order.requset.bean.ProductTypeBean;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.google.gson.Gson;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.zhpan.bannerview.BannerViewPager;
 import com.zhpan.bannerview.constants.IndicatorGravity;
@@ -23,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -102,6 +110,14 @@ public class HomeBannerFragment extends BaseFragment {
                     }
                 };
         mRvProductType.setAdapter(adapter);
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                String serachInfo = new Gson().toJson(new ProductSearchBean(CommSpUtils.getLocation()));
+                ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY)
+                        .withString("mSearchInfo",serachInfo).navigation();
+            }
+        });
     }
 
     private void initHomeBanner() {
@@ -122,6 +138,9 @@ public class HomeBannerFragment extends BaseFragment {
                 .setCanLoop(true)
                 .setAdapter(homeAdapter)
                 .setOnPageClickListener(position -> {
+                    String serachInfo = new Gson().toJson(new ProductSearchBean(CommSpUtils.getLocation()));
+                    ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY)
+                            .withString("mSearchInfo",serachInfo).navigation();
                 }).create();
 
         ArrayList<BannerData> dataList = new ArrayList<BannerData>();

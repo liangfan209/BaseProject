@@ -13,6 +13,7 @@ import com.bq.login.requset.bean.LoginInfo;
 public interface LoginBaseIView extends BaseIView {
 //    default void updateView(LoginConfigBean type){}
     default void loginView(LoginInfo info){};
+    default void loginVertificationView(LoginInfo info){};
     default void forgetPwdView(){};
     default void registerView(){}
     default void settingPwdView(){}

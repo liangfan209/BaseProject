@@ -13,7 +13,6 @@
             android:layout_width="115dp"
             android:layout_height="115dp"
             android:scaleType="fitXY"
-            android:background="@mipmap/order_icon_item_img"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             />
@@ -25,7 +24,7 @@
             android:layout_marginLeft="10dp">
 
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tv_product_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -135,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="¥"
-                    android:textColor="@color/ui_txt_normal_color"
+                    android:textColor="@color/ui_primary_color"
                     android:textSize="12sp"
                     android:layout_marginTop="3dp"
                     />
@@ -154,6 +153,7 @@
                     android:layout_marginTop="4dp"
                     />
                 <TextView
+                    android:id="@+id/tv_bottom_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="起"

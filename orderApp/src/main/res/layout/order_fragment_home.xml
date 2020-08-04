@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"/>
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smartlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#f2f2f2">
@@ -33,6 +34,7 @@
                     android:layout_height="375dp"/>
 
                 <RelativeLayout
+                    android:id="@+id/rlt_hot_school"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="-10dp">
@@ -85,6 +87,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rlt_hot_product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp">

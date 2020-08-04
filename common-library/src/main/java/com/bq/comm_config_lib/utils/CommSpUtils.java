@@ -29,8 +29,6 @@ public class CommSpUtils {
         } else {
             return "";
         }
-
-
     }
 
     public static String getRenewFlag() {
@@ -51,5 +49,10 @@ public class CommSpUtils {
         String loginInfoStr = SPUtils.getInstance(SpField.AUTH_TOKEN).getString(SpField.AUTH_TOKEN);
         LoginBean loginBean = new Gson().fromJson(loginInfoStr, LoginBean.class);
         return loginBean;
+    }
+
+    //获取定位地址
+    public static String getLocation(){
+        return "武汉";
     }
 }

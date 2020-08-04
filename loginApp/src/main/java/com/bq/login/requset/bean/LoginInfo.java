@@ -19,6 +19,15 @@ public class LoginInfo {
     private String access_token;
     private String expire_time;
     private String renew_flag;
+    private int is_password;
+
+    public int getIs_password() {
+        return is_password;
+    }
+
+    public void setIs_password(int is_password) {
+        this.is_password = is_password;
+    }
 
     public String getAccess_token() {
         return access_token;

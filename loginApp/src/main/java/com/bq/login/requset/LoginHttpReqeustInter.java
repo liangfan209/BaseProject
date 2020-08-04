@@ -27,4 +27,7 @@ public interface LoginHttpReqeustInter {
 
     //修改密码
     void modify(String oldPwd,String newPwd,RequestCallBackInter callBack);
+
+    //设置密码
+    public void setPwd(String newPwd, RequestCallBackInter callBack);
 }

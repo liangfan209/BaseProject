@@ -111,6 +111,20 @@ public class WalletHttpReqeustImp implements WalletHttpReqeustInter {
         });
     }
 
+    public void pay(String orderid,String payType, RequestCallBackInter callBackInter) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiWallet.API_PAY);
+        map.put("auth", CommSpUtils.getToken());
+        map.put("order_id", orderid);
+        map.put("pay_type", payType);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<WxBean>>(callBackInter){
+            @Override
+            public void onSuccess(Response<BaseResponse<WxBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
     //登录请求
 //    @Override
 //    public void login(String name, String pwd, RequestCallBackInter callBack) {

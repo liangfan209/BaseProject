@@ -5,34 +5,34 @@
       "type": "grid",
       "tabList": [
         {
-          "name": "商品详情",
+          "name": "我的订单",
           "remark": "",
           "icon": "user_center_icon_order_wait_payment",
-          "path": "/order/ProductDetailActivity",
+          "path": "/order/OrderListActivity",
           "params": 0,
           "jumpType": "arouter"
         },
         {
-          "name": "订单列表",
-          "remark": "",
+          "name": "我的合同",
+          "remark": "/order/OrderListActivity123",
           "icon": "user_center_icon_order_wait_sent_out",
-          "path": "/order/OrderListActivity",
+          "path": "",
           "params": 1,
           "jumpType": "arouter"
         },
         {
-          "name": "订单详情",
+          "name": "我的课本",
           "remark": "",
           "icon": "user_center_icon_order_wait_receive",
-          "path": "/order/OrderDetaiActivity",
+          "path": "",
           "params": 2,
           "jumpType": "arouter"
         },
         {
-          "name": "提交订单",
+          "name": "考务安排",
           "remark": "",
           "icon": "user_center_icon_order_complet",
-          "path": "/order/OrderCommitActivity",
+          "path": "",
           "params": 2,
           "jumpType": "arouter"
         }
@@ -47,7 +47,7 @@
           "name": "模拟题库",
           "remark": "",
           "icon": "user_center_icon_order_tiku",
-          "path": "/order/orderManager",
+          "path": "",
           "params": 0,
           "jumpType": "arouter"
         },
@@ -55,7 +55,7 @@
           "name": "我的收藏",
           "remark": "",
           "icon": "user_center_icon_order_shouchang",
-          "path": "/order/orderManager",
+          "path": "",
           "params": 1,
           "jumpType": "arouter"
         }

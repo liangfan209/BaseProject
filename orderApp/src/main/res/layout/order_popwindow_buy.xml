@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="#fafafa">
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
@@ -18,38 +19,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="20dp">
-        
-        <ImageView
-            android:id="@+id/iv_item"
-            android:layout_width="115dp"
-            android:layout_height="65dp"
-            android:scaleType="fitXY"
-            android:background="@mipmap/order_icon_item_img"
-            android:layout_marginLeft="15dp"
-            />
-        <TextView
-            android:id="@+id/tv_remark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="武汉大学 行政管理 自考专科专科专科专科"
-            android:layout_marginLeft="141dp"
-            android:textSize="@dimen/h5_font_size"
-            android:textColor="@color/ui_txt_normal_color"
-            />
+        android:paddingRight="20dp"
+        android:paddingBottom="16dp"
+        android:background="@color/white">
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="154dp"
-            android:layout_marginTop="46dp">
+            android:layout_marginLeft="140dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/h5_font_size"
                 android:text="¥"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="14dp"
                 android:textColor="@color/ui_primary_color"/>
 
             <TextView
@@ -70,19 +55,50 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/h5_font_size"
                 android:text="¥  19888.88"
+                android:visibility="gone"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="16dp"
                 android:textColor="@color/ui_txt_hint_color"
                 android:textStyle="bold"
                 android:layout_toRightOf="@id/tv_real_price"
-               />
+                />
         </RelativeLayout>
+        
+        <ImageView
+            android:id="@+id/iv_item"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="15dp"
+            />
+        <TextView
+            android:id="@+id/tv_buy_stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="库存 1090 件"
+            android:layout_marginLeft="141dp"
+            android:textSize="@dimen/h5_font_size"
+            android:textColorHint="@color/ui_txt_hint_color"
+            android:layout_marginTop="40dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_buy_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_buy_stock"
+            android:text="已选择："
+            android:layout_marginLeft="141dp"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/h5_font_size"
+            android:textColor="@color/ui_txt_normal_color"
+            />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="241dp"
+        android:layout_height="wrap_content"
         android:background="#fafafa">
         <TextView
             android:text="选择类型"
@@ -95,118 +111,95 @@
             android:layout_marginLeft="15dp"
             />
        <skin.support.widget.SkinCompatRadioGroup
+           android:id="@+id/frg"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:orientation="vertical"
            android:layout_marginTop="47dp"
-           android:layout_marginLeft="15dp">
-
-           <skin.support.widget.SkinCompatRadioButton
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:button="@null"
-               android:background="@drawable/ui_shap_radio_bt_selecter"
-               android:text="普通版"
-               android:textColor="@color/ui_radio_bt_color_selector"
-               android:paddingLeft="12dp"
-               android:paddingRight="12dp"
-               android:paddingTop="5dp"
-               android:paddingBottom="5dp"
-              />
-
-           <skin.support.widget.SkinCompatRadioButton
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:button="@null"
-               android:background="@drawable/ui_shap_radio_bt_selecter"
-               android:text="视频精讲班"
-               android:textColor="@color/ui_radio_bt_color_selector"
-               android:paddingLeft="12dp"
-               android:paddingRight="12dp"
-               android:paddingTop="5dp"
-               android:paddingBottom="5dp"
-               android:layout_marginTop="7dp"
-               />
+           >
        </skin.support.widget.SkinCompatRadioGroup>
-
-
-        <TextView
-            android:text="购买数量"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/ui_txt_normal_color"
-            android:textStyle="bold"
-            android:layout_marginTop="130dp"
-            android:textSize="@dimen/h2_font_size"
-            android:layout_marginLeft="15dp"
-            />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="130dp"
-            android:layout_marginRight="18dp">
-            
-            <RelativeLayout
-                android:id="@+id/rlt_subtract"
-                android:layout_width="21dp"
-                android:layout_height="21dp"
-                android:background="@drawable/shap_white_radius_4"
-                android:layout_marginRight="5dp">
-                <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:background="@mipmap/icon_subtract"
-                    android:layout_centerInParent="true"
-                    />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/shap_white_radius_4"
-                android:layout_marginTop="-5dp">
-                <TextView
-                    android:id="@+id/tv_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:textSize="@dimen/h5_font_size"
-                    android:textColor="@color/ui_primary_color"
-                    android:layout_centerInParent="true"
-                    />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlt_add"
-                android:layout_width="21dp"
-                android:layout_height="21dp"
-                android:layout_marginRight="4dp"
-                android:background="@drawable/shap_white_radius_4">
-                <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:background="@mipmap/icon_add"
-                    android:layout_centerInParent="true"
-                    />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_buy"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            style="@style/ui_h3_button_primary_style"
-            android:text="确定"
-            android:gravity="center"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="17dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            />
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/frg"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:text="购买数量"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ui_txt_normal_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/h2_font_size"
+                android:layout_marginLeft="15dp"
+                />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="18dp">
+
+                <RelativeLayout
+                    android:id="@+id/rlt_subtract"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:background="@drawable/shap_white_radius_4"
+                    android:layout_marginRight="5dp">
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:background="@mipmap/icon_subtract"
+                        android:layout_centerInParent="true"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/shap_white_radius_4"
+                    android:layout_marginTop="-5dp">
+                    <TextView
+                        android:id="@+id/tv_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textSize="@dimen/h5_font_size"
+                        android:textColor="@color/ui_primary_color"
+                        android:layout_centerInParent="true"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlt_add"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@drawable/shap_white_radius_4">
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:background="@mipmap/icon_add"
+                        android:layout_centerInParent="true"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_buy"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        style="@style/ui_h3_button_primary_style"
+        android:text="确定"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="17dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/ui_shap_button_bg_selector"
+        />
 </LinearLayout>

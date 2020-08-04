@@ -1,0 +1,17 @@
+<skin.support.widget.SkinCompatRadioButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:button="@null"
+    android:background="@drawable/ui_shap_radio_5_bt_selecter"
+    android:text="视频精讲班"
+    android:textColor="@color/ui_radio_bt_color_selector"
+    android:paddingLeft="12dp"
+    android:paddingRight="22dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:layout_marginTop="7dp"
+    android:drawablePadding="5dp"
+    android:layout_marginLeft="15dp"
+    android:layout_toRightOf="@id/iv_img"
+    />
