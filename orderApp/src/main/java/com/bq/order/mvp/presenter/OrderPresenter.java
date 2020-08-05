@@ -82,4 +82,18 @@ public class OrderPresenter implements BasePresenter {
             }
         });
     }
+
+    public void cancelOrder(int id) {
+        mProductHttpReqeustImp.cancelOrder(id,new AbstractReqeustCallback<String>(mIView) {
+
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+            @Override
+            public void onSuccess(String bean) {
+                mIView.cancelOrderView();
+            }
+        });
+    }
 }

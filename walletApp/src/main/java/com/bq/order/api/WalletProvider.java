@@ -8,7 +8,6 @@ import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.msgService.MessageBody;
 import com.bq.comm_config_lib.msgService.MessageEvent;
 import com.bq.comm_config_lib.request.RequestCallBackInter;
-import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.order.pay.PayUtils;
 import com.bq.order.pay.callback.IPayCallback;
 import com.bq.order.requset.WalletHttpReqeustImp;
@@ -35,7 +34,6 @@ public class WalletProvider {
                 @Override
                 public void onSuccess(Object o) {
                     event.eventInterface.callBack(new MessageBody(MessageBody.SUCCESS_CODE,new Gson().toJson(o)));
-                    CommSpUtils.clearLoginInfo();
                 }
                 @Override
                 public void onError(String msg) {
@@ -75,6 +73,9 @@ public class WalletProvider {
             }
             @Override
             public void cancel() {
+                ARouter.getInstance().build(AppArouter.ORDER_ORDER_DETAIL_ACTIVITY)
+                        .withString("mOrderId",orderId).navigation();
+                activity.finish();
             }
         });
     }

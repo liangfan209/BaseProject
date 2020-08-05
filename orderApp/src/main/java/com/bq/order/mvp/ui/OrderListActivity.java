@@ -15,6 +15,7 @@ import com.bq.order.mvp.ui.fragment.OrderListFragment;
 import com.bq.order.requset.bean.OrderRequsetBean;
 import com.fan.baseuilibrary.view.NoAnimationViewPager;
 import com.fan.baseuilibrary.view.flycotablayout.widget.SkinSlidingTabLayout;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -69,5 +70,17 @@ public class OrderListActivity extends BaseActivity {
             mFragmentList.add(OrderListFragment.getInstance(info));
         }
         mTablayout.setViewPager(mViewpager,mTitles,this,mFragmentList);
+
+        mTablayout.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                String info =position==0?types[position]:new Gson().toJson(new OrderRequsetBean(types[position]));
+                ((OrderListFragment)mFragmentList.get(position)).updateFragment(info);
+            }
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
     }
 }

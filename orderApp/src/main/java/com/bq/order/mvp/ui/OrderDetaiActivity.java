@@ -10,22 +10,15 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.msgService.MessageBody;
-import com.bq.comm_config_lib.msgService.MessageEvent;
-import com.bq.comm_config_lib.msgService.MessageInter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
-import com.bq.comm_config_lib.utils.PayView;
+import com.bq.comm_config_lib.utils.PayViewHelper;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
-import com.bq.order.api.bean.BanlanceBean;
 import com.bq.order.mvp.presenter.OrderPresenter;
 import com.bq.order.requset.bean.OrderInfo;
 import com.bq.utilslib.AppUtils;
-import com.google.gson.Gson;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -165,6 +158,8 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
             mTvOrderType.setText("卖家已发货");
             mTvOrderBottomRight.setVisibility(View.VISIBLE);
             mTvOrderBottomRight.setText("查看物流");
+        }else if(mOrderInfoBean.getStatus().equals("order_closed")){
+            mTvOrderType.setText("订单已取消");
         }else{
             mTvAfterSale.setVisibility(View.VISIBLE);
             mTvOrderType.setText("订单已完成");
@@ -172,20 +167,10 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
 
         mTvOrderBottomRight.setOnClickListener(v->{
             if(mOrderInfoBean.getStatus().equals("order_launched")){
-                EventBus.getDefault().post(new MessageEvent(AppArouter.WALLET_BALANCE_SERVICE, new MessageInter() {
-                    @Override
-                    public void callBack(MessageBody data) {
-                        String content = data.getContent();
-                        BanlanceBean banlance = new Gson().fromJson(content, BanlanceBean.class);
-                        double balance = banlance.getBalance();
-                        //弹出支付框
-                        new PayView().showBottomView(OrderDetaiActivity.this, mOrderId,
-                                Utils.getDouble2(mProductInfo.getSale_price()*mProductInfo.getQuantity()), Utils.getDouble2(balance));
-                    }
-                }));
+                PayViewHelper.getBanenceAndShow(OrderDetaiActivity.this, mOrderId,
+                        Utils.getDouble2(mProductInfo.getSale_price()*mProductInfo.getQuantity()),2);
             }else if(mOrderInfoBean.getStatus().equals("payment_finished")){
             }else if(mOrderInfoBean.getStatus().equals("delivery_finished")){
-            }else{
             }
         });
 

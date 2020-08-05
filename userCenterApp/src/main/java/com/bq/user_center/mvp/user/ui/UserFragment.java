@@ -1,5 +1,6 @@
 package com.bq.user_center.mvp.user.ui;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
 import com.bq.comm_config_lib.request.Api;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.api.bean.UserCenterConfigBean;
@@ -30,6 +32,7 @@ import com.fan.baseuilibrary.view.SimpleDividerItemDecoration;
 import com.fan.baseuilibrary.view.dialog.CustomDialog;
 import com.google.gson.Gson;
 
+import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -59,6 +62,9 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
     @BindView(R2.id.rlt_head)
     RelativeLayout mRltHead;
 
+    @BindView(R2.id.rlt_logout)
+    RelativeLayout mRltLogout;
+
     @BindView(R2.id.llt_content)
     LinearLayout mLltContent;
     private UserPresenter mUserPersenter;
@@ -84,10 +90,21 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         String jsonStr = AppUtils.getAssetJson(this.getContext(),"usercenter_center_config.json");
         userConfig = new Gson().fromJson(jsonStr, UserCenterConfigBean.class);
         updateView();
-        //获取用户信息
-        mUserPersenter.showUserInfo();
+
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //获取用户信息
+        String token = CommSpUtils.getToken();
+        if(!StringUtils.isEmpty(token)){
+            mUserPersenter.showUserInfo();
+            mRltLogout.setVisibility(View.VISIBLE);
+        }else{
+            mRltLogout.setVisibility(View.GONE);
+        }
+    }
 
     public void updateView() {
         List<UserCenterConfigBean.ModuleListBean> moduleList = userConfig.getModuleList();
@@ -149,7 +166,11 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
                         .withString("h5url",path).navigation();
             }else{
                 if(mUserinfo == null){
-                    mUserPersenter.showUserInfo();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("index",2);
+                    ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY)
+                                .withString("mPath",AppArouter.MAIN_ACTIVITY)
+                                .withBundle("mBundle",bundle).navigation();
                     return;
                 }
                 if("实名认证".equals(tabBean.getName())){
@@ -171,7 +192,7 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
     @OnClick({R2.id.rlt_head,R2.id.tv_logout})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.rlt_head){
-            ARouter.getInstance().build(AppArouter. USER_CENTER_USER_INFO_ACTIVITY).navigation();
+            ARouter.getInstance().build(AppArouter.USER_CENTER_USER_INFO_ACTIVITY).navigation();
         }else if(view.getId() == R.id.tv_logout){
             new CustomDialog().showDialogDialog(this.getContext(), "退出登录", "确定退出登录吗？", new CustomDialog.ClickCallBack() {
                 @Override
@@ -190,7 +211,10 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
     public void logout() {
         ToastUtils.showToastOk(this.getActivity(), "退出成功");
         new Handler().postDelayed(() -> {
-            getActivity().finish();
+//            getActivity().finish();
+//            ((MainActivity)getActivity()).selectFragment(0);
+            //告诉主页切换到首页
+            EventBus.getDefault().post("go_home");
             ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
         }, 1000);
     }

@@ -9,7 +9,9 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
+import com.bq.comm_config_lib.utils.PayViewHelper;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
@@ -22,6 +24,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
+import com.fan.baseuilibrary.view.dialog.CustomDialog;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -30,6 +33,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import butterknife.BindView;
+import skin.support.content.res.SkinCompatResources;
 
 /**
  * 文件名：
@@ -83,6 +87,12 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
         });
     }
 
+    public void updateFragment(String info){
+        searchInfo = info;
+        mRefreshLayout.initRefreshBoo();
+        loadData(1,10);
+    }
+
     @Override
     public BaseQuickAdapter<OrderInfo, ? extends BaseViewHolder> createAdapter() {
         return new BaseQuickAdapter<OrderInfo, BaseViewHolder>(R.layout.order_item_order,mlist) {
@@ -113,11 +123,29 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                 tvTotalCount.setText("数量：x"+ orderItemListBean.getQuantity());
                 String status = info.getStatus();
 
+                tvType.setTextColor(SkinCompatResources.getColor(tvType.getContext(),R.color.ui_primary_color));
                 tvHint.setVisibility(View.VISIBLE);
                 tvPrimary.setVisibility(View.VISIBLE);
 
                 tvPrimary.setOnClickListener(v->{
                     if(status.contains("order_launched")){
+                        showPayView(info.getId()+"",AppUtils.getDouble2(orderItemListBean.getSale_price()*orderItemListBean.getQuantity()));
+                        //待发货
+                    }else if(status.contains("payment_finished")){
+                        //待收货
+                    }else if(status.contains("delivery_finished")){
+                        //已完成
+                    }else if(status.contains("order_finished")){
+
+                    }
+                });
+
+                tvHint.setOnClickListener(v->{
+                    if(status.contains("order_launched")){
+                        //取消支付订单
+                        cancelOrder(info.getId());
+
+
                         //待发货
                     }else if(status.contains("payment_finished")){
                         //待收货
@@ -152,9 +180,32 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                     tvHint.setVisibility(View.GONE);
                     tvHint.setVisibility(View.GONE);
                     tvPrimary.setVisibility(View.GONE);
+                }else if(status.contains("order_closed")){
+                    tvHint.setVisibility(View.GONE);
+                    tvPrimary.setVisibility(View.GONE);
+                    tvType.setText("已取消");
+                    tvType.setTextColor(SkinCompatResources.getColor(tvType.getContext(),R.color.ui_txt_hint_color));
                 }
             }
         };
+    }
+
+    private void cancelOrder(int id) {
+        new CustomDialog().showDialogDialog(this.getContext(), "订单取消", "确定取消此订单吗？", new CustomDialog.ClickCallBack() {
+            @Override
+            public void ok() {
+                mOrderPresenter.cancelOrder(id);
+            }
+
+            @Override
+            public void cacel() {
+            }
+        });
+    }
+
+    @Override
+    public void cancelOrderView() {
+        updateFragment(searchInfo);
     }
 
     @Override
@@ -165,5 +216,10 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
     @Override
     public void getOrderListView(List<OrderInfo> list) {
         mRefreshLayout.addData(list);
+    }
+
+
+    public void showPayView(String orderId,String price){
+        PayViewHelper.getBanenceAndShow(((BaseActivity)getActivity()),orderId,price,3);
     }
 }

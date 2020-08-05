@@ -34,5 +34,7 @@ public class ApiProduct {
     public static String ORDER_GET_DETAIL = "customer.order.get";
     //订单列表
     public static String ORDER_LIST = "customer.order.search";
+    //取消订单
+    public static String ORDER_CANCEL_ORDER = "customer.order.cancel";
 
 }

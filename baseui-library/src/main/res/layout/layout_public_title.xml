@@ -6,7 +6,7 @@
     android:id="@+id/rlt_title"
     android:layout_height="48dp"
     android:layout_width="match_parent"
-    android:background="@color/ui_title_bg_color">
+    android:background="@color/transparent">
 
     <ImageView
         android:id="@+id/iv_title_left"

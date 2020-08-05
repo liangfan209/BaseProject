@@ -42,6 +42,7 @@ public class AppArouter {
 
     public static final String USER_CENTER_SERVICE = USER_CENTER+"/service";
     public static final String USER_CENTER_BANK_LIST_SERVICE = USER_CENTER+"/BankListService";
+    public static final String USER_CENTER_ADDRESS_DEFAULT_SERVICE = USER_CENTER+"/AddressDefaultService";
 
     //我的钱包
     public static final String WALLET = "/wallet";

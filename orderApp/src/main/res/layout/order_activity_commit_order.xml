@@ -17,6 +17,7 @@
             android:background="#fff9f9f9">
 
             <RelativeLayout
+                android:id="@+id/rlt_address"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@color/white"
@@ -24,21 +25,66 @@
 
                 <ImageView
                     android:id="@+id/iv_address"
-                    android:layout_width="15dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/icon_address_selecter"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tv_address_contact"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="逆向"
+                            android:textColor="@color/ui_txt_normal_color"
+                            android:textSize="@dimen/h3_font_size"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:id="@+id/tv_address_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:layout_marginLeft="15dp"
+                            android:textColor="@color/ui_txt_hint_color"
+                            android:textSize="@dimen/h4_font_size"/>
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/tv_address_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/h5_font_size"
+                        android:text=""
+                        android:layout_marginTop="10dp"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        />
+
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="9dp"
                     android:layout_height="15dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:background="@mipmap/next_step" />
 
-                <TextView
-                    android:id="@+id/tv_"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="选择收货地址"
-                    android:textColor="@color/ui_txt_normal_color"
-                    android:textSize="@dimen/h5_font_size"
-                    android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@id/iv_address"
-                    android:layout_marginLeft="28dp" />
 
             </RelativeLayout>
 

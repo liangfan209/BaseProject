@@ -14,11 +14,15 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.R;
 import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.msgService.MessageBody;
 import com.bq.comm_config_lib.msgService.MessageEvent;
+import com.bq.comm_config_lib.msgService.MessageInter;
+import com.bq.comm_config_lib.msgService.bean.BanlanceBean;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.utilslib.AppUtils;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.dialog.CustomDialog;
+import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -29,7 +33,7 @@ import org.greenrobot.eventbus.EventBus;
  * 时间：2020/4/26
  * 版权：
  */
-public class PayView {
+public class PayViewHelper {
 
 //    private CustomPopWindow mCustomPopWindow;
     private Dialog mDialog;
@@ -39,12 +43,34 @@ public class PayView {
     private String phoneNumber = "";
 
     /**
+     *
+     * @param activity 上下文
+     * @param orderId  订单ID
+     * @param price    支付总价格
+     * @param type  哪种页面过来的支付。  1：订单创建页 2：订单详情页 3：订单列表页
+     */
+    public static void getBanenceAndShow(final BaseActivity activity,String orderId,String price,int type){
+        EventBus.getDefault().post(new MessageEvent(AppArouter.WALLET_BALANCE_SERVICE, new MessageInter() {
+            @Override
+            public void callBack(MessageBody data) {
+                String content = data.getContent();
+                BanlanceBean banlance = new Gson().fromJson(content, BanlanceBean.class);
+                double balance = banlance.getBalance();
+                //弹出支付框
+                new PayViewHelper().showBottomView(activity, orderId,
+                        price, Utils.getDouble2(balance),type);
+            }
+        }));
+    }
+
+    /**
      * @param activity 上下文
      * @param orderId  订单ID
      * @param price    支付总价格
      * @param balence  付款个人总余额
+     * @param type  哪种页面过来的支付。  1：订单创建页 2：订单详情页 3：订单列表页
      */
-    public void showBottomView(BaseActivity activity, String orderId, String price, String balence) {
+    public void showBottomView(BaseActivity activity, String orderId, String price, String balence, int type) {
         View view = LinearLayout.inflate(activity, R.layout.layout_partner_pay, null);
         final RadioButton rbBlance = view.findViewById(R.id.rbt_balence);
         final RadioButton rbWeixin = view.findViewById(R.id.rbt_wexin);
@@ -64,24 +90,28 @@ public class PayView {
             attributes.height = AppUtils.dp2px(activity,440);
             dialogWindow.setWindowAnimations(com.bigkoo.pickerview.R.style.picker_view_slide_anim);//修改动画样式
         }
+
         iv_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDialog1 = new CustomDialog().showDialog(activity,
-                        "取消支付", "确定取消支付", "取消", "确定", new CustomDialog.ClickCallBack() {
+                if(type == 1){
+                    mDialog1 = new CustomDialog().showDialog(activity,
+                            "取消支付", "确定取消支付", "取消", "确定", new CustomDialog.ClickCallBack() {
 
-                            @Override
-                            public void ok() {
-                                if (mDialog1 != null) {
-                                    mDialog1.dismiss();
+                                @Override
+                                public void ok() {
+                                    if (mDialog1 != null) {
+                                        mDialog1.dismiss();
+                                    }
+                                    mDialog.dismiss();
+                                    payCancel(activity,orderId);
                                 }
-                                mDialog.dismiss();
-                                payCancel(activity,orderId);
-                            }
-                            @Override
-                            public void cacel() {
-                            }
-                        });
+                                @Override
+                                public void cacel() {
+                                }
+                            });
+                }
+
             }
         });
         TextView tvPrice = view.findViewById(R.id.tv_price);

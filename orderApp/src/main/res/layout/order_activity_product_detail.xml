@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <FrameLayout
                 android:layout_width="match_parent"
@@ -308,17 +308,11 @@
                     android:layout_toRightOf="@id/key2"
                     />
             </RelativeLayout>
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/ui_recycleview_item_line_color"
-                android:layout_marginLeft="13dp"
-                android:layout_marginRight="28dp"/>
 
             <ImageView
                 android:id="@+id/iv_product_mark"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_width="wrap_content"
+                android:layout_height="370dp"
                 android:scaleType="fitXY"
                 />
 

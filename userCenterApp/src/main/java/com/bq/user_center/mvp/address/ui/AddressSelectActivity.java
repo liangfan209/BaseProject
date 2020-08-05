@@ -1,10 +1,12 @@
 package com.bq.user_center.mvp.address.ui;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
@@ -20,6 +22,7 @@ import com.bq.user_center.requset.bean.AddressListBean;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,6 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import skin.support.widget.SkinCompatCheckBox;
 
 /**
  * 文件名：
@@ -49,6 +53,8 @@ public class AddressSelectActivity extends BaseActivity implements MyRefreshLayo
     RelativeLayout mRltAddAddress;
     private AddressManagerPresenter mAddressManagerPresenter;
 
+    @Autowired
+    int addressId;
 
     @Override
     protected int getContentViewLayout() {
@@ -63,6 +69,7 @@ public class AddressSelectActivity extends BaseActivity implements MyRefreshLayo
 
     @Override
     protected void attach() {
+        ARouter.getInstance().inject(this);
         mTvTitle.setText("选择地址");
         mRefreshLayout = new MyRefreshLayout<AddressListBean>(this, this);
         mRefreshLayout.setbackgroundColor(R.color.white);
@@ -70,6 +77,11 @@ public class AddressSelectActivity extends BaseActivity implements MyRefreshLayo
         mRefreshLayout.setRefresh(false, false);
         //选择某一个类型
         mRefreshLayout.adapter.setOnItemClickListener((adapter, view, position) -> {
+            AddressInfo info = (AddressInfo) adapter.getData().get(position);
+            Intent intent = new Intent();
+            intent.putExtra("address_info",new Gson().toJson(info));
+            setResult(0,intent);
+            finish();
         });
     }
 
@@ -84,18 +96,32 @@ public class AddressSelectActivity extends BaseActivity implements MyRefreshLayo
                             .withInt("optionType", AddressOptionActivity.ADDRESS_EDIT)
                             .withSerializable("mAddressInfo", addressBean).navigation();
                 });
-                    TextView tvAdress = baseViewHolder.getView(R.id.tv_txt);
+
+
+                    SkinCompatCheckBox cb = baseViewHolder.getView(R.id.skcb);
+                    if(addressId == -1){
+                        if(addressBean.getIs_default() == 1)
+                            cb.setVisibility(addressBean.getIs_default() == 1?View.VISIBLE:View.GONE);
+                    }else{
+                        cb.setVisibility(addressId == Integer.valueOf(addressBean.getId())?View.VISIBLE:View.GONE);
+                    }
+
+
+
+                TextView tvAdress = baseViewHolder.getView(R.id.tv_txt);
                     TextView tvName = baseViewHolder.getView(R.id.tv_name);
                     TextView tvPhone = baseViewHolder.getView(R.id.tv_phone);
                     tvName.setText(addressBean.getContacts());
                     String phone = addressBean.getPhone();
                     String formatPhone = phone.substring(0,3)+"****"+phone.substring(8);
                     tvPhone.setText(formatPhone);
+
+
+
                 if (baseViewHolder.getItemViewType() == 1) {
                     tvAdress.setText("         " + addressBean.getCity()+" "+addressBean.getAddress());
-                } else if (baseViewHolder.getItemViewType() == 2) {
+                } else if (baseViewHolder.getItemViewType() == 0) {
                     tvAdress.setText(addressBean.getCity()+" "+addressBean.getAddress());
-
                 }
             }
 

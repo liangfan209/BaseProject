@@ -75,7 +75,7 @@
             android:id="@+id/tv_buy_stock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="库存 1090 件"
+            android:text="库存 0 件"
             android:layout_marginLeft="141dp"
             android:textSize="@dimen/h5_font_size"
             android:textColorHint="@color/ui_txt_hint_color"
@@ -110,14 +110,13 @@
             android:textSize="@dimen/h2_font_size"
             android:layout_marginLeft="15dp"
             />
-       <skin.support.widget.SkinCompatRadioGroup
+       <com.fan.baseuilibrary.view.FlowRadioGroup
            android:id="@+id/frg"
-           android:layout_width="wrap_content"
+           android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:orientation="vertical"
            android:layout_marginTop="47dp"
            >
-       </skin.support.widget.SkinCompatRadioGroup>
+       </com.fan.baseuilibrary.view.FlowRadioGroup>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

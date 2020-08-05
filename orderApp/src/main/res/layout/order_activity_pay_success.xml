@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="支付方式"
+            android:text="支付成功"
             android:textColor="@color/ui_txt_normal_color"
             android:textSize="@dimen/h2_font_size"
             android:layout_marginTop="10dp"

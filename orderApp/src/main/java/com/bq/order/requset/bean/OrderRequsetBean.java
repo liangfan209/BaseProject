@@ -20,6 +20,12 @@ public class OrderRequsetBean {
         this.status = status;
     }
 
+    public OrderRequsetBean(int strike_price, List<GoodsList> goods_list) {
+        this.strike_price = strike_price;
+        this.goods_list = goods_list;
+    }
+
+
     public OrderRequsetBean(int strike_price, int address_id, List<GoodsList> goods_list) {
         this.strike_price = strike_price;
         this.address_id = address_id;

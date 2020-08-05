@@ -29,9 +29,13 @@ public class ActivityInterceptor implements IInterceptor {
             if (AppArouter.USER_CENTER_USER_INFO_ACTIVITY.equals(path) ||
                     AppArouter.USER_CENTER_ADDRESS_LIST.equals(path) ||
                     AppArouter.USER_CENTER_ADDRESS_SELECT.equals(path) ||
-                    AppArouter.WALLET_MY_ACTIVITY.equals(path) ||
-                    AppArouter.USER_CENTER_BANK_LIST.equals(path) ||
-                    AppArouter.LOGIN_MODIFY_ACTIVITY.equals(path)) {
+                    AppArouter.USER_CENTER_CETIFICATION_ACTIVITY.equals(path) || //实名认证
+                    AppArouter.WALLET_MY_ACTIVITY.equals(path) || //我的钱包
+                    AppArouter.USER_CENTER_ADDRESS_LIST.equals(path) || //地址管理
+                    AppArouter.USER_CENTER_BANK_LIST.equals(path) ||  //银行卡管理
+                    AppArouter.ORDER_LIST_ACTIVITY.equals(path) ||  //订单管理
+                    AppArouter.ORDER_ORDER_COMMIT_ACTIVITY.equals(path) ||  //订单管理
+                    AppArouter.LOGIN_MODIFY_ACTIVITY.equals(path)) { //修改面膜
                 Bundle optionsBundle = postcard.getOptionsBundle();
                 ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY)
                         .withBundle("mBundle", optionsBundle)

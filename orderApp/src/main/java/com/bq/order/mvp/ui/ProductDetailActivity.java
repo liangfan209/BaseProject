@@ -23,6 +23,7 @@ import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.comm_config_lib.utils.BitImageUtils;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
@@ -392,6 +393,12 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
     int position = 0;
 
     void showBuyPopwindow() {
+        String token = CommSpUtils.getToken();
+        if(StringUtils.isEmpty(token)){
+            ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).withString("mPath","-1").navigation();
+            return;
+        }
+
         View view = getLayoutInflater().inflate(R.layout.order_popwindow_buy, null);
         final TextView tvBuySelcter = view.findViewById(R.id.tv_buy_select);
         final TextView tvRealPrice = view.findViewById(R.id.tv_real_price);
@@ -405,13 +412,16 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
 
         tvRealPrice.setText(AppUtils.getDouble2(mProductInfo.getMin_price()));
 
-        SkinCompatRadioGroup fg = view.findViewById(R.id.frg);
-        FlowRadioGroup.LayoutParams params = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.MATCH_PARENT,
+        FlowRadioGroup fg = view.findViewById(R.id.frg);
+        FlowRadioGroup.LayoutParams params = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT,
                 RadioGroup.LayoutParams.WRAP_CONTENT);
         int marginInt = AppUtils.dp2px(this, 7);
         params.setMargins(marginInt, marginInt, marginInt, 0);
         final List<SpecificationList> specification_list = mProductInfo.getSpecification_list();
 
+        if(specification_list.size() == 0){
+            tvBuy.setEnabled(false);
+        }
         for (int i = 0; i < specification_list.size(); i++) {
             final RadioButton rb = (RadioButton) LayoutInflater.from(this).inflate(R.layout.order_layout_radiobutton, null);
             List<SpecificationList.SpecificationValueList> specificationValueList =
@@ -527,12 +537,14 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
 
     @OnClick({R2.id.value2, R2.id.tv_buy, R2.id.rlt_type})
     public void onViewClicked(View view) {
+
+
         if (view.getId() == R.id.tv_buy) {
             if(!Utils.isFastDoubleClick(mTvBuy,1000)){
                 showBuyPopwindow();
             }
         } else if (view.getId() == R.id.rlt_type) {
-            if(!Utils.isFastDoubleClick(mTvBuy,1000)){
+            if(!Utils.isFastDoubleClick(mRltType,1000)){
                 showBuyPopwindow();
             }
         }

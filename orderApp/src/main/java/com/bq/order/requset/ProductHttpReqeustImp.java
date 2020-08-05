@@ -1,5 +1,6 @@
 package com.bq.order.requset;
 
+import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.comm_config_lib.request.RequestCallBackInter;
 import com.bq.comm_config_lib.request.SignJsonCallBack;
 import com.bq.comm_config_lib.utils.CommSpUtils;
@@ -143,6 +144,11 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         });
     }
 
+    /**
+     * 搜索所有学年
+     * @param searchStr
+     * @param callBack
+     */
     @Override
     public void getDurationAll(String searchStr,RequestCallBackInter callBack) {
         Map<String,String> map = new HashMap<>();
@@ -229,17 +235,25 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
     public void getOrderList(int currentPage,String searchStr,RequestCallBackInter callBack) {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiProduct.ORDER_LIST);
-//        if(searchStr.equals("null")){
-//            map.put("search_info", "{}");
-//        }else{
-//            map.put("search_info", searchStr);
-//        }
         map.put("search_info", searchStr);
         map.put("current_page", currentPage+"");
         map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<OrderInfoListBean>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<OrderInfoListBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    public void cancelOrder(int id, AbstractReqeustCallback<String> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.ORDER_CANCEL_ORDER);
+        map.put("order_id", id+"");
+        map.put("auth", CommSpUtils.getToken());
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<String>> response) {
                 super.onSuccess(response);
             }
         });

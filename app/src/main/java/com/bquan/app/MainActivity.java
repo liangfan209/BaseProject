@@ -6,16 +6,18 @@ import android.os.Bundle;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
-import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.user_center.mvp.user.ui.UserFragment;
 import com.fan.baseuilibrary.view.flycotablayout.TabEntity;
 import com.fan.baseuilibrary.view.flycotablayout.widget.SkinCommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -59,8 +61,9 @@ public class MainActivity extends BaseActivity {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void attach() {
-        //绿色皮肤
+        EventBus.getDefault().register(this);
 
+        //绿色皮肤
         ARouter.getInstance().inject(this);
         for (String title : tabs) {
             mFragments.add(new UserFragment());
@@ -73,22 +76,22 @@ public class MainActivity extends BaseActivity {
         mTablayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-                if(position == 2){
-                    //判断下token
-                    String token = CommSpUtils.getToken();
-                    if(StringUtils.isEmpty(token)){
-                        //跳转到登录界面
-                        Bundle bundle = new Bundle();
-                        bundle.putInt("index",position);
-                        ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY)
-                                .withString("mPath",AppArouter.MAIN_ACTIVITY)
-                                .withBundle("mBundle",bundle).navigation();
-                        mTablayout.setCurrentTab(currentIndex);
-                        return;
-                    }
-                }else{
-                    currentIndex = position;
-                }
+//                if(position == 2){
+//                    //判断下token
+//                    String token = CommSpUtils.getToken();
+//                    if(StringUtils.isEmpty(token)){
+//                        //跳转到登录界面
+//                        Bundle bundle = new Bundle();
+//                        bundle.putInt("index",position);
+//                        ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY)
+//                                .withString("mPath",AppArouter.MAIN_ACTIVITY)
+//                                .withBundle("mBundle",bundle).navigation();
+//                        mTablayout.setCurrentTab(currentIndex);
+//                        return;
+//                    }
+//                }else{
+//                    currentIndex = position;
+//                }
                 selectFragment(position);
             }
             @Override
@@ -159,5 +162,17 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void providerData(String key) {
+        if(key == "go_home"){
+            mTablayout.setCurrentTab(0);
+            selectFragment(0);
+        }
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }
