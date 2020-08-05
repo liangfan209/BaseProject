@@ -251,7 +251,8 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
             ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY)
                     .withString("mSearchInfo",serachInfo).navigation();
         }else if(view.getId() == R.id.rlt_search){
-            jumpProductListActivity();
+//            jumpProductListActivity();
+            ARouter.getInstance().build(AppArouter.ORDER_SCAN_ACTIVITY).navigation();
         }
     }
 

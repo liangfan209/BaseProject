@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+
+    android:layout_height="fill_parent">
+
+
+
+
+    <SurfaceView
+        android:id="@+id/preview_view"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content" />
+
+
+    <com.fan.baseuilibrary.scan.ViewfinderView
+        android:id="@+id/viewfinder_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:public_inner_corner_color="#2979ff"
+        app:public_inner_corner_length="30dp"
+        app:public_inner_corner_width="5dp"
+
+        app:public_inner_margintop="200dp"
+        app:public_inner_scan_bitmap="@mipmap/home_scan_gridding"
+        app:public_inner_scan_iscircle="false"
+        app:public_inner_scan_speed="5"
+        app:public_inner_height="203dp"
+        app:public_inner_width="203dp" />
+
+    <include layout="@layout/layout_public_title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_flashlight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="345dp"
+        android:text="轻触照亮"
+        android:textSize="14sp"
+        android:textColor="#fefefe"
+        android:drawableTop="@mipmap/public_flashlight_close"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="420dp"
+        android:text="放入框内，自动扫描"
+        android:textColor="#f1f1f1"
+        android:layout_gravity="center_horizontal"
+        />
+
+</FrameLayout>

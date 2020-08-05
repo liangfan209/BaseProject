@@ -77,6 +77,13 @@
 
     <color name="actionsheet_golden">#E2CA86</color>
     <color name="actionsheet_golden_qian">#F0E4C1</color>
+
+    <color name="public_colorAccent_dialog">#041a39</color>
+    <color name="public_viewfinder_frame">#ff000000</color>
+    <color name="public_viewfinder_laser">#ffff0000</color>
+    <color name="public_viewfinder_mask">#60000000</color>
+    <color name="public_result_view">#b0000000</color>
+    <color name="public_possible_result_points">#c0ffff00</color>
 <!--    <color name="actionsheet_golden_shen">#B9ECCB</color>-->
 
 

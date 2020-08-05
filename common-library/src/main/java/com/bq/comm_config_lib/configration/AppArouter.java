@@ -77,6 +77,8 @@ public class AppArouter {
 
     public static final String ORDER_SCHOOL_DETAIL_ACTIVITY = ORDER +"/SchoolDetailActivity";
 
+    public static final String ORDER_SCAN_ACTIVITY = ORDER +"/ScanActivity";
+
     //h5页面
     public static final String H5_ACTIVITY = "/h5/H5Activity";
 

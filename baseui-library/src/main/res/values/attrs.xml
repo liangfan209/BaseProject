@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="SignatureView">
+        <attr format="color" name="penColor"/>
+        <attr format="color" name="backColor"/>
+        <attr format="integer" name="penWidth"/>
+    </declare-styleable>
+
+    <!--  ***************************** 扫一扫 *****************************  -->
+    <declare-styleable name="public_ViewfinderView">
+        <attr name="public_inner_width" format="dimension"/>
+        <attr name="public_inner_height" format="dimension"/>
+        <attr name="public_inner_margintop" format="dimension" />
+        <attr name="public_inner_corner_color" format="color" />
+        <attr name="public_inner_corner_length" format="dimension" />
+        <attr name="public_inner_corner_width" format="dimension" />
+        <attr name="public_inner_scan_bitmap" format="reference" />
+        <attr name="public_inner_scan_speed" format="integer" />
+        <attr name="public_inner_scan_iscircle" format="boolean" />
+    </declare-styleable>
 
     <declare-styleable name="Captcha">
         <attr name="src" format="reference"/>

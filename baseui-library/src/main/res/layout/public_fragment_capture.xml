@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+>
+
+    <SurfaceView
+        android:id="@+id/preview_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <com.fan.baseuilibrary.scan.ViewfinderView
+        android:id="@+id/viewfinder_view"
+        android:layout_width="wrap_content"
+        app:public_inner_margintop="200dp"
+        app:public_inner_scan_speed="50"
+        android:layout_height="wrap_content" />
+
+
+    <include layout="@layout/layout_public_title"
+     />
+
+    <TextView
+        android:id="@+id/tv_flashlight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="330dp"
+        android:text="轻触照亮"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="420dp"
+        android:text="放入框内，自动扫描"
+        android:textColor="#f6f6f6"
+        android:layout_gravity="center_horizontal"
+        />
+
+</FrameLayout>
