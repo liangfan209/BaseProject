@@ -16,13 +16,9 @@ import com.bq.comm_config_lib.utils.PayViewHelper;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
-import com.bq.order.api.OrderEventKey;
 import com.bq.order.mvp.presenter.OrderPresenter;
 import com.bq.order.requset.bean.OrderInfo;
 import com.bq.utilslib.AppUtils;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -113,9 +109,14 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
     protected void attach() {
         ARouter.getInstance().inject(this);
         mTvTitle.setText("订单详情");
-        mOrderPresenter.getOrderDetail(mOrderId);
-
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mOrderPresenter.getOrderDetail(mOrderId);
+    }
+
 
     @Override
     public void getOrderDetail(OrderInfo info) {
@@ -149,9 +150,9 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
         mTvRealPrice.setText("¥"+Utils.getDouble2(mProductInfo.getTotal_price()));
 
         Utils.showImage(mProductInfo.getShow_image(),mIvItem);
-        mTvProductType.setText("属性："+mProductInfo.getRemark() + "     发货："+mProductInfo.getDespatch_type());
+        mTvProductType.setText("属性："+mProductInfo.getRemark() + "     发货："+mOrderInfoBean.getDespatch_type());
 
-        if(mProductInfo.getDespatch_type().contains("物流")){
+        if(mOrderInfoBean.getDespatch_type().contains("物流")){
             if(mOrderInfoBean.getStatus().equals("order_launched")){
                 mTvOrderType.setText("等待支付");
                 mTvOrderBottomRight.setVisibility(View.VISIBLE);
@@ -161,7 +162,7 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
             }else if(mOrderInfoBean.getStatus().equals("delivery_finished")){
                 mTvOrderType.setText("卖家已发货");
                 mTvOrderBottomRight.setVisibility(View.VISIBLE);
-                mTvOrderBottomRight.setText("查看物流");
+                mTvOrderBottomRight.setText("确认收货");
             }else if(mOrderInfoBean.getStatus().equals("order_closed")){
                 mTvOrderType.setText("订单已取消");
             }else if(mOrderInfoBean.getStatus().equals("order_finish")){
@@ -232,10 +233,4 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void updateAddress(String event) {
-        if(OrderEventKey.UPDATE_ORDER_STATUS.equals(event)){
-            mOrderPresenter.getOrderDetail(mOrderId);
-        }
-    }
 }

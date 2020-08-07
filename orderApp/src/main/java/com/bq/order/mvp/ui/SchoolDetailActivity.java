@@ -22,6 +22,7 @@ import com.bq.order.mvp.ui.hodler.ProductType;
 import com.bq.order.requset.bean.ProductSearchBean;
 import com.bq.order.requset.bean.ProfessionList;
 import com.bq.order.requset.bean.SchoolInfo;
+import com.fan.baseuilibrary.view.CircleImageView;
 import com.fan.baseuilibrary.view.NoAnimationViewPager;
 import com.fan.baseuilibrary.view.flycotablayout.widget.SkinSlidingTabLayout;
 import com.google.gson.Gson;
@@ -52,7 +53,7 @@ public class SchoolDetailActivity extends BaseActivity implements ProductIview{
     @BindView(R2.id.rlt_title)
     RelativeLayout mRltTitle;
     @BindView(R2.id.iv_icon)
-    ImageView mTvIcon;
+    CircleImageView mTvIcon;
     @BindView(R2.id.tv_name)
     TextView mTvName;
     @BindView(R2.id.tv_detail)

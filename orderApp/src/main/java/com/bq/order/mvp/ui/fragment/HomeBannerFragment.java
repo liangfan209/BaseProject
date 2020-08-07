@@ -49,7 +49,8 @@ public class HomeBannerFragment extends BaseFragment {
     RecyclerView mRvProductType;
     @BindView(R2.id.banner_advertising)
     BannerViewPager mBannerAdvertising;
-
+    //undergraduate -> 专升本 、 specialty -> 高起专 、 graduate -> 考研 、 qualification ->
+    private String[] professionStr ={"undergraduate","specialty","graduate","qualification"};
     private String[] productTypeStr = {"专升本","高起专","考研","资格证"};
     private int[] productTypeInts = {R.mipmap.icon_benke,R.mipmap.icon_zhuanke,R.mipmap.icon_kaoyan,R.mipmap.icon_zigezheng};
 
@@ -116,10 +117,8 @@ public class HomeBannerFragment extends BaseFragment {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 ProductSearchBean bean = new ProductSearchBean();
-                bean.setCategory(productTypeStr[position]);
-                String serachInfo = new Gson().toJson(bean);
                 ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY)
-                        .withString("mSearchInfo",serachInfo).navigation();
+                        .withString("forType",professionStr[position]).navigation();
 //                parentFragment.updateTest();
             }
         });
@@ -151,15 +150,11 @@ public class HomeBannerFragment extends BaseFragment {
         ArrayList<BannerData> dataList = new ArrayList<BannerData>();
 //        BannerData b1 = new BannerData("https://www.wanandroid.com/blogimgs/90c6cc12-742e-4c9f-b318-b912f163b8d0.png",
 //                BannerData.TYPE_NEW);
-        BannerData b2 = new BannerData("http://img6.16fan.com/201510/11/005258wdngg6rv0tpn8z9z.jpg", 1);
-        BannerData b3 = new BannerData("http://img6.16fan.com/201510/11/013553aj3kp9u6iuz6k9uj.jpg", 1);
-        BannerData b4 = new BannerData("http://img6.16fan.com/201510/11/011753fnanichdca0wbhxc.jpg", 1);
-        BannerData b5 = new BannerData("http://img6.16fan.com/201510/11/011819zbzbciir9ctn295o.jpg", 1);
+        BannerData b2 = new BannerData(R.mipmap.icon_home_banner_top, 1);
+        BannerData b3 = new BannerData(R.mipmap.icon_home_banner_top, 1);
 //        dataList.add(b1);
         dataList.add(b2);
         dataList.add(b3);
-        dataList.add(b4);
-        dataList.add(b5);
         mBannerView.refreshData(dataList);
     }
 }

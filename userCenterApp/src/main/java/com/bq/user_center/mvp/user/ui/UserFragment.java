@@ -16,6 +16,7 @@ import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
 import com.bq.comm_config_lib.request.Api;
 import com.bq.comm_config_lib.utils.CommSpUtils;
+import com.bq.comm_config_lib.utils.Utils;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.api.bean.UserCenterConfigBean;
@@ -103,6 +104,8 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         }else{
             mRltLogout.setVisibility(View.GONE);
             mTvNickName.setText("未登录");
+            Glide.with(this).load(R.mipmap.icon_user_head)
+                    .apply(Utils.getRequestOptionRadus(mIvHead.getContext(),0)).into(mIvHead);
         }
     }
 

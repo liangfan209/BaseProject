@@ -153,6 +153,7 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
     }
 
     private void intHotProfessionView() {
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         mRvProfession.setLayoutManager(linearLayoutManager);
 

@@ -192,7 +192,8 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                         tvType.setText("待发货");
                         //待收货
                     }else if(status.contains("delivery_finished")){
-                        tvHint.setText("查看物流");
+//                        tvHint.setText("查看物流");
+                        tvHint.setVisibility(View.GONE);
                         tvPrimary.setText("确认收货");
                         tvType.setText("代收货");
                         //已完成
@@ -218,13 +219,13 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                     }else if(status.contains("payment_finished")){
                         tvHint.setVisibility(View.GONE);
                         tvPrimary.setVisibility(View.VISIBLE);
-                        tvPrimary.setText("签合同");
+                        tvPrimary.setText("签署合同");
                         tvType.setText("已付款");
                         //待收货
                     }else if(status.contains("delivery_finished")){
                         tvHint.setVisibility(View.GONE);
                         tvPrimary.setVisibility(View.VISIBLE);
-                        tvPrimary.setText("签合同");
+                        tvPrimary.setText("签署合同");
                         tvType.setText("已付款");
                         //已完成
                     }else if(status.contains("order_finished")){

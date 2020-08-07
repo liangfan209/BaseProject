@@ -124,7 +124,7 @@
                     android:id="@+id/tv_order_sign_contract"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="签约合同"
+                    android:text="签署合同"
                     android:textSize="@dimen/h5_font_size"
                     android:gravity="center"
                     android:textColor="@color/ui_primary_color"

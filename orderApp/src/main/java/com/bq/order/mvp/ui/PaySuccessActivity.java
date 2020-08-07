@@ -13,6 +13,9 @@ import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.order.R;
 import com.bq.order.R2;
+import com.bq.order.api.OrderEventKey;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -67,6 +70,7 @@ public class PaySuccessActivity extends BaseActivity {
         ARouter.getInstance().inject(this);
         mTvTitle.setText("支付成功");
         mTvMoney.setText(mPrice);
+        EventBus.getDefault().post(OrderEventKey.UPDATE_ORDER_STATUS);
     }
 
 

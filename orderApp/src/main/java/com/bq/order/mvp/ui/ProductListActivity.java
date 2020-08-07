@@ -96,6 +96,9 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
     private List<SelecterBean.SelectInfo> mProfessionList;
     private List<SelecterBean.SelectInfo> mDurationList;
 
+
+    @Autowired
+    String forType;
     @Autowired
     String mSearchInfo;
     @Autowired
@@ -179,10 +182,16 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
             mFlowContent.setVisibility(View.VISIBLE);
         }
         //冲4个按钮进来的
-        if(mSearchInfo.contains("资格证")){
-            mRltProfesionType.setVisibility(View.GONE);
-            mFlowContent.setVisibility(View.GONE);
+        if(!StringUtils.isEmpty(forType)){
+            if(forType.contains("qualification")){
+                mRltProfesionType.setVisibility(View.GONE);
+                mFlowContent.setVisibility(View.GONE);
+            }
+            ProductSearchBean bean  = new ProductSearchBean();
+            bean.setCategory(forType);
+            mSearchInfo = new Gson().toJson(bean);
         }
+
 
         ProductType type =  new ProductType(mSearchInfo,10);
         mProductListFragment = ProductListFragment.getInstance(type);
@@ -357,6 +366,9 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
                 bean.setDuration(entry.getValue().getId());
             }
             entry.getValue();
+        }
+        if(!StringUtils.isEmpty(forType)){
+            bean.setCategory(forType);
         }
         mSearchInfo = new Gson().toJson(bean);
         mProductListFragment.updateFragment(mSearchInfo);

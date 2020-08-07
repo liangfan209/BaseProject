@@ -37,6 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseIVie
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        MyStatusBarUtil.setStatusBarTransparent(this, false, true);
         setContentView(getContentViewLayout());
         mLoadingDialog = new LoadingDialog(this);
         ButterKnife.bind(this);

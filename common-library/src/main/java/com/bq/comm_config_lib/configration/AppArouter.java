@@ -75,7 +75,7 @@ public class AppArouter {
     public static final String ORDER_SCHOOL_LIST_ACTIVITY = ORDER +"/SchoolListActivity";
     //专业列表
     //学校列表
-    public static final String ORDER_PROFESSION_LIST_ACTIVITY = ORDER +"/SchoolListActivity";
+    public static final String ORDER_PROFESSION_LIST_ACTIVITY = ORDER +"/ProfessionListActivity";
 
     //学校详情
 
