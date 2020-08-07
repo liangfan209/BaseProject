@@ -1,5 +1,7 @@
 package com.bq.order.requset.bean;
 
+import com.blankj.utilcode.util.StringUtils;
+
 import java.util.List;
 
 /**
@@ -33,6 +35,43 @@ public class OrderInfo {
     private String last_payment_time;
     private String last_payment_number;
     private List<OrderItemListBean> order_item_list;
+    private String contract_background;
+    private String despatch_type;
+    private String status_name;
+
+    public String getStatus_name() {
+        return status_name;
+    }
+
+    public void setStatus_name(String status_name) {
+        this.status_name = status_name;
+    }
+
+    public String getDespatch_type() {
+        if(StringUtils.isEmpty(despatch_type)){
+            return "教育合同";
+        }
+        if(despatch_type.equals("eduction_contract")){
+            return "教育合同";
+        }else if(despatch_type.equals("top_up_phone")){
+            return "手机充值";
+        }else if(despatch_type.equals("logistics")){
+            return "物流交付";
+        }
+        return despatch_type;
+    }
+
+    public void setDespatch_type(String despatch_type) {
+        this.despatch_type = despatch_type;
+    }
+
+    public String getContract_background() {
+        return contract_background;
+    }
+
+    public void setContract_background(String contract_background) {
+        this.contract_background = contract_background;
+    }
 
     public int getId() {
         return id;
@@ -133,7 +172,27 @@ public class OrderInfo {
         private String brand_name;
         private String production_name;
         private String remark;
+        private String despatch_type;
         private List<SpecificationValueListBean> specification_value_list;
+
+        public String getDespatch_type() {
+            if(StringUtils.isEmpty(despatch_type)){
+//                return "";
+                return "教育合同";
+            }
+            if(despatch_type.equals("eduction_contract")){
+                return "教育合同";
+            }else if(despatch_type.equals("top_up_phone")){
+                return "手机充值";
+            }else if(despatch_type.equals("logistics")){
+                return "物流交付";
+            }
+            return despatch_type;
+        }
+
+        public void setDespatch_type(String despatch_type) {
+            this.despatch_type = despatch_type;
+        }
 
         public String getRemark() {
             return remark;

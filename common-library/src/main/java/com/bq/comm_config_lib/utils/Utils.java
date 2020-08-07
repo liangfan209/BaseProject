@@ -11,7 +11,9 @@ import android.widget.ImageView;
 
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.SizeUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.R;
+import com.bq.comm_config_lib.request.Api;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fan.baseuilibrary.utils.RoundCornersTransformation;
@@ -112,6 +114,12 @@ public class Utils {
     }
 
     public static void showImage(String path, ImageView iv){
+        if(StringUtils.isEmpty(path)){
+            path = "";
+        }
+        if(!path.contains("http")){
+            path = Api.BASE_API+path;
+        }
         Glide.with(iv).load(path)
                 .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
     }

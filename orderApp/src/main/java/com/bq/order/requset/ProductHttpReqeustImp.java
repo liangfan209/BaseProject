@@ -6,11 +6,13 @@ import com.bq.comm_config_lib.request.SignJsonCallBack;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.netlibrary.NetManager;
 import com.bq.netlibrary.http.BaseResponse;
+import com.bq.order.requset.bean.ContactListBean;
 import com.bq.order.requset.bean.OrderIdBean;
 import com.bq.order.requset.bean.OrderInfoDetailBean;
 import com.bq.order.requset.bean.OrderInfoListBean;
 import com.bq.order.requset.bean.ProductBean;
 import com.bq.order.requset.bean.ProductListBean;
+import com.bq.order.requset.bean.ProfessionListBean;
 import com.bq.order.requset.bean.SchoolBean;
 import com.bq.order.requset.bean.SchoolListBean;
 import com.bq.order.requset.bean.SelecterBean;
@@ -37,7 +39,7 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiProduct.PRODUCT_HOT_SCHOOL);
         map.put("search_info", searchStr);
-        map.put("auth", CommSpUtils.getToken());
+//        map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<SchoolListBean>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<SchoolListBean>> response) {
@@ -81,6 +83,23 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ProductListBean>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<ProductListBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    /**
+     * 获取热门专业列表
+     * @param searchStr
+     * @param callBack
+     */
+    public void getHostProfessionList(String searchStr, AbstractReqeustCallback<ProfessionListBean> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.PRODUCT_HOT_PROFESSION);
+        map.put("search_info", searchStr);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ProfessionListBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<ProfessionListBean>> response) {
                 super.onSuccess(response);
             }
         });
@@ -254,6 +273,58 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<String>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    /**
+     * 添加合同
+     * @param info
+     * @param callBack
+     */
+    public void addContract(String info,String id, AbstractReqeustCallback<String> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.ORDER_ADD_CONTRACT);
+        map.put("contract_info", info);
+        map.put("order_item_id", id);
+        map.put("auth", CommSpUtils.getToken());
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<String>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    public void getContactImg(String productId, AbstractReqeustCallback<ContactListBean> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.ORDER_GET_CONTRACT);
+        map.put("order_item_id", productId);
+        map.put("auth", CommSpUtils.getToken());
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ContactListBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<ContactListBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+
+    /**
+     * 获取所有专业
+     * @param page
+     * @param searchStr
+     * @param callBack
+     */
+    public void getProfessionList(int page, String searchStr, AbstractReqeustCallback<ProfessionListBean> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.PRODUCT_PROFESSION_SEARCH_ALL);
+        map.put("search_info", searchStr);
+        map.put("current_page", page+"");
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ProfessionListBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<ProfessionListBean>> response) {
                 super.onSuccess(response);
             }
         });

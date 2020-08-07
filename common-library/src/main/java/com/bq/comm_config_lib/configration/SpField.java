@@ -11,4 +11,5 @@ public class SpField {
     public static final String AUTH_TOKEN = "auth_token";
     public static final String AUTH_RENEW_FLAG = "renew_flag";
     public static final String AUTH_EXPIRE_TIME = "expire_time";
+    public static final String AUTH_USERINFO = "userinfo";
 }

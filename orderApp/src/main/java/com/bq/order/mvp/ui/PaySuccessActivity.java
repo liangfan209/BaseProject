@@ -73,7 +73,8 @@ public class PaySuccessActivity extends BaseActivity {
     @OnClick({R2.id.tv_signed, R2.id.tv_order_detail})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.tv_signed){
-
+//            ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY).navigation();
+//            finish();
         }else if(view.getId() == R.id.tv_order_detail){
             ARouter.getInstance().build(AppArouter.ORDER_ORDER_DETAIL_ACTIVITY)
                     .withString("mOrderId",mOrderId).navigation();

@@ -114,6 +114,50 @@ public class CityUtils {
         pvOptions.show();
     }
 
+
+    /**
+     * 选择2级
+     * @param context
+     * @param listener
+     */
+    public void showPickerView(Context context, CityCallBack listener) {
+        if(options1Items1.size() == 0){
+            initJsonData(context);
+        }
+        OptionsPickerBuilder builder = new OptionsPickerBuilder(context, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+                String opt1tx = options1Items1.size() > 0 ?
+                        options1Items1.get(options1).getPickerViewText() : "";
+
+                String opt2tx = options2Items2.size() > 0
+                        && options2Items2.get(options1).size() > 0 ?
+                        options2Items2.get(options1).get(options2).getPickerViewText() : "";
+
+                if(opt1tx.endsWith("市")){
+                    listener.getCitys(opt1tx.substring(0,opt1tx.length()-1));
+                }else{
+                    listener.getCitys(opt2tx.substring(0,opt2tx.length()-1));
+                }
+            }
+        })
+
+                .setTitleText("城市选择")
+                .setDividerColor(Color.BLACK)
+                .setSubmitColor(SkinCompatResources.getColor(context,R.color.ui_primary_color))
+                .setCancelColor(SkinCompatResources.getColor(context,R.color.ui_primary_color))
+                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                .setContentTextSize(20);
+
+        OptionsPickerView pvOptions = builder.build();
+
+        /*pvOptions.setPicker(options1Items);//一级选择器
+        pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
+        pvOptions.setPicker(options1Items1, options2Items2);//三级选择器
+        pvOptions.show();
+    }
+
     //解析json
     private void initJsonData(Context context) {//解析数据
         String JsonData = AppUtils.getAssetJson(context, "city.json");//获取assets目录下的json文件数据

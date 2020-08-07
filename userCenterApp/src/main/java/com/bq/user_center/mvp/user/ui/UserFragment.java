@@ -1,6 +1,5 @@
 package com.bq.user_center.mvp.user.ui;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,6 +102,7 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
             mRltLogout.setVisibility(View.VISIBLE);
         }else{
             mRltLogout.setVisibility(View.GONE);
+            mTvNickName.setText("未登录");
         }
     }
 
@@ -165,12 +165,9 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
                 ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
                         .withString("h5url",path).navigation();
             }else{
-                if(mUserinfo == null){
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("index",2);
+                if(mUserinfo == null || StringUtils.isEmpty(CommSpUtils.getToken())){
                     ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY)
-                                .withString("mPath",AppArouter.MAIN_ACTIVITY)
-                                .withBundle("mBundle",bundle).navigation();
+                                .withString("mPath","-1").navigation();
                     return;
                 }
                 if("实名认证".equals(tabBean.getName())){

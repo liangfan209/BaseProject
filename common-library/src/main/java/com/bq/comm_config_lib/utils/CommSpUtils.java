@@ -1,6 +1,7 @@
 package com.bq.comm_config_lib.utils;
 
 import com.bq.comm_config_lib.configration.SpField;
+import com.bq.comm_config_lib.msgService.bean.UserInfo;
 import com.bq.comm_config_lib.request.LoginBean;
 import com.bq.utilslib.SPUtils;
 import com.google.gson.Gson;
@@ -21,6 +22,15 @@ public class CommSpUtils {
     public static void saveLoginInfo(String loginInfo) {
         SPUtils.getInstance(SpField.AUTH_TOKEN).put(SpField.AUTH_TOKEN, loginInfo);
     }
+
+    public static void saveUserInfo(String userinfo){
+        SPUtils.getInstance(SpField.AUTH_TOKEN).put(SpField.AUTH_USERINFO, userinfo);
+    }
+    public static UserInfo getUserInfo(){
+        String userinfoStr = SPUtils.getInstance(SpField.AUTH_TOKEN).getString(SpField.AUTH_USERINFO);
+        return new Gson().fromJson(userinfoStr,UserInfo.class);
+    }
+
 
     public static String getToken() {
         LoginBean loginBean = getLoginBean();
@@ -51,8 +61,12 @@ public class CommSpUtils {
         return loginBean;
     }
 
-    //获取定位地址
+    //保持选择和定位地址
+    public static void saveLocaltion(String city){
+        SPUtils.getInstance(SpField.AUTH_TOKEN).put("city", city);
+    }
+
     public static String getLocation(){
-        return "武汉";
+        return SPUtils.getInstance(SpField.AUTH_TOKEN).getString("city", "湖北");
     }
 }

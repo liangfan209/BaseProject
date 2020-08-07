@@ -99,7 +99,6 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
 
     @Override
     protected void attach() {
-        mIvTitleLeft.setVisibility(View.GONE);
         mTvTitle.setText("登录");
         EditFormatUtils.phoneNumAddSpace(mEtPhone);
         initVerification();

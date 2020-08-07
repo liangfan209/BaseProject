@@ -26,6 +26,7 @@
                 android:textSize="16sp"
                 android:paddingLeft="15dp"
                 android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 />
 
 
@@ -120,20 +121,39 @@
                     />
 
                 <TextView
-                    android:id="@+id/tv_after_sale"
-                    android:layout_width="75dp"
-                    android:layout_height="28dp"
-                    android:background="@drawable/ui_shap_verification_code_unselect"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="180dp"
-                    android:layout_marginRight="15dp"
-                    android:text="申请售后"
-                    android:gravity="center"
-                    android:textColor="@color/ui_txt_normal_color"
-                    android:textStyle="bold"
+                    android:id="@+id/tv_order_sign_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="签约合同"
                     android:textSize="@dimen/h5_font_size"
-                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:textColor="@color/ui_primary_color"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="210dp"
+                    android:layout_marginRight="15dp"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/ui_shap_verification_code_select"
                     />
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_after_sale"-->
+<!--                    android:layout_width="75dp"-->
+<!--                    android:layout_height="28dp"-->
+<!--                    android:background="@drawable/ui_shap_verification_code_unselect"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:layout_marginTop="180dp"-->
+<!--                    android:layout_marginRight="15dp"-->
+<!--                    android:text="申请售后"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textColor="@color/ui_txt_normal_color"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="@dimen/h5_font_size"-->
+<!--                    android:layout_marginBottom="20dp"-->
+<!--                    />-->
 
             </RelativeLayout>
 
@@ -326,17 +346,17 @@
                         android:textSize="@dimen/h3_font_size"
                         android:textStyle="bold"
                         />
+
                     <TextView
                         android:id="@+id/tv_total_price"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginRight="15dp"
                         android:text="¥1195.00"
                         android:textColor="@color/ui_txt_hint_color"
-                        android:textSize="@dimen/h4_font_size"
-                        android:layout_marginLeft="80dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="15dp"
-                        />
+                        android:textSize="@dimen/h4_font_size" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -427,19 +447,6 @@
             android:background="@drawable/ui_shap_verification_code_select"
             />
 
-        <TextView
-            android:id="@+id/tv_order_bottom_left"
-            android:layout_width="110dp"
-            android:layout_height="28dp"
-            android:text="签约合同"
-            android:textSize="@dimen/h5_font_size"
-            android:layout_toLeftOf="@id/tv_order_bottom_right"
-            android:gravity="center"
-            android:textColor="@color/ui_primary_color"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:drawablePadding="4dp"
-            android:background="@drawable/ui_shap_verification_code_select"
-            />
+
     </RelativeLayout>
 </RelativeLayout>

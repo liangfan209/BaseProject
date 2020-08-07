@@ -3,6 +3,7 @@ package com.bq.user_center.mvp.user.presenter;
 import com.bq.comm_config_lib.msgService.MessageBody;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.user_center.api.ComponentService;
 import com.bq.user_center.api.UserCenterEventKey;
 import com.bq.user_center.mvp.user.ui.UserBaseIView;
@@ -44,6 +45,8 @@ public class UserPresenter implements BasePresenter {
             @Override
             public void onSuccess(UserInfo info) {
                 mUserIView.showUser(info);
+                //将用户信息保存到 sp
+                CommSpUtils.saveUserInfo(new Gson().toJson(info.getCustomer_info()));
             }
         });
     }

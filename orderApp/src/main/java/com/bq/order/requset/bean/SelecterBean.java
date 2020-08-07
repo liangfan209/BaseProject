@@ -1,5 +1,6 @@
 package com.bq.order.requset.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * 时间：2020/7/31
  * 版权：
  */
-public class SelecterBean {
+public class SelecterBean implements Serializable {
 
     private List<SelectInfo> data_list;
     public List<SelectInfo> getData_list() {
@@ -19,7 +20,12 @@ public class SelecterBean {
         this.data_list = data_list;
     }
 
-    public static class SelectInfo{
+    public static class SelectInfo implements Serializable {
+        public SelectInfo(String id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
         private String id;
         private String name;
 

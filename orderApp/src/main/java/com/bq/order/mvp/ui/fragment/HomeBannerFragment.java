@@ -63,6 +63,8 @@ public class HomeBannerFragment extends BaseFragment {
         return R.layout.order_fragment_home_banner;
     }
 
+
+
     @Override
     protected void attach() {
         initHomeBanner();
@@ -113,9 +115,12 @@ public class HomeBannerFragment extends BaseFragment {
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                String serachInfo = new Gson().toJson(new ProductSearchBean(CommSpUtils.getLocation()));
+                ProductSearchBean bean = new ProductSearchBean();
+                bean.setCategory(productTypeStr[position]);
+                String serachInfo = new Gson().toJson(bean);
                 ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY)
                         .withString("mSearchInfo",serachInfo).navigation();
+//                parentFragment.updateTest();
             }
         });
     }
@@ -133,7 +138,7 @@ public class HomeBannerFragment extends BaseFragment {
                 .setLifecycleRegistry(getLifecycle())
                 .setIndicatorStyle(IndicatorStyle.CIRCLE)
                 .setIndicatorSlideMode(IndicatorSlideMode.WORM)
-                .setInterval(3000)
+                .setInterval(5000)
                 .setIndicatorGravity(IndicatorGravity.END)
                 .setCanLoop(true)
                 .setAdapter(homeAdapter)

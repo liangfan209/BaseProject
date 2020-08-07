@@ -2,6 +2,7 @@ package com.bquan.app;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -175,4 +176,22 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
+    private long mPressedTime;
+    @Override
+    public void onBackPressed() {
+        //获取第一次按键时间
+        long mNowTime = System.currentTimeMillis();
+        //比较两次按键时间差
+        if ((mNowTime - mPressedTime) > 2000) {
+            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+//            Utils.showToast(this,getString(R.string.exit_app));
+            mPressedTime = mNowTime;
+        } else {
+            super.onBackPressed();
+            //退出应用
+            System.exit(0);
+        }
+    }
+
 }

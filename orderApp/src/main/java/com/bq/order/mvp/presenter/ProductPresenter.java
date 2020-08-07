@@ -6,6 +6,7 @@ import com.bq.order.mvp.ui.ProductIview;
 import com.bq.order.requset.ProductHttpReqeustImp;
 import com.bq.order.requset.bean.ProductBean;
 import com.bq.order.requset.bean.ProductListBean;
+import com.bq.order.requset.bean.ProfessionListBean;
 import com.bq.order.requset.bean.SchoolBean;
 import com.bq.order.requset.bean.SchoolListBean;
 import com.bq.order.requset.bean.SelecterBean;
@@ -102,11 +103,11 @@ public class ProductPresenter implements BasePresenter {
     }
 
     //获取热门产品
-    public void getHotProductList(String strs){
-        mProductHttpReqeustImp.getHostProductList(strs, new AbstractReqeustCallback<ProductListBean>(mIView) {
+    public void getHotProfessionList(String strs){
+        mProductHttpReqeustImp.getHostProfessionList(strs, new AbstractReqeustCallback<ProfessionListBean>(mIView) {
             @Override
-            public void onSuccess(ProductListBean bean) {
-                mIView.getProductListView(bean.getData_list());
+            public void onSuccess(ProfessionListBean bean) {
+                mIView.getProfessionListView(bean.getData_list());
             }
         });
     }
@@ -145,6 +146,20 @@ public class ProductPresenter implements BasePresenter {
             @Override
             public void onSuccess(SchoolBean bean) {
                 mIView.getSchoolDetailView(bean.getSchool_info());
+            }
+        });
+    }
+
+    /**
+     * 获取专业列表
+     * @param page
+     * @param searchStr
+     */
+    public void getprofessionList(int page, String searchStr) {
+        mProductHttpReqeustImp.getProfessionList(page,searchStr, new AbstractReqeustCallback<ProfessionListBean>(mIView) {
+            @Override
+            public void onSuccess(ProfessionListBean bean) {
+                mIView.getProfessionListView(bean.getData_list());
             }
         });
     }

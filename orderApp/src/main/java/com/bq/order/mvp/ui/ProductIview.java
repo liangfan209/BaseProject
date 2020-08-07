@@ -2,6 +2,7 @@ package com.bq.order.mvp.ui;
 
 import com.bq.comm_config_lib.mvp.BaseIView;
 import com.bq.order.requset.bean.ProductInfo;
+import com.bq.order.requset.bean.ProfessionInfo;
 import com.bq.order.requset.bean.SchoolInfo;
 import com.bq.order.requset.bean.SelecterBean;
 
@@ -23,6 +24,9 @@ public interface ProductIview extends BaseIView {
     //所有学年
     default void getDurationAllSelcterView(List<SelecterBean.SelectInfo> list){};
     default void getProductListView(List<ProductInfo> list){};
+
+    //获取专业列表
+    default void getProfessionListView(List<ProfessionInfo> list){}
 
     //获取商品详细信息
     default void getProductDetailView(ProductInfo info){}

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
@@ -64,6 +65,9 @@ public class ScanActivity extends BaseActivity {
             resultIntent.putExtras(bundle);
             ScanActivity.this.setResult(RESULT_OK, resultIntent);
 
+            ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_DETAIL_ACTIVITY)
+                    .withString("mProductId","1").navigation();
+
 //            Intent intent = new Intent(ScanActivity.this, BindDeviceActivity.class);
 //            intent.putExtra("sn_code", "4790072188");
 //            intent.putExtra("is_bind", "bind_sn");
@@ -109,13 +113,15 @@ public class ScanActivity extends BaseActivity {
                 CodeUtils.analyzeBitmap(ImageUtil.getImageAbsolutePath(this, uri), new CodeUtils.AnalyzeCallback() {
                     @Override
                     public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
-                        Intent resultIntent = new Intent();
-                        Bundle bundle = new Bundle();
-                        bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
-                        bundle.putString(CodeUtils.RESULT_STRING, result);
-                        resultIntent.putExtras(bundle);
-                        ScanActivity.this.setResult(RESULT_OK, resultIntent);
-                        ScanActivity.this.finish();
+
+                        System.out.println("=========>>>>>>>>>>>0000");
+//                        Intent resultIntent = new Intent();
+//                        Bundle bundle = new Bundle();
+//                        bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
+//                        bundle.putString(CodeUtils.RESULT_STRING, result);
+//                        resultIntent.putExtras(bundle);
+//                        ScanActivity.this.setResult(RESULT_OK, resultIntent);
+//                        ScanActivity.this.finish();
 
                     }
 

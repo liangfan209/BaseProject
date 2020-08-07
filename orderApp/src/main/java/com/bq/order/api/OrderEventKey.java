@@ -7,6 +7,6 @@ package com.bq.order.api;
  * 时间：2020/7/6
  * 版权：
  */
-public class WalletEventKey {
-    public static final String UPDATE_BALANCE = "update_balance";
+public class OrderEventKey {
+    public static final String UPDATE_ORDER_STATUS = "update_order_status";
 }

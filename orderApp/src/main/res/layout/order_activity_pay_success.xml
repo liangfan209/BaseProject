@@ -62,7 +62,7 @@
             android:gravity="center"
             android:layout_marginLeft="38dp"
             android:layout_marginRight="38dp"
-
+            android:visibility="gone"
             />
 
         <TextView

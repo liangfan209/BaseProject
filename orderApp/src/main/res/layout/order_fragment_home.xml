@@ -5,7 +5,77 @@
     android:orientation="vertical"
     android:background="#f2f2f2"
     android:paddingTop="20dp">
-    <include layout="@layout/order_product_search" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="50dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:background="@drawable/shap_white_radius_4">
+
+            <TextView
+                android:id="@+id/tv_address_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="湖北"
+                android:textSize="@dimen/h5_font_size"
+                android:layout_marginLeft="9dp"
+                android:textColor="@color/ui_txt_normal_color"
+                android:textStyle="bold"
+                android:drawablePadding="7dp"
+                />
+            <ImageView
+                android:id="@+id/iv_address_location"
+                android:layout_width="15dp"
+                android:layout_height="17dp"
+                android:background="@mipmap/icon_address_location"
+                android:layout_marginLeft="8dp"/>
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="15dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/ui_txt_hint_color"
+                />
+            <com.fan.baseuilibrary.view.DeletableEditText
+                android:id="@+id/det_search"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginLeft="10dp"
+                style="@style/ui_edit_txt_style"
+                android:textSize="@dimen/h5_font_size"
+                android:hint="请输入搜索名称"
+                />
+            <RelativeLayout
+                android:id="@+id/rlt_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:background="@mipmap/icon_search"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_scan_home"
+            android:layout_width="35dp"
+            android:layout_height="33dp"
+            android:background="@mipmap/icon_scan_home"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+    </RelativeLayout>
+
+
 
     <ImageView
         android:layout_width="match_parent"
@@ -56,19 +126,51 @@
                         android:textSize="@dimen/h5_font_size"
                         android:layout_alignParentRight="true"
                         />
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_school"
-                        android:layout_marginTop="20dp"
+                    <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"
-                        />
+                        android:layout_marginTop="30dp">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_school"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="80dp"
+                            android:nestedScrollingEnabled="false"
+                            />
+                        <RelativeLayout
+                            android:id="@+id/rlt_content_school"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@color/white">
+
+                            <ImageView
+                                android:id="@+id/empty_retry_view"
+                                android:layout_width="108dp"
+                                android:layout_height="72dp"
+                                android:background="@mipmap/ic_no_data"
+                                android:visibility="visible"
+                                android:layout_centerInParent="true"/>
+                            <TextView
+                                android:id="@+id/empty_view_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="暂无记录"
+                                android:textColor="#ff666666"
+                                android:textSize="13sp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@id/empty_retry_view"
+                                />
+                        </RelativeLayout>
+                    </FrameLayout>
+
                 </RelativeLayout>
 
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="30dp">
                     <TextView
                         android:layout_width="wrap_content"
@@ -90,7 +192,7 @@
                     android:id="@+id/rlt_hot_product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="20dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -15,6 +15,7 @@ import com.bq.comm_config_lib.utils.PayViewHelper;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
+import com.bq.order.api.OrderEventKey;
 import com.bq.order.mvp.presenter.OrderPresenter;
 import com.bq.order.mvp.ui.OrderIview;
 import com.bq.order.requset.bean.OrderInfo;
@@ -26,6 +27,9 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
 import com.fan.baseuilibrary.view.dialog.CustomDialog;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -70,7 +74,6 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
     protected BasePresenter createPersenter() {
         return mOrderPresenter = new OrderPresenter(this);
     }
-
     @Override
     protected void attach() {
         searchInfo =  getArguments().getString("searchInfo");
@@ -85,6 +88,13 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                         .withString("mOrderId",info.getId()+"").navigation();
             }
         });
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     public void updateFragment(String info){
@@ -128,15 +138,30 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                 tvPrimary.setVisibility(View.VISIBLE);
 
                 tvPrimary.setOnClickListener(v->{
-                    if(status.contains("order_launched")){
-                        showPayView(info.getId()+"",AppUtils.getDouble2(orderItemListBean.getSale_price()*orderItemListBean.getQuantity()));
-                        //待发货
-                    }else if(status.contains("payment_finished")){
-                        //待收货
-                    }else if(status.contains("delivery_finished")){
-                        //已完成
-                    }else if(status.contains("order_finished")){
+                    if(info.getDespatch_type().contains("物流")){
+                        if(status.contains("order_launched")){
+                            showPayView(info.getId()+"",AppUtils.getDouble2(orderItemListBean.getSale_price()*orderItemListBean.getQuantity()));
+                            //待发货
+                        }else if(status.contains("payment_finished")){
+                            //待收货
+                        }else if(status.contains("delivery_finished")){
+                            //已完成
+                        }else if(status.contains("order_finished")){
 
+                        }
+                    }else{
+                        if(status.contains("order_launched")){
+                            showPayView(info.getId()+"",AppUtils.getDouble2(orderItemListBean.getSale_price()*orderItemListBean.getQuantity()));
+                            //待发货  待收货
+                        }else if(status.contains("payment_finished") || status.contains("delivery_finished")){
+                            ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
+                                    .withString("productId",info.getId()+"")
+                                    .withInt("sign",1)
+                                    .withString("imgPath",info.getContract_background()).navigation();
+                        }else if(status.contains("order_finished")){
+                            ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
+                                    .withString("productId",info.getId()+"").navigation();
+                        }
                     }
                 });
 
@@ -144,8 +169,6 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                     if(status.contains("order_launched")){
                         //取消支付订单
                         cancelOrder(info.getId());
-
-
                         //待发货
                     }else if(status.contains("payment_finished")){
                         //待收货
@@ -156,36 +179,67 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                     }
                 });
 
-
-                //待支付
-                if(status.contains("order_launched")){
-                    tvHint.setText("取消");
-                    tvPrimary.setText("支付");
-                    tvType.setText("待支付");
-
-                    //待发货
-                }else if(status.contains("payment_finished")){
-                    tvHint.setVisibility(View.GONE);
-                    tvPrimary.setVisibility(View.GONE);
-
-                    //待收货
-                }else if(status.contains("delivery_finished")){
-                    tvHint.setText("查看物流");
-                    tvPrimary.setText("确认收货");
-                    tvHint.setVisibility(View.GONE);
-                    tvPrimary.setVisibility(View.GONE);
-                    //已完成
-                }else if(status.contains("order_finished")){
-                    tvPrimary.setText("评价");
-                    tvHint.setVisibility(View.GONE);
-                    tvHint.setVisibility(View.GONE);
-                    tvPrimary.setVisibility(View.GONE);
-                }else if(status.contains("order_closed")){
-                    tvHint.setVisibility(View.GONE);
-                    tvPrimary.setVisibility(View.GONE);
-                    tvType.setText("已取消");
-                    tvType.setTextColor(SkinCompatResources.getColor(tvType.getContext(),R.color.ui_txt_hint_color));
+                if(info.getDespatch_type().contains("物流")){
+                    //待支付
+                    if(status.contains("order_launched")){
+                        tvHint.setText("取消");
+                        tvPrimary.setText("支付");
+                        tvType.setText("待支付");
+                        //待发货
+                    }else if(status.contains("payment_finished")){
+                        tvHint.setVisibility(View.GONE);
+                        tvPrimary.setVisibility(View.GONE);
+                        tvType.setText("待发货");
+                        //待收货
+                    }else if(status.contains("delivery_finished")){
+                        tvHint.setText("查看物流");
+                        tvPrimary.setText("确认收货");
+                        tvType.setText("代收货");
+                        //已完成
+                    }else if(status.contains("order_finished")){
+                        tvPrimary.setText("评价");
+                        tvType.setText("已完成");
+                        tvHint.setVisibility(View.GONE);
+                        tvHint.setVisibility(View.GONE);
+                        tvPrimary.setVisibility(View.GONE);
+                    }else if(status.contains("order_closed")){
+                        tvHint.setVisibility(View.GONE);
+                        tvPrimary.setVisibility(View.GONE);
+                        tvType.setText("已取消");
+                        tvType.setTextColor(SkinCompatResources.getColor(tvType.getContext(),R.color.ui_txt_hint_color));
+                    }
+                }else{
+                    //待支付
+                    if(status.contains("order_launched")){
+                        tvHint.setText("取消");
+                        tvPrimary.setText("支付");
+                        tvType.setText("待支付");
+                        //待发货
+                    }else if(status.contains("payment_finished")){
+                        tvHint.setVisibility(View.GONE);
+                        tvPrimary.setVisibility(View.VISIBLE);
+                        tvPrimary.setText("签合同");
+                        tvType.setText("已付款");
+                        //待收货
+                    }else if(status.contains("delivery_finished")){
+                        tvHint.setVisibility(View.GONE);
+                        tvPrimary.setVisibility(View.VISIBLE);
+                        tvPrimary.setText("签合同");
+                        tvType.setText("已付款");
+                        //已完成
+                    }else if(status.contains("order_finished")){
+                        tvHint.setVisibility(View.GONE);
+                        tvPrimary.setVisibility(View.VISIBLE);
+                        tvPrimary.setText("查看合同");
+                        tvType.setText("已完成");
+                    }else if(status.contains("order_closed")){
+                        tvHint.setVisibility(View.GONE);
+                        tvPrimary.setVisibility(View.GONE);
+                        tvType.setText("已取消");
+                        tvType.setTextColor(SkinCompatResources.getColor(tvType.getContext(),R.color.ui_txt_hint_color));
+                    }
                 }
+                tvType.setText(info.getStatus_name());
             }
         };
     }
@@ -221,5 +275,12 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
 
     public void showPayView(String orderId,String price){
         PayViewHelper.getBanenceAndShow(((BaseActivity)getActivity()),orderId,price,3);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void updateAddress(String event) {
+        if(OrderEventKey.UPDATE_ORDER_STATUS.equals(event)){
+            updateFragment(searchInfo);
+        }
     }
 }

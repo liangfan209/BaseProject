@@ -4,6 +4,7 @@ import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.order.mvp.ui.OrderIview;
 import com.bq.order.requset.ProductHttpReqeustImp;
+import com.bq.order.requset.bean.ContactListBean;
 import com.bq.order.requset.bean.OrderIdBean;
 import com.bq.order.requset.bean.OrderInfoDetailBean;
 import com.bq.order.requset.bean.OrderInfoListBean;
@@ -96,4 +97,37 @@ public class OrderPresenter implements BasePresenter {
             }
         });
     }
+
+    /**
+     * 添加合同
+     */
+    public void addContract(String info,String id) {
+        mProductHttpReqeustImp.addContract(info,id,new AbstractReqeustCallback<String>(mIView) {
+
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+            @Override
+            public void onSuccess(String bean) {
+                mIView.addContactView();
+            }
+        });
+    }
+
+    public void getContactImg(String productId) {
+        mProductHttpReqeustImp.getContactImg(productId,new AbstractReqeustCallback<ContactListBean>(mIView) {
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+            @Override
+            public void onSuccess(ContactListBean bean) {
+                mIView.getContactImgs(bean.getContract_list());
+            }
+        });
+    }
+
+
+
 }

@@ -27,6 +27,7 @@ import com.bq.order.mvp.ui.fragment.ProductListFragment;
 import com.bq.order.mvp.ui.hodler.ProductType;
 import com.bq.order.requset.bean.ProductSearchBean;
 import com.bq.order.requset.bean.SelecterBean;
+import com.fan.baseuilibrary.utils.provinces.CityUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
 import com.fan.baseuilibrary.view.DeleteTextView;
 import com.fan.baseuilibrary.view.FlowLayout;
@@ -87,6 +88,9 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
     @BindView(R2.id.flow_content)
     FlowLayout mFlowContent;
 
+    @BindView(R2.id.rlt_profession_type)
+    RelativeLayout mRltProfesionType;
+
     ProductListFragment mProductListFragment;
     private List<SelecterBean.SelectInfo> mSchoolList;
     private List<SelecterBean.SelectInfo> mProfessionList;
@@ -96,6 +100,9 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
     String mSearchInfo;
     @Autowired
     String mSearchName;
+    @Autowired
+    SelecterBean.SelectInfo mSelectInfo;
+
 
     private ProductPresenter mProductPresenter;
 
@@ -116,16 +123,16 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
     protected void attach() {
         ARouter.getInstance().inject(this);
         mTvTitle.setText("商品列表");
+        mTvAddressLocation.setText(CommSpUtils.getLocation());
         initProductListView();
-
         mTvSchool.setCallBack(()->{
-            updateFlowlayout(0,"delete",null);
+            updateFlowlayout(0,"delete",null,true);
         });
         mTvProfession.setCallBack(()->{
-            updateFlowlayout(1,"delete",null);
+            updateFlowlayout(1,"delete",null,true);
         });
         mTvYear.setCallBack(()->{
-            updateFlowlayout(2,"delete",null);
+            updateFlowlayout(2,"delete",null,true);
         });
         mTvSchool.setBackgroundDrawable(SkinCompatResources.getDrawable(this,R.drawable.ui_shap_verification_code_select));
         mTvSchool.setTextColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
@@ -134,6 +141,8 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
         mTvYear.setBackgroundDrawable(SkinCompatResources.getDrawable(this,R.drawable.ui_shap_verification_code_select));
         mTvYear.setTextColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
         initEditText();
+
+
     }
 
     private void initEditText() {
@@ -158,16 +167,33 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
     }
 
     private void initProductListView() {
+        mFlowContent.setVisibility(View.GONE);
+        //从专业进来的
+        if(mSelectInfo != null){
+            ProductSearchBean bean  = new ProductSearchBean(CommSpUtils.getLocation());
+            bean.setMajor_id(mSelectInfo.getId());
+            mSearchInfo = new Gson().toJson(bean);
+            //
+            mProfessionMap.put(1,mSelectInfo);
+            updateFlowlayout(1,"add",mSelectInfo,false);
+            mFlowContent.setVisibility(View.VISIBLE);
+        }
+        //冲4个按钮进来的
+        if(mSearchInfo.contains("资格证")){
+            mRltProfesionType.setVisibility(View.GONE);
+            mFlowContent.setVisibility(View.GONE);
+        }
+
         ProductType type =  new ProductType(mSearchInfo,10);
         mProductListFragment = ProductListFragment.getInstance(type);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.flt_content, mProductListFragment);
         fragmentTransaction.commit();
 
-        mFlowContent.setVisibility(View.GONE);
+
     }
 
-    @OnClick({R2.id.rlt_search, R2.id.tv_school_select, R2.id.tv_profession_select, R2.id.tv_year_select})
+    @OnClick({R2.id.rlt_search, R2.id.tv_school_select, R2.id.tv_profession_select, R2.id.tv_year_select,R2.id.tv_address_location,R2.id.iv_address_location})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.tv_school_select) {
             chooseType(0);
@@ -177,6 +203,19 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
             chooseType(2);
         }else if(view.getId() == R.id.rlt_search){
             Utils.cancelFocus(mDetSearch);
+            updateFragment();
+        }else if(view.getId() == R.id.tv_address_location){
+            CityUtils.getInstance(this).showPickerView(this, new CityUtils.CityCallBack() {
+                @Override
+                public void getCitys(String citys) {
+                    CommSpUtils.saveLocaltion(citys);
+                    mTvAddressLocation.setText(citys);
+                    updateFragment();
+                }
+            });
+        }else if(view.getId() == R.id.iv_address_location){
+            mTvAddressLocation.setText("武汉");
+            CommSpUtils.saveLocaltion("武汉");
             updateFragment();
         }
     }
@@ -203,7 +242,7 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 SelecterBean.SelectInfo info = list.get(options1);
-                updateFlowlayout(key,"add",info);
+                updateFlowlayout(key,"add",info,true);
             }
         }).setSubmitColor(SkinCompatResources.getColor(this, R.color.ui_primary_color))
                 .setCancelColor(SkinCompatResources.getColor(this, R.color.ui_primary_color)).build();
@@ -217,9 +256,10 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
 
 
     private void chooseType(int key) {
+       ProductSearchBean bean = new ProductSearchBean();
         if(key == 0){
             if(mSchoolList == null){
-                String serachInfo = new Gson().toJson(new ProductSearchBean("湖北","武汉"));
+                String serachInfo = new Gson().toJson(bean);
                 mProductPresenter.getSchoolAll(serachInfo);
             }else{
                 getSchoolAllSelcterView(mSchoolList);
@@ -227,7 +267,7 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
         }
         if(key == 1){
             if(mProfessionList == null){
-                String serachInfo = new Gson().toJson(new ProductSearchBean());
+                String serachInfo = new Gson().toJson(bean);
                 mProductPresenter.getProfessionAll(serachInfo);
             }else{
                 getProfessionAllSelcterView(mProfessionList);
@@ -236,7 +276,7 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
 
         if(key == 2){
             if(mDurationList == null){
-                String serachInfo = new Gson().toJson(new ProductSearchBean());
+                String serachInfo = new Gson().toJson(bean);
                 mProductPresenter.getDurationAll(serachInfo);
             }else{
                 getDurationAllSelcterView(mDurationList);
@@ -252,7 +292,7 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
      * @param type    "add"  "delete"
      * @param content
      */
-    public void updateFlowlayout(int key, String type, SelecterBean.SelectInfo content) {
+    public void updateFlowlayout(int key, String type, SelecterBean.SelectInfo content,boolean isUpdate) {
         if (type.equals("add")) {
             mProfessionMap.put(key, content);
         } else if (type.equals("delete")) {
@@ -298,7 +338,8 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
         }
 
         //告知fragment开始搜索，搜索第一页的所有条件
-        updateFragment();
+        if(isUpdate)
+            updateFragment();
 
     }
 

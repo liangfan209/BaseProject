@@ -19,9 +19,8 @@ import com.bq.order.R;
 import com.bq.order.R2;
 import com.bq.order.mvp.presenter.ProductPresenter;
 import com.bq.order.requset.bean.ProductSearchBean;
-import com.bq.order.requset.bean.ProfessionList;
-import com.bq.order.requset.bean.SchoolInfo;
-import com.bumptech.glide.Glide;
+import com.bq.order.requset.bean.ProfessionInfo;
+import com.bq.order.requset.bean.SelecterBean;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -46,8 +45,8 @@ import butterknife.OnClick;
  * 时间：2020/7/29
  * 版权：
  */
-@Route(path = AppArouter.ORDER_SCHOOL_LIST_ACTIVITY)
-public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.LayoutInterface<SchoolInfo>, ProductIview{
+@Route(path = AppArouter.ORDER_PROFESSION_LIST_ACTIVITY)
+public class ProfessionListActivity extends BaseActivity implements MyRefreshLayout.LayoutInterface<ProfessionInfo>, ProductIview{
     @BindView(R2.id.iv_title_left)
     ImageView mIvTitleLeft;
     @BindView(R2.id.tv_title)
@@ -71,11 +70,11 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
     private String mSearchStr = "";
 
     private ProductPresenter mProductPresenter;
-    private List<SchoolInfo> mSchoolInfoList = new ArrayList<>();
+    private List<ProfessionInfo> mSchoolInfoList = new ArrayList<>();
 
     @Override
     protected int getContentViewLayout() {
-        return R.layout.order_activity_school_list;
+        return R.layout.order_activity_profession_list;
     }
 
     @Override
@@ -88,7 +87,7 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
         ProductSearchBean bean = new ProductSearchBean(CommSpUtils.getLocation());
         mTvAddressLocation.setText(CommSpUtils.getLocation());
         mSearchStr = new Gson().toJson(bean);
-        mTvTitle.setText("院校列表");
+        mTvTitle.setText("专业列表");
         mRefreshLayout = new MyRefreshLayout<String>(this, this);
         mRefreshLayout.setRefresh(true, true);
         mFltContent.addView(mRefreshLayout);
@@ -96,9 +95,11 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
         mRefreshLayout.adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                SchoolInfo info = (SchoolInfo) adapter.getData().get(position);
-                ARouter.getInstance().build(AppArouter.ORDER_SCHOOL_DETAIL_ACTIVITY)
-                        .withSerializable("mSchoolId",info.getId()).navigation();
+                ProfessionInfo info = (ProfessionInfo) adapter.getData().get(position);
+
+                SelecterBean.SelectInfo selectInfo = new SelecterBean.SelectInfo(info.getId()+"",info.getName());
+                ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY)
+                        .withSerializable("mSelectInfo",selectInfo).navigation();
             }
         });
     }
@@ -129,7 +130,8 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
     @OnClick({R2.id.rlt_search, R2.id.iv_advertising,R2.id.tv_address_location,R2.id.iv_address_location})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.rlt_search){
-
+            Utils.cancelFocus(mDetSearch);
+            updateSelf();
         }else if(view.getId() == R.id.tv_address_location){
             CityUtils.getInstance(this).showPickerView(this, new CityUtils.CityCallBack() {
                 @Override
@@ -147,49 +149,26 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
     }
 
     @Override
-    public BaseQuickAdapter<SchoolInfo, ? extends BaseViewHolder> createAdapter() {
-        return new BaseQuickAdapter<SchoolInfo, BaseViewHolder>(R.layout.order_item_school_type2, mSchoolInfoList) {
+    public BaseQuickAdapter<ProfessionInfo, ? extends BaseViewHolder> createAdapter() {
+        return new BaseQuickAdapter<ProfessionInfo, BaseViewHolder>(R.layout.order_item_profession, mSchoolInfoList) {
                     @Override
-                    protected void convert(@NotNull BaseViewHolder helper, SchoolInfo bean) {
-                        ImageView iv = helper.getView(R.id.iv_icon);
-                        Glide.with(iv).load(bean.getLogo_url())
-                                .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
-                        helper.setText(R.id.tv_title,bean.getName());
-                        List<ProfessionList> production_list = bean.getProduction_list();
-                        TextView tvRow1 = helper.getView(R.id.tv_row1);
-                        TextView tvRow2 = helper.getView(R.id.tv_row2);
-                        if(production_list.size() > 2){
-                            tvRow1.setVisibility(View.VISIBLE);
-                            tvRow2.setVisibility(View.VISIBLE);
-                            tvRow1.setText(production_list.get(0).getName()+" "+production_list.get(0).getQuantity()+"个   "+production_list.get(1).getName()+" "+production_list.get(2).getQuantity()+"个");
-                            if(production_list.size()  == 3){
-                                tvRow2.setText(production_list.get(2).getName()+" "+production_list.get(2).getQuantity()+"个 ");
-                            }else{
-                                tvRow2.setText(production_list.get(2).getName()+" "+production_list.get(2).getQuantity()+"个   "+production_list.get(3).getName()+" "+production_list.get(3).getQuantity()+"个");
-                            }
-                        }else if(production_list.size() > 0){
-                            tvRow1.setVisibility(View.VISIBLE);
-                            tvRow2.setVisibility(View.GONE);
-                            if(production_list.size()  == 1){
-                                tvRow1.setText(production_list.get(0).getName()+" "+production_list.get(0).getQuantity()+"个 ");
-                            }else{
-                                tvRow1.setText(production_list.get(0).getName()+" "+production_list.get(0).getQuantity()+"个   "+production_list.get(1).getName()+" "+production_list.get(1).getQuantity()+"个");
-                            }
-                        }else{
-                            tvRow1.setVisibility(View.GONE);
-                            tvRow2.setVisibility(View.GONE);
-                        }
+                    protected void convert(@NotNull BaseViewHolder helper, ProfessionInfo bean) {
+                        ImageView iv = helper.getView(R.id.iv_item);
+                        Utils.showImage(bean.getIcons(),iv);
+                        helper.setText(R.id.tv_profession_title,bean.getName());
+                        helper.setText(R.id.tv_profession_remark,bean.getContent());
                     }
                 };
     }
 
     @Override
-    public void getSchooListlView(List<SchoolInfo> list) {
+    public void getProfessionListView(List<ProfessionInfo> list) {
         mRefreshLayout.addData(list);
     }
 
+
     @Override
     public void loadData(int page, int pageSize) {
-        mProductPresenter.getSearchSchoolList(page,mSearchStr);
+        mProductPresenter.getprofessionList(page,mSearchStr);
     }
 }

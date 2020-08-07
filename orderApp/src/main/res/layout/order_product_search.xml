@@ -19,9 +19,14 @@
         android:layout_marginLeft="9dp"
         android:textColor="@color/ui_txt_normal_color"
         android:textStyle="bold"
-        android:drawableRight="@mipmap/icon_address_location"
         android:drawablePadding="7dp"
         />
+    <ImageView
+        android:id="@+id/iv_address_location"
+        android:layout_width="15dp"
+        android:layout_height="17dp"
+        android:background="@mipmap/icon_address_location"
+        android:layout_marginLeft="8dp"/>
 
     <ImageView
         android:layout_width="1px"

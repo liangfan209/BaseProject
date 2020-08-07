@@ -15,7 +15,18 @@ public class ApiProduct {
     public static String PRODUCT_SEARCH_SCHOOL_LIST = "university.school.search";
     //所有学校
     public static String PRODUCT_SCHOOL_ALL = "university.school.all";
+    //热门产品
     public static String PRODUCT_HOT_PRODUCT = "production.goods.hotsearch";
+
+    //热门专业
+    public static String PRODUCT_HOT_PROFESSION = "university.major.hotsearch";
+
+    //所有专业
+    public static String PRODUCT_PROFESSION_SEARCH_ALL = "university.major.search";
+
+
+
+
     //产品搜索列表
     public static String PRODUCT_PRODUCT_LIST = "production.goods.search";
     //所有专业
@@ -36,5 +47,11 @@ public class ApiProduct {
     public static String ORDER_LIST = "customer.order.search";
     //取消订单
     public static String ORDER_CANCEL_ORDER = "customer.order.cancel";
+
+    //添加合同
+    public static String ORDER_ADD_CONTRACT = "customer.contract.add";
+    public static String ORDER_GET_CONTRACT = "customer.contract.get";
+
+
 
 }
