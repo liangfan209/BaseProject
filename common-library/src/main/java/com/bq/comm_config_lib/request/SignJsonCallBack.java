@@ -10,6 +10,7 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 
 import java.net.ConnectException;
+import java.net.UnknownHostException;
 
 /**
  * 文件名：
@@ -72,8 +73,10 @@ public class SignJsonCallBack<T> extends JsonCallback<T> {
         if (ex instanceof ConnectException) {
             if (mRequestCallBack != null)
                 mRequestCallBack.onError("网络连接异常");
+        }else if(ex instanceof UnknownHostException){
+            if (mRequestCallBack != null)
+                mRequestCallBack.onError("无法解析域名"+Api.BASE_API);
         }
-        //异常部分统一处理
     }
 
 

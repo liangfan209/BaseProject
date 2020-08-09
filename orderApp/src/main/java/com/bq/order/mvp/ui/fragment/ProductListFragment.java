@@ -9,7 +9,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
-import com.bq.comm_config_lib.request.Api;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
@@ -114,6 +113,11 @@ public class ProductListFragment extends BaseFragment implements MyRefreshLayout
     @Override
     public void getProductListView(List<ProductInfo> list) {
         mRefreshLayout.addData(list);
+    }
+
+    @Override
+    public void getProductListErrorView() {
+        mRefreshLayout.addData(null);
     }
 
     @Override

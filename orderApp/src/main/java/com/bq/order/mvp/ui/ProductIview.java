@@ -19,14 +19,25 @@ public interface ProductIview extends BaseIView {
     default void getSchooListlView(List<SchoolInfo> list){};
     //所有学校
     default void getSchoolAllSelcterView(List<SelecterBean.SelectInfo> list){};
+    default void getSchoolAllSelcterErrorView(){}
+
+
     //所有专业
     default void getProfessionAllSelcterView(List<SelecterBean.SelectInfo> list){};
     //所有学年
     default void getDurationAllSelcterView(List<SelecterBean.SelectInfo> list){};
+
+    //获取所有的产品
     default void getProductListView(List<ProductInfo> list){};
+    default void getProductListErrorView(){};
+
+
 
     //获取专业列表
     default void getProfessionListView(List<ProfessionInfo> list){}
+    default void getProfessionListErrorView(){}
+
+
 
     //获取商品详细信息
     default void getProductDetailView(ProductInfo info){}

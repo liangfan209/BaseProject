@@ -121,6 +121,11 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
             public void onSuccess(Response<BaseResponse<SelecterBean>> response) {
                 super.onSuccess(response);
             }
+
+            @Override
+            public void onError(Response<BaseResponse<SelecterBean>> response) {
+                super.onError(response);
+            }
         });
     }
 

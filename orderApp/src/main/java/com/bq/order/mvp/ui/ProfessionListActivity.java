@@ -166,6 +166,10 @@ public class ProfessionListActivity extends BaseActivity implements MyRefreshLay
         mRefreshLayout.addData(list);
     }
 
+    @Override
+    public void getProfessionListErrorView() {
+        mRefreshLayout.addData(null);
+    }
 
     @Override
     public void loadData(int page, int pageSize) {

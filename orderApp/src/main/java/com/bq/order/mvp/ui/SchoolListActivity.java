@@ -189,6 +189,11 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
     }
 
     @Override
+    public void getSchoolAllSelcterErrorView() {
+        mRefreshLayout.addData(null);
+    }
+
+    @Override
     public void loadData(int page, int pageSize) {
         mProductPresenter.getSearchSchoolList(page,mSearchStr);
     }

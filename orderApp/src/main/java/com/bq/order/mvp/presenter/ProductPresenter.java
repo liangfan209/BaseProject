@@ -54,6 +54,12 @@ public class ProductPresenter implements BasePresenter {
             public void onSuccess(SchoolListBean bean) {
                 mIView.getSchooListlView(bean.getData_list());
             }
+
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+                mIView.getSchoolAllSelcterErrorView();
+            }
         });
     }
 
@@ -119,7 +125,13 @@ public class ProductPresenter implements BasePresenter {
             public void onSuccess(ProductListBean bean) {
                 mIView.getProductListView(bean.getData_list());
             }
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+                mIView.getProductListErrorView();
+            }
         });
+
     }
 
     //获取产品详情
@@ -160,6 +172,12 @@ public class ProductPresenter implements BasePresenter {
             @Override
             public void onSuccess(ProfessionListBean bean) {
                 mIView.getProfessionListView(bean.getData_list());
+            }
+
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+                mIView.getProfessionListErrorView();
             }
         });
     }
