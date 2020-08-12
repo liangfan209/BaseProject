@@ -44,7 +44,7 @@
             />
 
         <FrameLayout
-            android:layout_width="175dp"
+            android:layout_width="235dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="51dp">
 
@@ -59,7 +59,7 @@
                 />
             <TextView
                 android:id="@+id/tv_txt"
-                android:layout_width="175dp"
+                android:layout_width="235dp"
                 android:layout_height="wrap_content"
                 android:text="         湖北省武汉市江夏区佛祖岭街道58号达尚城1栋2单元402号"
                 style="@style/ui_h5_normal_style"

@@ -12,7 +12,6 @@ import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
-import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
@@ -96,8 +95,8 @@ public class SchoolDetailActivity extends BaseActivity implements ProductIview{
         List<ProfessionList> production_list = mSchoolInfo.getProduction_list();
         mTitles = new String[production_list.size()];
         for (int i = 0; i < production_list.size(); i++) {
-            mTitles[i] = production_list.get(i).getName()+"("+production_list.get(i).getQuantity()+")";
-            ProductSearchBean bean = new ProductSearchBean(CommSpUtils.getLocation());
+            mTitles[i] = production_list.get(i).getName();
+            ProductSearchBean bean = new ProductSearchBean();
             bean.setProduction_id(production_list.get(i).getId()+"");
             bean.setSchool_id(mSchoolInfo.getId());
             String serachInfo = new Gson().toJson(bean);

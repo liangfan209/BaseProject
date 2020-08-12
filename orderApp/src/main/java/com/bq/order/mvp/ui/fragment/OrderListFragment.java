@@ -179,37 +179,7 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                     }
                 });
 
-                if(info.getDespatch_type().contains("物流")){
-                    //待支付
-                    if(status.contains("order_launched")){
-                        tvHint.setText("取消");
-                        tvPrimary.setText("支付");
-                        tvType.setText("待支付");
-                        //待发货
-                    }else if(status.contains("payment_finished")){
-                        tvHint.setVisibility(View.GONE);
-                        tvPrimary.setVisibility(View.GONE);
-                        tvType.setText("待发货");
-                        //待收货
-                    }else if(status.contains("delivery_finished")){
-//                        tvHint.setText("查看物流");
-                        tvHint.setVisibility(View.GONE);
-                        tvPrimary.setText("确认收货");
-                        tvType.setText("代收货");
-                        //已完成
-                    }else if(status.contains("order_finished")){
-                        tvPrimary.setText("评价");
-                        tvType.setText("已完成");
-                        tvHint.setVisibility(View.GONE);
-                        tvHint.setVisibility(View.GONE);
-                        tvPrimary.setVisibility(View.GONE);
-                    }else if(status.contains("order_closed")){
-                        tvHint.setVisibility(View.GONE);
-                        tvPrimary.setVisibility(View.GONE);
-                        tvType.setText("已取消");
-                        tvType.setTextColor(SkinCompatResources.getColor(tvType.getContext(),R.color.ui_txt_hint_color));
-                    }
-                }else{
+                if(info.getDespatch_type().contains("教育")){
                     //待支付
                     if(status.contains("order_launched")){
                         tvHint.setText("取消");
@@ -233,6 +203,37 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                         tvPrimary.setVisibility(View.VISIBLE);
                         tvPrimary.setText("查看合同");
                         tvType.setText("已完成");
+                        tvType.setTextColor(SkinCompatResources.getColor(tvType.getContext(),R.color.ui_txt_hint_color));
+                    }else if(status.contains("order_closed")){
+                        tvHint.setVisibility(View.GONE);
+                        tvPrimary.setVisibility(View.GONE);
+                        tvType.setText("已取消");
+                        tvType.setTextColor(SkinCompatResources.getColor(tvType.getContext(),R.color.ui_txt_hint_color));
+                    }
+                }else{
+                    if(status.contains("order_launched")){
+                        tvHint.setText("取消");
+                        tvPrimary.setText("支付");
+                        tvType.setText("待支付");
+                        //待发货
+                    }else if(status.contains("payment_finished")){
+                        tvHint.setVisibility(View.GONE);
+                        tvPrimary.setVisibility(View.GONE);
+                        tvType.setText("待发货");
+                        //待收货
+                    }else if(status.contains("delivery_finished")){
+//                        tvHint.setText("查看物流");
+                        tvHint.setVisibility(View.GONE);
+                        tvPrimary.setText("确认收货");
+                        tvType.setText("代收货");
+                        //已完成
+                    }else if(status.contains("order_finished")){
+                        tvPrimary.setText("评价");
+                        tvType.setText("已完成");
+                        tvType.setTextColor(SkinCompatResources.getColor(tvType.getContext(),R.color.ui_txt_hint_color));
+                        tvHint.setVisibility(View.GONE);
+                        tvHint.setVisibility(View.GONE);
+                        tvPrimary.setVisibility(View.GONE);
                     }else if(status.contains("order_closed")){
                         tvHint.setVisibility(View.GONE);
                         tvPrimary.setVisibility(View.GONE);

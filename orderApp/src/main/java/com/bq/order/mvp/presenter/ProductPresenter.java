@@ -73,6 +73,8 @@ public class ProductPresenter implements BasePresenter {
 
             @Override
             public void onSuccess(SelecterBean bean) {
+                if(bean==null || bean.getData_list() == null)
+                    return;
                 mIView.getSchoolAllSelcterView(bean.getData_list());
             }
         });
@@ -88,6 +90,8 @@ public class ProductPresenter implements BasePresenter {
 
             @Override
             public void onSuccess(SelecterBean bean) {
+                if(bean==null || bean.getData_list() == null)
+                    return;
                 mIView.getProfessionAllSelcterView(bean.getData_list());
             }
         });
@@ -103,6 +107,8 @@ public class ProductPresenter implements BasePresenter {
 
             @Override
             public void onSuccess(SelecterBean bean) {
+                if(bean==null || bean.getData_list() == null)
+                    return;
                 mIView.getDurationAllSelcterView(bean.getData_list());
             }
         });

@@ -81,7 +81,7 @@ public class PayUtils {
      * @param balence  付款个人总余额
      */
     public void showBottomView(BaseActivity activity, String orderId, String price, String balence) {
-        View view = LinearLayout.inflate(activity, R.layout.layout_partner_pay, null);
+        View view = LinearLayout.inflate(activity, R.layout.layout_view_pay, null);
         final RadioButton rbBlance = view.findViewById(R.id.rbt_balence);
         final RadioButton rbWeixin = view.findViewById(R.id.rbt_wexin);
         final RadioButton rbZhifubao = view.findViewById(R.id.rbt_zhifubao);

@@ -114,7 +114,7 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
 
     @Override
     protected void attach() {
-        mTvTitle.setText("签合同");
+
         ARouter.getInstance().inject(this);
 
         EditFormatUtils.idCardAddSpace(mEtIdCard);
@@ -137,7 +137,9 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
         //签合同
         if(sign == 1){
             Utils.showImage(imgPath,mIvContract);
+            mTvTitle.setText("签合同");
         }else{
+            mTvTitle.setText("查看合同");
             mOrderPresenter.getContactImg(productId);
             mRltBottom.setVisibility(View.GONE);
             mLltTopContent.setVisibility(View.GONE);

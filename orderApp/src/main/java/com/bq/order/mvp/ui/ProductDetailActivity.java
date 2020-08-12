@@ -38,6 +38,7 @@ import com.bq.utilslib.BitmapUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.CustomPopWindow;
 import com.fan.baseuilibrary.view.FlowRadioGroup;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
@@ -109,8 +110,9 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
     @BindView(R2.id.tv_buy)
     TextView mTvBuy;
 
-    @BindView(R2.id.iv_product_mark)
-    ImageView mIvProductMark;
+
+//    @BindView(R2.id.iv_product_mark)
+//    ImageView mIvProductMark;
 
 
     @BindView(R2.id.tv_month_quantity)
@@ -119,6 +121,9 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
     TextView mTvProductTitle;
     @BindView(R2.id.tv_product_remark)
     TextView mTvProductRemark;
+
+    @BindView(R2.id.llt_imgs)
+    LinearLayout mLltImgs;
 
 
     @BindView(R2.id.tv_index)
@@ -175,7 +180,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
         mTvShippingValue.setText(mProductInfo.getDespatch_type());
         mTvMonthQuantity.setText("月销" + mProductInfo.getMonth_quantity());
         mTvProductTitle.setText(mProductInfo.getTitle());
-        mTvRealPrice.setText("¥  " + AppUtils.getDouble2(mProductInfo.getMin_price()));
+        mTvRealPrice.setText(AppUtils.getDouble2(mProductInfo.getMin_price()));
         mTvProductRemark.setText(mProductInfo.getDescription());
 
         if( mProductInfo.getSpecification_list().size() > 0){
@@ -190,8 +195,11 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
             }
             mTvTypeValue.setText(sb.toString());
         }
-        if(mProductInfo.getDetail().size() >0){
-            Utils.showImage(mProductInfo.getDetail().get(0),mIvProductMark);
+        List<String> detail = mProductInfo.getDetail();
+        for (int i = 0; i < detail.size(); i++) {
+            ImageView iv = new ImageView(this);
+            Utils.showImage(mProductInfo.getDetail().get(i),iv);
+            mLltImgs.addView(iv);
         }
     }
 
@@ -535,7 +543,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
     }
 
 
-    @OnClick({R2.id.value2, R2.id.tv_buy, R2.id.rlt_type})
+    @OnClick({R2.id.value2, R2.id.tv_buy, R2.id.rlt_type,R2.id.tv_save,R2.id.tv_server})
     public void onViewClicked(View view) {
 
 
@@ -547,6 +555,8 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
             if(!Utils.isFastDoubleClick(mRltType,1000)){
                 showBuyPopwindow();
             }
+        }else if(view.getId() == R.id.tv_save|| view.getId() == R.id.tv_server){
+            ToastUtils.showToast(this,"正在开发中");
         }
     }
 

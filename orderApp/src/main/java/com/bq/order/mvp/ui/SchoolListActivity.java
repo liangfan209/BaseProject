@@ -140,8 +140,8 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
                 }
             });
         }else if(view.getId() == R.id.iv_address_location){
-            mTvAddressLocation.setText("武汉");
-            CommSpUtils.saveLocaltion("武汉");
+            mTvAddressLocation.setText("武汉市");
+            CommSpUtils.saveLocaltion("武汉市");
             updateSelf();
         }
     }
@@ -158,27 +158,60 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
                         List<ProfessionList> production_list = bean.getProduction_list();
                         TextView tvRow1 = helper.getView(R.id.tv_row1);
                         TextView tvRow2 = helper.getView(R.id.tv_row2);
-                        if(production_list.size() > 2){
-                            tvRow1.setVisibility(View.VISIBLE);
-                            tvRow2.setVisibility(View.VISIBLE);
-                            tvRow1.setText(production_list.get(0).getName()+" "+production_list.get(0).getQuantity()+"个   "+production_list.get(1).getName()+" "+production_list.get(2).getQuantity()+"个");
-                            if(production_list.size()  == 3){
-                                tvRow2.setText(production_list.get(2).getName()+" "+production_list.get(2).getQuantity()+"个 ");
-                            }else{
-                                tvRow2.setText(production_list.get(2).getName()+" "+production_list.get(2).getQuantity()+"个   "+production_list.get(3).getName()+" "+production_list.get(3).getQuantity()+"个");
-                            }
-                        }else if(production_list.size() > 0){
-                            tvRow1.setVisibility(View.VISIBLE);
-                            tvRow2.setVisibility(View.GONE);
-                            if(production_list.size()  == 1){
-                                tvRow1.setText(production_list.get(0).getName()+" "+production_list.get(0).getQuantity()+"个 ");
-                            }else{
-                                tvRow1.setText(production_list.get(0).getName()+" "+production_list.get(0).getQuantity()+"个   "+production_list.get(1).getName()+" "+production_list.get(1).getQuantity()+"个");
-                            }
-                        }else{
-                            tvRow1.setVisibility(View.GONE);
-                            tvRow2.setVisibility(View.GONE);
+                        TextView tvRow3 = helper.getView(R.id.tv_row3);
+                        TextView tvRow4 = helper.getView(R.id.tv_row4);
+                        TextView tvRow5 = helper.getView(R.id.tv_row5);
+                        TextView tvRow6 = helper.getView(R.id.tv_row6);
+                        TextView tvRow7 = helper.getView(R.id.tv_row7);
+                        TextView tvRow8 = helper.getView(R.id.tv_row8);
+                        if(production_list.size() == 1){
+                            tvRow1.setText(production_list.get(0).getName()+": ");
+                            tvRow2.setText(production_list.get(0).getQuantity()+"个");
+                        }else if(production_list.size() == 2){
+                            tvRow1.setText(production_list.get(0).getName()+": ");
+                            tvRow2.setText(production_list.get(0).getQuantity()+"个  ");
+                            tvRow3.setText(production_list.get(1).getName()+": ");
+                            tvRow4.setText(production_list.get(1).getQuantity()+"个");
+                        }else if(production_list.size() == 3){
+                            tvRow1.setText(production_list.get(0).getName()+": ");
+                            tvRow2.setText(production_list.get(0).getQuantity()+"个  ");
+                            tvRow3.setText(production_list.get(1).getName()+": ");
+                            tvRow4.setText(production_list.get(1).getQuantity()+"个");
+                            tvRow5.setText(production_list.get(2).getName()+": ");
+                            tvRow6.setText(production_list.get(2).getQuantity()+"个");
+                        }else if(production_list.size() >= 4){
+                            tvRow1.setText(production_list.get(0).getName()+": ");
+                            tvRow2.setText(production_list.get(0).getQuantity()+"个  ");
+                            tvRow3.setText(production_list.get(1).getName()+": ");
+                            tvRow4.setText(production_list.get(1).getQuantity()+"个");
+                            tvRow5.setText(production_list.get(2).getName()+": ");
+                            tvRow6.setText(production_list.get(2).getQuantity()+"个  ");
+                            tvRow7.setText(production_list.get(3).getName()+": ");
+                            tvRow8.setText(production_list.get(3).getQuantity()+"个");
                         }
+
+
+//                        if(production_list.size() > 2){
+//                            tvRow1.setVisibility(View.VISIBLE);
+//                            tvRow2.setVisibility(View.VISIBLE);
+//                            tvRow1.setText(production_list.get(0).getName()+" "+production_list.get(0).getQuantity()+"个   "+production_list.get(1).getName()+" "+production_list.get(2).getQuantity()+"个");
+//                            if(production_list.size()  == 3){
+//                                tvRow2.setText(production_list.get(2).getName()+" "+production_list.get(2).getQuantity()+"个 ");
+//                            }else{
+//                                tvRow2.setText(production_list.get(2).getName()+" "+production_list.get(2).getQuantity()+"个   "+production_list.get(3).getName()+" "+production_list.get(3).getQuantity()+"个");
+//                            }
+//                        }else if(production_list.size() > 0){
+//                            tvRow1.setVisibility(View.VISIBLE);
+//                            tvRow2.setVisibility(View.GONE);
+//                            if(production_list.size()  == 1){
+//                                tvRow1.setText(production_list.get(0).getName()+" "+production_list.get(0).getQuantity()+"个 ");
+//                            }else{
+//                                tvRow1.setText(production_list.get(0).getName()+" "+production_list.get(0).getQuantity()+"个   "+production_list.get(1).getName()+" "+production_list.get(1).getQuantity()+"个");
+//                            }
+//                        }else{
+//                            tvRow1.setVisibility(View.GONE);
+//                            tvRow2.setVisibility(View.GONE);
+//                        }
                     }
                 };
     }

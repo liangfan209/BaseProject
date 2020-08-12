@@ -21,11 +21,11 @@
             android:orientation="vertical">
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp">
+                android:layout_height="350dp">
                 <com.zhpan.bannerview.BannerViewPager
                     android:id="@+id/banner_view"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="350dp"
                     app:bvp_indicator_visibility="gone"/>
 
                 <skin.support.widget.SkinCompatRadioGroup
@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="30dp">
+                    android:layout_marginBottom="28dp">
 
                     <skin.support.widget.SkinCompatRadioButton
                         android:id="@+id/rb_video"
@@ -69,7 +69,7 @@
                     android:background="@drawable/alpha_gray_button_unselect"
                     android:layout_gravity="bottom|right"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="28dp"
                     android:textColor="@color/white"
                     android:gravity="center"
                     />
@@ -86,16 +86,26 @@
                 android:layout_height="wrap_content"
                 >
 
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/h5_font_size"
+                    android:text="¥  "
+                    android:layout_marginLeft="37dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/ui_primary_color"
+                    />
+
                 <TextView
                     android:id="@+id/tv_real_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/h1_font_size"
-                    android:text="¥  16688.88"
-                    android:layout_marginLeft="37dp"
+                    android:text="16688.88"
+                    android:layout_marginLeft="50dp"
                     android:layout_marginTop="8dp"
-                    android:textColor="@color/ui_primary_color"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/ui_primary_color"/>
 
 
                 <TextView
@@ -192,6 +202,7 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="40dp"
+                    android:visibility="gone"
                     />
             </RelativeLayout>
 
@@ -309,12 +320,20 @@
                     />
             </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/iv_product_mark"
+            <LinearLayout
+                android:id="@+id/llt_imgs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitStart"
-                />
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+<!--            <ImageView-->
+<!--                android:id="@+id/iv_product_mark"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:scaleType="fitStart"-->
+<!--                />-->
 
         </LinearLayout>
 
@@ -327,6 +346,7 @@
         android:layout_alignParentBottom="true">
 
         <TextView
+            android:id="@+id/tv_server"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="客服"
@@ -339,6 +359,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="收藏"

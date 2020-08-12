@@ -1,81 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:skin="http://schemas.android.com/android/skin"
-    >
-    <LinearLayout
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlt_head"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:layout_height="60dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp">
 
-        <RelativeLayout
-            android:id="@+id/rlt_head"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp">
+        <TextView
+            android:id="@+id/tv_nick_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="27dp"
+            android:layout_toRightOf="@+id/iv_head"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/ui_txt_normal_color"
+            android:textSize="@dimen/h2_font_size"
+            android:textStyle="bold" />
 
-            <com.fan.baseuilibrary.view.CircleImageView
-                android:id="@+id/iv_head"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_marginLeft="15dp"
-                android:layout_centerVertical="true"
-                android:gravity="center_vertical"
-                android:background="@mipmap/icon_user_head"
-                android:textSize="14sp"
-                skin:enable="true"
-                />
+        <TextView
+            style="@style/user_center_item_right"
+            android:drawableRight="@mipmap/next_step" />
 
-            <TextView
-                android:id="@+id/tv_nick_name"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="27dp"
-                android:gravity="center_vertical"
-                android:layout_toRightOf="@+id/iv_head"
-                android:textColor="@color/ui_txt_normal_color"
-                android:textStyle="bold"
-                android:textSize="@dimen/h2_font_size"
-                android:text=""/>
-            <TextView
-                android:drawableRight="@mipmap/next_step"
-                style="@style/user_center_item_right"
-                />
-        </RelativeLayout>
+        <com.fan.baseuilibrary.view.CircleImageView
+            android:id="@+id/iv_head"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@mipmap/icon_user_head"
+            android:gravity="center_vertical"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llt_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:orientation="vertical" />
 
 
-        <LinearLayout
-            android:id="@+id/llt_content"
+    <RelativeLayout
+        android:id="@+id/rlt_logout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="-5dp"
+        android:background="@mipmap/shadow_card"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_logout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"/>
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="退出登录"
+            android:textColor="@color/ui_txt_normal_color"
+            android:textSize="@dimen/h3_font_size"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/rlt_logout"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="vertical"
-            android:layout_marginTop="-5dp"
-            android:background="@mipmap/shadow_card">
-
-            <TextView
-                android:id="@+id/tv_logout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="@dimen/h3_font_size"
-                android:textColor="@color/ui_txt_normal_color"
-                android:textStyle="bold"
-                android:text="退出登录"
-                android:gravity="center"
-                skin:enable="true"
-                android:layout_centerInParent="true"
-                />
-        </RelativeLayout>
-
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>

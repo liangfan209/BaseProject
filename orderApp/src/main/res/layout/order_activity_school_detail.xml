@@ -16,22 +16,23 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/ui_shap_jianbian_primary_bg">
                 <com.fan.baseuilibrary.view.CircleImageView
                     android:id="@+id/iv_icon"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_centerVertical="true"
                     />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginLeft="105dp"
-                    android:layout_marginTop="18dp">
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="15dp">
 
                     <TextView
                         android:id="@+id/tv_name"
@@ -48,14 +49,13 @@
                         android:id="@+id/tv_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:maxLines="3"
+                        android:maxLines="5"
                         android:ellipsize="end"
                         android:textColor="@color/white"
                         android:textSize="@dimen/h5_font_size"
                         android:text="学校描述学校描述学校描述学校描述学校描述学校描述学校描述学校描述学校描述学校描述学校描述"
                         />
                 </LinearLayout>
-
 
         </RelativeLayout>
 
@@ -67,9 +67,10 @@
             app:tl_indicator_height="3dp"
             app:tl_textUnselectColor="@color/ui_txt_normal_color"
             app:tl_textSelectColor="@color/ui_primary_color"
-            app:tl_textsize="18sp"
+            app:tl_textsize="@dimen/h2_font_size"
             app:tl_iconVisible="false"
-            app:tl_indicator_width="80dp"
+            app:tl_indicator_width="60dp"
+            app:tl_tab_padding="10dp"
             />
         <com.fan.baseuilibrary.view.NoAnimationViewPager
             android:id="@+id/viewpager"

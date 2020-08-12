@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="440dp"
+        android:layout_height="400dp"
         android:background="@drawable/shap_white_radius_4">
 
         <ImageView
@@ -100,12 +100,14 @@
                     android:drawableRight="@drawable/ui_checkbox_select"
                     android:drawableLeft="@mipmap/icon_balence"
                     android:checked="true"
-                    android:drawablePadding="10dp"/>
+                    android:drawablePadding="10dp"
+                    android:visibility="gone"/>
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="#cccccc"/>
+                    android:background="#cccccc"
+                    android:visibility="gone"/>
                 
                 <skin.support.widget.SkinCompatRadioButton
                     android:id="@+id/rbt_zhifubao"

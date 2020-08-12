@@ -149,8 +149,9 @@
                 android:layout_height="800dp">
                 <ImageView
                     android:id="@+id/iv_contract"
+                    android:scaleType="fitStart"
                     android:layout_width="match_parent"
-                    android:layout_height="800dp"/>
+                    android:layout_height="wrap_content"/>
                 <ImageView
                     android:id="@+id/iv_sign"
                     android:layout_width="100dp"

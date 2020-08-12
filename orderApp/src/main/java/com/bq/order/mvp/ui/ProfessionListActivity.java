@@ -142,8 +142,8 @@ public class ProfessionListActivity extends BaseActivity implements MyRefreshLay
                 }
             });
         }else if(view.getId() == R.id.iv_address_location){
-            mTvAddressLocation.setText("武汉");
-            CommSpUtils.saveLocaltion("武汉");
+            mTvAddressLocation.setText("武汉市");
+            CommSpUtils.saveLocaltion("武汉市");
             updateSelf();
         }
     }

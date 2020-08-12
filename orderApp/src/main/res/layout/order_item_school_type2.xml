@@ -41,23 +41,76 @@
             android:layout_marginTop="5dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_row1"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/h5_font_size"
-                android:textColor="@color/ui_txt_normal_color"
-                android:text="专科： 14个专业   本科： 14个专业 "
-                />
-            <TextView
-                android:id="@+id/tv_row2"
-                android:layout_width="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_row1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/h5_font_size"
+                    android:textColor="@color/ui_txt_hint_color"
+                    />
+                <TextView
+                    android:id="@+id/tv_row2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/h5_font_size"
+                    android:textColor="@color/ui_txt_normal_color"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_row3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/h5_font_size"
+                    android:textColor="@color/ui_txt_hint_color"
+                    />
+                <TextView
+                    android:id="@+id/tv_row4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/h5_font_size"
+                    android:textColor="@color/ui_txt_normal_color"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/h5_font_size"
-                android:layout_marginTop="7dp"
-                android:textColor="@color/ui_txt_normal_color"
-                android:text="考研： 14个专业   资格证： 14个专业 "
-                />
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp">
+                <TextView
+                    android:id="@+id/tv_row5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/h5_font_size"
+                    android:textColor="@color/ui_txt_hint_color"
+                    />
+                <TextView
+                    android:id="@+id/tv_row6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/h5_font_size"
+                    android:textColor="@color/ui_txt_normal_color"
+                    />
+                <TextView
+                    android:id="@+id/tv_row7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/h5_font_size"
+                    android:textColor="@color/ui_txt_hint_color"
+                    />
+                <TextView
+                    android:id="@+id/tv_row8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/h5_font_size"
+                    android:textColor="@color/ui_txt_normal_color"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

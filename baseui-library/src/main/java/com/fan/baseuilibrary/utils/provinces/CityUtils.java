@@ -136,9 +136,9 @@ public class CityUtils {
                         options2Items2.get(options1).get(options2).getPickerViewText() : "";
 
                 if(opt1tx.endsWith("市")){
-                    listener.getCitys(opt1tx.substring(0,opt1tx.length()-1));
+                    listener.getCitys(opt1tx);
                 }else{
-                    listener.getCitys(opt2tx.substring(0,opt2tx.length()-1));
+                    listener.getCitys(opt2tx);
                 }
             }
         })

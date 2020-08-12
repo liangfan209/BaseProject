@@ -123,7 +123,7 @@ public class OrderPresenter implements BasePresenter {
             }
             @Override
             public void onSuccess(ContactListBean bean) {
-                mIView.getContactImgs(bean.getContract_list());
+                mIView.getContactImgs(bean.getContract_img_list());
             }
         });
     }

@@ -25,6 +25,7 @@ public class NewTypeViewHolder extends BaseViewHolder<BannerData> {
 //                ((ImageView) view).setImageResource(resId);
 //            }
             StandardGSYVideoPlayer player = findView(R.id.detail_player);
+            player.getBackButton().setVisibility(View.GONE);
             this.mInter.createVideo(player);
         }
 

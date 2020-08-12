@@ -38,6 +38,15 @@ public class OrderInfo {
     private String contract_background;
     private String despatch_type;
     private String status_name;
+    private OrderItemListBean.AddressInfo invoice_info;
+
+    public OrderItemListBean.AddressInfo getInvoice_info() {
+        return invoice_info;
+    }
+
+    public void setInvoice_info(OrderItemListBean.AddressInfo invoice_info) {
+        this.invoice_info = invoice_info;
+    }
 
     public String getStatus_name() {
         return status_name;
@@ -53,7 +62,7 @@ public class OrderInfo {
         }
         if(despatch_type.equals("eduction_contract")){
             return "教育合同";
-        }else if(despatch_type.equals("top_up_phone")){
+        }else if(despatch_type.equals("phone_top_up")){
             return "手机充值";
         }else if(despatch_type.equals("logistics")){
             return "物流交付";
@@ -113,6 +122,11 @@ public class OrderInfo {
     }
 
     public String getLast_payment_type() {
+        if("wechat".equals(last_payment_type)){
+            return "微信";
+        }else if("alipay".equals(last_payment_type)){
+            return "支付宝";
+        }
         return last_payment_type;
     }
 
@@ -174,6 +188,7 @@ public class OrderInfo {
         private String remark;
         private String despatch_type;
         private List<SpecificationValueListBean> specification_value_list;
+
 
         public String getDespatch_type() {
             if(StringUtils.isEmpty(despatch_type)){
@@ -321,6 +336,36 @@ public class OrderInfo {
 
             public void setAttribute(String attribute) {
                 this.attribute = attribute;
+            }
+        }
+
+        public static class AddressInfo {
+            private String name;
+            private String phone;
+            private String address;
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getPhone() {
+                return phone;
+            }
+
+            public void setPhone(String phone) {
+                this.phone = phone;
+            }
+
+            public String getAddress() {
+                return address;
+            }
+
+            public void setAddress(String address) {
+                this.address = address;
             }
         }
     }

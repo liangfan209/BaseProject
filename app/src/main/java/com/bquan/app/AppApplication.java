@@ -5,21 +5,26 @@ import android.os.Build;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
 import com.baidu.ocr.sdk.exception.OCRError;
 import com.baidu.ocr.sdk.model.AccessToken;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.bq.comm_config_lib.BaseApplication;
 import com.bq.comm_config_lib.msgService.Servicemanager;
 import com.bq.comm_config_lib.request.Api;
 import com.fan.baseuilibrary.utils.provinces.CityUtils;
 import com.fan.baseuilibrary.view.MyClassicsHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreater;
+import com.scwang.smartrefresh.layout.api.RefreshFooter;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
@@ -67,6 +72,28 @@ public class AppApplication extends BaseApplication {
                 return header;
             }
         });
+
+        //设置全局的Footer构建器
+        SmartRefreshLayout.setDefaultRefreshFooterCreater(new DefaultRefreshFooterCreater() {
+            @NonNull
+            @Override
+            public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
+                //指定为经典Footer，默认是 BallPulseFooter
+//                return new ClassicsFooter(context).setDrawableSize(20);
+
+                ClassicsFooter.REFRESH_FOOTER_LOADING="加载中...";
+                ClassicsFooter footer = new ClassicsFooter(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
+                footer.setAccentColor(context.getResources().getColor(R.color.color_999999));
+                footer.getTitleText().setTextSize(12);
+                ViewGroup.LayoutParams layoutParams = footer.getProgressView().getLayoutParams();
+                layoutParams.height = SizeUtils.sp2px(15);
+                layoutParams.width = SizeUtils.sp2px(15);
+                footer.getProgressView().setLayoutParams(layoutParams);
+//        footer.setProgressBitmap(null);
+                footer.setArrowBitmap(null);
+                return footer;
+            }
+        });
     }
 
 
@@ -111,6 +138,9 @@ public class AppApplication extends BaseApplication {
                 .setSkinStatusBarColorEnable(false)                     // 关闭状态栏换肤，默认打开[可选]
                 .setSkinWindowBackgroundEnable(false)                   // 关闭windowBackground换肤，默认打开[可选]
                 .loadSkin();
+
+        SkinCompatManager.getInstance().loadSkin("appskin-debug.apk", null,
+                SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
 
         //初始化orc
         initAccessTokenWithAkSk();

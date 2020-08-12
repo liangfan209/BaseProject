@@ -27,7 +27,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="32dp"
             android:drawableRight="@mipmap/next_step"
-            android:drawablePadding="20dp"/>
+            android:drawablePadding="8dp"/>
 
         <ImageView
             android:id="@+id/iv_line"

@@ -19,45 +19,6 @@
           "path": "",
           "params": 1,
           "jumpType": "arouter"
-        },
-        {
-          "name": "我的课本",
-          "remark": "",
-          "icon": "user_center_icon_order_wait_receive",
-          "path": "",
-          "params": 2,
-          "jumpType": "arouter"
-        },
-        {
-          "name": "考务安排",
-          "remark": "",
-          "icon": "user_center_icon_order_complet",
-          "path": "",
-          "params": 2,
-          "jumpType": "arouter"
-        }
-      ]
-    },
-
-    {
-      "name": "学习资料",
-      "type": "grid",
-      "tabList": [
-        {
-          "name": "模拟题库",
-          "remark": "",
-          "icon": "user_center_icon_order_tiku",
-          "path": "",
-          "params": 0,
-          "jumpType": "arouter"
-        },
-        {
-          "name": "我的收藏",
-          "remark": "",
-          "icon": "user_center_icon_order_shouchang",
-          "path": "",
-          "params": 1,
-          "jumpType": "arouter"
         }
       ]
     },
@@ -67,21 +28,6 @@
       "name": "",
       "type": "vertical",
       "tabList": [
-        {
-          "name": "实名认证",
-          "remark": "",
-          "icon": "user_center_icon_modify_pwd",
-          "path": "/userCenter/CertificationActivity",
-          "value": "",
-          "jumpType": "arouter"
-        },
-        {
-          "name": "我的钱包",
-          "remark": "",
-          "icon": "user_center_icon_usercenter_bank_manager",
-          "path": "/wallet/MyWalletActivity",
-          "jumpType": "arouter"
-        },
         {
           "name": "修改密码",
           "remark": "",
@@ -94,19 +40,6 @@
           "remark": "",
           "icon": "user_center_icon_usercenter_address_manager",
           "path": "/userCenter/AddressManagerActivity",
-          "jumpType": "arouter"
-        }
-      ]
-    },
-    {
-      "name": "",
-      "type": "vertical",
-      "tabList": [
-        {
-          "name": "银行卡",
-          "remark": "",
-          "icon": "user_center_icon_usercenter_bank_manager",
-          "path": "/userCenter/BankManagerActivity",
           "jumpType": "arouter"
         },
         {

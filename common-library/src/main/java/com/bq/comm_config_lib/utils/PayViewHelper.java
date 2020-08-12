@@ -71,7 +71,7 @@ public class PayViewHelper {
      * @param type  哪种页面过来的支付。  1：订单创建页 2：订单详情页 3：订单列表页
      */
     public void showBottomView(BaseActivity activity, String orderId, String price, String balence, int type) {
-        View view = LinearLayout.inflate(activity, R.layout.layout_partner_pay, null);
+        View view = LinearLayout.inflate(activity, R.layout.layout_view_pay, null);
         final RadioButton rbBlance = view.findViewById(R.id.rbt_balence);
         final RadioButton rbWeixin = view.findViewById(R.id.rbt_wexin);
         final RadioButton rbZhifubao = view.findViewById(R.id.rbt_zhifubao);
@@ -87,7 +87,7 @@ public class PayViewHelper {
             dialogWindow.setGravity(Gravity.BOTTOM);//可以改成Bottom
             WindowManager.LayoutParams attributes = dialogWindow.getAttributes();
             attributes.width = WindowManager.LayoutParams.MATCH_PARENT;
-            attributes.height = AppUtils.dp2px(activity,440);
+            attributes.height = AppUtils.dp2px(activity,400);
             dialogWindow.setWindowAnimations(com.bigkoo.pickerview.R.style.picker_view_slide_anim);//修改动画样式
         }
 
@@ -110,6 +110,8 @@ public class PayViewHelper {
                                 public void cacel() {
                                 }
                             });
+                }else{
+                    mDialog.dismiss();
                 }
 
             }

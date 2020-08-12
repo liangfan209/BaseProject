@@ -112,7 +112,7 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
 
     @Override
     protected void attach() {
-        CommSpUtils.saveLocaltion("武汉");
+        CommSpUtils.saveLocaltion("武汉市");
         mTvAddressLocation.setText(CommSpUtils.getLocation());
         mHomeBannerFragment = new HomeBannerFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -125,6 +125,7 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
         updateView();
         initEditText();
 
+        mSmartRefreshLayout.setEnableLoadmore(false);
         mSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
@@ -277,12 +278,28 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
                 }
             });
         }else if(view.getId() == R.id.iv_scan_home){
-            ARouter.getInstance().build(AppArouter.ORDER_SCAN_ACTIVITY).navigation();
-//            ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY).navigation();
+            if(!Utils.isFastDoubleClick(mIvScanHome,1000)){
+                ARouter.getInstance().build(AppArouter.ORDER_SCAN_ACTIVITY).navigation();
+            }
+//            new RxPermissions(getActivity())
+//                    .request(Manifest.permission.READ_EXTERNAL_STORAGE,
+//                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                    .subscribe(new Consumer<Boolean>() {
+//                        @Override
+//                        public void accept(Boolean aBoolean) throws Exception {
+//                            if (aBoolean) {
+//                                DoloadHelper.downloadApk("http://education.bq.com/resource/contract/4255_1597056309.pdf");
+//                            } else {
+//                                ToastUtils.showToast(getActivity(), "没有拍照或存储权限，请打开相关权限");
+//                            }
+//                        }
+//                    });
+
+
         }else if(view.getId() == R.id.iv_address_location){
-            searchStr = new Gson().toJson(new ProductSearchBean("武汉"));
-            mTvAddressLocation.setText("武汉");
-            CommSpUtils.saveLocaltion("武汉");
+            searchStr = new Gson().toJson(new ProductSearchBean("武汉市"));
+            mTvAddressLocation.setText("武汉市");
+            CommSpUtils.saveLocaltion("武汉市");
             updateView();
         }
     }

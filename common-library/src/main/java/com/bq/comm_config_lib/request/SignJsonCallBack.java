@@ -1,16 +1,17 @@
 package com.bq.comm_config_lib.request;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.blankj.utilcode.util.ActivityUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.netlibrary.http.BaseResponse;
 import com.bq.netlibrary.http.JsonCallback;
+import com.google.gson.JsonSyntaxException;
+import com.lzy.okgo.exception.HttpException;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 
 import java.net.ConnectException;
 import java.net.UnknownHostException;
+import java.util.concurrent.TimeoutException;
 
 /**
  * 文件名：
@@ -55,9 +56,10 @@ public class SignJsonCallBack<T> extends JsonCallback<T> {
                     mRequestCallBack.onSuccess(((BaseResponse) body).result);
             } else {
                 if(30008 ==((BaseResponse) body).code || 30007 ==((BaseResponse) body).code){
-                    ActivityUtils.finishAllActivities();
-                    CommSpUtils.saveLoginInfo("");
-                    ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
+//                    ActivityUtils.finishAllActivities();
+//                    CommSpUtils.saveLoginInfo("");
+                    ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY)
+                            .withString("mPath","-1").navigation();
                 }
                 if (mRequestCallBack != null)
                     mRequestCallBack.onError(((BaseResponse) body).msg);
@@ -76,6 +78,15 @@ public class SignJsonCallBack<T> extends JsonCallback<T> {
         }else if(ex instanceof UnknownHostException){
             if (mRequestCallBack != null)
                 mRequestCallBack.onError("无法解析域名"+Api.BASE_API);
+        }else if(ex instanceof HttpException){
+            if (mRequestCallBack != null)
+                mRequestCallBack.onError("找不到服务器");
+        }else if(ex instanceof JsonSyntaxException){
+            if (mRequestCallBack != null)
+                mRequestCallBack.onError("json解析错误");
+        }else if(ex instanceof TimeoutException){
+            if (mRequestCallBack != null)
+                mRequestCallBack.onError("链接超时");
         }
     }
 

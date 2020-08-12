@@ -37,14 +37,14 @@ public class MainActivity extends BaseActivity {
     Bundle mBundle;
 
 
-    private String[] tabs = new String[]{"学习", "发现", "我的"};
+    private String[] tabs = new String[]{"学习", "我的"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
     private int[] mIconUnselectIds = {
-            R.mipmap.icon_home_study_unselect, R.mipmap.icon_home_find_unselect,
+            R.mipmap.icon_home_study_unselect,
             R.mipmap.icon_home_mine_unselect};
     private int[] mIconSelectIds = {
-            R.mipmap.icon_home_study_select, R.mipmap.icon_home_find_select,
+            R.mipmap.icon_home_study_select,
             R.mipmap.icon_home_mine_select};
     private ArrayList<Fragment> mFragments = new ArrayList<>();
 
@@ -127,13 +127,13 @@ public class MainActivity extends BaseActivity {
                 }
                 break;
             case 1:
-                if (skinFragment == null) {
-                    skinFragment = new MainFragment();
-                    transaction.add(R.id.flt_content, skinFragment, "flag" + index);
-                }else{
-                    transaction.show(skinFragment);
-                }
-                break;
+//                if (skinFragment == null) {
+////                    skinFragment = new MainFragment();
+////                    transaction.add(R.id.flt_content, skinFragment, "flag" + index);
+////                }else{
+////                    transaction.show(skinFragment);
+////                }
+////                break;
             case 2:
                 if (mUserFragment == null) {
                     mUserFragment = (Fragment) ARouter.getInstance().build(AppArouter.USER_CENTER_USER_FRAGMENT).navigation();

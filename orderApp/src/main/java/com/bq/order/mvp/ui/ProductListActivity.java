@@ -187,7 +187,7 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
                 mRltProfesionType.setVisibility(View.GONE);
                 mFlowContent.setVisibility(View.GONE);
             }
-            ProductSearchBean bean  = new ProductSearchBean();
+            ProductSearchBean bean  = new ProductSearchBean(CommSpUtils.getLocation());
             bean.setCategory(forType);
             mSearchInfo = new Gson().toJson(bean);
         }
@@ -223,8 +223,8 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
                 }
             });
         }else if(view.getId() == R.id.iv_address_location){
-            mTvAddressLocation.setText("武汉");
-            CommSpUtils.saveLocaltion("武汉");
+            mTvAddressLocation.setText("武汉市");
+            CommSpUtils.saveLocaltion("武汉市");
             updateFragment();
         }
     }

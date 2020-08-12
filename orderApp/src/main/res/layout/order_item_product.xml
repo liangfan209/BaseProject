@@ -32,7 +32,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="计算机科学与技术"
-                android:maxWidth="150dp"
+                android:maxWidth="160dp"
                 android:textStyle="bold"
                 android:textColor="@color/ui_txt_normal_color"
                 android:textSize="@dimen/h3_font_size" />
