@@ -1,6 +1,6 @@
 package com.bquan.app.wxapi;
 
-import com.bq.order.pay.weixin.WXPayEntryBaseActivity;
+import com.bq.wallet.pay.weixin.WXPayEntryBaseActivity;
 
 public class WXPayEntryActivity extends WXPayEntryBaseActivity {
     @Override
