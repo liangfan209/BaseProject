@@ -128,6 +128,7 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                 helper.setText(R.id.tv_brand,orderItemListBean.getBrand_name());
                 helper.setText(R.id.tv_product,orderItemListBean.getProduction_name());
                 helper.setText(R.id.tv_price, AppUtils.getDouble2(orderItemListBean.getSale_price()));
+                helper.setText(R.id.tv_orgamnization, orderItemListBean.getAgent_name());
 
                 helper.setText(R.id.tv_total_price,"总价： ¥"+AppUtils.getDouble2(orderItemListBean.getSale_price()*orderItemListBean.getQuantity()));
                 tvTotalCount.setText("数量：x"+ orderItemListBean.getQuantity());
@@ -156,6 +157,7 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                         }else if(status.contains("payment_finished") || status.contains("delivery_finished")){
                             ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
                                     .withString("productId",info.getId()+"")
+                                    .withSerializable("mInvoiceInfo",info.getInvoice_info())
                                     .withInt("sign",1)
                                     .withString("imgPath",info.getContract_background()).navigation();
                         }else if(status.contains("order_finished")){

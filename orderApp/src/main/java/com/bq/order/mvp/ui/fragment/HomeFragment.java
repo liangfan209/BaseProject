@@ -20,21 +20,23 @@ import com.bq.order.R;
 import com.bq.order.R2;
 import com.bq.order.mvp.presenter.ProductPresenter;
 import com.bq.order.mvp.ui.ProductIview;
+import com.bq.order.mvp.ui.adapter.SchoolBannerAdapter;
 import com.bq.order.requset.bean.ProductSearchBean;
 import com.bq.order.requset.bean.ProfessionInfo;
 import com.bq.order.requset.bean.SchoolInfo;
-import com.bq.order.requset.bean.SelecterBean;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.utils.provinces.CityUtils;
-import com.fan.baseuilibrary.view.CircleImageView;
 import com.fan.baseuilibrary.view.DeletableEditText;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.zhpan.bannerview.BannerViewPager;
+import com.zhpan.bannerview.constants.IndicatorGravity;
+import com.zhpan.indicator.enums.IndicatorSlideMode;
+import com.zhpan.indicator.enums.IndicatorStyle;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -43,7 +45,6 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -68,8 +69,10 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
     FrameLayout mFltHomeBanner;
     @BindView(R2.id.tv_hot_school)
     TextView mTvHotSchool;
-    @BindView(R2.id.rv_school)
-    RecyclerView mRvSchool;
+
+//    @BindView(R2.id.rv_school)
+//    RecyclerView mRvSchool;
+
     @BindView(R2.id.rv_news)
     RecyclerView mRvNews;
     @BindView(R2.id.tv_hot_profession)
@@ -84,6 +87,9 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
     @BindView(R2.id.rlt_hot_product)
     RelativeLayout mRltHotProduct;
 
+    @BindView((R2.id.banner_school))
+    BannerViewPager mBannerSchool;
+
     @BindView(R2.id.iv_scan_home)
     ImageView mIvScanHome;
 
@@ -93,7 +99,7 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
 
     private HomeBannerFragment mHomeBannerFragment;
     private ProductPresenter mProductPresenter;
-    BaseQuickAdapter mSchoolAdapter;
+//    BaseQuickAdapter mSchoolAdapter;
     BaseQuickAdapter mProductAdapter;
     List<SchoolInfo> mHostSchoollist = new ArrayList<>();
     List<ProfessionInfo> mHostProfessionlist = new ArrayList<>();
@@ -120,6 +126,7 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
         fragmentTransaction.commit();
 
         initHotSchoolView();
+
         intNewsView();
         intHotProfessionView();
         updateView();
@@ -176,9 +183,8 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 ProfessionInfo info = (ProfessionInfo) adapter.getData().get(position);
-                SelecterBean.SelectInfo selectInfo = new SelecterBean.SelectInfo(info.getId()+"",info.getName());
-                ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY)
-                        .withSerializable("mSelectInfo",selectInfo).navigation();
+                ARouter.getInstance().build(AppArouter.ORDER_SCHOOL_PROFESSION_LIST_ACTIVITY)
+                        .withSerializable("mProfessionInfo",info).navigation();
             }
         });
     }
@@ -186,30 +192,42 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
 
 
     private void initHotSchoolView() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
-        mRvSchool.setLayoutManager(gridLayoutManager);
-        mSchoolAdapter = new
-                BaseQuickAdapter<SchoolInfo, BaseViewHolder>(R.layout.order_item_school, mHostSchoollist) {
-                    @Override
-                    protected void convert(@NotNull BaseViewHolder helper,
-                                           SchoolInfo bean) {
-                        helper.setText(R.id.tv_name,bean.getName());
-                        helper.setText(R.id.tv_remark,bean.getContent());
-                        CircleImageView iv = helper.getView(R.id.iv_icon);
-                        Glide.with(iv).load(bean.getLogo_url())
-                                .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
-                    }
-                };
-        mRvSchool.setAdapter(mSchoolAdapter);
+        mBannerSchool
+                .setScrollDuration(600)
+                .setLifecycleRegistry(getLifecycle())
+                .setIndicatorStyle(IndicatorStyle.CIRCLE)
+                .setIndicatorSlideMode(IndicatorSlideMode.WORM)
+                .setIndicatorGravity(IndicatorGravity.END)
+                .setCanLoop(false)
+                .setAdapter(new SchoolBannerAdapter())
+                .create();
 
-        mSchoolAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                SchoolInfo info = (SchoolInfo) adapter.getData().get(position);
-                ARouter.getInstance().build(AppArouter.ORDER_SCHOOL_DETAIL_ACTIVITY)
-                        .withString("mSchoolId",info.getId()).navigation();
-            }
-        });
+
+
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
+//        mRvSchool.setLayoutManager(gridLayoutManager);
+//        mSchoolAdapter = new
+//                BaseQuickAdapter<SchoolInfo, BaseViewHolder>(R.layout.order_item_school, mHostSchoollist) {
+//                    @Override
+//                    protected void convert(@NotNull BaseViewHolder helper,
+//                                           SchoolInfo bean) {
+//                        helper.setText(R.id.tv_name,bean.getName());
+//                        helper.setText(R.id.tv_remark,bean.getContent());
+//                        CircleImageView iv = helper.getView(R.id.iv_icon);
+//                        Glide.with(iv).load(bean.getLogo_url())
+//                                .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
+//                    }
+//                };
+//        mRvSchool.setAdapter(mSchoolAdapter);
+//
+//        mSchoolAdapter.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+//                SchoolInfo info = (SchoolInfo) adapter.getData().get(position);
+//                ARouter.getInstance().build(AppArouter.ORDER_SCHOOL_DETAIL_ACTIVITY)
+//                        .withString("mSchoolId",info.getId()).navigation();
+//            }
+//        });
     }
 
     @Override
@@ -225,8 +243,26 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
     public void getSchooListlView(List<SchoolInfo> list) {
         mRltContentSchool.setVisibility(list.size()>0?View.GONE: View.VISIBLE);
         mHostSchoollist = list;
-        mSchoolAdapter.setNewData(mHostSchoollist);
-        mSchoolAdapter.notifyDataSetChanged();
+        List<List<SchoolInfo>> mlists = new ArrayList<>();
+        if(mHostSchoollist.size() == 0)return;
+        int page = mHostSchoollist.size()/4;
+        if(mHostSchoollist.size()%4 == 0){
+            page = mHostSchoollist.size()/4;
+        }else{
+            page = mHostSchoollist.size()/4+1;
+        }
+        for (int i = 0; i < page; i++) {
+            List<SchoolInfo> indexList = new ArrayList<>();
+            for (int j = 0; j < 4; j++) {
+                if((i*4+j)<mHostSchoollist.size()){
+                    indexList.add(mHostSchoollist.get(i*4+j));
+                }else{
+                    break;
+                }
+            }
+            mlists.add(indexList);
+        }
+        mBannerSchool.refreshData(mlists);
     }
 
     private void intNewsView() {

@@ -7,6 +7,7 @@ import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.netlibrary.NetManager;
 import com.bq.netlibrary.http.BaseResponse;
 import com.bq.order.requset.bean.ContactListBean;
+import com.bq.order.requset.bean.ContractListBean;
 import com.bq.order.requset.bean.OrderIdBean;
 import com.bq.order.requset.bean.OrderInfoDetailBean;
 import com.bq.order.requset.bean.OrderInfoListBean;
@@ -15,6 +16,7 @@ import com.bq.order.requset.bean.ProductListBean;
 import com.bq.order.requset.bean.ProfessionListBean;
 import com.bq.order.requset.bean.SchoolBean;
 import com.bq.order.requset.bean.SchoolListBean;
+import com.bq.order.requset.bean.SchoolProfessionListBean;
 import com.bq.order.requset.bean.SelecterBean;
 import com.lzy.okgo.model.Response;
 
@@ -330,6 +332,42 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ProfessionListBean>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<ProfessionListBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    /**
+     * 获取学校专业列表
+     * @param page
+     * @param searchStr
+     * @param callBack
+     */
+    public void getSchoolProfessionList(int page, int type,String searchStr, AbstractReqeustCallback<SchoolProfessionListBean> callBack) {
+        Map<String,String> map = new HashMap<>();
+        if(type == 1){
+            //专业的学校列表
+            map.put("api", ApiProduct.PRODUCT_PROFESSION_SCHOOL_LIST);
+        }else{
+            map.put("api", ApiProduct.PRODUCT_SCHOOL_PROFESSION_LIST);
+        }
+        map.put("search_info", searchStr);
+        map.put("current_page", page+"");
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<SchoolProfessionListBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<SchoolProfessionListBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    public void getContractList( AbstractReqeustCallback<ContractListBean> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.PRODUCT_CONTRACT_SEARCH_ALL);
+        map.put("auth", CommSpUtils.getToken());
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ContractListBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<ContractListBean>> response) {
                 super.onSuccess(response);
             }
         });

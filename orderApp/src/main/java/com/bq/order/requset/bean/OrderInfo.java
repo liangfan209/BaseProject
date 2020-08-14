@@ -38,13 +38,13 @@ public class OrderInfo {
     private String contract_background;
     private String despatch_type;
     private String status_name;
-    private OrderItemListBean.AddressInfo invoice_info;
+    private InvoiceInfo invoice_info;
 
-    public OrderItemListBean.AddressInfo getInvoice_info() {
+    public InvoiceInfo getInvoice_info() {
         return invoice_info;
     }
 
-    public void setInvoice_info(OrderItemListBean.AddressInfo invoice_info) {
+    public void setInvoice_info(InvoiceInfo invoice_info) {
         this.invoice_info = invoice_info;
     }
 
@@ -187,8 +187,17 @@ public class OrderInfo {
         private String production_name;
         private String remark;
         private String despatch_type;
+        private String agent_name;
+
         private List<SpecificationValueListBean> specification_value_list;
 
+        public String getAgent_name() {
+            return agent_name;
+        }
+
+        public void setAgent_name(String agent_name) {
+            this.agent_name = agent_name;
+        }
 
         public String getDespatch_type() {
             if(StringUtils.isEmpty(despatch_type)){
@@ -339,34 +348,5 @@ public class OrderInfo {
             }
         }
 
-        public static class AddressInfo {
-            private String name;
-            private String phone;
-            private String address;
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getPhone() {
-                return phone;
-            }
-
-            public void setPhone(String phone) {
-                this.phone = phone;
-            }
-
-            public String getAddress() {
-                return address;
-            }
-
-            public void setAddress(String address) {
-                this.address = address;
-            }
-        }
     }
 }

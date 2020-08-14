@@ -10,26 +10,28 @@ import java.util.List;
  * 时间：2020/8/7
  * 版权：
  */
-public class ProfessionInfo implements Serializable {
-    private int id;
+public class SchoolProfessionInfo implements Serializable {
+    private List<AgentInfo> agent_list;
+    private String id;
     private String name;
     private String content;
     private String icons;
-    private List<AgentInfo> agent_list;
 
-    public List<AgentInfo> getAgent_list() {
-        return agent_list;
+    private String category;
+
+    public String getCategory() {
+        return category;
     }
 
-    public void setAgent_list(List<AgentInfo> agent_list) {
-        this.agent_list = agent_list;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -56,4 +58,13 @@ public class ProfessionInfo implements Serializable {
     public void setIcons(String icons) {
         this.icons = icons;
     }
+
+    public List<AgentInfo> getAgent_list() {
+        return agent_list;
+    }
+
+    public void setAgent_list(List<AgentInfo> agent_list) {
+        this.agent_list = agent_list;
+    }
+
 }

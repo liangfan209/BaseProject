@@ -2,6 +2,7 @@ package com.bq.comm_config_lib.request;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.netlibrary.http.BaseResponse;
 import com.bq.netlibrary.http.JsonCallback;
 import com.google.gson.JsonSyntaxException;
@@ -57,7 +58,7 @@ public class SignJsonCallBack<T> extends JsonCallback<T> {
             } else {
                 if(30008 ==((BaseResponse) body).code || 30007 ==((BaseResponse) body).code){
 //                    ActivityUtils.finishAllActivities();
-//                    CommSpUtils.saveLoginInfo("");
+                    CommSpUtils.saveLoginInfo("");
                     ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY)
                             .withString("mPath","-1").navigation();
                 }

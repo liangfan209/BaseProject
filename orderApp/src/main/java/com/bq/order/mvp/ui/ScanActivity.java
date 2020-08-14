@@ -58,16 +58,33 @@ public class ScanActivity extends BaseActivity {
         @Override
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
 
-            Intent resultIntent = new Intent();
-            Bundle bundle = new Bundle();
-            bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
-            bundle.putString(CodeUtils.RESULT_STRING, result);
-            resultIntent.putExtras(bundle);
-            ScanActivity.this.setResult(RESULT_OK, resultIntent);
+            String str = "type=goods&goods_id=11";
+            String[] split = str.split("&");
+            if(split.length<2){
+                ToastUtils.showToast(ScanActivity.this,"格式错误");
+                return;
+            }
+            String[] split1 = split[0].split("=");
+            String[] split2 = split[1].split("=");
 
-            ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_DETAIL_ACTIVITY)
-                    .withString("mProductId","1").navigation();
 
+            if(split1[1].contains("goods")){
+                ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_DETAIL_ACTIVITY)
+                        .withString("mProductId",split2[1]).navigation();
+            }else if(split1[1].contains("http")){
+
+            }
+
+
+//            Intent resultIntent = new Intent();
+//            Bundle bundle = new Bundle();
+//            bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
+//            bundle.putString(CodeUtils.RESULT_STRING, result);
+//            resultIntent.putExtras(bundle);
+//            ScanActivity.this.setResult(RESULT_OK, resultIntent);
+//
+//            ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_DETAIL_ACTIVITY)
+//                    .withString("mProductId","1").navigation();
 //            Intent intent = new Intent(ScanActivity.this, BindDeviceActivity.class);
 //            intent.putExtra("sn_code", "4790072188");
 //            intent.putExtra("is_bind", "bind_sn");

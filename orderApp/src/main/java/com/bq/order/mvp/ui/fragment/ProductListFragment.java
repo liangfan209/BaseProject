@@ -106,6 +106,7 @@ public class ProductListFragment extends BaseFragment implements MyRefreshLayout
                 helper.setText(R.id.tv_brand,bean.getBrand_name());
                 helper.setText(R.id.tv_product,bean.getProduction_name());
                 helper.setText(R.id.tv_price, AppUtils.getDouble2(bean.getSale_price()));
+                helper.setText(R.id.tv_orgamnization, bean.getAgent_name());
             }
         };
     }

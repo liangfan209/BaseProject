@@ -18,9 +18,9 @@ import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
 import com.bq.order.mvp.presenter.ProductPresenter;
+import com.bq.order.requset.bean.AgentInfo;
 import com.bq.order.requset.bean.ProductSearchBean;
 import com.bq.order.requset.bean.ProfessionInfo;
-import com.bq.order.requset.bean.SelecterBean;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -40,7 +40,7 @@ import butterknife.OnClick;
 
 /**
  * 文件名：
- * 描述： 学校列表
+ * 描述： 学校或专业列表
  * 作者：梁帆
  * 时间：2020/7/29
  * 版权：
@@ -67,6 +67,7 @@ public class ProfessionListActivity extends BaseActivity implements MyRefreshLay
     ImageView mIvAdvertising;
     @BindView(R2.id.flt_content)
     FrameLayout mFltContent;
+
     private String mSearchStr = "";
 
     private ProductPresenter mProductPresenter;
@@ -96,10 +97,8 @@ public class ProfessionListActivity extends BaseActivity implements MyRefreshLay
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 ProfessionInfo info = (ProfessionInfo) adapter.getData().get(position);
-
-                SelecterBean.SelectInfo selectInfo = new SelecterBean.SelectInfo(info.getId()+"",info.getName());
-                ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY)
-                        .withSerializable("mSelectInfo",selectInfo).navigation();
+                ARouter.getInstance().build(AppArouter.ORDER_SCHOOL_PROFESSION_LIST_ACTIVITY)
+                        .withSerializable("mProfessionInfo",info).navigation();
             }
         });
     }
@@ -150,13 +149,25 @@ public class ProfessionListActivity extends BaseActivity implements MyRefreshLay
 
     @Override
     public BaseQuickAdapter<ProfessionInfo, ? extends BaseViewHolder> createAdapter() {
-        return new BaseQuickAdapter<ProfessionInfo, BaseViewHolder>(R.layout.order_item_profession, mSchoolInfoList) {
+        return new BaseQuickAdapter<ProfessionInfo, BaseViewHolder>(R.layout.order_item_school_type2, mSchoolInfoList) {
                     @Override
                     protected void convert(@NotNull BaseViewHolder helper, ProfessionInfo bean) {
-                        ImageView iv = helper.getView(R.id.iv_item);
+                        ImageView iv = helper.getView(R.id.iv_icon);
                         Utils.showImage(bean.getIcons(),iv);
-                        helper.setText(R.id.tv_profession_title,bean.getName());
-                        helper.setText(R.id.tv_profession_remark,bean.getContent());
+                        helper.setText(R.id.tv_title,bean.getName());
+                        helper.setText(R.id.tv_content,bean.getContent());
+
+                        TextView tvLeft = helper.getView(R.id.agent_left);
+                        TextView tvRight = helper.getView(R.id.agent_right);
+
+                        List<AgentInfo> agent_list = bean.getAgent_list();
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 0; i < agent_list.size(); i++) {
+                            sb.append(agent_list.get(i).getName()).append(";");
+                        }
+                        tvLeft.setText(sb.toString());
+                        if(agent_list.size() > 0)
+                            tvRight.setText(String.format("等%s家机构为您服务",agent_list.size()+""));
                     }
                 };
     }

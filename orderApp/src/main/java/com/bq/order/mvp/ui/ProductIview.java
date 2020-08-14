@@ -1,9 +1,11 @@
 package com.bq.order.mvp.ui;
 
 import com.bq.comm_config_lib.mvp.BaseIView;
+import com.bq.order.requset.bean.ContractInfo;
 import com.bq.order.requset.bean.ProductInfo;
 import com.bq.order.requset.bean.ProfessionInfo;
 import com.bq.order.requset.bean.SchoolInfo;
+import com.bq.order.requset.bean.SchoolProfessionInfo;
 import com.bq.order.requset.bean.SelecterBean;
 
 import java.util.List;
@@ -37,6 +39,13 @@ public interface ProductIview extends BaseIView {
     default void getProfessionListView(List<ProfessionInfo> list){}
     default void getProfessionListErrorView(){}
 
+    //所有学校专业列表
+    default void getSchoolProfessionListView(List<SchoolProfessionInfo> list){}
+    default void getSchoolProfessionListErrorView(){}
+
+    //所有合同
+    default void getContractListView(List<ContractInfo> list){}
+    default void getContractListVErrorView(){}
 
 
     //获取商品详细信息

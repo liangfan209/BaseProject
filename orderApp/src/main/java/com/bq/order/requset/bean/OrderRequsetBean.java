@@ -13,6 +13,32 @@ public class OrderRequsetBean {
     private Integer strike_price;
     private Integer address_id;
     private List<GoodsList> goods_list;
+    private InvoiceInfo invoice_info;
+
+
+    public void setAddress_id(Integer address_id) {
+        this.address_id = address_id;
+    }
+
+    public InvoiceInfo getInvoice_info() {
+        return invoice_info;
+    }
+
+    public void setInvoice_info(InvoiceInfo invoice_info) {
+        this.invoice_info = invoice_info;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setStrike_price(Integer strike_price) {
+        this.strike_price = strike_price;
+    }
 
     private String status;
 

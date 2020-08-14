@@ -26,6 +26,7 @@ public class ProductInfo implements Serializable {
     private int min_price;
     private String description;
     private String  video_display;
+    private String agent_name;
     private List<String> detail;
     private List<String> slideshow;
     private List<SpecificationList> specification_list;
@@ -35,6 +36,14 @@ public class ProductInfo implements Serializable {
     private int realPrice;
     private int count;
     private int selectPosition;
+
+    public String getAgent_name() {
+        return agent_name;
+    }
+
+    public void setAgent_name(String agent_name) {
+        this.agent_name = agent_name;
+    }
 
     public int getSelectPosition() {
         return selectPosition;

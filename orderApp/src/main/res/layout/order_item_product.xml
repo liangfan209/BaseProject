@@ -2,7 +2,7 @@
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="135dp"
+        android:layout_height="115dp"
         android:orientation="horizontal"
         android:layout_marginBottom="15dp"
         android:background="@drawable/shap_white_radius_10"
@@ -10,18 +10,19 @@
 
         <ImageView
             android:id="@+id/iv_item"
-            android:layout_width="115dp"
-            android:layout_height="115dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
             android:scaleType="fitXY"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="22dp"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="10dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="7dp">
 
             <TextView
                 android:id="@+id/tv_product_title"
@@ -31,8 +32,8 @@
                 android:layout_marginRight="15dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="计算机科学与技术"
                 android:maxWidth="160dp"
+                android:visibility="gone"
                 android:textStyle="bold"
                 android:textColor="@color/ui_txt_normal_color"
                 android:textSize="@dimen/h3_font_size" />
@@ -40,7 +41,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
                 <TextView
                     android:id="@+id/tv_school"
                     android:layout_width="wrap_content"
@@ -97,12 +99,6 @@
                     android:maxLines="1"
                     android:layout_marginTop="6dp"
                     />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
                 <TextView
                     android:id="@+id/tv_brand"
                     android:layout_width="wrap_content"
@@ -112,6 +108,8 @@
                     android:background="@drawable/shap_green_radius_2"
                     android:padding="2dp"
                     android:textSize="10sp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="6dp"
                     />
                 <TextView
                     android:id="@+id/tv_product"
@@ -123,6 +121,7 @@
                     android:padding="2dp"
                     android:layout_marginLeft="7dp"
                     android:textSize="10sp"
+                    android:layout_marginTop="6dp"
                     />
             </LinearLayout>
 
@@ -163,5 +162,16 @@
                     android:layout_marginTop="3dp"
                     />
             </LinearLayout>
+            <TextView
+                android:id="@+id/tv_orgamnization"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h5_font_size"
+                android:textColor="@color/ui_txt_hint_color"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:drawableLeft="@mipmap/icon_organization"
+                android:drawablePadding="4dp"
+                android:text="普育吧科技有限公司为您服务"/>
         </LinearLayout>
 </LinearLayout>

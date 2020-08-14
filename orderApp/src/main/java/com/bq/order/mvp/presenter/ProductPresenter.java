@@ -4,11 +4,13 @@ import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.order.mvp.ui.ProductIview;
 import com.bq.order.requset.ProductHttpReqeustImp;
+import com.bq.order.requset.bean.ContractListBean;
 import com.bq.order.requset.bean.ProductBean;
 import com.bq.order.requset.bean.ProductListBean;
 import com.bq.order.requset.bean.ProfessionListBean;
 import com.bq.order.requset.bean.SchoolBean;
 import com.bq.order.requset.bean.SchoolListBean;
+import com.bq.order.requset.bean.SchoolProfessionListBean;
 import com.bq.order.requset.bean.SelecterBean;
 
 import androidx.annotation.NonNull;
@@ -184,6 +186,36 @@ public class ProductPresenter implements BasePresenter {
             public void onError(String msg) {
                 super.onError(msg);
                 mIView.getProfessionListErrorView();
+            }
+        });
+    }
+
+    public void getSchoolProfessionList(int page,int type, String searchStr) {
+        mProductHttpReqeustImp.getSchoolProfessionList(page,type,searchStr, new AbstractReqeustCallback<SchoolProfessionListBean>(mIView) {
+            @Override
+            public void onSuccess(SchoolProfessionListBean bean) {
+                mIView.getSchoolProfessionListView(bean.getData_list());
+            }
+
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+                mIView.getSchoolProfessionListErrorView();
+            }
+        });
+    }
+
+    public void getContractList() {
+        mProductHttpReqeustImp.getContractList(new AbstractReqeustCallback<ContractListBean>(mIView) {
+            @Override
+            public void onSuccess(ContractListBean bean) {
+                mIView.getContractListView(bean.getData_list());
+            }
+
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+                mIView.getContractListVErrorView();
             }
         });
     }

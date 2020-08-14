@@ -17,6 +17,77 @@
             android:background="#fff9f9f9">
 
             <RelativeLayout
+                android:id="@+id/rlt_education"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_education"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/icon_contract_left"/>
+
+                <LinearLayout
+                    android:id="@+id/llt_contract"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="18dp"
+                    android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_education_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="@dimen/h3_font_size"
+                            android:textStyle="bold"
+                            android:textColor="@color/ui_txt_normal_color"/>
+                        <TextView
+                            android:id="@+id/tv_education_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:layout_marginTop="3dp"
+                            android:textSize="@dimen/h5_font_size"
+                            android:textColor="@color/ui_txt_normal_color"/>
+
+                    <TextView
+                        android:id="@+id/tv_education_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/h5_font_size"
+                        android:text=""
+                        android:layout_marginTop="3dp"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:textColor="@color/ui_txt_normal_color"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:drawableRight="@mipmap/next_step"
+                    android:drawablePadding="5dp"
+                    android:textColor="@color/ui_primary_color"
+                    android:text=""/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/rlt_address"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -117,8 +188,8 @@
 
                     <ImageView
                         android:id="@+id/iv_item"
-                        android:layout_width="115dp"
-                        android:layout_height="115dp"
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
                         android:scaleType="fitXY"
                         android:layout_marginLeft="15dp"
                         android:layout_gravity="center_vertical"
@@ -139,6 +210,7 @@
                             android:ellipsize="end"
                             android:maxLines="2"
                             android:text="计算机科学与技术"
+                            android:visibility="gone"
                             android:textStyle="bold"
                             android:textColor="@color/ui_txt_normal_color"
                             android:textSize="@dimen/h3_font_size" />
@@ -203,12 +275,6 @@
                                 android:maxLines="1"
                                 android:layout_marginTop="6dp"
                                 />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="5dp">
                             <TextView
                                 android:id="@+id/tv_brand"
                                 android:layout_width="wrap_content"
@@ -218,6 +284,8 @@
                                 android:background="@drawable/shap_green_radius_2"
                                 android:padding="2dp"
                                 android:textSize="10sp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginLeft="5dp"
                                 />
                             <TextView
                                 android:id="@+id/tv_product"
@@ -229,6 +297,7 @@
                                 android:padding="2dp"
                                 android:layout_marginLeft="7dp"
                                 android:textSize="10sp"
+                                android:layout_marginTop="6dp"
                                 />
                         </LinearLayout>
 
@@ -269,7 +338,18 @@
                                 android:textColor="@color/ui_txt_hint_color"
                                 android:textSize="12sp" />
                         </LinearLayout>
-
+                        <TextView
+                            android:id="@+id/tv_agent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/ui_txt_hint_color"
+                            android:layout_toRightOf="@id/agent_left"
+                            android:text="普育吧科技有限公司为您服务"
+                            android:drawableLeft="@mipmap/icon_organization"
+                            android:drawablePadding="4dp"
+                            android:textSize="@dimen/h5_font_size"
+                            android:maxLines="1"
+                            />
 
                     </LinearLayout>
 

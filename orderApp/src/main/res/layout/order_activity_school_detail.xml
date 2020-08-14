@@ -5,35 +5,37 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include layout="@layout/layout_public_title"/>
-
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:orientation="vertical">
+        android:fillViewport="true"
+        >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ui_shap_jianbian_primary_bg">
-                <com.fan.baseuilibrary.view.CircleImageView
-                    android:id="@+id/iv_icon"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_centerVertical="true"
-                    />
-
-                <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@mipmap/icon_school_bg"
+                >
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="105dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginBottom="15dp">
+                    android:layout_height="wrap_content">
 
+                    <com.fan.baseuilibrary.view.CircleImageView
+                        android:id="@+id/iv_icon"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginBottom="14dp"
+                        />
                     <TextView
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
@@ -44,40 +46,73 @@
                         android:ellipsize="end"
                         android:text="华中农业大学"
                         android:textStyle="bold"
+                        android:layout_marginTop="35dp"
+                        android:layout_marginLeft="100dp"
                         />
+                </RelativeLayout>
+                <ScrollView
+                    android:id="@+id/scrollview_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
                     <TextView
                         android:id="@+id/tv_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:maxLines="5"
                         android:ellipsize="end"
                         android:textColor="@color/white"
                         android:textSize="@dimen/h5_font_size"
-                        android:text="学校描述学校描述学校描述学校描述学校描述学校描述学校描述学校描述学校描述学校描述学校描述"
+                        android:lineSpacingExtra="1.6dp"
+                        android:letterSpacing="0"
+                        android:lineSpacingMultiplier="1.0"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=""
                         />
-                </LinearLayout>
+                </ScrollView>
 
-        </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlt_expance"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="@drawable/shap_touming_4"
+                    android:layout_alignParentBottom="true"
+                    >
+                    <TextView
+                        android:id="@+id/tv_expance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="展开详情"
+                        android:textSize="@dimen/h5_font_size"
+                        android:textColor="@color/white"
+                        android:drawableLeft="@mipmap/icon_expansion_down"
+                        android:drawablePadding="4dp"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+            <com.fan.baseuilibrary.view.flycotablayout.widget.SkinSlidingTabLayout
+                android:id="@+id/tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:tl_indicator_color="@color/ui_primary_color"
+                app:tl_indicator_height="3dp"
+                app:tl_textUnselectColor="@color/ui_txt_normal_color"
+                app:tl_textSelectColor="@color/ui_primary_color"
+                app:tl_textsize="@dimen/h2_font_size"
+                app:tl_iconVisible="false"
+                app:tl_indicator_width="60dp"
+                app:tl_tab_padding="10dp"
+                app:tl_tab_space_equal="true"
+                android:background="@color/white"
+                />
+            <com.fan.baseuilibrary.view.NoAnimationViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
 
-        <com.fan.baseuilibrary.view.flycotablayout.widget.SkinSlidingTabLayout
-            android:id="@+id/tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:tl_indicator_color="@color/ui_primary_color"
-            app:tl_indicator_height="3dp"
-            app:tl_textUnselectColor="@color/ui_txt_normal_color"
-            app:tl_textSelectColor="@color/ui_primary_color"
-            app:tl_textsize="@dimen/h2_font_size"
-            app:tl_iconVisible="false"
-            app:tl_indicator_width="60dp"
-            app:tl_tab_padding="10dp"
-            />
-        <com.fan.baseuilibrary.view.NoAnimationViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-    </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>

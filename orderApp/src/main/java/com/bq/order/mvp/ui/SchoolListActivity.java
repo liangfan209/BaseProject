@@ -18,8 +18,8 @@ import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
 import com.bq.order.mvp.presenter.ProductPresenter;
+import com.bq.order.requset.bean.AgentInfo;
 import com.bq.order.requset.bean.ProductSearchBean;
-import com.bq.order.requset.bean.ProfessionList;
 import com.bq.order.requset.bean.SchoolInfo;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -97,8 +97,8 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 SchoolInfo info = (SchoolInfo) adapter.getData().get(position);
-                ARouter.getInstance().build(AppArouter.ORDER_SCHOOL_DETAIL_ACTIVITY)
-                        .withSerializable("mSchoolId",info.getId()).navigation();
+                ARouter.getInstance().build(AppArouter.ORDER_SCHOOL_PROFESSION_LIST_ACTIVITY)
+                        .withSerializable("mSchoolInfo",info).navigation();
             }
         });
     }
@@ -152,66 +152,21 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
                     @Override
                     protected void convert(@NotNull BaseViewHolder helper, SchoolInfo bean) {
                         ImageView iv = helper.getView(R.id.iv_icon);
-                        Glide.with(iv).load(bean.getLogo_url())
+                        Glide.with(iv).load(bean.getIcons())
                                 .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
                         helper.setText(R.id.tv_title,bean.getName());
-                        List<ProfessionList> production_list = bean.getProduction_list();
-                        TextView tvRow1 = helper.getView(R.id.tv_row1);
-                        TextView tvRow2 = helper.getView(R.id.tv_row2);
-                        TextView tvRow3 = helper.getView(R.id.tv_row3);
-                        TextView tvRow4 = helper.getView(R.id.tv_row4);
-                        TextView tvRow5 = helper.getView(R.id.tv_row5);
-                        TextView tvRow6 = helper.getView(R.id.tv_row6);
-                        TextView tvRow7 = helper.getView(R.id.tv_row7);
-                        TextView tvRow8 = helper.getView(R.id.tv_row8);
-                        if(production_list.size() == 1){
-                            tvRow1.setText(production_list.get(0).getName()+": ");
-                            tvRow2.setText(production_list.get(0).getQuantity()+"个");
-                        }else if(production_list.size() == 2){
-                            tvRow1.setText(production_list.get(0).getName()+": ");
-                            tvRow2.setText(production_list.get(0).getQuantity()+"个  ");
-                            tvRow3.setText(production_list.get(1).getName()+": ");
-                            tvRow4.setText(production_list.get(1).getQuantity()+"个");
-                        }else if(production_list.size() == 3){
-                            tvRow1.setText(production_list.get(0).getName()+": ");
-                            tvRow2.setText(production_list.get(0).getQuantity()+"个  ");
-                            tvRow3.setText(production_list.get(1).getName()+": ");
-                            tvRow4.setText(production_list.get(1).getQuantity()+"个");
-                            tvRow5.setText(production_list.get(2).getName()+": ");
-                            tvRow6.setText(production_list.get(2).getQuantity()+"个");
-                        }else if(production_list.size() >= 4){
-                            tvRow1.setText(production_list.get(0).getName()+": ");
-                            tvRow2.setText(production_list.get(0).getQuantity()+"个  ");
-                            tvRow3.setText(production_list.get(1).getName()+": ");
-                            tvRow4.setText(production_list.get(1).getQuantity()+"个");
-                            tvRow5.setText(production_list.get(2).getName()+": ");
-                            tvRow6.setText(production_list.get(2).getQuantity()+"个  ");
-                            tvRow7.setText(production_list.get(3).getName()+": ");
-                            tvRow8.setText(production_list.get(3).getQuantity()+"个");
+                        helper.setText(R.id.tv_content,bean.getContent());
+                        TextView tvLeft = helper.getView(R.id.agent_left);
+                        TextView tvRight = helper.getView(R.id.agent_right);
+
+                        List<AgentInfo> agent_list = bean.getAgent_list();
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 0; i < agent_list.size(); i++) {
+                            sb.append(agent_list.get(i).getName()).append(";");
                         }
-
-
-//                        if(production_list.size() > 2){
-//                            tvRow1.setVisibility(View.VISIBLE);
-//                            tvRow2.setVisibility(View.VISIBLE);
-//                            tvRow1.setText(production_list.get(0).getName()+" "+production_list.get(0).getQuantity()+"个   "+production_list.get(1).getName()+" "+production_list.get(2).getQuantity()+"个");
-//                            if(production_list.size()  == 3){
-//                                tvRow2.setText(production_list.get(2).getName()+" "+production_list.get(2).getQuantity()+"个 ");
-//                            }else{
-//                                tvRow2.setText(production_list.get(2).getName()+" "+production_list.get(2).getQuantity()+"个   "+production_list.get(3).getName()+" "+production_list.get(3).getQuantity()+"个");
-//                            }
-//                        }else if(production_list.size() > 0){
-//                            tvRow1.setVisibility(View.VISIBLE);
-//                            tvRow2.setVisibility(View.GONE);
-//                            if(production_list.size()  == 1){
-//                                tvRow1.setText(production_list.get(0).getName()+" "+production_list.get(0).getQuantity()+"个 ");
-//                            }else{
-//                                tvRow1.setText(production_list.get(0).getName()+" "+production_list.get(0).getQuantity()+"个   "+production_list.get(1).getName()+" "+production_list.get(1).getQuantity()+"个");
-//                            }
-//                        }else{
-//                            tvRow1.setVisibility(View.GONE);
-//                            tvRow2.setVisibility(View.GONE);
-//                        }
+                        tvLeft.setText(sb.toString());
+                        if(agent_list.size() > 0)
+                            tvRight.setText(String.format("等%s家机构为您服务",agent_list.size()+""));
                     }
                 };
     }

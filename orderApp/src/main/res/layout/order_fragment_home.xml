@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#f2f2f2"
     android:paddingTop="20dp">
@@ -136,6 +137,14 @@
                             android:layout_height="160dp"
                             android:nestedScrollingEnabled="false"
                             />
+
+                        <com.zhpan.bannerview.BannerViewPager
+                            android:id="@+id/banner_school"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="160dp"
+                            app:bvp_indicator_visibility="gone"/>
+
                         <RelativeLayout
                             android:id="@+id/rlt_content_school"
                             android:layout_width="match_parent"

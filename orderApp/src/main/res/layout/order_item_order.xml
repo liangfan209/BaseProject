@@ -101,7 +101,7 @@
             android:textColor="@color/ui_primary_color"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="4dp"/>
     </RelativeLayout>
 
 </LinearLayout>

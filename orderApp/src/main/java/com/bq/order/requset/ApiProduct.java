@@ -24,8 +24,13 @@ public class ApiProduct {
     //所有专业
     public static String PRODUCT_PROFESSION_SEARCH_ALL = "university.major.search";
 
+    //合同列表
+    public static String PRODUCT_CONTRACT_SEARCH_ALL = "customer.contract.search";
 
-
+    //学校专业列表
+    public static String PRODUCT_SCHOOL_PROFESSION_LIST = "university.relations.searchmajor";
+    //专业学校列表
+    public static String PRODUCT_PROFESSION_SCHOOL_LIST = "university.relations.searchschool";
 
     //产品搜索列表
     public static String PRODUCT_PRODUCT_LIST = "production.goods.search";

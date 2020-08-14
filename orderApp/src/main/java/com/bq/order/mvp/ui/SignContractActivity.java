@@ -25,6 +25,7 @@ import com.bq.order.R2;
 import com.bq.order.api.OrderEventKey;
 import com.bq.order.mvp.presenter.OrderPresenter;
 import com.bq.order.requset.bean.ContractRequsetBean;
+import com.bq.order.requset.bean.InvoiceInfo;
 import com.bq.utilslib.AccountValidatorUtil;
 import com.bq.utilslib.EditFormatUtils;
 import com.fan.baseuilibrary.utils.ToastUtils;
@@ -94,6 +95,8 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
     private UserInfo userInfo;
 
     @Autowired
+    InvoiceInfo mInvoiceInfo;
+    @Autowired
     String productId;
     @Autowired
     String imgPath;
@@ -138,9 +141,25 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
         if(sign == 1){
             Utils.showImage(imgPath,mIvContract);
             mTvTitle.setText("签合同");
+            if(mInvoiceInfo != null){
+                mEtName.setText(mInvoiceInfo.getName());
+                mEtPhone.setText(mInvoiceInfo.getPhone());
+                mEtIdCard.setText(mInvoiceInfo.getIdentification());
+                mEtName.setEnabled(false);
+                mEtPhone.setEnabled(false);
+                mEtIdCard.setEnabled(false);
+                mEtName.setClearDrawableVisible(false);
+                mEtPhone.setClearDrawableVisible(false);
+                mEtIdCard.setClearDrawableVisible(false);
+            }
+
         }else{
             mTvTitle.setText("查看合同");
-            mOrderPresenter.getContactImg(productId);
+            if(!StringUtils.isEmpty(imgPath)){
+                Utils.showImage(imgPath,mIvContract);
+            }else{
+                mOrderPresenter.getContactImg(productId);
+            }
             mRltBottom.setVisibility(View.GONE);
             mLltTopContent.setVisibility(View.GONE);
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mScrollview.getLayoutParams();

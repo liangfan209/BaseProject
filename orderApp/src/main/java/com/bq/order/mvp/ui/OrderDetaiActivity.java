@@ -18,6 +18,7 @@ import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
 import com.bq.order.mvp.presenter.OrderPresenter;
+import com.bq.order.requset.bean.InvoiceInfo;
 import com.bq.order.requset.bean.OrderInfo;
 import com.bq.utilslib.AppUtils;
 import com.fan.baseuilibrary.utils.ToastUtils;
@@ -105,9 +106,23 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
     @BindView(R2.id.tv_address_txt)
     TextView mTvAddressTxt;
 
+    @BindView(R2.id.llt_contract)
+    LinearLayout mLltContract;
+    @BindView(R2.id.tv_education_name)
+    TextView mTvEducationName;
+    @BindView(R2.id.tv_education_phone)
+    TextView mTvEducationPhone;
+    @BindView(R2.id.tv_education_id)
+    TextView mTvEducationId;
+
+    @BindView(R2.id.tv_agent)
+    TextView mTvAgent;
+
+
 //    tv_address_name tv_address_phone  tv_address_txt
 
     private OrderPresenter mOrderPresenter;
+    private InvoiceInfo mInvoiceInfo;
 
     @Override
     protected int getContentViewLayout() {
@@ -135,6 +150,7 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
     @Override
     public void getOrderDetail(OrderInfo info) {
         mOrderInfoBean = info;
+        mInvoiceInfo = info.getInvoice_info();
         initView();
     }
 
@@ -151,6 +167,8 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
         mTvProduct.setText(mProductInfo.getProduction_name());
         mTvPrice.setText(AppUtils.getDouble2(mProductInfo.getSale_price()));
         mTvBottomRight.setText("x"+mProductInfo.getQuantity());
+        mTvAgent.setText(mProductInfo.getAgent_name()+"为您服务");
+
 //        mTvAfterSale.setVisibility(View.GONE);
         mTvOrderSignContract.setVisibility(View.GONE);
         mTvOrderBottomRight.setVisibility(View.GONE);
@@ -167,8 +185,12 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
         mTvProductType.setText("属性："+mProductInfo.getRemark() + "     发货："+mOrderInfoBean.getDespatch_type());
 
 
-        mLltAddress.setVisibility(View.GONE);
+
         if(mOrderInfoBean.getDespatch_type().contains("教育")){
+            mLltContract.setVisibility(View.VISIBLE);
+            mLltAddress.setVisibility(View.GONE);
+            updateInVoiceInfo();
+
             if(mOrderInfoBean.getStatus().equals("order_launched")){
                 mTvOrderType.setText("等待支付");
                 mTvOrderBottomRight.setVisibility(View.VISIBLE);
@@ -192,7 +214,8 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
         }else{
             if(mOrderInfoBean.getDespatch_type().contains("物流")){
                 mLltAddress.setVisibility(View.VISIBLE);
-                OrderInfo.OrderItemListBean.AddressInfo invoice_info = mOrderInfoBean.getInvoice_info();
+                mLltContract.setVisibility(View.GONE);
+                InvoiceInfo invoice_info = mOrderInfoBean.getInvoice_info();
                 if(invoice_info == null) return;
                 mTvAddressName.setText(invoice_info.getName());
                 mTvAddressPhone.setText(invoice_info.getPhone());
@@ -228,6 +251,7 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
                 ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
                         .withString("productId",mOrderInfoBean.getId()+"")
                         .withInt("sign",1)
+                        .withSerializable("mInvoiceInfo",mOrderInfoBean.getInvoice_info())
                         .withString("imgPath",mOrderInfoBean.getContract_background()).navigation();
 
             }else if(mOrderInfoBean.getStatus().equals("order_finished")){
@@ -258,6 +282,17 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
             }
         }else if(view.getId() == R.id.tv_server){
             ToastUtils.showToast(this,"正在开发中");
+        }
+    }
+
+    private void updateInVoiceInfo(){
+        mTvEducationName.setVisibility(View.VISIBLE);
+        mTvEducationPhone.setVisibility(View.VISIBLE);
+        mTvEducationId.setVisibility(View.VISIBLE);
+        if(mInvoiceInfo != null){
+            mTvEducationName.setText(mInvoiceInfo.getName());
+            mTvEducationPhone.setText(mInvoiceInfo.getPhone());
+            mTvEducationId.setText(mInvoiceInfo.getIdentification());
         }
     }
 

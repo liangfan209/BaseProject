@@ -232,6 +232,7 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
             //跳转到主页面中
             if (StringUtils.isEmpty(mPath)) {
                 ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
+            }else if(mPath.equals("-1")){
             } else {
                 ARouter.getInstance().build(mPath)
                         .withBundle("mBundle", mBundle).navigation();

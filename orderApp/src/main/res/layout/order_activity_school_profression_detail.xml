@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/layout_public_title"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:background="#f2f2f2"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@mipmap/icon_school_bg"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.fan.baseuilibrary.view.CircleImageView
+                        android:id="@+id/iv_icon"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginBottom="14dp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/h3_font_size"
+                        android:textColor="@color/white"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:text="华中农业大学"
+                        android:textStyle="bold"
+                        android:layout_marginTop="35dp"
+                        android:layout_marginLeft="100dp"
+                        />
+                </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tv_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/h5_font_size"
+                        android:maxLines="3"
+                        android:lineSpacingExtra="1.6dp"
+                        android:letterSpacing="0"
+                        android:lineSpacingMultiplier="1.0"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="华中农业大学（Huazhong Agricultural University），简称“华农”，位于湖北省武汉市南湖狮子山脚，是中华人民共和国教育部直属的…一所以生命科学为特色，农、理、工、文、法、经、管协调发展的全国重点大学，国家首批世界一流学科建设高校，国家“211工程”、“985工程优势学科创新平台”重点建设高校，入选高等学校学科创新引智计划、卓越工程师教育培养计划、卓越农林人才教育培养计划、国家建设高水平大学公派研究生项目、新工科研究与实践项目、中国政府奖学金来华留学生接收院校、全国深化创新创业教育改革示范高校、首批高等学校科技成果转化和技术转移基地，为武汉七校联合办学成员。为武汉七校联合办学成员。为武汉七校联合办学成员。为武汉七校联合办学成员。为武汉七校联合办学成员。为武汉七校联合办学成员。为武汉七校联合办学成员。为武汉七校联合办学成员。"
+                        />
+
+                <RelativeLayout
+                    android:id="@+id/rlt_expance"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="@drawable/shap_touming_4"
+                    android:layout_alignParentBottom="true"
+                    >
+                    <TextView
+                        android:id="@+id/tv_expance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="展开详情"
+                        android:textSize="@dimen/h5_font_size"
+                        android:textColor="@color/white"
+                        android:drawableLeft="@mipmap/icon_expansion_down"
+                        android:drawablePadding="4dp"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/shap_white_radius_4">
+
+                <TextView
+                    android:id="@+id/tv_profession"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/h3_font_size"
+                    android:textColor="@color/ui_txt_normal_color"
+                    android:text="计算机与技术"
+                    android:layout_marginTop="15dp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    />
+                <TextView
+                    android:id="@+id/tv_profession_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/h5_font_size"
+                    android:layout_marginTop="10dp"
+                    android:text="培养较扎实的基础医学理论和临床医学知识以及一定的预防医学知识、具有一定的临床思和临床实践能力的临床医学专… 门人才。"
+                    android:maxLines="2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:ellipsize="end"
+                    android:layout_marginBottom="10dp"
+                    />
+                <RelativeLayout
+                    android:id="@+id/rlt_expance1"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="@drawable/shap_touming_4"
+                    android:layout_alignParentBottom="true"
+                    >
+                    <TextView
+                        android:id="@+id/tv_expance1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="展开详情"
+                        android:textSize="@dimen/h5_font_size"
+                        android:textColor="@color/ui_txt_hint_color"
+                        android:drawableLeft="@mipmap/icon_expansion_down"
+                        android:drawablePadding="4dp"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h3_font_size"
+                android:textColor="@color/ui_txt_normal_color"
+                android:text="助学帮助"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_product_list"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

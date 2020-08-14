@@ -13,9 +13,18 @@ import java.util.List;
 public class SchoolInfo implements Serializable {
     private String content;
     private String id;
-    private String logo_url;
+    private String icons;
     private String name;
     private List<ProfessionList> production_list;
+    private List<AgentInfo> agent_list;
+
+    public List<AgentInfo> getAgent_list() {
+        return agent_list;
+    }
+
+    public void setAgent_list(List<AgentInfo> agent_list) {
+        this.agent_list = agent_list;
+    }
 
     public List<ProfessionList> getProduction_list() {
         return production_list;
@@ -41,12 +50,12 @@ public class SchoolInfo implements Serializable {
         this.id = id;
     }
 
-    public String getLogo_url() {
-        return logo_url;
+    public String getIcons() {
+        return icons;
     }
 
-    public void setLogo_url(String logo_url) {
-        this.logo_url = logo_url;
+    public void setIcons(String icons) {
+        this.icons = icons;
     }
 
     public String getName() {
@@ -61,4 +70,5 @@ public class SchoolInfo implements Serializable {
     public String toString() {
         return this.name;
     }
+
 }

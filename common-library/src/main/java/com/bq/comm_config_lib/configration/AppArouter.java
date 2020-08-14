@@ -73,15 +73,24 @@ public class AppArouter {
     public static final String ORDER_PRODUCT_LIST_ACTIVITY = ORDER +"/ProductListActivity";
     //学校列表
     public static final String ORDER_SCHOOL_LIST_ACTIVITY = ORDER +"/SchoolListActivity";
+
+    //合同列表
+    public static final String ORDER_CONTRACT_LIST_ACTIVITY = ORDER +"/ContractListActivity";
+
     //专业列表
-    //学校列表
     public static final String ORDER_PROFESSION_LIST_ACTIVITY = ORDER +"/ProfessionListActivity";
 
-    //学校详情
+    //学校专业列表
+    public static final String ORDER_SCHOOL_PROFESSION_LIST_ACTIVITY = ORDER +"/SchoolProfessionListActivity";
 
-    public static final String ORDER_SCHOOL_DETAIL_ACTIVITY = ORDER +"/SchoolDetailActivity";
+    //院校专业详情
+    public static final String ORDER_SCHOOL_PROFRESSION_DETAIL_ACTIVITY = ORDER +"/SchoolProfessionDetailActivity";
     //签合同
     public static final String ORDER_SIGN_CONTRACT_ACTIVITY = ORDER+"/SignContract";
+
+    //签署人信息
+    public static final String ORDER_SIGN_USER_ACTIVITY = ORDER+"/SignUserActivity";
+
     //电子签名
     public static final String ORDER_AUTOGRAPH_ACTIVITY = ORDER+"/AutographActivity";
 

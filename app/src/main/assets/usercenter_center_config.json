@@ -14,9 +14,9 @@
         },
         {
           "name": "我的合同",
-          "remark": "/order/OrderListActivity123",
+          "remark": "",
           "icon": "user_center_icon_order_wait_sent_out",
-          "path": "",
+          "path": "/order/ContractListActivity",
           "params": 1,
           "jumpType": "arouter"
         }

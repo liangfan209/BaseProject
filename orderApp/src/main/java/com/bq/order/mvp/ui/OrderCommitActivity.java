@@ -3,6 +3,7 @@ package com.bq.order.mvp.ui;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.bq.order.R;
 import com.bq.order.R2;
 import com.bq.order.api.bean.AddressInfo;
 import com.bq.order.mvp.presenter.OrderPresenter;
+import com.bq.order.requset.bean.InvoiceInfo;
 import com.bq.order.requset.bean.OrderRequsetBean;
 import com.bq.order.requset.bean.ProductInfo;
 import com.bq.order.requset.bean.SpecificationList;
@@ -101,12 +103,25 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
     @BindView(R2.id.tv_address_phone)
     TextView mTvAddressPhone;
 
+    @BindView(R2.id.llt_contract)
+    LinearLayout mLltContract;
+    @BindView(R2.id.tv_education_name)
+    TextView mTvEducationName;
+    @BindView(R2.id.tv_education_phone)
+    TextView mTvEducationPhone;
+    @BindView(R2.id.tv_education_id)
+    TextView mTvEducationId;
+
+    @BindView(R2.id.tv_agent)
+    TextView mTvAgent;
+
+
+
     @Autowired
     ProductInfo mProductInfo;
-
     private String addressId = "-1";
-
     private OrderPresenter mOrderPresenter;
+    private InvoiceInfo mInvoiceInfo;
 
     @Override
     protected int getContentViewLayout() {
@@ -134,6 +149,7 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
         mTvBrand.setText(mProductInfo.getBrand_name());
         mTvProduct.setText(mProductInfo.getProduction_name());
         mTvSalePrice.setText(AppUtils.getDouble2(mProductInfo.getRealPrice()));
+        mTvAgent.setText(mProductInfo.getAgent_name()+"为您服务");
 
         mTvCategoryValue.setText(mProductInfo.getAttrubute());
         mTvLogister.setText(mProductInfo.getDespatch_type());
@@ -142,8 +158,19 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
         mTvTotalPrice.setText("¥"+AppUtils.getDouble2(mProductInfo.getRealPrice() * mProductInfo.getCount()));
         mTvStock.setText("x "+ mProductInfo.getCount());
 
-        if(mProductInfo.getDespatch_type().contains("物流")){
+        if(mProductInfo.getDespatch_type().contains("教育")){
+            mRltAddress.setVisibility(View.GONE);
+            mLltContract.setVisibility(View.VISIBLE);
+            if(mInvoiceInfo == null){
+                mTvEducationName.setText("请填写签署人信息");
+                mTvEducationPhone.setVisibility(View.GONE);
+                mTvEducationId.setVisibility(View.GONE);
+            }else{
+                updateInVoiceInfo();
+            }
+        }else{
             mRltAddress.setVisibility(View.VISIBLE);
+            mLltContract.setVisibility(View.GONE);
             EventBus.getDefault().post(new MessageEvent(AppArouter.USER_CENTER_ADDRESS_DEFAULT_SERVICE, new MessageInter() {
                 @Override
                 public void callBack(MessageBody data) {
@@ -152,14 +179,23 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
                     }
                 }
             }));
-        }else{
-            mRltAddress.setVisibility(View.GONE);
         }
 
     }
 
+    private void updateInVoiceInfo(){
+        mTvEducationName.setVisibility(View.VISIBLE);
+        mTvEducationPhone.setVisibility(View.VISIBLE);
+        mTvEducationId.setVisibility(View.VISIBLE);
+        if(mInvoiceInfo != null){
+            mTvEducationName.setText(mInvoiceInfo.getName());
+            mTvEducationPhone.setText(mInvoiceInfo.getPhone());
+            mTvEducationId.setText(mInvoiceInfo.getIdentification());
+        }
+    }
 
-    @OnClick({R2.id.tv_buy,R2.id.rlt_address})
+
+    @OnClick({R2.id.tv_buy,R2.id.rlt_address,R2.id.llt_contract})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.tv_buy) {
             if(!Utils.isFastDoubleClick(mTvBuy,1000)){
@@ -174,6 +210,16 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
                         return;
                     }
                     bean.setAddress_id(Integer.valueOf(addressId));
+                }else if(mProductInfo.getDespatch_type().contains("教育")){
+                    String name = mTvEducationName.getText().toString();
+                    String phone = mTvEducationPhone.getText().toString();
+                    String identification = mTvEducationId.getText().toString();
+                    if(StringUtils.isEmpty(phone)){
+                        ToastUtils.showToast(this,"请填写签署人信息");
+                        return;
+                    }
+                    InvoiceInfo info = new InvoiceInfo(name,phone,identification);
+                    bean.setInvoice_info(info);
                 }
                 String orderInfo = new Gson().toJson(bean);
                 mOrderPresenter.addOrder(orderInfo);
@@ -182,6 +228,10 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
             ARouter.getInstance().build(AppArouter.USER_CENTER_ADDRESS_SELECT)
                     .withInt("addressId",Integer.valueOf(addressId))
                     .navigation(this,11);
+        }else if(view.getId() == R.id.llt_contract){
+            ARouter.getInstance().build(AppArouter.ORDER_SIGN_USER_ACTIVITY)
+                    .withSerializable("mInvoiceInfo",mInvoiceInfo)
+                    .navigation(this,12);
         }
     }
 
@@ -195,6 +245,9 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
             }catch(Exception e){
 
             }
+        }else if(requestCode == 12 && resultCode == 0){
+            mInvoiceInfo = (InvoiceInfo) data.getExtras().getSerializable("mInvoiceInfo");
+            updateInVoiceInfo();
         }
     }
 
