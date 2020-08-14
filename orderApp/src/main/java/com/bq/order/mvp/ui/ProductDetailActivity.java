@@ -264,9 +264,17 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
 
 
         ArrayList<BannerData> dataList = new ArrayList<BannerData>();
-//        BannerData b1 = new BannerData("https://www.wanandroid.com/blogimgs/90c6cc12-742e-4c9f-b318-b912f163b8d0.png",
-//                BannerData.TYPE_NEW);
-//        dataList.add(b1);
+
+
+        if(StringUtils.isEmpty(mProductInfo.getVideo_display())){
+            mRgVideo.setVisibility(View.GONE);
+        }else{
+            mRgVideo.setVisibility(View.VISIBLE);
+            BannerData b1 = new BannerData("https://www.wanandroid.com/blogimgs/90c6cc12-742e-4c9f-b318-b912f163b8d0.png",
+            BannerData.TYPE_NEW);
+            dataList.add(b1);
+
+        }
 
 
         List<String> slideshow = mProductInfo.getSlideshow();

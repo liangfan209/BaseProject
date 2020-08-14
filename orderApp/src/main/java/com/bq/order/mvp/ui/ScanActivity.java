@@ -57,9 +57,7 @@ public class ScanActivity extends BaseActivity {
     CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
         @Override
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
-
-            String str = "type=goods&goods_id=11";
-            String[] split = str.split("&");
+            String[] split = result.split("&");
             if(split.length<2){
                 ToastUtils.showToast(ScanActivity.this,"格式错误");
                 return;
