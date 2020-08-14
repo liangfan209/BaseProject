@@ -3,7 +3,6 @@ package com.bq.order.mvp.ui;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -103,8 +102,8 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
     @BindView(R2.id.tv_address_phone)
     TextView mTvAddressPhone;
 
-    @BindView(R2.id.llt_contract)
-    LinearLayout mLltContract;
+    @BindView(R2.id.rlt_education)
+    RelativeLayout mRltEducation;
     @BindView(R2.id.tv_education_name)
     TextView mTvEducationName;
     @BindView(R2.id.tv_education_phone)
@@ -160,7 +159,7 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
 
         if(mProductInfo.getDespatch_type().contains("教育")){
             mRltAddress.setVisibility(View.GONE);
-            mLltContract.setVisibility(View.VISIBLE);
+            mRltEducation.setVisibility(View.VISIBLE);
             if(mInvoiceInfo == null){
                 mTvEducationName.setText("请填写签署人信息");
                 mTvEducationPhone.setVisibility(View.GONE);
@@ -170,7 +169,7 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
             }
         }else{
             mRltAddress.setVisibility(View.VISIBLE);
-            mLltContract.setVisibility(View.GONE);
+            mRltEducation.setVisibility(View.GONE);
             EventBus.getDefault().post(new MessageEvent(AppArouter.USER_CENTER_ADDRESS_DEFAULT_SERVICE, new MessageInter() {
                 @Override
                 public void callBack(MessageBody data) {
@@ -195,7 +194,7 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
     }
 
 
-    @OnClick({R2.id.tv_buy,R2.id.rlt_address,R2.id.llt_contract})
+    @OnClick({R2.id.tv_buy,R2.id.rlt_address,R2.id.rlt_education})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.tv_buy) {
             if(!Utils.isFastDoubleClick(mTvBuy,1000)){
@@ -228,7 +227,7 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
             ARouter.getInstance().build(AppArouter.USER_CENTER_ADDRESS_SELECT)
                     .withInt("addressId",Integer.valueOf(addressId))
                     .navigation(this,11);
-        }else if(view.getId() == R.id.llt_contract){
+        }else if(view.getId() == R.id.rlt_education){
             ARouter.getInstance().build(AppArouter.ORDER_SIGN_USER_ACTIVITY)
                     .withSerializable("mInvoiceInfo",mInvoiceInfo)
                     .navigation(this,12);
