@@ -116,10 +116,22 @@ public class SchoolProfressionListFragment extends BaseFragment implements MyRef
                 List<AgentInfo> agent_list = bean.getAgent_list();
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < agent_list.size(); i++) {
-                    sb.append(agent_list.get(i).getName()).append(";");
+                    sb.append(agent_list.get(i).getName());
+                    if(agent_list.size() != 1 && i != agent_list.size()-1){
+                        sb.append(";");
+                    }
                 }
                 tvLeft.setText(sb.toString());
-                tvRight.setText(String.format("等%s家机构为您服务",agent_list.size()+""));
+                if(agent_list.size() > 0){
+                    if(agent_list.size() == 1){
+                        tvRight.setText("1家机构为您服务");
+                    }else{
+                        tvRight.setText(String.format("等%s家机构为您服务",agent_list.size()+""));
+                    }
+                }else{
+                    tvRight.setVisibility(View.GONE);
+                    tvLeft.setText("暂无机构");
+                }
             }
         };
     }

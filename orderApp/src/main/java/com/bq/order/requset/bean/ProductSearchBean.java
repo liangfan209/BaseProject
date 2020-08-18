@@ -17,6 +17,15 @@ public class ProductSearchBean {
     private String production_id;
     private String name;
     private String category;
+    private String major_name;
+
+    public String getMajor_name() {
+        return major_name;
+    }
+
+    public void setMajor_name(String major_name) {
+        this.major_name = major_name;
+    }
 
     public String getCategory() {
         return category;

@@ -27,6 +27,9 @@ public class ApiProduct {
     //合同列表
     public static String PRODUCT_CONTRACT_SEARCH_ALL = "customer.contract.search";
 
+    //banner
+    public static String PRODUCT_BANNEL_LIST = "adsense.advertisement.search";
+
     //学校专业列表
     public static String PRODUCT_SCHOOL_PROFESSION_LIST = "university.relations.searchmajor";
     //专业学校列表

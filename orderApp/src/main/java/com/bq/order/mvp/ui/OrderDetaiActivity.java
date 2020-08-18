@@ -106,8 +106,8 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
     @BindView(R2.id.tv_address_txt)
     TextView mTvAddressTxt;
 
-    @BindView(R2.id.llt_contract)
-    LinearLayout mLltContract;
+    @BindView(R2.id.rlt_education)
+    RelativeLayout mRltEducation;
     @BindView(R2.id.tv_education_name)
     TextView mTvEducationName;
     @BindView(R2.id.tv_education_phone)
@@ -187,7 +187,7 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
 
 
         if(mOrderInfoBean.getDespatch_type().contains("教育")){
-            mLltContract.setVisibility(View.VISIBLE);
+            mRltEducation.setVisibility(View.VISIBLE);
             mLltAddress.setVisibility(View.GONE);
             updateInVoiceInfo();
 
@@ -214,7 +214,7 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
         }else{
             if(mOrderInfoBean.getDespatch_type().contains("物流")){
                 mLltAddress.setVisibility(View.VISIBLE);
-                mLltContract.setVisibility(View.GONE);
+                mRltEducation.setVisibility(View.GONE);
                 InvoiceInfo invoice_info = mOrderInfoBean.getInvoice_info();
                 if(invoice_info == null) return;
                 mTvAddressName.setText(invoice_info.getName());

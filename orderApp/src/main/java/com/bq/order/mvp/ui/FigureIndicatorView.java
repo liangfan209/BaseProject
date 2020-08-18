@@ -4,16 +4,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Build;
 import android.util.AttributeSet;
 
-import com.bq.utilslib.AppUtils;
 import com.zhpan.bannerview.utils.BannerUtils;
 import com.zhpan.indicator.base.BaseIndicatorView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 /**
  * <pre>
@@ -25,7 +22,7 @@ public class FigureIndicatorView extends BaseIndicatorView {
 
     private int radius = BannerUtils.dp2px(20);
 
-    private int backgroundColor = Color.parseColor("#eeffffff");
+    private int backgroundColor = Color.parseColor("#88FF5252");
 
     private int textColor = Color.WHITE;
 
@@ -49,18 +46,15 @@ public class FigureIndicatorView extends BaseIndicatorView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(2 * radius,  radius);
+        setMeasuredDimension(2 * radius, 2 * radius);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (getPageSize() > 1) {
             mPaint.setColor(backgroundColor);
-//            canvas.drawCircle(getWidth() / 2f, getHeight() / 2f, radius, mPaint);
-            canvas.drawRoundRect(0,0,getWidth(),getHeight(), AppUtils.dp2px(getContext(),7), AppUtils.dp2px(getContext(),7),mPaint);
-
+            canvas.drawCircle(getWidth() / 2f, getHeight() / 2f, radius, mPaint);
             mPaint.setColor(textColor);
             mPaint.setTextSize(textSize);
             String text = getCurrentPosition() + 1 + "/" + getPageSize();

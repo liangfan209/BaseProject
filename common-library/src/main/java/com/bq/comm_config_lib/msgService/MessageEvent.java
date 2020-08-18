@@ -15,13 +15,15 @@ public class MessageEvent {
     public String orderId;
     public Activity activity;
     public String price;
+    public String payType;
 
 
-    public MessageEvent(String key, String orderId, Activity a,String price) {
+    public MessageEvent(String key, String orderId, Activity a,String price,String payType) {
         this.key = key;
         this.orderId = orderId;
         this.activity = a;
         this.price = price;
+        this.payType = payType;
     }
 
     public MessageEvent(String key, MessageInter eventInter) {

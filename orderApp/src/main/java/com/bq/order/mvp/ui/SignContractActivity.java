@@ -185,6 +185,9 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
                 return;
             }
 
+            if(Utils.isFastDoubleClick(mTvCommit,4000)) {
+                return;
+            }
             String name = mEtName.getText().toString();
             String phone = mEtPhone.getText().toString().replaceAll("","");
             String identication = mEtIdCard.getText().toString().replaceAll(" ","");

@@ -103,7 +103,7 @@
                     android:background="@mipmap/icon_contract_left"/>
 
                 <LinearLayout
-                    android:id="@+id/llt_contract"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

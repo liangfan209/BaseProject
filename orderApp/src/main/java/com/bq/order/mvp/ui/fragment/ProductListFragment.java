@@ -17,7 +17,6 @@ import com.bq.order.mvp.ui.ProductIview;
 import com.bq.order.mvp.ui.hodler.ProductType;
 import com.bq.order.requset.bean.ProductInfo;
 import com.bq.utilslib.AppUtils;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -96,8 +95,9 @@ public class ProductListFragment extends BaseFragment implements MyRefreshLayout
             @Override
             protected void convert(@NotNull BaseViewHolder helper, ProductInfo bean) {
                 ImageView iv = helper.getView(R.id.iv_item);
-                Glide.with(iv).load(bean.getThumbnail())
-                        .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
+//                Glide.with(iv).load(bean.getThumbnail())
+//                        .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
+                Utils.showImage(bean.getThumbnail(),iv,3);
                 helper.setText(R.id.tv_product_title,bean.getTitle());
                 helper.setText(R.id.tv_school,bean.getSchool_name());
                 helper.setText(R.id.tv_profession,bean.getMajor_name());
@@ -106,7 +106,7 @@ public class ProductListFragment extends BaseFragment implements MyRefreshLayout
                 helper.setText(R.id.tv_brand,bean.getBrand_name());
                 helper.setText(R.id.tv_product,bean.getProduction_name());
                 helper.setText(R.id.tv_price, AppUtils.getDouble2(bean.getSale_price()));
-                helper.setText(R.id.tv_orgamnization, bean.getAgent_name());
+                helper.setText(R.id.tv_orgamnization, bean.getAgent_name()+"为您服务");
             }
         };
     }

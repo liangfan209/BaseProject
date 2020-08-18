@@ -4,14 +4,17 @@ import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.order.mvp.ui.ProductIview;
 import com.bq.order.requset.ProductHttpReqeustImp;
+import com.bq.order.requset.bean.BannerListBean;
 import com.bq.order.requset.bean.ContractListBean;
 import com.bq.order.requset.bean.ProductBean;
 import com.bq.order.requset.bean.ProductListBean;
 import com.bq.order.requset.bean.ProfessionListBean;
+import com.bq.order.requset.bean.ReqeusetInfo;
 import com.bq.order.requset.bean.SchoolBean;
 import com.bq.order.requset.bean.SchoolListBean;
 import com.bq.order.requset.bean.SchoolProfessionListBean;
 import com.bq.order.requset.bean.SelecterBean;
+import com.google.gson.Gson;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
@@ -216,6 +219,21 @@ public class ProductPresenter implements BasePresenter {
             public void onError(String msg) {
                 super.onError(msg);
                 mIView.getContractListVErrorView();
+            }
+        });
+    }
+
+    public void getHomeBanner(String index_banner) {
+        String info = new Gson().toJson(new ReqeusetInfo(index_banner));
+        mProductHttpReqeustImp.getBannerList(info,new AbstractReqeustCallback<BannerListBean>(mIView) {
+            @Override
+            public void onSuccess(BannerListBean bean) {
+                mIView.getBannerList(index_banner,bean.getData_list());
+            }
+
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
             }
         });
     }

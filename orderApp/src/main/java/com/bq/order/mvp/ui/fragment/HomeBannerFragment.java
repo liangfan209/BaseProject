@@ -7,18 +7,20 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
-import com.bq.comm_config_lib.utils.CommSpUtils;
+import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
+import com.bq.order.mvp.presenter.ProductPresenter;
+import com.bq.order.mvp.ui.ProductIview;
 import com.bq.order.mvp.ui.adapter.BannerAdapter;
 import com.bq.order.mvp.ui.hodler.NewTypeViewHolder;
 import com.bq.order.requset.bean.BannerData;
+import com.bq.order.requset.bean.BannerInfo;
 import com.bq.order.requset.bean.ProductSearchBean;
 import com.bq.order.requset.bean.ProductTypeBean;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.google.gson.Gson;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.zhpan.bannerview.BannerViewPager;
 import com.zhpan.bannerview.constants.IndicatorGravity;
@@ -42,7 +44,7 @@ import butterknife.BindView;
  * 时间：2020/7/29
  * 版权：
  */
-public class HomeBannerFragment extends BaseFragment {
+public class HomeBannerFragment extends BaseFragment implements ProductIview {
     @BindView(R2.id.banner_view)
     BannerViewPager mBannerView;
     @BindView(R2.id.rv_product_type)
@@ -54,9 +56,10 @@ public class HomeBannerFragment extends BaseFragment {
     private String[] productTypeStr = {"专升本","高起专","考研","资格证"};
     private int[] productTypeInts = {R.mipmap.icon_benke,R.mipmap.icon_zhuanke,R.mipmap.icon_kaoyan,R.mipmap.icon_zigezheng};
 
+    private ProductPresenter mProductPresenter;
     @Override
     protected BasePresenter createPersenter() {
-        return null;
+        return mProductPresenter = new ProductPresenter(this);
     }
 
     @Override
@@ -68,30 +71,49 @@ public class HomeBannerFragment extends BaseFragment {
 
     @Override
     protected void attach() {
-        initHomeBanner();
         initRecycleView();
-        //初始化广告banner
-        initAdvertisingBeanner();
+        updateView();
     }
 
-    private void initAdvertisingBeanner() {
+    public void updateView(){
+        mProductPresenter.getHomeBanner("index_banner");
+        mProductPresenter.getHomeBanner("index_mid");
+    }
+
+
+    @Override
+    public void getBannerList(String type, List<BannerInfo> list) {
+        if("index_banner".equals(type)){
+            initHomeBanner(list);
+        }else if("index_mid".equals(type)){
+            initAdvertisingBeanner(list);
+        }
+    }
+
+
+
+    private void initAdvertisingBeanner(List<BannerInfo> list) {
         mBannerAdvertising
                 .setScrollDuration(600)
                 .setLifecycleRegistry(getLifecycle())
                 .setIndicatorStyle(IndicatorStyle.CIRCLE)
-                .setIndicatorSlideMode(IndicatorSlideMode.WORM)
+                .setIndicatorSlideMode(IndicatorSlideMode.SMOOTH)
                 .setInterval(3000)
-                .setIndicatorGravity(IndicatorGravity.END)
+                .setIndicatorGravity(IndicatorGravity.CENTER)
                 .setCanLoop(true)
                 .setAdapter(new BannerAdapter())
                 .setOnPageClickListener(position -> {
+                    BannerData info = (BannerData) mBannerView.getData().get(position);
+//                    ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
+//                            .withString("h5url",info.getUrl()).navigation();
+                    Utils.goCustomActivity(this.getActivity(),info.getUrl());
                 }).create();
 
         ArrayList<BannerData> dataList = new ArrayList<BannerData>();
-        BannerData b1 = new BannerData(R.mipmap.icon_advertising, 1);
-        BannerData b2 = new BannerData(R.mipmap.icon_advertising, 1);
-        dataList.add(b1);
-        dataList.add(b2);
+        for (BannerInfo bannerInfo : list) {
+            dataList.add(new BannerData(bannerInfo.getId(),bannerInfo.getName(),bannerInfo.getThumbnail(),
+                    bannerInfo.getUrl(),1));
+        }
         mBannerAdvertising.refreshData(dataList);
     }
 
@@ -124,11 +146,10 @@ public class HomeBannerFragment extends BaseFragment {
         });
     }
 
-    private void initHomeBanner() {
+    private void initHomeBanner(List<BannerInfo> list) {
         BannerAdapter homeAdapter = new BannerAdapter(new NewTypeViewHolder.HolderInter() {
             @Override
             public void createVideo(StandardGSYVideoPlayer palyer) {
-//                createVideoView(palyer);
             }
         });
 
@@ -136,25 +157,28 @@ public class HomeBannerFragment extends BaseFragment {
                 .setScrollDuration(600)
                 .setLifecycleRegistry(getLifecycle())
                 .setIndicatorStyle(IndicatorStyle.CIRCLE)
-                .setIndicatorSlideMode(IndicatorSlideMode.WORM)
+                .setIndicatorSlideMode(IndicatorSlideMode.SMOOTH)
                 .setInterval(5000)
-                .setIndicatorGravity(IndicatorGravity.END)
+                .setIndicatorGravity(IndicatorGravity.CENTER)
+//                .setIndicatorView(10,10)
+                .setIndicatorVisibility(View.VISIBLE)
                 .setCanLoop(true)
                 .setAdapter(homeAdapter)
                 .setOnPageClickListener(position -> {
-                    String serachInfo = new Gson().toJson(new ProductSearchBean(CommSpUtils.getLocation()));
-                    ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY)
-                            .withString("mSearchInfo",serachInfo).navigation();
+//                    String serachInfo = new Gson().toJson(new ProductSearchBean(CommSpUtils.getLocation()));
+//                    ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY)
+//                            .withString("mSearchInfo",serachInfo).navigation();
+                    BannerData info = (BannerData) mBannerView.getData().get(position);
+//                    ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
+//                            .withString("h5url",info.getUrl()).navigation();
+                    Utils.goCustomActivity(this.getActivity(),info.getUrl());
                 }).create();
 
         ArrayList<BannerData> dataList = new ArrayList<BannerData>();
-//        BannerData b1 = new BannerData("https://www.wanandroid.com/blogimgs/90c6cc12-742e-4c9f-b318-b912f163b8d0.png",
-//                BannerData.TYPE_NEW);
-        BannerData b2 = new BannerData(R.mipmap.icon_home_banner_top, 1);
-        BannerData b3 = new BannerData(R.mipmap.icon_home_banner_top, 1);
-//        dataList.add(b1);
-        dataList.add(b2);
-        dataList.add(b3);
+        for (BannerInfo bannerInfo : list) {
+            dataList.add(new BannerData(bannerInfo.getId(),bannerInfo.getName(),bannerInfo.getThumbnail(),
+                    bannerInfo.getUrl(),1));
+        }
         mBannerView.refreshData(dataList);
     }
 }

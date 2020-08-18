@@ -38,6 +38,9 @@ import com.zhpan.bannerview.constants.IndicatorGravity;
 import com.zhpan.indicator.enums.IndicatorSlideMode;
 import com.zhpan.indicator.enums.IndicatorStyle;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -126,10 +129,10 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
         fragmentTransaction.commit();
 
         initHotSchoolView();
-
-        intNewsView();
+//        intNewsView();
         intHotProfessionView();
         updateView();
+        //getbanner();
         initEditText();
 
         mSmartRefreshLayout.setEnableLoadmore(false);
@@ -137,9 +140,29 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 updateView();
+                mHomeBannerFragment.updateView();
             }
         });
+
+        EventBus.getDefault().register(this);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void providerData(String key) {
+        if(key.equals("update_location")){
+            searchStr = new Gson().toJson(new ProductSearchBean(CommSpUtils.getLocation()));
+            mTvAddressLocation.setText(CommSpUtils.getLocation());
+            updateView();
+        }
+    }
+
+
 
     void updateView(){
         mProductPresenter.getHotSchool(searchStr);

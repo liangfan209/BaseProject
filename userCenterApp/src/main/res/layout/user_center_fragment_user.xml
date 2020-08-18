@@ -52,7 +52,7 @@
         android:id="@+id/rlt_logout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_marginTop="-5dp"
+        android:layout_marginTop="30dp"
         android:background="@mipmap/shadow_card"
         android:orientation="vertical">
 

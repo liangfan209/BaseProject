@@ -237,6 +237,7 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(data == null) return;
         if(requestCode == 11 && resultCode == 0){
             try{
                 String addressInfo = data.getStringExtra("address_info");

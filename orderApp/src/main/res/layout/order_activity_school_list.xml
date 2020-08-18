@@ -17,12 +17,12 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="2dp">
 
-        <ImageView
-            android:id="@+id/iv_advertising"
+        <com.zhpan.bannerview.BannerViewPager
+            android:id="@+id/banner_advertising"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:background="@mipmap/icon_advertising"/>
+            app:bvp_indicator_visibility="gone"/>
         <FrameLayout
             android:id="@+id/flt_content"
             android:layout_width="match_parent"

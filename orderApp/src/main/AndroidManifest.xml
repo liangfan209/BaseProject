@@ -6,79 +6,79 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".mvp.ui.OrderListActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
         <activity android:name=".mvp.ui.OrderCommitActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
         <activity android:name=".mvp.ui.OrderDetaiActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <activity android:name=".mvp.ui.PaySuccessActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <activity android:name=".mvp.ui.ProductListActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
         <activity android:name=".mvp.ui.SchoolListActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
         <activity android:name=".mvp.ui.SchoolProfessionListActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <activity android:name=".mvp.ui.ScanActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <activity android:name=".mvp.ui.SignContractActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <activity android:name=".mvp.ui.AutographActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
         <activity android:name=".mvp.ui.ProfessionListActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
         <activity android:name=".mvp.ui.SchoolProfessionDetailActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <activity android:name=".mvp.ui.SignUserInfoActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <activity android:name=".mvp.ui.ContractListActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
     </application>

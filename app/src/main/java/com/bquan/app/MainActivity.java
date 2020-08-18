@@ -168,6 +168,7 @@ public class MainActivity extends BaseActivity {
         if(key == "go_home"){
             mTablayout.setCurrentTab(0);
             selectFragment(0);
+            selectFragment(0);
         }
     }
 

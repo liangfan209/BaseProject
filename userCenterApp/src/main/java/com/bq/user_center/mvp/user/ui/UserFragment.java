@@ -33,6 +33,8 @@ import com.fan.baseuilibrary.view.dialog.CustomDialog;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -90,7 +92,23 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         String jsonStr = AppUtils.getAssetJson(this.getContext(),"usercenter_center_config.json");
         userConfig = new Gson().fromJson(jsonStr, UserCenterConfigBean.class);
         updateView();
+        EventBus.getDefault().register(this);
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void providerData(String key) {
+        if(key == "go_logout"){
+            new Handler().postDelayed(()->{
+                EventBus.getDefault().post("go_home");
+                ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
+            },1200);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override

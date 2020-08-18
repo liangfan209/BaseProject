@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -167,7 +169,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
     @Override
     protected void attach() {
         ARouter.getInstance().inject(this);
-        mTvTitle.setText("商品详情");
+        mTvTitle.setText("助学详情");
         //创建viewhoder
         mTvInitialPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         mProductPresenter.getProductDetail(mProductId);
@@ -214,10 +216,12 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
         mRgVideo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.rb_video) {
-                    mBannerView.setCurrentItem(0);
-                } else if (checkedId == R.id.rb_img) {
-                    mBannerView.setCurrentItem(1);
+                if(!StringUtils.isEmpty(mProductInfo.getVideo_display())){
+                    if (checkedId == R.id.rb_video) {
+                        mBannerView.setCurrentItem(0);
+                    } else if (checkedId == R.id.rb_img) {
+                        mBannerView.setCurrentItem(1);
+                    }
                 }
             }
         });
@@ -234,14 +238,24 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
                 .setOnPageClickListener(new BannerViewPager.OnPageClickListener() {
                     @Override
                     public void onPageClick(int position) {
-                        if (position != 0) {
-                            BitImageUtils.showBigImgPreview(ProductDetailActivity.this, position - 1, getImgList(),
+                        if(!StringUtils.isEmpty(mProductInfo.getVideo_display())){
+                            if (position != 0) {
+                                BitImageUtils.showBigImgPreview(ProductDetailActivity.this, position - 1, getImgList(),
+                                        new BitImageUtils.PageSelect() {
+                                            @Override
+                                            public void onPageSelected(int postion) {
+                                                mBannerView.setCurrentItem(position + 1);
+                                            }
+                                        });
+                            }
+                        }else{
+                            BitImageUtils.showBigImgPreview(ProductDetailActivity.this, position, getImgList(),
                                     new BitImageUtils.PageSelect() {
-                                @Override
-                                public void onPageSelected(int postion) {
-                                    mBannerView.setCurrentItem(position + 1);
-                                }
-                            });
+                                        @Override
+                                        public void onPageSelected(int postion) {
+                                            mBannerView.setCurrentItem(position);
+                                        }
+                                    });
                         }
                     }
                 })
@@ -249,7 +263,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
                     @Override
                     public void onPageSelected(int position) {
                         super.onPageSelected(position);
-                        if (position == 0) {
+                        if (position == 0 && !StringUtils.isEmpty(mProductInfo.getVideo_display())) {
                             mRbVideo.setChecked(true);
                             mRbImg.setChecked(false);
                             mTvIndex.setVisibility(View.GONE);
@@ -257,7 +271,12 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
                             mRbVideo.setChecked(false);
                             mRbImg.setChecked(true);
                             mTvIndex.setVisibility(View.VISIBLE);
-                            mTvIndex.setText(position + "/" + mProductInfo.getSlideshow().size());
+                            if(!StringUtils.isEmpty(mProductInfo.getVideo_display())){
+                                mTvIndex.setText(position + "/" + mProductInfo.getSlideshow().size());
+                            }else{
+                                mRbVideo.setVisibility(View.GONE);
+                                mTvIndex.setText((position+1) + "/" + mProductInfo.getSlideshow().size());
+                            }
                         }
                     }
                 }).create();
@@ -293,6 +312,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
     }
 
 
+    Handler mHandler;
     void createVideoView(StandardGSYVideoPlayer palyer) {
         detailPlayer = palyer;
         //外部辅助的旋转，帮助全屏
@@ -300,8 +320,26 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
         //初始化不打开外部的旋转
         orientationUtils.setEnable(false);
         GSYVideoOptionBuilder gsyVideoOption = new GSYVideoOptionBuilder();
+        final ImageView imageView = new ImageView(this);
+
+        mHandler = new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                imageView.setImageBitmap((Bitmap) msg.obj);
+            }
+        };
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bm = Utils.getNetVideoBitmap(mProductInfo.getVideo_display());
+                Message m = new Message();
+                m.obj = bm;
+                mHandler.sendMessage(m);
+            }
+        }).start();
         gsyVideoOption
-//                .setThumbImageView(imageView)
+                .setThumbImageView(imageView)
                 .setIsTouchWiget(true)
 //                .setRotateViewAuto(false)
                 .setLockLand(false)
@@ -384,6 +422,9 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if(mHandler != null){
+            mHandler.removeCallbacksAndMessages(null);
+        }
         if (detailPlayer != null) {
             if (isPlay) {
                 detailPlayer.getCurrentPlayer().release();

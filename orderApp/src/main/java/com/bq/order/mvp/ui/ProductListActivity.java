@@ -33,6 +33,8 @@ import com.fan.baseuilibrary.view.DeleteTextView;
 import com.fan.baseuilibrary.view.FlowLayout;
 import com.google.gson.Gson;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,7 +127,7 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
     @Override
     protected void attach() {
         ARouter.getInstance().inject(this);
-        mTvTitle.setText("商品列表");
+        mTvTitle.setText("助学帮助");
         mTvAddressLocation.setText(CommSpUtils.getLocation());
         initProductListView();
         mTvSchool.setCallBack(()->{
@@ -220,12 +222,14 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
                     CommSpUtils.saveLocaltion(citys);
                     mTvAddressLocation.setText(citys);
                     updateFragment();
+                    EventBus.getDefault().post("update_location");
                 }
             });
         }else if(view.getId() == R.id.iv_address_location){
             mTvAddressLocation.setText("武汉市");
             CommSpUtils.saveLocaltion("武汉市");
             updateFragment();
+            EventBus.getDefault().post("update_location");
         }
     }
 

@@ -1,6 +1,7 @@
 package com.bq.order.mvp.ui;
 
 import com.bq.comm_config_lib.mvp.BaseIView;
+import com.bq.order.requset.bean.BannerInfo;
 import com.bq.order.requset.bean.ContractInfo;
 import com.bq.order.requset.bean.ProductInfo;
 import com.bq.order.requset.bean.ProfessionInfo;
@@ -52,4 +53,8 @@ public interface ProductIview extends BaseIView {
     default void getProductDetailView(ProductInfo info){}
     //获取学校详情
     default void getSchoolDetailView(SchoolInfo info){};
+
+
+    //获取banner
+    default void getBannerList(String type,List<BannerInfo> list){}
 }

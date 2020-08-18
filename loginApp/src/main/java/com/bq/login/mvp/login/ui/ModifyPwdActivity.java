@@ -7,8 +7,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
@@ -23,6 +21,8 @@ import com.bq.utilslib.Md5Utils;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.EyeRelativeLayout;
 import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -95,9 +95,9 @@ public class ModifyPwdActivity extends BaseActivity implements LoginBaseIView {
         new Handler().postDelayed(() -> {
             finish();
             CommSpUtils.saveLoginInfo("");
-            ActivityUtils.finishAllActivities();
-            ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
-
+//            ActivityUtils.finishAllActivities();
+//            ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
+            EventBus.getDefault().post("go_logout");
         }, 1000);
     }
 

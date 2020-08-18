@@ -3,6 +3,7 @@ package com.bquan.app;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -60,6 +61,17 @@ public class H5Activity extends BaseActivity{
 
         mLoadingDialog = new LoadingDialog(this);
         mLoadingDialog.show();
+
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                if (title != null) {
+                    titleTv.setText(title);
+                }
+            }
+        });
+
         WebChromeClient wvcc = new WebChromeClient() {
             @Override
             public void onReceivedTitle(WebView view, String title) {
@@ -78,6 +90,16 @@ public class H5Activity extends BaseActivity{
 
         };
         mWebView.setWebChromeClient(wvcc);
+        mWebView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+
+        });
+
         mWebView.loadUrl(h5url);
     }
 }

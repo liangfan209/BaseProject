@@ -37,6 +37,6 @@ public class NetViewHolder extends BaseViewHolder<BannerData> {
                     .apply(Utils.getRequestOptionRadus(imageView.getContext(),3)).into(imageView);
         }
 
-//        Glide.with(imageView).load(data.getImagePath()).placeholder(R.mipmap.ic_launcher).into(imageView);
+//        Glide.with(imageView).load(data.getImagePath()).placeholder(R.mipmap.ic_launcher1).into(imageView);
     }
 }

@@ -134,9 +134,9 @@ public class RegisterPwdActivity extends BaseActivity implements LoginBaseIView 
     public void registerView() {
         ToastUtils.showToastOk(this, "注册成功");
         new Handler().postDelayed(() -> {
+            ActivityUtils.finishActivity(LoginActivity.class);
             finish();
-            ActivityUtils.finishAllActivities();
-            ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
+//            ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
         }, 1000);
     }
 

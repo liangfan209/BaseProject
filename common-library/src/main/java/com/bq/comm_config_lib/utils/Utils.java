@@ -4,15 +4,19 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.R;
+import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.request.Api;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -20,6 +24,8 @@ import com.fan.baseuilibrary.utils.RoundCornersTransformation;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+
+import java.util.HashMap;
 
 
 /**
@@ -123,6 +129,16 @@ public class Utils {
         Glide.with(iv).load(path)
                 .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
     }
+    public static void showImage(String path, ImageView iv,int dp){
+        if(StringUtils.isEmpty(path)){
+            path = "";
+        }
+        if(!path.contains("http")){
+            path = Api.BASE_API+path;
+        }
+        Glide.with(iv).load(path)
+                .apply(Utils.getRequestOptionRadus(iv.getContext(),dp)).into(iv);
+    }
 
 
 //    public static RequestOptions getRequestOptionRadus(Context context, int dp){
@@ -160,6 +176,39 @@ public class Utils {
         ToastUtils.showToastOk(activity,"复制成功");
     }
 
+    public static void goCustomActivity(Activity activity, String result){
+        String[] split = result.split("&");
+        if(split.length<2){
+            ToastUtils.showToast(activity,"格式错误");
+            return;
+        }
+        String[] split1 = split[0].split("=");
+        String[] split2 = split[1].split("=");
+        if(split1[1].contains("goods")){
+            ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_DETAIL_ACTIVITY)
+                    .withString("mProductId",split2[1]).navigation();
+        }else if(split1[1].contains("http")){
+            ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
+                    .withString("h5url",split2[1]).navigation();
+        }
+    }
+
+    public static Bitmap getNetVideoBitmap(String videoUrl) {
+        Bitmap bitmap = null;
+
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        try {
+            //根据url获取缩略图
+            retriever.setDataSource(videoUrl, new HashMap());
+            //获得第一帧图片
+            bitmap = retriever.getFrameAtTime();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } finally {
+            retriever.release();
+        }
+        return bitmap;
+    }
 
 
 }

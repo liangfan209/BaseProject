@@ -18,7 +18,10 @@ import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.R2;
 import com.bq.order.mvp.presenter.ProductPresenter;
+import com.bq.order.mvp.ui.adapter.BannerAdapter;
 import com.bq.order.requset.bean.AgentInfo;
+import com.bq.order.requset.bean.BannerData;
+import com.bq.order.requset.bean.BannerInfo;
 import com.bq.order.requset.bean.ProductSearchBean;
 import com.bq.order.requset.bean.SchoolInfo;
 import com.bumptech.glide.Glide;
@@ -29,7 +32,12 @@ import com.fan.baseuilibrary.utils.provinces.CityUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
 import com.google.gson.Gson;
+import com.zhpan.bannerview.BannerViewPager;
+import com.zhpan.bannerview.constants.IndicatorGravity;
+import com.zhpan.indicator.enums.IndicatorSlideMode;
+import com.zhpan.indicator.enums.IndicatorStyle;
 
+import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -64,8 +72,11 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
     DeletableEditText mDetSearch;
     @BindView(R2.id.rlt_search)
     RelativeLayout mRltSearch;
-    @BindView(R2.id.iv_advertising)
-    ImageView mIvAdvertising;
+//    @BindView(R2.id.iv_advertising)
+//    ImageView mIvAdvertising;
+    @BindView(R2.id.banner_advertising)
+    BannerViewPager mBannerAdvertising;
+
     @BindView(R2.id.flt_content)
     FrameLayout mFltContent;
     private String mSearchStr = "";
@@ -101,6 +112,40 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
                         .withSerializable("mSchoolInfo",info).navigation();
             }
         });
+        mProductPresenter.getHomeBanner("school_list");
+    }
+
+    @Override
+    public void getBannerList(String type, List<BannerInfo> list) {
+        if("school_list".equals(type)){
+            initAdvertisingBeanner(list);
+        }
+    }
+
+
+    private void initAdvertisingBeanner(List<BannerInfo> list) {
+        mBannerAdvertising
+                .setScrollDuration(600)
+                .setLifecycleRegistry(getLifecycle())
+                .setIndicatorStyle(IndicatorStyle.CIRCLE)
+                .setIndicatorSlideMode(IndicatorSlideMode.WORM)
+                .setInterval(3000)
+                .setIndicatorGravity(IndicatorGravity.END)
+                .setCanLoop(true)
+                .setAdapter(new BannerAdapter())
+                .setOnPageClickListener(position -> {
+                    BannerData info = (BannerData) mBannerAdvertising.getData().get(position);
+//                    ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
+//                            .withString("h5url",info.getUrl()).navigation();
+                    Utils.goCustomActivity(this.getActivity(),info.getUrl());
+                }).create();
+
+        ArrayList<BannerData> dataList = new ArrayList<BannerData>();
+        for (BannerInfo bannerInfo : list) {
+            dataList.add(new BannerData(bannerInfo.getId(),bannerInfo.getName(),bannerInfo.getThumbnail(),
+                    bannerInfo.getUrl(),1));
+        }
+        mBannerAdvertising.refreshData(dataList);
     }
 
     private void initEditText() {
@@ -126,7 +171,7 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
     }
 
 
-    @OnClick({R2.id.rlt_search, R2.id.iv_advertising,R2.id.tv_address_location,R2.id.iv_address_location})
+    @OnClick({R2.id.rlt_search,R2.id.tv_address_location,R2.id.iv_address_location})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.rlt_search){
 
@@ -137,12 +182,18 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
                     CommSpUtils.saveLocaltion(citys);
                     mTvAddressLocation.setText(citys);
                     updateSelf();
+                    //通知首页修改
+                    EventBus.getDefault().post("update_location");
+
                 }
             });
         }else if(view.getId() == R.id.iv_address_location){
             mTvAddressLocation.setText("武汉市");
             CommSpUtils.saveLocaltion("武汉市");
             updateSelf();
+            //通知首页修改
+            EventBus.getDefault().post("update_location");
+
         }
     }
 
@@ -162,11 +213,22 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
                         List<AgentInfo> agent_list = bean.getAgent_list();
                         StringBuilder sb = new StringBuilder();
                         for (int i = 0; i < agent_list.size(); i++) {
-                            sb.append(agent_list.get(i).getName()).append(";");
+                            sb.append(agent_list.get(i).getName());
+                            if(agent_list.size() != 1 && i != agent_list.size()-1){
+                                sb.append(";");
+                            }
                         }
                         tvLeft.setText(sb.toString());
-                        if(agent_list.size() > 0)
-                            tvRight.setText(String.format("等%s家机构为您服务",agent_list.size()+""));
+                        if(agent_list.size() > 0){
+                            if(agent_list.size() == 1){
+                                tvRight.setText("1家机构为您服务");
+                            }else{
+                                tvRight.setText(String.format("等%s家机构为您服务",agent_list.size()+""));
+                            }
+                        }else{
+                            tvRight.setVisibility(View.GONE);
+                            tvLeft.setText("暂无机构");
+                        }
                     }
                 };
     }

@@ -13,7 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="182dp"
         app:bvp_round_corner="7dp"
-        app:bvp_indicator_visibility="gone"/>
+        app:bvp_indicator_visibility="visible"
+        app:bvp_indicator_normal_color="@color/ui_txt_hint_color"
+        app:bvp_indicator_checked_color="@color/white"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_product_type"
@@ -26,5 +29,8 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        app:bvp_indicator_visibility="gone"/>
+        app:bvp_indicator_visibility="visible"
+        app:bvp_indicator_normal_color="@color/ui_txt_hint_color"
+        app:bvp_indicator_checked_color="@color/white"
+       />
 </LinearLayout>

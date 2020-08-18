@@ -6,6 +6,7 @@ import com.bq.comm_config_lib.request.SignJsonCallBack;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.netlibrary.NetManager;
 import com.bq.netlibrary.http.BaseResponse;
+import com.bq.order.requset.bean.BannerListBean;
 import com.bq.order.requset.bean.ContactListBean;
 import com.bq.order.requset.bean.ContractListBean;
 import com.bq.order.requset.bean.OrderIdBean;
@@ -368,6 +369,18 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ContractListBean>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<ContractListBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    public void getBannerList(String info,AbstractReqeustCallback<BannerListBean> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.PRODUCT_BANNEL_LIST);
+        map.put("search_info", info);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<BannerListBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<BannerListBean>> response) {
                 super.onSuccess(response);
             }
         });

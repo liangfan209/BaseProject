@@ -30,16 +30,36 @@ public class BannerData {
     private int type;
     private String url;
     private int drawable = -1;
+    private String name;
 
+
+    public BannerData(int id,String name,String thumbnail,String url, int type) {
+        this.imagePath = thumbnail;
+        this.type = type;
+        this.id = id;
+        this.name = name;
+        this.url = url;
+    }
 
     public BannerData(String imagePath, int type) {
         this.imagePath = imagePath;
         this.type = type;
     }
 
+
+
     public BannerData(int imageRes, int type) {
         this.drawable = imageRes;
         this.type = type;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getDrawable() {

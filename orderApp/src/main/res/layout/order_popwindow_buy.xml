@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/ui_txt_normal_color"
             android:textStyle="bold"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:textSize="@dimen/h2_font_size"
             android:layout_marginLeft="15dp"
             />
@@ -114,14 +114,15 @@
            android:id="@+id/frg"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_marginTop="47dp"
+           android:layout_marginTop="36dp"
+           android:layout_marginLeft="5dp"
            >
        </com.fan.baseuilibrary.view.FlowRadioGroup>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/frg"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="15dp">
             <TextView
                 android:text="购买数量"
                 android:layout_width="wrap_content"
