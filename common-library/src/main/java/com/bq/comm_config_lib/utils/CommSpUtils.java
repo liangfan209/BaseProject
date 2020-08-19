@@ -67,6 +67,6 @@ public class CommSpUtils {
     }
 
     public static String getLocation(){
-        return SPUtils.getInstance(SpField.AUTH_TOKEN).getString("city", "湖北");
+        return SPUtils.getInstance(SpField.AUTH_TOKEN).getString("city", "武汉市");
     }
 }

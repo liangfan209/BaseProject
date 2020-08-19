@@ -188,6 +188,7 @@ public class OrderInfo {
         private String remark;
         private String despatch_type;
         private String agent_name;
+        private String category;
 
         private List<SpecificationValueListBean> specification_value_list;
 
@@ -212,6 +213,15 @@ public class OrderInfo {
                 return "物流交付";
             }
             return despatch_type;
+        }
+
+
+        public String getCategory() {
+            return category;
+        }
+
+        public void setCategory(String category) {
+            this.category = category;
         }
 
         public void setDespatch_type(String despatch_type) {

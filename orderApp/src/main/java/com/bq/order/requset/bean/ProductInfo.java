@@ -1,5 +1,7 @@
 package com.bq.order.requset.bean;
 
+import com.blankj.utilcode.util.StringUtils;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class ProductInfo implements Serializable {
     private String duration;
     private String school_city;
     private String production_name;
+    private String category;
     private String brand_name;
     private String despatch_type;
     private int sale_price;
@@ -36,6 +39,17 @@ public class ProductInfo implements Serializable {
     private int realPrice;
     private int count;
     private int selectPosition;
+
+    public String getCategory() {
+        if(StringUtils.isEmpty(category)){
+            return "高起专";
+        }
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getAgent_name() {
         return agent_name;

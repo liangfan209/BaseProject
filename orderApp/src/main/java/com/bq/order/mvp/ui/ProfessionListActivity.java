@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -73,7 +74,7 @@ public class ProfessionListActivity extends BaseActivity implements MyRefreshLay
     RelativeLayout mRltSearch;
 //    @BindView(R2.id.iv_advertising)
 //    ImageView mIvAdvertising;
-    @BindView(R2.id.banner_advertising)
+//    @BindView(R2.id.banner_advertising)
     BannerViewPager mBannerAdvertising;
 
     @BindView(R2.id.flt_content)
@@ -103,6 +104,11 @@ public class ProfessionListActivity extends BaseActivity implements MyRefreshLay
         mRefreshLayout = new MyRefreshLayout<String>(this, this);
         mRefreshLayout.setRefresh(true, true);
         mFltContent.addView(mRefreshLayout);
+
+        LinearLayout lltBanner = (LinearLayout) LinearLayout.inflate(this, R.layout.order_layout_banner, null);
+        mBannerAdvertising = lltBanner.findViewById(R.id.banner_advertising);
+        mRefreshLayout.adapter.addHeaderView(lltBanner);
+
         initEditText();
         mRefreshLayout.adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override

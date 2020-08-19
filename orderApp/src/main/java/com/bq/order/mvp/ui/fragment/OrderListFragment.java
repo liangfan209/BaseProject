@@ -126,7 +126,7 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                 helper.setText(R.id.tv_duration,orderItemListBean.getDuration());
                 helper.setText(R.id.tv_address,orderItemListBean.getSchool_city());
                 helper.setText(R.id.tv_brand,orderItemListBean.getBrand_name());
-                helper.setText(R.id.tv_product,orderItemListBean.getProduction_name());
+                helper.setText(R.id.tv_product,orderItemListBean.getCategory());
                 helper.setText(R.id.tv_price, AppUtils.getDouble2(orderItemListBean.getSale_price()));
                 helper.setText(R.id.tv_orgamnization, orderItemListBean.getAgent_name());
 

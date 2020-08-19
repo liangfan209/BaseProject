@@ -40,7 +40,6 @@ import butterknife.BindView;
 public class ProductListFragment extends BaseFragment implements MyRefreshLayout.LayoutInterface<ProductInfo>
         , ProductIview {
 
-
     @BindView(R2.id.flt_content)
     FrameLayout mFltContent;
     private List<ProductInfo> mlist = new ArrayList<>();
@@ -104,7 +103,7 @@ public class ProductListFragment extends BaseFragment implements MyRefreshLayout
                 helper.setText(R.id.tv_duration,bean.getDuration());
                 helper.setText(R.id.tv_address,bean.getSchool_city());
                 helper.setText(R.id.tv_brand,bean.getBrand_name());
-                helper.setText(R.id.tv_product,bean.getProduction_name());
+                helper.setText(R.id.tv_product,bean.getCategory());
                 helper.setText(R.id.tv_price, AppUtils.getDouble2(bean.getSale_price()));
                 helper.setText(R.id.tv_orgamnization, bean.getAgent_name()+"为您服务");
             }

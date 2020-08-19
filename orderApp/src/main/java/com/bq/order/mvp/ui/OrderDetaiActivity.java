@@ -164,7 +164,7 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
         mTvAddress.setText(mProductInfo.getSchool_city());
         mTvBrand.setText(mProductInfo.getBrand_name());
         mTvBrand.setText(mProductInfo.getBrand_name());
-        mTvProduct.setText(mProductInfo.getProduction_name());
+        mTvProduct.setText(mProductInfo.getCategory());
         mTvPrice.setText(AppUtils.getDouble2(mProductInfo.getSale_price()));
         mTvBottomRight.setText("x"+mProductInfo.getQuantity());
         mTvAgent.setText(mProductInfo.getAgent_name()+"为您服务");

@@ -127,7 +127,7 @@ public class Utils {
             path = Api.BASE_API+path;
         }
         Glide.with(iv).load(path)
-                .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
+                .apply(Utils.getRequestOptionRadus(iv.getContext(),2)).into(iv);
     }
     public static void showImage(String path, ImageView iv,int dp){
         if(StringUtils.isEmpty(path)){

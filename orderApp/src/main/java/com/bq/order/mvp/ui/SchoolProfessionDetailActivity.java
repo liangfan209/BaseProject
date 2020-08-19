@@ -22,7 +22,6 @@ import com.bq.order.requset.bean.ProfessionInfo;
 import com.bq.order.requset.bean.SchoolInfo;
 import com.bq.order.requset.bean.SchoolProfessionInfo;
 import com.bq.utilslib.AppUtils;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -68,6 +67,8 @@ public class SchoolProfessionDetailActivity extends BaseActivity implements Prod
     TextView mTvProfession;
     @BindView(R2.id.tv_profession_detail)
     TextView mTvProfessionDetail;
+    @BindView(R2.id.tv_study_help)
+    TextView mTvStudyHelp;
 
     @BindView(R2.id.rv_product_list)
     RecyclerView mRvProductList;
@@ -190,6 +191,9 @@ public class SchoolProfessionDetailActivity extends BaseActivity implements Prod
     @Override
     public void getProductListView(List<ProductInfo> list) {
         mProductlist = list;
+        if(list.size() == 0){
+            mTvStudyHelp.setText("");
+        }
         intProductList();
     }
 
@@ -202,15 +206,14 @@ public class SchoolProfessionDetailActivity extends BaseActivity implements Prod
                     protected void convert(@NotNull BaseViewHolder helper,
                                            ProductInfo bean) {
                         ImageView iv = helper.getView(R.id.iv_item);
-                        Glide.with(iv).load(bean.getThumbnail())
-                                .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
+                        Utils.showImage(bean.getThumbnail(),iv,3);
                         helper.setText(R.id.tv_product_title,bean.getTitle());
                         helper.setText(R.id.tv_school,bean.getSchool_name());
                         helper.setText(R.id.tv_profession,bean.getMajor_name());
                         helper.setText(R.id.tv_duration,bean.getDuration());
                         helper.setText(R.id.tv_address,bean.getSchool_city());
                         helper.setText(R.id.tv_brand,bean.getBrand_name());
-                        helper.setText(R.id.tv_product,bean.getProduction_name());
+                        helper.setText(R.id.tv_product,bean.getCategory());
                         helper.setText(R.id.tv_price, AppUtils.getDouble2(bean.getSale_price()));
                         helper.setText(R.id.tv_orgamnization, bean.getAgent_name()+"为您服务");
                     }
