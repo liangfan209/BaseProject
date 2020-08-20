@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginLeft="19dp"
+            android:background="@drawable/ui_checkbox_select"/>
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="wrap_content"
+            android:background="@color/ui_primary_color"
+            android:layout_alignTop="@+id/iv_icon"
+            android:layout_marginTop="12dp"
+            android:layout_alignBottom="@+id/tv_time"
+            android:layout_marginLeft="25dp"/>
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="备注：尊敬的用户，您已经不符合我们的退款要求， 我们不能给您退款，请您谅解。"
+            android:layout_marginLeft="41dp"
+            android:layout_marginRight="41dp"
+            android:textSize="@dimen/h5_font_size"
+            android:textColor="@color/ui_txt_normal_color"
+            />
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_content"
+            android:text=" 2020-07-20 16:08:09"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="41dp"
+            android:layout_marginRight="41dp"
+            android:paddingBottom="20dp"
+            />
+    </RelativeLayout>
+    
+</LinearLayout>

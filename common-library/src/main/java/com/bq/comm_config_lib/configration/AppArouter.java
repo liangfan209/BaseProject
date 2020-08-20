@@ -54,6 +54,8 @@ public class AppArouter {
     public static final String WALLET_SECURITY_SETTIGN_PWD_ACTIVITY = WALLET+"/security/PayPwdSettingActivity";
     public static final String WALLET_BALANCE_SERVICE = WALLET+"/banlence/service";
     public static final String WALLET_PAY_SERVICE = WALLET+"/pay/service";
+    public static final String WALLET_REFUND_ACTIVITY = WALLET+"/RefundActivity"; //申请退款
+    public static final String WALLET_REFUND_PROCESS_ACTIVITY = WALLET+"/RefundProcessActivity"; //退款进度
 
 
 

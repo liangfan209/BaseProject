@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <include layout="@layout/layout_public_title"/>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ui_h3_normal_style"
+            android:text="退款联系人"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/ui_txt_hint_color"
+            />
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/det_refund_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=""
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"
+            android:textColor="@color/ui_txt_normal_color"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="105dp"
+
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ffeeeeee"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ui_h3_normal_style"
+            android:text="联系方式"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/ui_txt_hint_color"
+            />
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/det_refund_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=""
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"
+            android:textColor="@color/ui_txt_normal_color"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="105dp"
+
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ffeeeeee"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rlt_refund_reason"
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退款原因"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/ui_txt_hint_color"
+            android:textSize="@dimen/h3_font_size"
+            />
+
+        <TextView
+            android:id="@+id/tv_reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请选择退款原因"
+            android:textColor="@color/ui_txt_hint_color"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="105dp"
+            />
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="12dp"
+            android:background="@mipmap/next_step"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ffeeeeee"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="87dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ui_h3_normal_style"
+            android:text="备注"
+            android:layout_marginLeft="16dp"
+            android:textColor="@color/ui_txt_hint_color"
+            android:layout_marginTop="15dp"
+            />
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/det_refund_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请描述申请退款原因"
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"
+            android:textColor="@color/ui_txt_normal_color"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:ellipsize="end"
+            android:maxLines="4"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ffeeeeee"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/ui_txt_normal_color"
+        android:layout_marginLeft="15dp"
+        android:textSize="@dimen/h5_font_size"
+        android:layout_marginTop="10dp"
+        android:text="温馨提示：\n\n 1、订单一旦取消，无法恢复。\n 2、支付券一旦支付不予退还；支付优惠一并取消\n 3、退款方式为原路退回"
+        />
+
+    <Button
+        android:id="@+id/bt_refund"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="申请退款"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        style="@style/ui_h3_button_primary_style"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/ui_shap_button_bg_selector"
+        android:layout_alignParentBottom="true"/>
+
+</LinearLayout>

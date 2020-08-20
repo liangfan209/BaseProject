@@ -73,6 +73,8 @@ dependencies {
     api 'com.airbnb.android:lottie:2.7.0'
     api 'com.umeng.umsdk:analytics:8.0.0'
     api 'com.umeng.umsdk:common:2.0.0'
+
+
     implementation files('libs/umeng-shareboard-widget-6.9.6.jar')
     implementation files('libs/umeng-share-core-6.9.6.jar')
     implementation files('libs/umeng-sharetool-6.9.6.jar')

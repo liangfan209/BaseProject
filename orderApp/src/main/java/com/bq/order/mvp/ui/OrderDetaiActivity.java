@@ -90,6 +90,7 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
     @BindView(R2.id.tv_order_sign_contract)
     TextView mTvOrderSignContract;
 
+
     @BindView(R2.id.tv_product_type)
     TextView mTvProductType;
     @BindView(R2.id.tv_order_type)
@@ -117,6 +118,9 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
 
     @BindView(R2.id.tv_agent)
     TextView mTvAgent;
+
+    @BindView(R2.id.tv_refund)
+    TextView mTvRefund;
 
 
 //    tv_address_name tv_address_phone  tv_address_txt
@@ -186,6 +190,7 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
 
 
 
+        mTvRefund.setVisibility(View.VISIBLE);
         if(mOrderInfoBean.getDespatch_type().contains("教育")){
             mRltEducation.setVisibility(View.VISIBLE);
             mLltAddress.setVisibility(View.GONE);
@@ -195,6 +200,7 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
                 mTvOrderType.setText("等待支付");
                 mTvOrderBottomRight.setVisibility(View.VISIBLE);
                 mTvOrderBottomRight.setText("立即支付");
+                mTvRefund.setVisibility(View.GONE);
             }else if(mOrderInfoBean.getStatus().equals("payment_finished")){
                 mTvOrderType.setText("已付款");
                 mTvOrderSignContract.setVisibility(View.VISIBLE);
@@ -203,6 +209,7 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
                 mTvOrderSignContract.setVisibility(View.VISIBLE);
             }else if(mOrderInfoBean.getStatus().equals("order_closed")){
                 mTvOrderType.setText("订单已取消");
+                mTvOrderBottomRight.setVisibility(View.GONE);
             }else if(mOrderInfoBean.getStatus().equals("order_finished")){
                 mTvOrderType.setText("订单已完成");
                 mTvOrderSignContract.setText("查看合同");
@@ -226,6 +233,7 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
                 mTvOrderType.setText("等待支付");
                 mTvOrderBottomRight.setVisibility(View.VISIBLE);
                 mTvOrderBottomRight.setText("立即支付");
+                mTvRefund.setVisibility(View.GONE);
             }else if(mOrderInfoBean.getStatus().equals("payment_finished")){
                 mTvOrderType.setText("等待卖家发货");
             }else if(mOrderInfoBean.getStatus().equals("delivery_finished")){
@@ -263,9 +271,13 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
             if(mOrderInfoBean.getStatus().equals("order_launched")){
                 PayViewHelper.getBanenceAndShow(OrderDetaiActivity.this, mOrderId,
                         Utils.getDouble2(mProductInfo.getSale_price()*mProductInfo.getQuantity()),2);
-            }else if(mOrderInfoBean.getStatus().equals("payment_finished")){
-            }else if(mOrderInfoBean.getStatus().equals("delivery_finished")){
+            }else if(mOrderInfoBean.getStatus().equals("payment_finished") || mOrderInfoBean.getStatus().equals("delivery_finished")){
+//                ARouter.getInstance().build(AppArouter.WALLET_REFUND_ACTIVITY).navigation();
             }
+        });
+
+        mTvRefund.setOnClickListener(v->{
+            ARouter.getInstance().build(AppArouter.WALLET_REFUND_ACTIVITY).navigation();
         });
 
 //        mTvOrderTime.setText(mOrderInfoBean.getCreate_time());
