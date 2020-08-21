@@ -155,6 +155,17 @@ public class ProductPresenter implements BasePresenter {
         });
     }
 
+    //获取产品详情
+    public void getPosterDetail(String id){
+        mProductHttpReqeustImp.getPosterDetail(id, new AbstractReqeustCallback<ProductBean>(mIView) {
+            @Override
+            public void onSuccess(ProductBean bean) {
+                mIView.getProductDetailView(bean.getGoods_info());
+            }
+        });
+    }
+
+
 
     /**
      * 获取学校详情

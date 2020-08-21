@@ -44,6 +44,8 @@ public class ApiProduct {
     //获取商品详情
     public static String PRODUCT_DETAIL = "production.goods.get";
 
+    public static String PRODUCT_POSTER_DETAIL = "production.poster.get";
+
 
     public static String SCHOOL_DETAIL = "university.school.get";
 

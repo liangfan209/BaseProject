@@ -209,6 +209,24 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         });
     }
 
+    /**
+     * 获取扫码产品详情
+     * @param id
+     * @param callBack
+     */
+    public void getPosterDetail(String id, RequestCallBackInter callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.PRODUCT_POSTER_DETAIL);
+        map.put("poster_id", id);
+        map.put("auth", CommSpUtils.getToken());
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ProductBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<ProductBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
 
     /**
      * 获取学校详情

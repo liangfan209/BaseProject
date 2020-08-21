@@ -187,6 +187,9 @@ public class Utils {
         if(split1[1].contains("goods")){
             ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_DETAIL_ACTIVITY)
                     .withString("mProductId",split2[1]).navigation();
+        }else if(split[1].contains("poster")){
+            ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_DETAIL_ACTIVITY)
+                    .withString("mPosterId",split2[1]).navigation();
         }else if(split1[1].contains("http")){
             ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
                     .withString("h5url",split2[1]).navigation();

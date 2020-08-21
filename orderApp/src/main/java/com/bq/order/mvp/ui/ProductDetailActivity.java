@@ -141,6 +141,10 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
 
     @Autowired
     String mProductId;
+
+    @Autowired
+    String mPosterId;
+
     private ProductInfo mProductInfo;
 
     OrientationUtils orientationUtils;
@@ -172,7 +176,11 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
         mTvTitle.setText("助学详情");
         //创建viewhoder
         mTvInitialPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        mProductPresenter.getProductDetail(mProductId);
+        if(!StringUtils.isEmpty(mProductId)){
+            mProductPresenter.getProductDetail(mProductId);
+        }else if(!StringUtils.isEmpty(mPosterId)){
+            mProductPresenter.getPosterDetail(mPosterId);
+        }
     }
 
     private void initView() {
