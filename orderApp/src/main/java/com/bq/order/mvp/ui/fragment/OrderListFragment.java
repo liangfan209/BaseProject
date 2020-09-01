@@ -128,9 +128,9 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                 helper.setText(R.id.tv_brand,orderItemListBean.getBrand_name());
                 helper.setText(R.id.tv_product,orderItemListBean.getCategory());
                 helper.setText(R.id.tv_price, AppUtils.getDouble2(orderItemListBean.getSale_price()));
-                helper.setText(R.id.tv_orgamnization, orderItemListBean.getAgent_name());
+                helper.setText(R.id.tv_orgamnization, orderItemListBean.getAgent_name()+"为您服务");
 
-                helper.setText(R.id.tv_total_price,"总价： ¥"+AppUtils.getDouble2(orderItemListBean.getSale_price()*orderItemListBean.getQuantity()));
+                helper.setText(R.id.tv_total_price,"总价： ¥"+AppUtils.getDouble2(info.getStrike_price()*orderItemListBean.getQuantity()));
                 tvTotalCount.setText("数量：x"+ orderItemListBean.getQuantity());
                 String status = info.getStatus();
 
@@ -156,13 +156,15 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                             //待发货  待收货
                         }else if(status.contains("payment_finished") || status.contains("delivery_finished")){
                             ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
-                                    .withString("productId",info.getId()+"")
+                                    .withString("mOrderDetailId",info.getId()+"")
                                     .withSerializable("mInvoiceInfo",info.getInvoice_info())
                                     .withInt("sign",1)
-                                    .withString("imgPath",info.getContract_background()).navigation();
+                                    .withSerializable("imgPathList",info.getContract_background()).navigation();
+
+
                         }else if(status.contains("order_finished")){
                             ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
-                                    .withString("productId",info.getId()+"").navigation();
+                                    .withString("mOrderDetailId",info.getId()+"").navigation();
                         }
                     }
                 });

@@ -8,8 +8,12 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.msgService.MessageBody;
+import com.bq.comm_config_lib.msgService.MessageEvent;
+import com.bq.comm_config_lib.msgService.MessageInter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.user_center.mvp.user.ui.UserFragment;
 import com.fan.baseuilibrary.view.flycotablayout.TabEntity;
 import com.fan.baseuilibrary.view.flycotablayout.widget.SkinCommonTabLayout;
@@ -27,6 +31,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
+import io.jiantao.android.locate.LocationHelper;
 
 @Route(path = AppArouter.MAIN_ACTIVITY)
 public class MainActivity extends BaseActivity {
@@ -50,6 +55,7 @@ public class MainActivity extends BaseActivity {
 
     private Fragment mUserFragment,skinFragment,mHomeFragment;
     private int currentIndex = 0;
+    private LocationHelper.LocationListener mLocationListener;
 
     @Override
     protected int getContentViewLayout() {
@@ -77,22 +83,6 @@ public class MainActivity extends BaseActivity {
         mTablayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-//                if(position == 2){
-//                    //判断下token
-//                    String token = CommSpUtils.getToken();
-//                    if(StringUtils.isEmpty(token)){
-//                        //跳转到登录界面
-//                        Bundle bundle = new Bundle();
-//                        bundle.putInt("index",position);
-//                        ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY)
-//                                .withString("mPath",AppArouter.MAIN_ACTIVITY)
-//                                .withBundle("mBundle",bundle).navigation();
-//                        mTablayout.setCurrentTab(currentIndex);
-//                        return;
-//                    }
-//                }else{
-//                    currentIndex = position;
-//                }
                 selectFragment(position);
             }
             @Override
@@ -105,6 +95,11 @@ public class MainActivity extends BaseActivity {
             selectFragment(index);
         }
         selectFragment(0);
+
+
+
+
+
 //        SkinCompatManager.getInstance().loadSkin("appskin-debug.apk", null, SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
     }
 

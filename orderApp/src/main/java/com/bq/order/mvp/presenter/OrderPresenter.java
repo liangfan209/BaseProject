@@ -5,6 +5,7 @@ import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.order.mvp.ui.OrderIview;
 import com.bq.order.requset.ProductHttpReqeustImp;
 import com.bq.order.requset.bean.ContactListBean;
+import com.bq.order.requset.bean.ContractinfoBean;
 import com.bq.order.requset.bean.OrderIdBean;
 import com.bq.order.requset.bean.OrderInfoDetailBean;
 import com.bq.order.requset.bean.OrderInfoListBean;
@@ -45,8 +46,23 @@ public class OrderPresenter implements BasePresenter {
         });
     }
 
+
     public void addOrder(String info) {
         mProductHttpReqeustImp.orderAdd(info, new AbstractReqeustCallback<OrderIdBean>(mIView) {
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+
+            @Override
+            public void onSuccess(OrderIdBean bean) {
+                mIView.orderAddView(bean.getOrder_id());
+            }
+        });
+    }
+
+    public void addOrderByPoster(String info,String postId) {
+        mProductHttpReqeustImp.orderAddByPoster(info,postId, new AbstractReqeustCallback<OrderIdBean>(mIView) {
             @Override
             public void onStart() {
                 mIView.showLoading();
@@ -111,6 +127,18 @@ public class OrderPresenter implements BasePresenter {
             @Override
             public void onSuccess(String bean) {
                 mIView.addContactView();
+            }
+        });
+    }
+
+    /**
+     * 创建合同
+     */
+    public void createContract(String orderDetailId){
+        mProductHttpReqeustImp.createContract(orderDetailId,new AbstractReqeustCallback<ContractinfoBean>(mIView) {
+            @Override
+            public void onSuccess(ContractinfoBean contractinfoBean) {
+                mIView.createContactView(contractinfoBean.getContract_info());
             }
         });
     }

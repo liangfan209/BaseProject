@@ -18,9 +18,9 @@ import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
-import com.bq.comm_config_lib.request.Api;
 import com.bq.comm_config_lib.request.upload.UploadBean;
 import com.bq.comm_config_lib.request.upload.UploadHelper;
+import com.bq.comm_config_lib.utils.Utils;
 import com.bq.user_center.R;
 import com.bq.user_center.R2;
 import com.bq.user_center.api.bean.UserInfoConfigBean;
@@ -135,7 +135,8 @@ public class UserinfoActivity extends BaseActivity implements UserBaseIView{
                 moduleListBean.setValue(customerInfo.getWechat());
             }
         }
-        Glide.with(this).load(Api.BASE_API+ customerInfo.getHead_url()).into(mCivHeader);
+        Utils.showImageHeader(info.getCustomer_info().getHead_url(),mCivHeader);
+//        Glide.with(this).load(Api.BASE_API+ customerInfo.getHead_url()).into(mCivHeader);
         mBaseQuickAdapter.notifyDataSetChanged();
     }
 

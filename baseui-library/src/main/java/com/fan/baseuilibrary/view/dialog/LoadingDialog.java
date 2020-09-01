@@ -12,6 +12,7 @@ public class LoadingDialog extends Dialog {
 		super(context, R.style.dialog);
 		this.context = context;
 		setContentView(R.layout.dialog_loading);
+		this.setCanceledOnTouchOutside(false);
 	}
 }
 

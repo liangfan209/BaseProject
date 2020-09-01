@@ -4,6 +4,7 @@ import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.order.mvp.ui.ProductIview;
 import com.bq.order.requset.ProductHttpReqeustImp;
+import com.bq.order.requset.bean.AppVersionBean;
 import com.bq.order.requset.bean.BannerListBean;
 import com.bq.order.requset.bean.ContractListBean;
 import com.bq.order.requset.bean.ProductBean;
@@ -240,6 +241,20 @@ public class ProductPresenter implements BasePresenter {
             @Override
             public void onSuccess(BannerListBean bean) {
                 mIView.getBannerList(index_banner,bean.getData_list());
+            }
+
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+            }
+        });
+    }
+
+    public void updateApp() {
+        mProductHttpReqeustImp.updateApp(new AbstractReqeustCallback<AppVersionBean>(mIView) {
+            @Override
+            public void onSuccess(AppVersionBean bean) {
+                mIView.checkUpdateView(bean.getEdition_info());
             }
 
             @Override

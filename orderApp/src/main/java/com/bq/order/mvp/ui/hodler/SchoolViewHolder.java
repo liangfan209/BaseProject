@@ -8,7 +8,6 @@ import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.bq.order.requset.bean.SchoolInfo;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.fan.baseuilibrary.view.CircleImageView;
@@ -52,8 +51,9 @@ public class SchoolViewHolder extends BaseViewHolder<List<SchoolInfo>> {
                         helper.setText(R.id.tv_name, bean.getName());
                         helper.setText(R.id.tv_remark, bean.getContent());
                         CircleImageView iv = helper.getView(R.id.iv_icon);
-                        Glide.with(iv).load(bean.getIcons())
-                                .apply(Utils.getRequestOptionRadus(iv.getContext(), 0)).into(iv);
+                        Utils.showImage(bean.getIcons(),iv);
+//                        Glide.with(iv).load(bean.getIcons())
+//                                .apply(Utils.getRequestOptionRadus(iv.getContext(), 0)).into(iv);
                     }
                 };
         mRvSchool.setAdapter(mSchoolAdapter);

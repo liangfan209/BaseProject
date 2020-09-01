@@ -70,7 +70,7 @@ public class SignUserInfoActivity extends BaseActivity implements OrderIview{
 
     @Override
     protected void attach() {
-        mTvTitle.setText("签署人信息");
+        mTvTitle.setText("合同人信息");
         ARouter.getInstance().inject(this);
         EditFormatUtils.idCardAddSpace(mEtIdCard);
         EditFormatUtils.phoneNumAddSpace(mEtPhone);
@@ -86,10 +86,10 @@ public class SignUserInfoActivity extends BaseActivity implements OrderIview{
 
         mTvCommit.setOnClickListener(v->{
             String name = mEtName.getText().toString();
-            String phone = mEtPhone.getText().toString().replaceAll("","");
+            String phone = mEtPhone.getText().toString().replaceAll(" ","");
             String identication = mEtIdCard.getText().toString().replaceAll(" ","");
             if(StringUtils.isEmpty(name)){
-                ToastUtils.showToast(this,"请输入姓名");
+                ToastUtils.showToast(this,"请输入合同人姓名");
                 return;
             }
             if(StringUtils.isEmpty(phone)){

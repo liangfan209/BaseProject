@@ -12,6 +12,9 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.msgService.MessageBody;
+import com.bq.comm_config_lib.msgService.MessageEvent;
+import com.bq.comm_config_lib.msgService.MessageInter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
 import com.bq.comm_config_lib.utils.CommSpUtils;
@@ -98,6 +101,8 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
 
     @BindView(R2.id.rlt_content_school)
     RelativeLayout mRltContentSchool;
+    @BindView(R2.id.rlt_profession_nodata)
+    RelativeLayout mRltProfessionNodata;
 
 
     private HomeBannerFragment mHomeBannerFragment;
@@ -121,7 +126,6 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
 
     @Override
     protected void attach() {
-        CommSpUtils.saveLocaltion("武汉市");
         mTvAddressLocation.setText(CommSpUtils.getLocation());
         mHomeBannerFragment = new HomeBannerFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -131,6 +135,16 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
         initHotSchoolView();
 //        intNewsView();
         intHotProfessionView();
+        EventBus.getDefault().post(new MessageEvent("location", getActivity(), new MessageInter() {
+            @Override
+            public void callBack(MessageBody data) {
+                CommSpUtils.saveLocaltion(data.getContent());
+                searchStr = new Gson().toJson(new ProductSearchBean(data.getContent()));
+                mTvAddressLocation.setText(data.getContent());
+                updateView();
+            }
+        }));
+
         updateView();
         //getbanner();
         initEditText();
@@ -145,6 +159,7 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
         });
 
         EventBus.getDefault().register(this);
+//        updateApp();
     }
 
     @Override
@@ -160,6 +175,13 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
             mTvAddressLocation.setText(CommSpUtils.getLocation());
             updateView();
         }
+    }
+
+    /**
+     * 在线更新
+     */
+    public void updateApp(){
+        mProductPresenter.updateApp();
     }
 
 
@@ -255,7 +277,9 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
 
     @Override
     public void getProfessionListView(List<ProfessionInfo> list) {
-        //        mRltContentSchool.setVisibility(list.size()>0?View.VISIBLE: View.GONE);
+        mRvProfession.setVisibility(list.size()>0?View.VISIBLE: View.GONE);
+        mRltProfessionNodata.setVisibility(list.size()>0?View.GONE: View.VISIBLE);
+//        mrlt.setVisibility(list.size()>0?View.GONE: View.VISIBLE);
         mHostProfessionlist = list;
         mProductAdapter.setNewData(mHostProfessionlist);
         mProductAdapter.notifyDataSetChanged();
@@ -264,6 +288,7 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
 
     @Override
     public void getSchooListlView(List<SchoolInfo> list) {
+        mRltHotSchool.setVisibility(list.size()>0?View.VISIBLE: View.GONE);
         mRltContentSchool.setVisibility(list.size()>0?View.GONE: View.VISIBLE);
         mHostSchoollist = list;
         List<List<SchoolInfo>> mlists = new ArrayList<>();
@@ -288,24 +313,6 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
         mBannerSchool.refreshData(mlists);
     }
 
-    private void intNewsView() {
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL,false);
-        mRvNews.setLayoutManager(linearLayoutManager);
-
-        BaseQuickAdapter adapter = new
-                BaseQuickAdapter<String, BaseViewHolder>(R.layout.order_item_news, list) {
-                    @Override
-                    protected void convert(@NotNull BaseViewHolder helper,
-                                           String bean) {
-                    }
-                };
-        mRvNews.setAdapter(adapter);
-    }
 
     @Override
     public void onComplete() {
@@ -337,29 +344,22 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
                 }
             });
         }else if(view.getId() == R.id.iv_scan_home){
+
             if(!Utils.isFastDoubleClick(mIvScanHome,1000)){
                 ARouter.getInstance().build(AppArouter.ORDER_SCAN_ACTIVITY).navigation();
             }
-//            new RxPermissions(getActivity())
-//                    .request(Manifest.permission.READ_EXTERNAL_STORAGE,
-//                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                    .subscribe(new Consumer<Boolean>() {
-//                        @Override
-//                        public void accept(Boolean aBoolean) throws Exception {
-//                            if (aBoolean) {
-//                                DoloadHelper.downloadApk("http://education.bq.com/resource/contract/4255_1597056309.pdf");
-//                            } else {
-//                                ToastUtils.showToast(getActivity(), "没有拍照或存储权限，请打开相关权限");
-//                            }
-//                        }
-//                    });
 
 
         }else if(view.getId() == R.id.iv_address_location){
-            searchStr = new Gson().toJson(new ProductSearchBean("武汉市"));
-            mTvAddressLocation.setText("武汉市");
-            CommSpUtils.saveLocaltion("武汉市");
-            updateView();
+            EventBus.getDefault().post(new MessageEvent("location", getActivity(), new MessageInter() {
+                @Override
+                public void callBack(MessageBody data) {
+                    searchStr = new Gson().toJson(new ProductSearchBean(data.getContent()));
+                    mTvAddressLocation.setText(data.getContent());
+                    CommSpUtils.saveLocaltion(data.getContent());
+                    updateView();
+                }
+            }));
         }
     }
 

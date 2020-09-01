@@ -2,6 +2,7 @@ package com.bq.order.requset.bean;
 
 import com.blankj.utilcode.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class OrderInfo {
     private String last_payment_time;
     private String last_payment_number;
     private List<OrderItemListBean> order_item_list;
-    private String contract_background;
+    private ArrayList<ContractImgInfo> contract_background;
     private String despatch_type;
     private String status_name;
     private InvoiceInfo invoice_info;
@@ -74,11 +75,11 @@ public class OrderInfo {
         this.despatch_type = despatch_type;
     }
 
-    public String getContract_background() {
+    public ArrayList<ContractImgInfo> getContract_background() {
         return contract_background;
     }
 
-    public void setContract_background(String contract_background) {
+    public void setContract_background(ArrayList<ContractImgInfo> contract_background) {
         this.contract_background = contract_background;
     }
 

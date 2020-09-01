@@ -151,15 +151,16 @@ public class MyRefreshLayout<T> extends SmartRefreshLayout {
 
 
         } else if (loadmoreBoo) {
-            if (list != null && list.size() == 0) {
+            if (list != null && list.size() == 0 && adapter.getData().size() > 0) {
                 noDataView = LinearLayout.inflate(mRecyclerView.getContext(),
                         R.layout.layout_base_nodata, null);
                 adapter.addFooterView(noDataView);
                 this.setEnableLoadmore(false);
             }
-
-            adapter.addData(list);
-            mStatusView.showContent(mRecyclerView);
+            if(adapter.getData().size() > 0){
+                adapter.addData(list);
+                mStatusView.showContent(mRecyclerView);
+            }
         }
     }
 

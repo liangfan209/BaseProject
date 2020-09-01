@@ -118,6 +118,7 @@ public class SchoolProfessionDetailActivity extends BaseActivity implements Prod
         searchBean.setCategory(mInfo.getCategory());
         if(mSchoolInfo != null){
             searchBean.setSchool_id(mSchoolInfo.getId());
+            searchBean.setMajor_id(mInfo.getId());
         }else{
             searchBean.setSchool_id(mInfo.getId());
             if(mProfessionInfo != null){

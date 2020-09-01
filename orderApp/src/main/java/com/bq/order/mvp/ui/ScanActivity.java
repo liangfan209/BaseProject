@@ -7,9 +7,12 @@ import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
+import com.bq.comm_config_lib.utils.CommSpUtils;
+import com.bq.comm_config_lib.utils.Utils;
 import com.bq.order.R;
 import com.fan.baseuilibrary.scan.CaptureFragment;
 import com.fan.baseuilibrary.scan.CodeUtils;
@@ -49,6 +52,12 @@ public class ScanActivity extends BaseActivity {
         captureFragment.setAnalyzeCallback(analyzeCallback);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_my_container, captureFragment).commit();
+
+        String token = CommSpUtils.getToken();
+        if(StringUtils.isEmpty(token)){
+            ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).withString("mPath","-1").navigation();
+            return;
+        }
     }
 
     /**
@@ -57,22 +66,23 @@ public class ScanActivity extends BaseActivity {
     CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
         @Override
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
-            String[] split = result.split("&");
-            if(split.length<2){
-                ToastUtils.showToast(ScanActivity.this,"格式错误");
-                return;
-            }
-            String[] split1 = split[0].split("=");
-            String[] split2 = split[1].split("=");
-
-
-            if(split1[1].contains("goods")){
-                ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_DETAIL_ACTIVITY)
-                        .withString("mProductId",split2[1]).navigation();
-            }else if(split1[1].contains("http")){
-
-            }
-
+//            String[] split = result.split("&");
+//            if(split.length<2){
+//                ToastUtils.showToast(ScanActivity.this,"格式错误");
+//                return;
+//            }
+//            String[] split1 = split[0].split("=");
+//            String[] split2 = split[1].split("=");
+//
+//
+//            if(split1[1].contains("goods")){
+//                ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_DETAIL_ACTIVITY)
+//                        .withString("mProductId",split2[1]).navigation();
+//            }else if(split1[1].contains("http")){
+//
+//            }
+            Utils.goCustomActivity(ScanActivity.this,result);
+            finish();
 
 //            Intent resultIntent = new Intent();
 //            Bundle bundle = new Bundle();

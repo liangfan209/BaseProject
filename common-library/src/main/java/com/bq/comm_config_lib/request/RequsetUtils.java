@@ -34,6 +34,8 @@ public class RequsetUtils {
             e.printStackTrace();
         }
         request.params("flag", "customer-mobile");
+        request.params("clientType", "android");
+        request.params("version", "1");
         request.params("timestamp", String.valueOf(System.currentTimeMillis()));
         LinkedHashMap<String, List<String>> urlParamsMap = request.getParams().urlParamsMap;
         StringBuilder sb = new StringBuilder();
@@ -44,6 +46,7 @@ public class RequsetUtils {
         String bufferStr = sb.toString();
         bufferStr = bufferStr.substring(0, bufferStr.length() - 1);
         String unSign = RSA.getSign(bufferStr);
+        unSign = unSign.replaceAll("\\+","%2B");
         String s1 = RSA.sha1(unSign);
         String sign = RSA.sampling(s1, RSA.requestBodyStr2Map(bufferStr), 1.4);
         request.params("sign", sign);

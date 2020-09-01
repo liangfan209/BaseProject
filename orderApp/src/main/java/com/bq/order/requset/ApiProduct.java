@@ -52,15 +52,23 @@ public class ApiProduct {
 
     //客户下单接口
     public static String ORDER_ADD = "customer.order.add";
+    //二维码下单
+    public static String ORDER_POSTER_ADD = "customer.order.posteradd";
+
     public static String ORDER_GET_DETAIL = "customer.order.get";
     //订单列表
     public static String ORDER_LIST = "customer.order.search";
     //取消订单
     public static String ORDER_CANCEL_ORDER = "customer.order.cancel";
 
-    //添加合同
-    public static String ORDER_ADD_CONTRACT = "customer.contract.add";
+    //签署合同
+    public static String ORDER_ADD_CONTRACT = "customer.contract.autograph";
+
     public static String ORDER_GET_CONTRACT = "customer.contract.get";
+    //创建合同
+    public static String ORDER_CREATE_CONTRACT = "customer.contract.add";
+    //在线更新
+    public static final String UPDATE_APP = "edition.get";
 
 
 

@@ -129,6 +129,25 @@ public class Utils {
         Glide.with(iv).load(path)
                 .apply(Utils.getRequestOptionRadus(iv.getContext(),2)).into(iv);
     }
+    public static void showImageHeader(String path, ImageView iv){
+        if(StringUtils.isEmpty(path)){
+            path = "";
+        }
+        if(!path.contains("http")){
+            path = Api.BASE_API+path;
+        }
+        RoundCornersTransformation transformation =
+                new RoundCornersTransformation(iv.getContext(),
+                        SizeUtils.dp2px(2),
+                        RoundCornersTransformation.CornerType.ALL);
+        RequestOptions requestOptions =new RequestOptions()
+                .placeholder(R.mipmap.icon_user_head)
+                .fallback(R.mipmap.icon_user_head);
+
+        Glide.with(iv).load(path)
+                .apply(requestOptions.transform(transformation)).into(iv);
+    }
+
     public static void showImage(String path, ImageView iv,int dp){
         if(StringUtils.isEmpty(path)){
             path = "";
@@ -179,7 +198,7 @@ public class Utils {
     public static void goCustomActivity(Activity activity, String result){
         String[] split = result.split("&");
         if(split.length<2){
-            ToastUtils.showToast(activity,"格式错误");
+//            ToastUtils.showToast(activity,"格式错误");
             return;
         }
         String[] split1 = split[0].split("=");
@@ -196,9 +215,18 @@ public class Utils {
         }
     }
 
-    public static Bitmap getNetVideoBitmap(String videoUrl) {
-        Bitmap bitmap = null;
+    public static String getHttpLink(String url){
+        if(!url.startsWith("http")){
+            url = Api.BASE_API+url;
+        }
+        return url;
+    }
 
+    public static Bitmap getNetVideoBitmap(String videoUrl) {
+        if(!videoUrl.startsWith("http")){
+            videoUrl = Api.BASE_API+videoUrl;
+        }
+        Bitmap bitmap = null;
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         try {
             //根据url获取缩略图

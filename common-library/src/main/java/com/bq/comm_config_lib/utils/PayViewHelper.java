@@ -136,10 +136,10 @@ public class PayViewHelper {
                     checkUserPay(activity,orderId);
                 } else if (weiXinCheck) {
                     mDialog.dismiss();
-                    EventBus.getDefault().post(new MessageEvent(AppArouter.WALLET_PAY_SERVICE,orderId,activity,price,"wechat"));
+                    EventBus.getDefault().post(new MessageEvent(AppArouter.WALLET_PAY_SERVICE,orderId,activity,price,"wechat",type));
                 } else if (zhifubaoCheck) {
                     mDialog.dismiss();
-                    EventBus.getDefault().post(new MessageEvent(AppArouter.WALLET_PAY_SERVICE,orderId,activity,price,"alipay"));
+                    EventBus.getDefault().post(new MessageEvent(AppArouter.WALLET_PAY_SERVICE,orderId,activity,price,"alipay",type));
                 }
             }
         });

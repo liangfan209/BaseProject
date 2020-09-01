@@ -257,14 +257,14 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
             //后期还要判断是否已经签约了合同
             if(mOrderInfoBean.getStatus().equals("payment_finished") || mOrderInfoBean.getStatus().equals("delivery_finished")){
                 ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
-                        .withString("productId",mOrderInfoBean.getId()+"")
                         .withInt("sign",1)
                         .withSerializable("mInvoiceInfo",mOrderInfoBean.getInvoice_info())
-                        .withString("imgPath",mOrderInfoBean.getContract_background()).navigation();
+                        .withString("mOrderDetailId",mOrderInfoBean.getId()+"").navigation();
+//                        .withSerializable("imgPathList",mOrderInfoBean.getContract_background()).navigation();
 
             }else if(mOrderInfoBean.getStatus().equals("order_finished")){
                 ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
-                        .withString("productId",mOrderInfoBean.getId()+"").navigation();
+                        .withString("mOrderDetailId",mOrderInfoBean.getId()+"").navigation();
             }
         });
         mTvOrderBottomRight.setOnClickListener(v->{

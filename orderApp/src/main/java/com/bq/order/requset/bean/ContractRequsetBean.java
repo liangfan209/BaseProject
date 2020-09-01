@@ -14,6 +14,12 @@ public class ContractRequsetBean {
     private String email;
     private String autograph;
 
+    public ContractRequsetBean(String email, String autograph) {
+        this.email = email;
+        this.autograph = autograph;
+    }
+
+
     public ContractRequsetBean(String name, String phone, String identification, String email, String autograph) {
         this.name = name;
         this.phone = phone;

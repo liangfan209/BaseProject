@@ -225,6 +225,7 @@ public class ProfessionListActivity extends BaseActivity implements MyRefreshLay
                         tvLeft.setText(sb.toString());
 
                         if(agent_list.size() > 0){
+                            tvRight.setVisibility(View.VISIBLE);
                             if(agent_list.size() == 1){
                                 tvRight.setText("1家机构为您服务");
                             }else{

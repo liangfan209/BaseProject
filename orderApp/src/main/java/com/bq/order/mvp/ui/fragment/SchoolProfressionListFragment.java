@@ -76,7 +76,7 @@ public class SchoolProfressionListFragment extends BaseFragment implements MyRef
     protected void attach() {
         mSchoolProfessionRequstBean = (SchoolProfessionRequstBean) getArguments().get("mProfessionRequstBean");
         mRefreshLayout = new MyRefreshLayout<String>(this.getContext(), this);
-        mRefreshLayout.setRefresh(true, true);
+        mRefreshLayout.setRefresh(false, true);
         mFltContent.addView(mRefreshLayout);
 
         mRefreshLayout.adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -123,6 +123,7 @@ public class SchoolProfressionListFragment extends BaseFragment implements MyRef
                 }
                 tvLeft.setText(sb.toString());
                 if(agent_list.size() > 0){
+                    tvRight.setVisibility(View.VISIBLE);
                     if(agent_list.size() == 1){
                         tvRight.setText("1家机构为您服务");
                     }else{

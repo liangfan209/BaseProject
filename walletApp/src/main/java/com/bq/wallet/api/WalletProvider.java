@@ -1,6 +1,7 @@
 package com.bq.wallet.api;
 
 import android.app.Activity;
+import android.os.Handler;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.annotation.Register;
@@ -36,84 +37,92 @@ public class WalletProvider {
             new WalletHttpReqeustImp().getBalance(new RequestCallBackInter() {
                 @Override
                 public void onSuccess(Object o) {
-                    event.eventInterface.callBack(new MessageBody(MessageBody.SUCCESS_CODE,new Gson().toJson(o)));
+                    event.eventInterface.callBack(new MessageBody(MessageBody.SUCCESS_CODE, new Gson().toJson(o)));
                 }
+
                 @Override
                 public void onError(String msg) {
-                    event.eventInterface.callBack(new MessageBody(MessageBody.FAIL_CODE,msg));
+                    event.eventInterface.callBack(new MessageBody(MessageBody.FAIL_CODE, msg));
                 }
             });
-        } else if(AppArouter.LOGOUT_SERVER.equals(event.key)){
+        } else if (AppArouter.LOGOUT_SERVER.equals(event.key)) {
 
-        } else if(AppArouter.WALLET_PAY_SERVICE.equals(event.key)){
-            new WalletHttpReqeustImp().pay(event.orderId,event.payType, new RequestCallBackInter<WxBean>() {
+        } else if (AppArouter.WALLET_PAY_SERVICE.equals(event.key)) {
+            new WalletHttpReqeustImp().pay(event.orderId, event.payType, new RequestCallBackInter<WxBean>() {
                 @Override
                 public void onSuccess(WxBean bean) {
-                    if(event.payType.equals("wechat")){
-                        wechatPay(event.activity,bean.getPay_info(),event.orderId,event.price);
-                    }else if(event.payType.equals("alipay")){
-                        zhifubaoPay(event.activity,bean.getPay_info().getPrepayid(),event.orderId,event.price);
+                    if (event.payType.equals("wechat")) {
+                        wechatPay(event.activity, bean.getPay_info(), event.orderId, event.price,event.aType);
+                    } else if (event.payType.equals("alipay")) {
+                        zhifubaoPay(event.activity, bean.getPay_info().getPrepayid(), event.orderId, event.price,event.aType);
                     }
                 }
+
                 @Override
                 public void onError(String msg) {
 //                    event.eventInterface.callBack(new MessageBody(MessageBody.FAIL_CODE,msg));
                 }
-            } );
+            });
         }
     }
 
-    static void wechatPay(Activity activity, WxBean.PayInfo info,final String orderId,String price){
-        PayUtils.wexinPay(activity,info,new IPayCallback(){
+    static void wechatPay(Activity activity, WxBean.PayInfo info, final String orderId, String price,int aType) {
+        PayUtils.wexinPay(activity, info, new IPayCallback() {
             @Override
             public void success() {
                 ARouter.getInstance().build(AppArouter.ORDER_PAY_SUCCESS_ACTIVITY)
-                        .withString("mOrderId",orderId)
-                        .withString("mPrice",price).navigation();
+                        .withString("mOrderId", orderId)
+                        .withString("mPrice", price).navigation();
                 activity.finish();
             }
+
             @Override
             public void failed() {
-                ARouter.getInstance().build(AppArouter.ORDER_ORDER_DETAIL_ACTIVITY)
-                        .withString("mOrderId",orderId).navigation();
-                activity.finish();
+                toOrderDetail(activity,orderId,aType);
             }
+
             @Override
             public void cancel() {
-                ARouter.getInstance().build(AppArouter.ORDER_ORDER_DETAIL_ACTIVITY)
-                        .withString("mOrderId",orderId).navigation();
-                activity.finish();
+                toOrderDetail(activity,orderId,aType);
             }
         });
     }
 
-    public static void zhifubaoPay(final Activity activity, String info,final String orderId,final String price) {
+    public static void zhifubaoPay(final Activity activity, String info, final String orderId, final String price, int aType) {
         //实例化支付宝支付策略
         AliPay aliPay = new AliPay();
         //构造支付宝订单实体。一般都是由服务端直接返回。
         AlipayInfoImpli alipayInfoImpli = new AlipayInfoImpli();
         alipayInfoImpli.setOrderInfo(info);
         //策略场景类调起支付方法开始支付，以及接收回调。
-        EasyPay.pay(aliPay, activity, alipayInfoImpli,new IPayCallback(){
+        EasyPay.pay(aliPay, activity, alipayInfoImpli, new IPayCallback() {
             @Override
             public void success() {
                 ARouter.getInstance().build(AppArouter.ORDER_PAY_SUCCESS_ACTIVITY)
-                        .withString("mOrderId",orderId)
-                        .withString("mPrice",price).navigation();
+                        .withString("mOrderId", orderId)
+                        .withString("mPrice", price).navigation();
                 activity.finish();
             }
+
             @Override
             public void failed() {
-                ARouter.getInstance().build(AppArouter.ORDER_ORDER_DETAIL_ACTIVITY)
-                        .withString("mOrderId",orderId).navigation();
-                activity.finish();
+                toOrderDetail(activity,orderId,aType);
             }
+
             @Override
             public void cancel() {
-                ARouter.getInstance().build(AppArouter.ORDER_ORDER_DETAIL_ACTIVITY)
-                        .withString("mOrderId",orderId).navigation();
-                activity.finish();
+                toOrderDetail(activity,orderId,aType);
             }
         });
     }
+    public static void toOrderDetail(Activity activity,String orderId,int aType){
+        new Handler().postDelayed(() -> {
+            ARouter.getInstance().build(AppArouter.ORDER_ORDER_DETAIL_ACTIVITY)
+                    .withString("mOrderId", orderId).navigation();
+            if (aType != 3)
+                activity.finish();
+        }, 300);
+    }
+
+
 }

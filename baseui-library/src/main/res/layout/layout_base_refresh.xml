@@ -10,6 +10,5 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/base_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:nestedScrollingEnabled="false"/>
+        android:layout_height="match_parent"/>
 </com.fan.baseuilibrary.view.StatusView>

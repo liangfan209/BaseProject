@@ -288,13 +288,13 @@ public class RSA {
             String[] tmp = datum.split("=");
             if (null != tmp && tmp.length == 2) {
                 try {
-                    mapOfRequestBody.put(tmp[0].toLowerCase(), URLDecoder.decode(tmp[1], "utf-8"));
+                    mapOfRequestBody.put(tmp[0], URLDecoder.decode(tmp[1], "utf-8"));
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
             }
         }
-        mapOfRequestBody.remove("serialVersionUID".toLowerCase());
+        mapOfRequestBody.remove("serialVersionUID");
         return mapOfRequestBody;
     }
 

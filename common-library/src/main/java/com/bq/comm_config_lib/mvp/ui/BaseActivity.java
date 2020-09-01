@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import com.bq.comm_config_lib.R;
 import com.bq.comm_config_lib.mvp.BaseIView;
 import com.bq.comm_config_lib.mvp.BasePresenter;
+import com.bq.comm_config_lib.utils.MyStatusBarUtil;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
 import com.fan.baseuilibrary.view.dialog.LoadingDialog;
@@ -37,8 +38,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseIVie
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        MyStatusBarUtil.setStatusBarTransparent(this, false, true);
         setContentView(getContentViewLayout());
+        MyStatusBarUtil.setStatusBarTranslucent(this, R.color.transparent, true);
         mLoadingDialog = new LoadingDialog(this);
         ButterKnife.bind(this);
         View backIv = findViewById(R.id.iv_title_left);

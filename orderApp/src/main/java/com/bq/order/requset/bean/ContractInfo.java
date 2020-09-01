@@ -1,14 +1,26 @@
 package com.bq.order.requset.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContractInfo implements Serializable {
     private String id;
     private String name;
     private String create_time;
+    private String status_name;
     private List<String> url;
-    private List<String> img_url;
+    private ArrayList<String> img_url;
+
+
+    public String getStatus_name() {
+
+        return status_name;
+    }
+
+    public void setStatus_name(String status_name) {
+        this.status_name = status_name;
+    }
 
     public String getId() {
         return id;
@@ -42,11 +54,11 @@ public class ContractInfo implements Serializable {
         this.url = url;
     }
 
-    public List<String> getImg_url() {
+    public ArrayList<String> getImg_url() {
         return img_url;
     }
 
-    public void setImg_url(List<String> img_url) {
+    public void setImg_url(ArrayList<String> img_url) {
         this.img_url = img_url;
     }
 }

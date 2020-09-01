@@ -96,10 +96,12 @@ public class AppArouter {
     //电子签名
     public static final String ORDER_AUTOGRAPH_ACTIVITY = ORDER+"/AutographActivity";
 
+    public static final String ORDER_OPEN_FILE_ACTIVITY = ORDER+"/OpenFilesActivity";
 
     public static final String ORDER_SCAN_ACTIVITY = ORDER +"/ScanActivity";
 
     //h5页面
     public static final String H5_ACTIVITY = "/h5/H5Activity";
+
 
 }

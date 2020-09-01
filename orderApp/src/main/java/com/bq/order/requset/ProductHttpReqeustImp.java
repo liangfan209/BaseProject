@@ -6,9 +6,11 @@ import com.bq.comm_config_lib.request.SignJsonCallBack;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.netlibrary.NetManager;
 import com.bq.netlibrary.http.BaseResponse;
+import com.bq.order.requset.bean.AppVersionBean;
 import com.bq.order.requset.bean.BannerListBean;
 import com.bq.order.requset.bean.ContactListBean;
 import com.bq.order.requset.bean.ContractListBean;
+import com.bq.order.requset.bean.ContractinfoBean;
 import com.bq.order.requset.bean.OrderIdBean;
 import com.bq.order.requset.bean.OrderInfoDetailBean;
 import com.bq.order.requset.bean.OrderInfoListBean;
@@ -63,7 +65,6 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         map.put("api", ApiProduct.PRODUCT_SEARCH_SCHOOL_LIST);
         map.put("current_page", currentPage+"");
         map.put("search_info", searchStr);
-        map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<SchoolListBean>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<SchoolListBean>> response) {
@@ -118,7 +119,6 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiProduct.PRODUCT_SCHOOL_ALL);
         map.put("search_info", searchStr);
-        map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<SelecterBean>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<SelecterBean>> response) {
@@ -143,7 +143,7 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         map.put("api", ApiProduct.PRODUCT_PRODUCT_LIST);
         map.put("current_page", currentPage+"");
         map.put("search_info", searchStr);
-        map.put("auth", CommSpUtils.getToken());
+//        map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ProductListBean>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<ProductListBean>> response) {
@@ -162,7 +162,7 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiProduct.PRODUCT_PROFESSION_ALL);
         map.put("search_info", searchStr);
-        map.put("auth", CommSpUtils.getToken());
+//        map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<SelecterBean>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<SelecterBean>> response) {
@@ -181,7 +181,7 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiProduct.PRODUCT_DURATION_ALL);
         map.put("search_info", searchStr);
-        map.put("auth", CommSpUtils.getToken());
+//        map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<SelecterBean>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<SelecterBean>> response) {
@@ -200,7 +200,7 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiProduct.PRODUCT_DETAIL);
         map.put("goods_id", id);
-        map.put("auth", CommSpUtils.getToken());
+//        map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ProductBean>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<ProductBean>> response) {
@@ -237,7 +237,7 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiProduct.SCHOOL_DETAIL);
         map.put("school_id", schoolId);
-        map.put("auth", CommSpUtils.getToken());
+//        map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<SchoolBean>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<SchoolBean>> response) {
@@ -255,6 +255,20 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiProduct.ORDER_ADD);
         map.put("order_info", info);
+        map.put("auth", CommSpUtils.getToken());
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<OrderIdBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<OrderIdBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    public void orderAddByPoster(String info,String posterId,RequestCallBackInter callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.ORDER_POSTER_ADD);
+        map.put("order_info", info);
+        map.put("poster_id", posterId);
         map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<OrderIdBean>>(callBack){
             @Override
@@ -313,7 +327,7 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiProduct.ORDER_ADD_CONTRACT);
         map.put("contract_info", info);
-        map.put("order_item_id", id);
+        map.put("contract_id", id);
         map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack){
             @Override
@@ -399,6 +413,34 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<BannerListBean>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<BannerListBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    /**
+     * 创建合同
+     */
+    public void createContract(String orderDetailId, AbstractReqeustCallback<ContractinfoBean> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.ORDER_CREATE_CONTRACT);
+        map.put("order_item_id", orderDetailId);
+        map.put("auth", CommSpUtils.getToken());
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ContractinfoBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<ContractinfoBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    public void updateApp(AbstractReqeustCallback<AppVersionBean> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.UPDATE_APP);
+        map.put("type", "android");
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<AppVersionBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<AppVersionBean>> response) {
                 super.onSuccess(response);
             }
         });

@@ -16,18 +16,27 @@ public class MessageEvent {
     public Activity activity;
     public String price;
     public String payType;
+    public int aType;
 
 
-    public MessageEvent(String key, String orderId, Activity a,String price,String payType) {
+
+
+    public MessageEvent(String key, String orderId, Activity a,String price,String payType,int aType) {
         this.key = key;
         this.orderId = orderId;
         this.activity = a;
         this.price = price;
         this.payType = payType;
+        this.aType = aType;
     }
 
     public MessageEvent(String key, MessageInter eventInter) {
         this.key = key;
+        eventInterface = eventInter;
+    }
+    public MessageEvent(String key, Activity a,MessageInter eventInter) {
+        this.key = key;
+        this.activity = a;
         eventInterface = eventInter;
     }
 

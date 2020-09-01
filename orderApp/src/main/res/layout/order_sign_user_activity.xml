@@ -18,7 +18,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="签署人"
+                android:text="合同人"
                 android:textColor="@color/ui_txt_normal_color"
                 android:textSize="@dimen/h3_font_size"
                 android:layout_centerVertical="true"
@@ -30,7 +30,7 @@
                 android:layout_height="50dp"
                 android:background="@null"
                 android:maxLength="10"
-                android:hint="请输入姓名"
+                android:hint="请输入合同人姓名"
                 style="@style/ui_edit_txt_style"
                 android:textSize="@dimen/h4_font_size"
                 android:layout_marginLeft="97dp"/>

@@ -51,6 +51,7 @@ public class UploadHelper {
 
 
 
+    //身份证 idimg
     public void uploadStart(File file, CallBackInter inter) {
         new Thread(new Runnable() {
             @Override
@@ -63,7 +64,9 @@ public class UploadHelper {
                 map.put("timestamp",String.valueOf(System.currentTimeMillis()));
                 map.put("flag","file");
                 map.put("auth", CommSpUtils.getToken());
-                map.put("store_type","1");
+                map.put("store_type","person");
+                map.put("clientType","android");
+                map.put("version","1");
 
 //            map.put("token",token);
 

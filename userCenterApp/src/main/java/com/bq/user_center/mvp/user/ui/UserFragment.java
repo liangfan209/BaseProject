@@ -14,7 +14,6 @@ import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
-import com.bq.comm_config_lib.request.Api;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.user_center.R;
@@ -251,7 +250,8 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         }
         this.mUserinfo = info;
         mTvNickName.setText(info.getCustomer_info().getNick());
-        Glide.with(this).load(Api.BASE_API+ info.getCustomer_info().getHead_url()).into(mIvHead);
+        Utils.showImageHeader(info.getCustomer_info().getHead_url(),mIvHead);
+//        Glide.with(this).load(Api.BASE_API+ info.getCustomer_info().getHead_url()).into(mIvHead);
 
     }
 }

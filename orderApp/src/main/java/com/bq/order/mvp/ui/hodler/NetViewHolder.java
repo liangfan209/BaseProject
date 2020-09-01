@@ -30,8 +30,9 @@ public class NetViewHolder extends BaseViewHolder<BannerData> {
     public void bindData(BannerData data, int position, int pageSize) {
         ImageView imageView = findView(R.id.banner_image);
         if(!StringUtils.isEmpty(data.getImagePath())){
-            Glide.with(imageView).load(data.getImagePath())
-                    .apply(Utils.getRequestOptionRadus(imageView.getContext(),3)).into(imageView);
+//            Glide.with(imageView).load(data.getImagePath())
+//                    .apply(Utils.getRequestOptionRadus(imageView.getContext(),3)).into(imageView);
+            Utils.showImage(data.getImagePath(),imageView,3);
         }else if(data.getDrawable() != -1){
             Glide.with(imageView).load(data.getDrawable())
                     .apply(Utils.getRequestOptionRadus(imageView.getContext(),3)).into(imageView);

@@ -173,7 +173,12 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
     @Override
     protected void attach() {
         ARouter.getInstance().inject(this);
-        mTvTitle.setText("助学详情");
+
+        if(StringUtils.isEmpty(mPosterId)){
+            mTvTitle.setText("助学详情");
+        }else{
+            mTvTitle.setText("助学详情_专属连接");
+        }
         //创建viewhoder
         mTvInitialPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         if(!StringUtils.isEmpty(mProductId)){
@@ -185,7 +190,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
 
     private void initView() {
         mValue1.setText(mProductInfo.getBrand_name());
-        mValue2.setText(mProductInfo.getCategory());
+        mValue2.setText(mProductInfo.getProduction_name());
         String despatch_type = mProductInfo.getDespatch_type();
         mTvShippingValue.setText(mProductInfo.getDespatch_type());
         mTvMonthQuantity.setText("月销" + mProductInfo.getMonth_quantity());
@@ -204,6 +209,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
                 }
             }
             mTvTypeValue.setText(sb.toString());
+            mTvRealPrice.setText(AppUtils.getDouble2(mProductInfo.getSpecification_list().get(0).getSale_price()));
         }
         List<String> detail = mProductInfo.getDetail();
         for (int i = 0; i < detail.size(); i++) {
@@ -477,7 +483,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
         RelativeLayout rltSubtract = view.findViewById(R.id.rlt_subtract);
         TextView tvCount = view.findViewById(R.id.tv_count);
 
-        tvRealPrice.setText(AppUtils.getDouble2(mProductInfo.getMin_price()));
+        tvRealPrice.setText(AppUtils.getDouble2(mProductInfo.getSale_price()));
 
         FlowRadioGroup fg = view.findViewById(R.id.frg);
         FlowRadioGroup.LayoutParams params = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT,
@@ -486,15 +492,19 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
         params.setMargins(marginInt, marginInt, marginInt, 0);
         final List<SpecificationList> specification_list = mProductInfo.getSpecification_list();
 
+
         if(specification_list.size() == 0){
             tvBuy.setEnabled(false);
+        }
+        if(specification_list.size() > 0){
+            tvRealPrice.setText(AppUtils.getDouble2(specification_list.get(0).getSale_price()));
         }
         for (int i = 0; i < specification_list.size(); i++) {
             final RadioButton rb = (RadioButton) LayoutInflater.from(this).inflate(R.layout.order_layout_radiobutton, null);
             List<SpecificationList.SpecificationValueList> specificationValueList =
                     specification_list.get(i).getSpecification_value_list();
             Glide.with(this).asBitmap().apply(Utils.getRequestOptionRadus(rb.getContext(), 3))
-                    .load(specification_list.get(i).getShow_image())// Api.BASE_API + specification_list.get(i).getShow_image())
+                    .load(Utils.getHttpLink(specification_list.get(i).getShow_image()))// Api.BASE_API + specification_list.get(i).getShow_image())
                     .into(new SimpleTarget<Bitmap>() {
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
@@ -512,12 +522,14 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
                     sb.append("/");
                 }
             }
+
             rb.setText(sb.toString());
             if(!StringUtils.isEmpty(mTvTypeValue.getText().toString())){
                 if(mTvTypeValue.getText().toString().equals(sb.toString())){
                     tvBuySelcter.setText("已选择：“"+sb.toString()+"”");
                     mStock = specification_list.get(i).getStock();
                     tvBuyStock.setText("库存 "+mStock+" 件");
+//                    mTvRealPrice.setText(AppUtils.getDouble2(mProductInfo.getSale_price()));
                     Utils.showImage(specification_list.get(i).getShow_image(),ivIcon);
                     mProductInfo.setAttrubute(sb.toString());
                     mProductInfo.setImgPath(specification_list.get(i).getShow_image());
@@ -556,6 +568,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
                 mProductInfo.setRealPrice(specificationList.getSale_price());
                 mProductInfo.setSelectPosition(position);
                 mProductInfo.setImgPath(specificationList.getShow_image());
+                mTvRealPrice.setText(AppUtils.getDouble2(specificationList.getSale_price()));
 
                 Utils.showImage(specificationList.getShow_image(),ivIcon);
 
@@ -568,7 +581,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
         rltAdd.setOnClickListener(v -> {
             int count = Integer.valueOf(tvCount.getText().toString());
             if (count < mStock) {
-                count++;
+//                count++;
                 tvBuy.setEnabled(true);
             }else{
                 //将按钮变为不可点击
@@ -578,7 +591,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
         rltSubtract.setOnClickListener(v -> {
             int count = Integer.valueOf(tvCount.getText().toString());
             if (count > 1) {
-                count--;
+//                count--;
             }
             tvCount.setText(count + "");
         });
@@ -592,8 +605,15 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
         tvBuy.setOnClickListener(v -> {
             int count = Integer.valueOf(tvCount.getText().toString());
             mProductInfo.setCount(count);
-            ARouter.getInstance().build(AppArouter.ORDER_ORDER_COMMIT_ACTIVITY)
-                    .withSerializable("mProductInfo",mProductInfo).navigation();
+            if(StringUtils.isEmpty(mPosterId)){
+                ARouter.getInstance().build(AppArouter.ORDER_ORDER_COMMIT_ACTIVITY)
+                        .withSerializable("mProductInfo",mProductInfo).navigation();
+            }else{
+                ARouter.getInstance().build(AppArouter.ORDER_ORDER_COMMIT_ACTIVITY)
+                        .withSerializable("mProductInfo",mProductInfo)
+                        .withString("mPosterId",mPosterId).navigation();
+            }
+
 //                    .withSerializable("mProductInfo",mProductInfo).navigation();
             mCustomPopWindow.dissmiss();
 
@@ -627,7 +647,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
         for (String image : images) {
             imageInfo = new ImageInfo();
             // 原图地址
-            imageInfo.setOriginUrl(image);
+            imageInfo.setOriginUrl(Utils.getHttpLink(image));
             // 缩略图；实际使用中，根据需求传入缩略图路径。如果没有缩略图url，可以将两项设置为一样。
             imageInfo.setThumbnailUrl(image.concat("-400"));
             imageInfoList.add(imageInfo);

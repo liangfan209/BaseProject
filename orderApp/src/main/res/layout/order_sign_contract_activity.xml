@@ -30,7 +30,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="签署人"
+                        android:text="合同人"
                         android:textColor="@color/ui_txt_normal_color"
                         android:textSize="@dimen/h3_font_size"
                         android:layout_centerVertical="true"
@@ -146,18 +146,26 @@
             </LinearLayout>
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="800dp">
-                <ImageView
-                    android:id="@+id/iv_contract"
-                    android:scaleType="fitStart"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/llt_imgs"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                </LinearLayout>
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_contract"-->
+<!--                    android:scaleType="fitStart"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"/>-->
                 <ImageView
                     android:id="@+id/iv_sign"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_marginRight="35dp"
-                    android:layout_marginBottom="75dp"
+                    android:layout_marginBottom="125dp"
                     android:layout_gravity="bottom|right"/>
             </FrameLayout>
 

@@ -20,10 +20,19 @@ public class SpecificationList implements Serializable {
 
     private int id;
     private int sale_price;
+    private int original_price;
     private int stock;
     private String show_image;
     private List<SpecificationValueList> specification_value_list;
 
+
+    public int getOriginal_price() {
+        return original_price;
+    }
+
+    public void setOriginal_price(int original_price) {
+        this.original_price = original_price;
+    }
 
     public int getId() {
         return id;

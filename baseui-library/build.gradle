@@ -82,6 +82,7 @@ dependencies {
     implementation files('libs/umeng-share-QQ-simplify-6.9.6.jar')
     implementation files('libs/umeng-share-sina-simplify-6.9.6.jar')
     implementation files('libs/core_3.0.1.jar')
+    implementation files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
 
     //test
     api rootProject.ext.dependencies["junit"]
@@ -90,6 +91,7 @@ dependencies {
     api rootProject.ext.dependencies["retrofit.converter.gson"]
     api rootProject.ext.dependencies["okgo"]
     api rootProject.ext.dependencies["okgo.chuck"]
+
 }
 
 

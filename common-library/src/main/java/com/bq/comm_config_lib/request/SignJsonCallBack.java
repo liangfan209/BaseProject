@@ -78,7 +78,7 @@ public class SignJsonCallBack<T> extends JsonCallback<T> {
                 mRequestCallBack.onError("网络连接异常");
         }else if(ex instanceof UnknownHostException){
             if (mRequestCallBack != null)
-                mRequestCallBack.onError("无法解析域名"+Api.BASE_API);
+                mRequestCallBack.onError("请求失败，请检查您的网络");
         }else if(ex instanceof HttpException){
             if (mRequestCallBack != null)
                 mRequestCallBack.onError("找不到服务器");

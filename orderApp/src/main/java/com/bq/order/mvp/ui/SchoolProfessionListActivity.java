@@ -1,11 +1,8 @@
 package com.bq.order.mvp.ui;
 
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -23,7 +20,6 @@ import com.bq.order.mvp.ui.fragment.SchoolProfressionListFragment;
 import com.bq.order.requset.bean.ProfessionInfo;
 import com.bq.order.requset.bean.SchoolInfo;
 import com.bq.order.requset.bean.SchoolProfessionRequstBean;
-import com.bq.utilslib.AppUtils;
 import com.fan.baseuilibrary.view.CircleImageView;
 import com.fan.baseuilibrary.view.NoAnimationViewPager;
 import com.fan.baseuilibrary.view.flycotablayout.widget.SkinSlidingTabLayout;
@@ -68,8 +64,8 @@ public class SchoolProfessionListActivity extends BaseActivity implements Produc
     @BindView(R2.id.tv_expance)
     TextView mTvExpance;
 
-    @BindView(R2.id.scrollview_txt)
-    ScrollView mScrollviewTxt;
+//    @BindView(R2.id.scrollview_txt)
+//    ScrollView mScrollviewTxt;
 
     private ProductPresenter mProductPresenter;
 
@@ -81,13 +77,13 @@ public class SchoolProfessionListActivity extends BaseActivity implements Produc
     private boolean scollBoo = true;
 
 
-    private String[] mTitles = {"高起专", "专升本", "考研"};
-    private String[] catogoryStr ={"specialty","undergraduate","graduate"};
+    private String[] mTitles = {"高起专","高起本", "专升本", "考研" };
+    private String[] catogoryStr ={"specialty","highcost","undergraduate","graduate"};
     private ArrayList<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
     protected int getContentViewLayout() {
-        return R.layout.order_activity_school_detail;
+        return R.layout.order_activity_school_detail1;
     }
 
     @Override
@@ -132,30 +128,20 @@ public class SchoolProfessionListActivity extends BaseActivity implements Produc
         }
 
 
-        if(mTvDetail.getText().length() > 80){
-            mScrollviewTxt.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return scollBoo;
-                }
-            });
+        if(mTvDetail.getText().length() >80){
+            mRltExpance.setVisibility(View.VISIBLE);
             mRltExpance.setOnClickListener(v->{
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mScrollviewTxt.getLayoutParams();
-                int height = layoutParams.height;
-                if(height == AppUtils.dp2px(this,60)){
-                    scollBoo = false;
-                    layoutParams.height = AppUtils.dp2px(this,180);
+                String str = mTvExpance.getText().toString();
+                if(str.contains("展开")){
                     mTvExpance.setText("收起详情");
+                    mTvDetail.setMaxLines(1000);
                     mTvExpance.setCompoundDrawablesWithIntrinsicBounds(0,0,R.mipmap.icon_expansion_up,0);
-
                 }else{
-                    layoutParams.height = AppUtils.dp2px(this,60);
-                    scollBoo = true;
                     mTvExpance.setText("展开详情");
+                    mTvDetail.setMaxLines(3);
                     mTvExpance.setCompoundDrawablesWithIntrinsicBounds(0,0,R.mipmap.icon_expansion_down,0);
-                    mScrollviewTxt.setScrollY(0);
                 }
-                mScrollviewTxt.setLayoutParams(layoutParams);
+
             });
         }else{
             mRltExpance.setVisibility(View.GONE);

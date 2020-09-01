@@ -25,7 +25,6 @@ import com.bq.order.requset.bean.BannerData;
 import com.bq.order.requset.bean.BannerInfo;
 import com.bq.order.requset.bean.ProductSearchBean;
 import com.bq.order.requset.bean.SchoolInfo;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -210,8 +209,9 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
                     @Override
                     protected void convert(@NotNull BaseViewHolder helper, SchoolInfo bean) {
                         ImageView iv = helper.getView(R.id.iv_icon);
-                        Glide.with(iv).load(bean.getIcons())
-                                .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
+//                        Glide.with(iv).load(bean.getIcons())
+//                                .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
+                        Utils.showImage(bean.getIcons(),iv,2);
                         helper.setText(R.id.tv_title,bean.getName());
                         helper.setText(R.id.tv_content,bean.getContent());
                         TextView tvLeft = helper.getView(R.id.agent_left);
@@ -227,6 +227,7 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
                         }
                         tvLeft.setText(sb.toString());
                         if(agent_list.size() > 0){
+                            tvRight.setVisibility(View.VISIBLE);
                             if(agent_list.size() == 1){
                                 tvRight.setText("1家机构为您服务");
                             }else{

@@ -1,6 +1,7 @@
 package com.bq.order.mvp.ui;
 
 import com.bq.comm_config_lib.mvp.BaseIView;
+import com.bq.order.requset.bean.ContractInfo;
 import com.bq.order.requset.bean.OrderInfo;
 
 import java.util.List;
@@ -20,4 +21,5 @@ public interface OrderIview extends BaseIView {
 
     default void getContactImgs(List<String> list){}
     default void addContactView(){}
+    default void createContactView(ContractInfo info){}
 }

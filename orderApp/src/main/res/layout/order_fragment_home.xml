@@ -108,7 +108,8 @@
                     android:id="@+id/rlt_hot_school"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="-10dp">
+                    android:layout_marginRight="-10dp"
+                    android:visibility="gone">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -221,12 +222,48 @@
                         android:textSize="@dimen/h5_font_size"
                         android:layout_alignParentRight="true"
                         />
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_profession"
-                        android:layout_marginTop="35dp"
+
+
+                    <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"/>
+                        android:layout_marginTop="12dp">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_profession"
+                            android:layout_marginTop="35dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:nestedScrollingEnabled="false"/>
+
+
+                        <RelativeLayout
+                            android:id="@+id/rlt_profession_nodata"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="15dp"
+                            android:background="#f2f2f2"
+                            android:visibility="visible">
+
+                            <ImageView
+                                android:layout_width="108dp"
+                                android:layout_height="72dp"
+                                android:background="@mipmap/ic_no_data"
+                                android:visibility="visible"
+                                android:layout_centerInParent="true"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="暂无记录"
+                                android:textColor="#ff666666"
+                                android:textSize="13sp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="140dp"
+                                />
+                        </RelativeLayout>
+                    </FrameLayout>
+
                 </RelativeLayout>
 
 
