@@ -312,7 +312,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:layout_height="30dp"
+                android:background="#f4f4f4">
 
                 <TextView
                     android:id="@+id/tv_txt1"
@@ -345,7 +346,8 @@
                 android:id="@+id/llt_imgs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="#f4f4f4">
 
             </LinearLayout>
 

@@ -76,6 +76,7 @@ public class AutographActivity extends BaseActivity {
                                 if (aBoolean) {
                                     mSignView.save("/sdcard/sign.png", true, 10);
 //                                    ToastUtils.showToast(AutographActivity.this,"图片保存成功");
+                                    setResult(20);
                                     finish();
                                 } else {
                                     ToastUtils.showToast(AutographActivity.this, "没有存储权限，请打开相关权限");

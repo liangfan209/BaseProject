@@ -281,7 +281,7 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
         mRltProfessionNodata.setVisibility(list.size()>0?View.GONE: View.VISIBLE);
 //        mrlt.setVisibility(list.size()>0?View.GONE: View.VISIBLE);
         mHostProfessionlist = list;
-        mProductAdapter.setNewData(mHostProfessionlist);
+        mProductAdapter.setNewInstance(mHostProfessionlist);
         mProductAdapter.notifyDataSetChanged();
     }
 

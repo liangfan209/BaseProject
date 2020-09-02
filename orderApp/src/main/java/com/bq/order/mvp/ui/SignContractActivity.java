@@ -267,7 +267,7 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 11 && resultCode == 0){
+        if(requestCode == 11 && resultCode == 20){
             //将图片展示出来
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = false;

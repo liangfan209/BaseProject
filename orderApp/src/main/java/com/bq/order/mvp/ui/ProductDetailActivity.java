@@ -190,7 +190,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
 
     private void initView() {
         mValue1.setText(mProductInfo.getBrand_name());
-        mValue2.setText(mProductInfo.getProduction_name());
+        mValue2.setText(mProductInfo.getCategory());
         String despatch_type = mProductInfo.getDespatch_type();
         mTvShippingValue.setText(mProductInfo.getDespatch_type());
         mTvMonthQuantity.setText("月销" + mProductInfo.getMonth_quantity());

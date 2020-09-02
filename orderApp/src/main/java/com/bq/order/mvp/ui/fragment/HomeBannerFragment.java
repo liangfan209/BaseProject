@@ -84,8 +84,6 @@ public class HomeBannerFragment extends BaseFragment implements ProductIview {
                 .setAdapter(new BannerAdapter())
                 .setOnPageClickListener(position -> {
                     BannerData info = (BannerData) mBannerView.getData().get(position);
-//                    ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
-//                            .withString("h5url",info.getUrl()).navigation();
                     Utils.goCustomActivity(this.getActivity(), info.getUrl());
                 }).create();
 
@@ -107,8 +105,6 @@ public class HomeBannerFragment extends BaseFragment implements ProductIview {
                 .setAdapter(homeAdapter)
                 .setOnPageClickListener(position -> {
                     BannerData info = (BannerData) mBannerView.getData().get(position);
-//                    ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
-//                            .withString("h5url",info.getUrl()).navigation();
                     Utils.goCustomActivity(this.getActivity(), info.getUrl());
                 }).create();
 
@@ -172,9 +168,6 @@ public class HomeBannerFragment extends BaseFragment implements ProductIview {
     }
 
     private void initHomeBanner(List<BannerInfo> list) {
-
-
-
         ArrayList<BannerData> dataList = new ArrayList<BannerData>();
         for (BannerInfo bannerInfo : list) {
             dataList.add(new BannerData(bannerInfo.getId(), bannerInfo.getName(), bannerInfo.getThumbnail(),

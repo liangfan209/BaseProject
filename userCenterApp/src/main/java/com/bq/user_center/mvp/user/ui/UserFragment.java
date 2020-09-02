@@ -100,7 +100,7 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
             new Handler().postDelayed(()->{
                 EventBus.getDefault().post("go_home");
                 ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
-            },1200);
+            },300);
         }
     }
 
