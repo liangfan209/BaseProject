@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhpan.bannerview.BannerViewPager
+        android:id="@+id/banner_view"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="182dp"
+        app:bvp_round_corner="7dp"
+        app:bvp_indicator_visibility="visible"
+        app:bvp_indicator_normal_color="@color/ui_txt_hint_color"
+        app:bvp_indicator_checked_color="@color/white"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_product_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"/>
+
+    <com.zhpan.bannerview.BannerViewPager
+        android:id="@+id/banner_advertising"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        app:bvp_indicator_visibility="visible"
+        app:bvp_indicator_normal_color="@color/ui_txt_hint_color"
+        app:bvp_indicator_checked_color="@color/white"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rlt_hot_school"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="热门学校"
+            android:textColor="@color/ui_txt_normal_color"
+            android:textSize="@dimen/h2_font_size"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/tv_hot_school"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看更多>"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/ui_primary_color"
+            android:textSize="@dimen/h5_font_size"
+            android:layout_marginTop="3dp"
+            android:layout_alignParentRight="true"
+            />
+
+        <com.zhpan.bannerview.BannerViewPager
+            android:id="@+id/banner_school"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            app:bvp_indicator_visibility="gone"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlt_hot_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="热门专业"
+            android:textColor="@color/ui_txt_normal_color"
+            android:textSize="@dimen/h2_font_size"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/tv_hot_profession"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"
+            android:text="查看更多>"
+            android:textColor="@color/ui_primary_color"
+            android:textSize="@dimen/h5_font_size"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlt_profession_nodata"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:background="#f2f2f2"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="108dp"
+            android:layout_height="72dp"
+            android:background="@mipmap/ic_no_data"
+            android:visibility="visible"
+            android:layout_centerInParent="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂无记录"
+            android:textColor="#ff666666"
+            android:textSize="13sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="140dp"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
+
+
+

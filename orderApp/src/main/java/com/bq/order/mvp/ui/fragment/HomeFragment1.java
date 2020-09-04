@@ -3,11 +3,12 @@ package com.bq.order.mvp.ui.fragment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
@@ -22,8 +23,13 @@ import com.bq.order.R;
 import com.bq.order.R2;
 import com.bq.order.mvp.presenter.ProductPresenter;
 import com.bq.order.mvp.ui.ProductIview;
+import com.bq.order.mvp.ui.adapter.BannerAdapter;
 import com.bq.order.mvp.ui.adapter.SchoolBannerAdapter;
+import com.bq.order.mvp.ui.hodler.NewTypeViewHolder;
+import com.bq.order.requset.bean.BannerData;
+import com.bq.order.requset.bean.BannerInfo;
 import com.bq.order.requset.bean.ProductSearchBean;
+import com.bq.order.requset.bean.ProductTypeBean;
 import com.bq.order.requset.bean.ProfessionInfo;
 import com.bq.order.requset.bean.SchoolInfo;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -35,6 +41,7 @@ import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.zhpan.bannerview.BannerViewPager;
 import com.zhpan.bannerview.constants.IndicatorGravity;
 import com.zhpan.indicator.enums.IndicatorSlideMode;
@@ -49,7 +56,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -62,51 +69,44 @@ import butterknife.OnClick;
  * 时间：2020/7/29
  * 版权：
  */
-//@Route(path = AppArouter.ORDER_HOME_FRAGMENT)
-public class HomeFragment extends BaseFragment implements  ProductIview {
+@Route(path = AppArouter.ORDER_HOME_FRAGMENT)
+public class HomeFragment1 extends BaseFragment implements  ProductIview {
+
+
+
+    @BindView(R2.id.rv_profession)
+    RecyclerView mRvProfession;
+    @BindView(R2.id.smartlayout)
+    SmartRefreshLayout mSmartRefreshLayout;
+    @BindView(R2.id.iv_scan_home)
+    ImageView mIvScanHome;
     @BindView(R2.id.tv_address_location)
     TextView mTvAddressLocation;
     @BindView(R2.id.det_search)
     DeletableEditText mDetSearch;
     @BindView(R2.id.rlt_search)
     RelativeLayout mRltSearch;
-    @BindView(R2.id.flt_home_banner)
-    FrameLayout mFltHomeBanner;
-    @BindView(R2.id.tv_hot_school)
-    TextView mTvHotSchool;
 
-//    @BindView(R2.id.rv_school)
-//    RecyclerView mRvSchool;
 
-    @BindView(R2.id.rv_news)
-    RecyclerView mRvNews;
-    @BindView(R2.id.tv_hot_profession)
-    TextView mTvHotProfession;
-    @BindView(R2.id.rv_profession)
-    RecyclerView mRvProfession;
-    @BindView(R2.id.smartlayout)
-    SmartRefreshLayout mSmartRefreshLayout;
 
-    @BindView(R2.id.rlt_hot_school)
+
+    BannerViewPager mBannerView;
+    RecyclerView mRvProductType;
+    BannerViewPager mBannerAdvertising;
     RelativeLayout mRltHotSchool;
-    @BindView(R2.id.rlt_hot_product)
-    RelativeLayout mRltHotProduct;
-
-    @BindView((R2.id.banner_school))
+    TextView mTvHotSchool;
     BannerViewPager mBannerSchool;
-
-    @BindView(R2.id.iv_scan_home)
-    ImageView mIvScanHome;
-
-    @BindView(R2.id.rlt_content_school)
     RelativeLayout mRltContentSchool;
-    @BindView(R2.id.rlt_profession_nodata)
+    TextView mTvHotProfession;
     RelativeLayout mRltProfessionNodata;
 
 
-    private HomeBannerFragment mHomeBannerFragment;
+
+
+    private String[] professionStr = {"undergraduate", "specialty", "graduate", "highcost"};
+    private String[] productTypeStr = {"专升本", "高起专", "考研", "高起本"};
+    private int[] productTypeInts = {R.mipmap.icon_benke, R.mipmap.icon_zhuanke, R.mipmap.icon_kaoyan, R.mipmap.icon_zigezheng};
     private ProductPresenter mProductPresenter;
-//    BaseQuickAdapter mSchoolAdapter;
     BaseQuickAdapter mProductAdapter;
     List<SchoolInfo> mHostSchoollist = new ArrayList<>();
     List<ProfessionInfo> mHostProfessionlist = new ArrayList<>();
@@ -120,20 +120,23 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
 
     @Override
     protected int getContentViewLayout() {
-        return R.layout.order_fragment_home;
+        return R.layout.order_fragment_home1;
     }
 
     @Override
     protected void attach() {
         mTvAddressLocation.setText(CommSpUtils.getLocation());
-        mHomeBannerFragment = new HomeBannerFragment();
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.flt_home_banner,mHomeBannerFragment);
-        fragmentTransaction.commit();
-
-        initHotSchoolView();
-//        intNewsView();
         intHotProfessionView();
+
+        initEditText();
+        mSmartRefreshLayout.setEnableLoadmore(false);
+        mSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                updateView();
+            }
+        });
+        EventBus.getDefault().register(this);
         EventBus.getDefault().post(new MessageEvent("location", getActivity(), new MessageInter() {
             @Override
             public void callBack(MessageBody data) {
@@ -143,22 +146,6 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
                 updateView();
             }
         }));
-
-        updateView();
-        //getbanner();
-        initEditText();
-
-        mSmartRefreshLayout.setEnableLoadmore(false);
-        mSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                updateView();
-                mHomeBannerFragment.updateView();
-            }
-        });
-
-        EventBus.getDefault().register(this);
-//        updateApp();
     }
 
     @Override
@@ -176,6 +163,99 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
         }
     }
 
+    @Override
+    public void getBannerList(String type, List<BannerInfo> list) {
+        if ("index_banner".equals(type)) {
+            initHomeBanner(list);
+        } else if ("index_mid".equals(type)) {
+            initAdvertisingBeanner(list);
+        }
+    }
+
+    private void initHomeBanner(List<BannerInfo> list) {
+        BannerAdapter homeAdapter = new BannerAdapter(new NewTypeViewHolder.HolderInter() {
+            @Override
+            public void createVideo(StandardGSYVideoPlayer palyer) {
+            }
+        });
+        mBannerView
+                .setScrollDuration(600)
+                .setLifecycleRegistry(getLifecycle())
+                .setIndicatorStyle(IndicatorStyle.CIRCLE)
+                .setIndicatorSlideMode(IndicatorSlideMode.SMOOTH)
+                .setInterval(5000)
+                .setIndicatorGravity(IndicatorGravity.CENTER)
+//                .setIndicatorView(10,10)
+                .setIndicatorVisibility(View.VISIBLE)
+                .setCanLoop(true)
+                .setAdapter(homeAdapter)
+                .setOnPageClickListener(position -> {
+                    BannerData info = (BannerData) mBannerView.getData().get(position);
+                    Utils.goCustomActivity(this.getActivity(), info.getUrl());
+                }).create();
+        ArrayList<BannerData> dataList = new ArrayList<BannerData>();
+        for (BannerInfo bannerInfo : list) {
+            dataList.add(new BannerData(bannerInfo.getId(), bannerInfo.getName(), bannerInfo.getThumbnail(),
+                    bannerInfo.getUrl(), 1));
+        }
+        mBannerView.refreshData(dataList);
+    }
+
+    private void initAdvertisingBeanner(List<BannerInfo> list) {
+        mBannerAdvertising
+                .setScrollDuration(600)
+                .setLifecycleRegistry(getLifecycle())
+                .setIndicatorStyle(IndicatorStyle.CIRCLE)
+                .setIndicatorSlideMode(IndicatorSlideMode.SMOOTH)
+                .setInterval(3000)
+                .setIndicatorGravity(IndicatorGravity.CENTER)
+                .setCanLoop(true)
+                .setAdapter(new BannerAdapter())
+                .setOnPageClickListener(position -> {
+                    BannerData info = (BannerData) mBannerView.getData().get(position);
+                    Utils.goCustomActivity(this.getActivity(), info.getUrl());
+                }).create();
+        ArrayList<BannerData> dataList = new ArrayList<BannerData>();
+        for (BannerInfo bannerInfo : list) {
+            dataList.add(new BannerData(bannerInfo.getId(), bannerInfo.getName(), bannerInfo.getThumbnail(),
+                    bannerInfo.getUrl(), 1));
+        }
+        mBannerAdvertising.refreshData(dataList);
+    }
+
+
+    /**
+     * 中间4个tab页
+     */
+    private void initRecycleView() {
+        List<ProductTypeBean.ProductTypeInfo> list = new ArrayList<>();
+        for (int i = 0; i < productTypeStr.length; i++) {
+            list.add(new ProductTypeBean.ProductTypeInfo(productTypeInts[i], productTypeStr[i]));
+        }
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 4);
+        mRvProductType.setLayoutManager(gridLayoutManager);
+        BaseQuickAdapter adapter = new
+                BaseQuickAdapter<ProductTypeBean.ProductTypeInfo, BaseViewHolder>(R.layout.order_item_product_type, list) {
+                    @Override
+                    protected void convert(@NotNull BaseViewHolder helper,
+                                           ProductTypeBean.ProductTypeInfo bean) {
+                        ImageView iv = helper.getView(R.id.iv_img);
+                        iv.setBackground(getResources().getDrawable(bean.getId()));
+                        helper.setText(R.id.tv_name, bean.getName());
+                    }
+                };
+        mRvProductType.setAdapter(adapter);
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                ProductSearchBean bean = new ProductSearchBean();
+                ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY)
+                        .withString("forType", professionStr[position]).navigation();
+//                parentFragment.updateTest();
+            }
+        });
+    }
+
     /**
      * 在线更新
      */
@@ -188,6 +268,8 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
     void updateView(){
         mProductPresenter.getHotSchool(searchStr);
         mProductPresenter.getHotProfessionList(searchStr);
+        mProductPresenter.getHomeBanner("index_banner");
+        mProductPresenter.getHomeBanner("index_mid");
     }
 
     private void initEditText() {
@@ -205,10 +287,8 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
     }
 
     private void intHotProfessionView() {
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         mRvProfession.setLayoutManager(linearLayoutManager);
-
         mProductAdapter = new
                 BaseQuickAdapter<ProfessionInfo, BaseViewHolder>(R.layout.order_item_profession, mHostProfessionlist) {
                     @Override
@@ -222,7 +302,6 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
                     }
                 };
         mRvProfession.setAdapter(mProductAdapter);
-
         mProductAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
@@ -231,6 +310,30 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
                         .withSerializable("mProfessionInfo",info).navigation();
             }
         });
+        View topView = LinearLayout.inflate(mRvProfession.getContext(),R.layout.order_fragment_home_recycleview_top,null);
+        mBannerView = topView.findViewById(R.id.banner_view);
+        mRvProductType = topView.findViewById(R.id.rv_product_type);
+        mBannerAdvertising = topView.findViewById(R.id.banner_advertising);
+        mRltHotSchool = topView.findViewById(R.id.rlt_hot_school);
+        mTvHotSchool = topView.findViewById(R.id.tv_hot_school);
+        mTvHotProfession = topView.findViewById(R.id.tv_hot_profession);
+        mBannerSchool = topView.findViewById(R.id.banner_school);
+        mRltProfessionNodata = topView.findViewById(R.id.rlt_profession_nodata);
+
+        mTvHotSchool.setOnClickListener(v->{
+            ARouter.getInstance().build(AppArouter.ORDER_SCHOOL_LIST_ACTIVITY).navigation();
+        });
+        mTvHotProfession.setOnClickListener(v->{
+            String serachInfo = new Gson().toJson(new ProductSearchBean(CommSpUtils.getLocation()));
+            ARouter.getInstance().build(AppArouter.ORDER_PROFESSION_LIST_ACTIVITY)
+                    .withString("mSearchInfo",serachInfo).navigation();
+        });
+
+        initHotSchoolView();
+        mProductAdapter.addHeaderView(topView);
+        //获取所有接口
+        initRecycleView();
+        updateView();
     }
 
 
@@ -245,40 +348,12 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
                 .setCanLoop(false)
                 .setAdapter(new SchoolBannerAdapter())
                 .create();
-
-
-
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
-//        mRvSchool.setLayoutManager(gridLayoutManager);
-//        mSchoolAdapter = new
-//                BaseQuickAdapter<SchoolInfo, BaseViewHolder>(R.layout.order_item_school, mHostSchoollist) {
-//                    @Override
-//                    protected void convert(@NotNull BaseViewHolder helper,
-//                                           SchoolInfo bean) {
-//                        helper.setText(R.id.tv_name,bean.getName());
-//                        helper.setText(R.id.tv_remark,bean.getContent());
-//                        CircleImageView iv = helper.getView(R.id.iv_icon);
-//                        Glide.with(iv).load(bean.getLogo_url())
-//                                .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
-//                    }
-//                };
-//        mRvSchool.setAdapter(mSchoolAdapter);
-//
-//        mSchoolAdapter.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-//                SchoolInfo info = (SchoolInfo) adapter.getData().get(position);
-//                ARouter.getInstance().build(AppArouter.ORDER_SCHOOL_DETAIL_ACTIVITY)
-//                        .withString("mSchoolId",info.getId()).navigation();
-//            }
-//        });
     }
 
     @Override
     public void getProfessionListView(List<ProfessionInfo> list) {
         mRvProfession.setVisibility(list.size()>0?View.VISIBLE: View.GONE);
         mRltProfessionNodata.setVisibility(list.size()>0?View.GONE: View.VISIBLE);
-//        mrlt.setVisibility(list.size()>0?View.GONE: View.VISIBLE);
         mHostProfessionlist = list;
         mProductAdapter.setNewInstance(mHostProfessionlist);
         mProductAdapter.notifyDataSetChanged();
@@ -288,7 +363,6 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
     @Override
     public void getSchooListlView(List<SchoolInfo> list) {
         mRltHotSchool.setVisibility(list.size()>0?View.VISIBLE: View.GONE);
-        mRltContentSchool.setVisibility(list.size()>0?View.GONE: View.VISIBLE);
         mHostSchoollist = list;
         List<List<SchoolInfo>> mlists = new ArrayList<>();
         if(mHostSchoollist.size() == 0)return;
@@ -319,17 +393,11 @@ public class HomeFragment extends BaseFragment implements  ProductIview {
         mSmartRefreshLayout.finishRefresh();
     }
 
-    @OnClick({R2.id.rlt_search, R2.id.tv_hot_school, R2.id.tv_hot_profession,R2.id.tv_address_location,
+    @OnClick({R2.id.rlt_search, R2.id.tv_address_location,
             R2.id.iv_scan_home,R2.id.iv_address_location})
     public void onViewClicked(View view) {
-        if(view.getId() == R.id.tv_hot_school){
-            ARouter.getInstance().build(AppArouter.ORDER_SCHOOL_LIST_ACTIVITY).navigation();
-        }else if(view.getId() == R.id.tv_hot_profession){
-            //默认湖北武汉
-            String serachInfo = new Gson().toJson(new ProductSearchBean(CommSpUtils.getLocation()));
-            ARouter.getInstance().build(AppArouter.ORDER_PROFESSION_LIST_ACTIVITY)
-                    .withString("mSearchInfo",serachInfo).navigation();
-        }else if(view.getId() == R.id.rlt_search){
+
+            if(view.getId() == R.id.rlt_search){
             jumpProductListActivity(null);
 //            ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY).navigation();
         }else if(view.getId() == R.id.tv_address_location){

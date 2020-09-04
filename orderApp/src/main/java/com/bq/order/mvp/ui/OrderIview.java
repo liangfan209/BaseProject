@@ -19,7 +19,7 @@ public interface OrderIview extends BaseIView {
     default void getOrderListView(List<OrderInfo> list){};
     default void cancelOrderView(){};
 
-    default void getContactImgs(List<String> list){}
+    default void getContactInfo(ContractInfo info){}
     default void addContactView(){}
-    default void createContactView(ContractInfo info){}
+//    default void createContactView(ContractInfo info){}
 }

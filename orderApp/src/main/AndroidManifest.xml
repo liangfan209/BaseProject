@@ -3,7 +3,8 @@
     <application>
         <activity android:name=".mvp.ui.ProductDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
         <activity android:name=".mvp.ui.OrderListActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"

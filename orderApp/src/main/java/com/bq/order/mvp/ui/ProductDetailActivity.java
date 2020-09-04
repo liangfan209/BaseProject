@@ -127,6 +127,13 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
     @BindView(R2.id.llt_imgs)
     LinearLayout mLltImgs;
 
+    @BindView(R2.id.tv_school_val)
+    TextView mTvSchoolVal;
+    @BindView(R2.id.tv_profession_val)
+    TextView mTvProfessionVal;
+    @BindView(R2.id.tv_year_val)
+    TextView mTvYearval;
+
 
     @BindView(R2.id.tv_index)
     TextView mTvIndex;
@@ -195,8 +202,12 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
         mTvShippingValue.setText(mProductInfo.getDespatch_type());
         mTvMonthQuantity.setText("月销" + mProductInfo.getMonth_quantity());
         mTvProductTitle.setText(mProductInfo.getTitle());
-        mTvRealPrice.setText(AppUtils.getDouble2(mProductInfo.getMin_price()));
+//        mTvRealPrice.setText(AppUtils.getDouble2(mProductInfo.getMin_price()));
         mTvProductRemark.setText(mProductInfo.getDescription());
+
+        mTvSchoolVal.setText(mProductInfo.getSchool_name());
+        mTvProfessionVal.setText(mProductInfo.getMajor_name());
+        mTvYearval.setText(mProductInfo.getDuration());
 
         if( mProductInfo.getSpecification_list().size() > 0){
             List<SpecificationList.SpecificationValueList> specification_value_list =
@@ -576,8 +587,14 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
         });
 
 
-        TextView tvInitPrice = view.findViewById(R.id.tv_initial_price);
-        tvInitPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        if(!StringUtils.isEmpty(mPosterId)){
+            TextView tvInitPrice = view.findViewById(R.id.tv_initial_price);
+            tvInitPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            if(mProductInfo.getSpecification_list().size() > 0){
+                mTvRealPrice.setText(AppUtils.getDouble2(mProductInfo.getSpecification_list().get(0).getOriginal_price()));
+            }
+        }
+
         rltAdd.setOnClickListener(v -> {
             int count = Integer.valueOf(tvCount.getText().toString());
             if (count < mStock) {

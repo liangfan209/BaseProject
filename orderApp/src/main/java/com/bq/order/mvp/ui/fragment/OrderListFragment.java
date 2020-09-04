@@ -154,12 +154,11 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                         if(status.contains("order_launched")){
                             showPayView(info.getId()+"",AppUtils.getDouble2(orderItemListBean.getSale_price()*orderItemListBean.getQuantity()));
                             //待发货  待收货
-                        }else if(status.contains("payment_finished") || status.contains("delivery_finished")){
+                        }else if(status.contains("delivery_finished")){
                             ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
                                     .withString("mOrderDetailId",info.getId()+"")
-                                    .withSerializable("mInvoiceInfo",info.getInvoice_info())
                                     .withInt("sign",1)
-                                    .withSerializable("imgPathList",info.getContract_background()).navigation();
+                                    .navigation();
 
 
                         }else if(status.contains("order_finished")){
@@ -192,7 +191,7 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                         //待发货
                     }else if(status.contains("payment_finished")){
                         tvHint.setVisibility(View.GONE);
-                        tvPrimary.setVisibility(View.VISIBLE);
+                        tvPrimary.setVisibility(View.GONE);
                         tvPrimary.setText("签署合同");
                         tvType.setText("已付款");
                         //待收货

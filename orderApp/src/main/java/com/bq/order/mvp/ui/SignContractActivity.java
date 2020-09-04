@@ -16,7 +16,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.msgService.bean.UserInfo;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.comm_config_lib.utils.Utils;
@@ -26,7 +25,6 @@ import com.bq.order.api.OrderEventKey;
 import com.bq.order.mvp.presenter.OrderPresenter;
 import com.bq.order.requset.bean.ContractInfo;
 import com.bq.order.requset.bean.ContractRequsetBean;
-import com.bq.order.requset.bean.InvoiceInfo;
 import com.bq.utilslib.AccountValidatorUtil;
 import com.bq.utilslib.EditFormatUtils;
 import com.fan.baseuilibrary.utils.ToastUtils;
@@ -37,7 +35,6 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.Nullable;
 import butterknife.BindView;
@@ -93,18 +90,18 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
     LinearLayout mLltTopContent;
 
     private OrderPresenter mOrderPresenter;
-    private UserInfo userInfo;
-
     private String contactId="";
 
-    @Autowired
-    InvoiceInfo mInvoiceInfo;
+
     @Autowired
     String mOrderDetailId;
+
     @Autowired
     int sign;
+
     @Autowired
-    ArrayList<String> imgPathList;
+    ContractInfo mContractInfo;
+
     private int flag = -1;
 
 
@@ -122,9 +119,7 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
 
     @Override
     protected void attach() {
-
         ARouter.getInstance().inject(this);
-
         EditFormatUtils.idCardAddSpace(mEtIdCard);
         EditFormatUtils.phoneNumAddSpace(mEtPhone);
 //        mEtIdCard.addTextChangedListener(new TextWatcher() {
@@ -140,61 +135,68 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
 //            }
 //        });
 
+//签合同
 
-        //签合同
-        if(sign == 1 && !StringUtils.isEmpty(mOrderDetailId)){
-//            Utils.showImage(imgPath,mIvContract);
-            //根据订单id，创建合同
-            mOrderPresenter.createContract(mOrderDetailId);
-            mTvTitle.setText("签合同");
-            if(mInvoiceInfo != null){
-                mEtName.setText(mInvoiceInfo.getName());
-                mEtPhone.setText(mInvoiceInfo.getPhone());
-                mEtIdCard.setText(mInvoiceInfo.getIdentification());
-                mEtName.setEnabled(false);
-                mEtPhone.setEnabled(false);
-                mEtIdCard.setEnabled(false);
-                mEtName.setClearDrawableVisible(false);
-                mEtPhone.setClearDrawableVisible(false);
-                mEtIdCard.setClearDrawableVisible(false);
+        if(mContractInfo != null){
+            mEtName.setText(mContractInfo.getName());
+            mEtPhone.setText(mContractInfo.getPhone());
+            mEtIdCard.setText(mContractInfo.getIdentification());
+            mEtName.setEnabled(false);
+            mEtPhone.setEnabled(false);
+            mEtIdCard.setEnabled(false);
+            mEtName.setClearDrawableVisible(false);
+            mEtPhone.setClearDrawableVisible(false);
+            mEtIdCard.setClearDrawableVisible(false);
+            ArrayList<String> list = mContractInfo.getImg_url();
+            if(list == null || list.size() == 0)return;
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            for (int i = 0; i < list.size(); i++) {
+                ImageView iv = new ImageView(this);
+                Utils.showImage(list.get(i),iv);
+                mLltImgs.addView(iv,params);
             }
+        }
+
+        if(sign == 1){
+            mTvTitle.setText("签合同");
 
         }else{
             mTvTitle.setText("查看合同");
-            if(imgPathList != null){
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                for (int i = 0; i < imgPathList.size(); i++) {
-                    ImageView iv = new ImageView(this);
-                    Utils.showImage(imgPathList.get(i),iv);
-                    mLltImgs.addView(iv,params);
-                }
-            }else{
-                mOrderPresenter.getContactImg(mOrderDetailId);
-            }
             mRltBottom.setVisibility(View.GONE);
             mLltTopContent.setVisibility(View.GONE);
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mScrollview.getLayoutParams();
             layoutParams.bottomMargin = 0;
             mScrollview.setLayoutParams(layoutParams);
         }
-    }
 
-    @Override
-    public void createContactView(ContractInfo info) {
 
-        contactId = info.getId();
-        ArrayList<String> imgPathList = info.getImg_url();
-        for (int i = 0; i < imgPathList.size(); i++) {
-            ImageView iv = new ImageView(this);
-            Utils.showImage(imgPathList.get(i),iv);
-            mLltImgs.addView(iv);
+
+        if(!StringUtils.isEmpty(mOrderDetailId)){
+            mOrderPresenter.getContactImg(mOrderDetailId);
         }
     }
 
+
     @Override
-    public void getContactImgs(List<String> list) {
+    public void getContactInfo(ContractInfo info) {
+
+        if(info != null){
+            mEtName.setText(info.getName());
+            mEtPhone.setText(info.getPhone());
+            mEtIdCard.setText(info.getIdentification());
+            mEtName.setEnabled(false);
+            mEtPhone.setEnabled(false);
+            mEtIdCard.setEnabled(false);
+            mEtName.setClearDrawableVisible(false);
+            mEtPhone.setClearDrawableVisible(false);
+            mEtIdCard.setClearDrawableVisible(false);
+        }else{
+            return;
+        }
+
+        contactId = info.getId();
+        ArrayList<String> list = info.getImg_url();
         if(list == null || list.size() == 0)return;
-//        Utils.showImage(list.get(0),mIvContract);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         for (int i = 0; i < list.size(); i++) {
             ImageView iv = new ImageView(this);

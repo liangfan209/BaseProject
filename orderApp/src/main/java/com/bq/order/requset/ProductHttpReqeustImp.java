@@ -8,7 +8,6 @@ import com.bq.netlibrary.NetManager;
 import com.bq.netlibrary.http.BaseResponse;
 import com.bq.order.requset.bean.AppVersionBean;
 import com.bq.order.requset.bean.BannerListBean;
-import com.bq.order.requset.bean.ContactListBean;
 import com.bq.order.requset.bean.ContractListBean;
 import com.bq.order.requset.bean.ContractinfoBean;
 import com.bq.order.requset.bean.OrderIdBean;
@@ -337,14 +336,14 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         });
     }
 
-    public void getContactImg(String productId, AbstractReqeustCallback<ContactListBean> callBack) {
+    public void getContactImg(String productId, AbstractReqeustCallback<ContractinfoBean> callBack) {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiProduct.ORDER_GET_CONTRACT);
         map.put("order_item_id", productId);
         map.put("auth", CommSpUtils.getToken());
-        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ContactListBean>>(callBack){
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ContractinfoBean>>(callBack){
             @Override
-            public void onSuccess(Response<BaseResponse<ContactListBean>> response) {
+            public void onSuccess(Response<BaseResponse<ContractinfoBean>> response) {
                 super.onSuccess(response);
             }
         });

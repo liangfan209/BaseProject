@@ -4,7 +4,6 @@ import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.order.mvp.ui.OrderIview;
 import com.bq.order.requset.ProductHttpReqeustImp;
-import com.bq.order.requset.bean.ContactListBean;
 import com.bq.order.requset.bean.ContractinfoBean;
 import com.bq.order.requset.bean.OrderIdBean;
 import com.bq.order.requset.bean.OrderInfoDetailBean;
@@ -131,27 +130,28 @@ public class OrderPresenter implements BasePresenter {
         });
     }
 
-    /**
-     * 创建合同
-     */
-    public void createContract(String orderDetailId){
-        mProductHttpReqeustImp.createContract(orderDetailId,new AbstractReqeustCallback<ContractinfoBean>(mIView) {
-            @Override
-            public void onSuccess(ContractinfoBean contractinfoBean) {
-                mIView.createContactView(contractinfoBean.getContract_info());
-            }
-        });
-    }
+//    /**
+//     * 创建合同
+//     */
+//    public void createContract(String orderDetailId){
+//        mProductHttpReqeustImp.createContract(orderDetailId,new AbstractReqeustCallback<ContractinfoBean>(mIView) {
+//            @Override
+//            public void onSuccess(ContractinfoBean contractinfoBean) {
+//                mIView.createContactView(contractinfoBean.getContract_info());
+//            }
+//        });
+//    }
 
     public void getContactImg(String productId) {
-        mProductHttpReqeustImp.getContactImg(productId,new AbstractReqeustCallback<ContactListBean>(mIView) {
+        mProductHttpReqeustImp.getContactImg(productId,new AbstractReqeustCallback<ContractinfoBean>(mIView) {
             @Override
             public void onStart() {
                 mIView.showLoading();
             }
             @Override
-            public void onSuccess(ContactListBean bean) {
-                mIView.getContactImgs(bean.getContract_img_list());
+            public void onSuccess(ContractinfoBean bean) {
+                if(bean == null) return;
+                mIView.getContactInfo(bean.getContract_info());
             }
         });
     }

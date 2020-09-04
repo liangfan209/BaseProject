@@ -76,11 +76,11 @@ public class ContractListActivity extends BaseActivity implements ProductIview {
                 BaseQuickAdapter<ContractInfo, BaseViewHolder>(R.layout.order_item_contract, mContractList) {
                     @Override
                     protected void convert(@NotNull BaseViewHolder helper, ContractInfo bean) {
-                        helper.setText(R.id.tv_pdf, bean.getName());
+                        helper.setText(R.id.tv_pdf, bean.getContract_name());
                         helper.setText(R.id.tv_time, bean.getCreate_time());
                         TextView tvType = helper.getView(R.id.tv_type);
                         tvType.setText(bean.getStatus_name());
-                        if(bean.getStatus_name().equals("已完成")){
+                        if("已签署".equals(bean.getStatus_name())){
                             tvType.setTextColor(getResources().getColor(R.color.ui_txt_hint_color));
                             tvType.setBackground(getResources().getDrawable(R.drawable.shap_gray_radius_5));
                         }else{
@@ -97,8 +97,16 @@ public class ContractListActivity extends BaseActivity implements ProductIview {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 ContractInfo info = (ContractInfo) adapter.getData().get(position);
-                ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
-                        .withStringArrayList("imgPathList",info.getImg_url()).navigation();
+                if("已签署".equals(info.getStatus_name())){
+                    ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
+                            .withSerializable("mContractInfo",info)
+                            .navigation();
+                }else{
+                    ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
+                            .withInt("sign",1)
+                            .withSerializable("mContractInfo",info)
+                            .navigation();
+                }
             }
         });
         mProductPresenter.getContractList();

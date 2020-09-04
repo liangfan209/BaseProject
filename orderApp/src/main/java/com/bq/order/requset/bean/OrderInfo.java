@@ -190,6 +190,15 @@ public class OrderInfo {
         private String despatch_type;
         private String agent_name;
         private String category;
+        private String id;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         private List<SpecificationValueListBean> specification_value_list;
 

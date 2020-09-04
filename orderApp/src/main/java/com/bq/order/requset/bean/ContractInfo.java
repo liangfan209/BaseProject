@@ -6,16 +6,50 @@ import java.util.List;
 
 public class ContractInfo implements Serializable {
     private String id;
-    private String name;
+    private String contract_name;
     private String create_time;
     private String status_name;
     private List<String> url;
     private ArrayList<String> img_url;
+    private String name;
+    private String phone;
+    private String identification;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getIdentification() {
+        return identification;
+    }
+
+    public void setIdentification(String identification) {
+        this.identification = identification;
+    }
 
     public String getStatus_name() {
-
         return status_name;
+    }
+
+
+    public String getContract_name() {
+        return contract_name;
+    }
+
+    public void setContract_name(String contract_name) {
+        this.contract_name = contract_name;
     }
 
     public void setStatus_name(String status_name) {
@@ -28,14 +62,6 @@ public class ContractInfo implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getCreate_time() {

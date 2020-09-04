@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingTop="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="50dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:background="@drawable/shap_white_radius_4">
+
+            <TextView
+                android:id="@+id/tv_address_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="湖北"
+                android:textSize="@dimen/h5_font_size"
+                android:layout_marginLeft="9dp"
+                android:textColor="@color/ui_txt_normal_color"
+                android:textStyle="bold"
+                android:drawablePadding="7dp"
+                />
+            <ImageView
+                android:id="@+id/iv_address_location"
+                android:layout_width="15dp"
+                android:layout_height="17dp"
+                android:background="@mipmap/icon_address_location"
+                android:layout_marginLeft="8dp"/>
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="15dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/ui_txt_hint_color"
+                />
+            <com.fan.baseuilibrary.view.DeletableEditText
+                android:id="@+id/det_search"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginLeft="10dp"
+                style="@style/ui_edit_txt_style"
+                android:textSize="@dimen/h5_font_size"
+                android:hint="请输入搜索名称"
+                />
+            <RelativeLayout
+                android:id="@+id/rlt_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:background="@mipmap/icon_search"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_scan_home"
+            android:layout_width="35dp"
+            android:layout_height="33dp"
+            android:background="@mipmap/icon_scan_home"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smartlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f2f2f2">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_profession"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+</LinearLayout>
+
+
+

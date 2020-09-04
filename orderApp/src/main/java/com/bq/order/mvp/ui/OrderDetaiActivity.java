@@ -203,7 +203,7 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
                 mTvRefund.setVisibility(View.GONE);
             }else if(mOrderInfoBean.getStatus().equals("payment_finished")){
                 mTvOrderType.setText("已付款");
-                mTvOrderSignContract.setVisibility(View.VISIBLE);
+//                mTvOrderSignContract.setVisibility(View.VISIBLE);
             }else if(mOrderInfoBean.getStatus().equals("delivery_finished")){
                 mTvOrderType.setText("已付款");
                 mTvOrderSignContract.setVisibility(View.VISIBLE);
@@ -255,16 +255,15 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
         //签约合同
         mTvOrderSignContract.setOnClickListener(v->{
             //后期还要判断是否已经签约了合同
-            if(mOrderInfoBean.getStatus().equals("payment_finished") || mOrderInfoBean.getStatus().equals("delivery_finished")){
+            if(mOrderInfoBean.getStatus().equals("delivery_finished")){
                 ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
                         .withInt("sign",1)
-                        .withSerializable("mInvoiceInfo",mOrderInfoBean.getInvoice_info())
-                        .withString("mOrderDetailId",mOrderInfoBean.getId()+"").navigation();
+                        .withString("mOrderDetailId",mProductInfo.getId()+"").navigation();
 //                        .withSerializable("imgPathList",mOrderInfoBean.getContract_background()).navigation();
 
             }else if(mOrderInfoBean.getStatus().equals("order_finished")){
                 ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
-                        .withString("mOrderDetailId",mOrderInfoBean.getId()+"").navigation();
+                        .withString("mOrderDetailId",mProductInfo.getId()+"").navigation();
             }
         });
         mTvOrderBottomRight.setOnClickListener(v->{
