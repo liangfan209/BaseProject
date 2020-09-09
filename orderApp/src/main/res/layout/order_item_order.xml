@@ -7,28 +7,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="10dp"
         android:background="@color/white">
+
+
         <LinearLayout
             android:id="@+id/llt_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <include layout="@layout/order_item_product"/>
-        </LinearLayout>
 
+            <include layout="@layout/order_item_product" />
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/llt_content"
-
             >
             <TextView
                 android:id="@+id/tv_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="总价： ¥199.88"
                 android:layout_marginRight="15dp"
@@ -44,6 +44,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="数量：x1"
+                android:visibility="gone"
                 android:layout_marginRight="15dp"
                 android:layout_toLeftOf="@id/tv_total_price"
                 android:textColor="@color/ui_txt_hint_color"
@@ -56,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="46dp"
+                android:layout_marginTop="26dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"
                 >
@@ -101,7 +102,8 @@
             android:textColor="@color/ui_primary_color"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="4dp"/>
+            android:textSize="@dimen/h4_font_size"
+            android:layout_marginTop="18dp"/>
     </RelativeLayout>
 
 </LinearLayout>

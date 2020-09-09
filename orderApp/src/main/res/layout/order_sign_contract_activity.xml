@@ -187,7 +187,7 @@
             android:textColor="@color/ui_txt_hint_color"
             android:textSize="@dimen/h5_font_size"
             android:layout_marginLeft="25dp"
-            android:drawableTop="@mipmap/order_icon_service"
+            android:drawableTop="@mipmap/order_icon_sign"
             android:layout_marginTop="11dp"
             android:drawablePadding="4dp"
             />

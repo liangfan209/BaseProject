@@ -39,12 +39,31 @@ public class ProductInfo implements Serializable {
     private int realPrice;
     private int count;
     private int selectPosition;
+    private int deposit;
+    private String pay_services;
+
+
+    public String getPay_services() {
+        return pay_services;
+    }
+
+    public void setPay_services(String pay_services) {
+        this.pay_services = pay_services;
+    }
 
     public String getCategory() {
         if(StringUtils.isEmpty(category)){
             return "高起专";
         }
         return category;
+    }
+
+    public int getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(int deposit) {
+        this.deposit = deposit;
     }
 
     public void setCategory(String category) {

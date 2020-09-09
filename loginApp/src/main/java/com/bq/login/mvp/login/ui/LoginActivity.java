@@ -1,6 +1,7 @@
 package com.bq.login.mvp.login.ui;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -227,7 +228,14 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
         //将token保存到本地sp中
         CommSpUtils.saveLoginInfo(new Gson().toJson(info));
         if(info.getIs_password() == 0){
-            ARouter.getInstance().build(AppArouter.LOGIN_SETTING_ACTIVITY).navigation();
+            if(!StringUtils.isEmpty(mPath) && !mPath.equals("-1")){
+                ARouter.getInstance().build(mPath)
+                        .withBundle("mBundle", mBundle).navigation();
+            }
+            new Handler().postDelayed(()->{
+                ARouter.getInstance().build(AppArouter.LOGIN_SETTING_ACTIVITY).navigation();
+            },25);
+
         }else{
             //跳转到主页面中
             if (StringUtils.isEmpty(mPath)) {

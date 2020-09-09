@@ -7,7 +7,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
@@ -70,7 +69,7 @@ public class SettingPwdActivity extends BaseActivity implements LoginBaseIView{
     public void settingPwdView() {
         ToastUtils.showToastOk(this,"设置成功");
         new Handler().postDelayed(()->{
-            ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
+//            ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
             finish();
         },1000);
 
@@ -79,7 +78,7 @@ public class SettingPwdActivity extends BaseActivity implements LoginBaseIView{
     @OnClick({R2.id.iv_title_left, R2.id.tv_jump, R2.id.tv_setting})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.tv_jump){
-            ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
+//            ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
             finish();
         } else if(view.getId() == R.id.tv_setting){
             String s = mEtPwd.getText().toString();

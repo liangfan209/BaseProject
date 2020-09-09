@@ -14,7 +14,16 @@ public class OrderRequsetBean {
     private Integer address_id;
     private List<GoodsList> goods_list;
     private InvoiceInfo invoice_info;
+    private int deposit;
 
+
+    public int getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(int deposit) {
+        this.deposit = deposit;
+    }
 
     public void setAddress_id(Integer address_id) {
         this.address_id = address_id;
@@ -39,6 +48,8 @@ public class OrderRequsetBean {
     public void setStrike_price(Integer strike_price) {
         this.strike_price = strike_price;
     }
+
+
 
     private String status;
 

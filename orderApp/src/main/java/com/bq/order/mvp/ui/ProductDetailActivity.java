@@ -197,7 +197,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
 
     private void initView() {
         mValue1.setText(mProductInfo.getBrand_name());
-        mValue2.setText(mProductInfo.getCategory());
+        mValue2.setText(mProductInfo.getProduction_name());
         String despatch_type = mProductInfo.getDespatch_type();
         mTvShippingValue.setText(mProductInfo.getDespatch_type());
         mTvMonthQuantity.setText("月销" + mProductInfo.getMonth_quantity());
@@ -221,6 +221,16 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
             }
             mTvTypeValue.setText(sb.toString());
             mTvRealPrice.setText(AppUtils.getDouble2(mProductInfo.getSpecification_list().get(0).getSale_price()));
+
+
+            mTvInitialPrice.setVisibility(View.GONE);
+            if(!StringUtils.isEmpty(mPosterId)){
+                mTvInitialPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+                mTvInitialPrice.setVisibility(View.VISIBLE);
+                if(mProductInfo.getSpecification_list().size() > 0){
+                    mTvInitialPrice.setText(AppUtils.getDouble2(mProductInfo.getSpecification_list().get(0).getOriginal_price()));
+                }
+            }
         }
         List<String> detail = mProductInfo.getDetail();
         for (int i = 0; i < detail.size(); i++) {
@@ -580,18 +590,19 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
                 mProductInfo.setSelectPosition(position);
                 mProductInfo.setImgPath(specificationList.getShow_image());
                 mTvRealPrice.setText(AppUtils.getDouble2(specificationList.getSale_price()));
-
                 Utils.showImage(specificationList.getShow_image(),ivIcon);
 
             }
         });
 
 
+        TextView tvInitPrice = view.findViewById(R.id.tv_initial_price);
+        tvInitPrice.setVisibility(View.GONE);
         if(!StringUtils.isEmpty(mPosterId)){
-            TextView tvInitPrice = view.findViewById(R.id.tv_initial_price);
             tvInitPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            tvInitPrice.setVisibility(View.VISIBLE);
             if(mProductInfo.getSpecification_list().size() > 0){
-                mTvRealPrice.setText(AppUtils.getDouble2(mProductInfo.getSpecification_list().get(0).getOriginal_price()));
+                tvInitPrice.setText("¥"+AppUtils.getDouble2(mProductInfo.getSpecification_list().get(0).getOriginal_price()));
             }
         }
 

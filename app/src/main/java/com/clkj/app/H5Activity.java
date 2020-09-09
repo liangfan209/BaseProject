@@ -1,4 +1,4 @@
-package com.bquan.app;
+package com.clkj.app;
 
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;

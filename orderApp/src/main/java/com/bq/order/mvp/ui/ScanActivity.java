@@ -81,6 +81,8 @@ public class ScanActivity extends BaseActivity {
 //            }else if(split1[1].contains("http")){
 //
 //            }
+
+//            result = "type=poster&poster_id=23";
             Utils.goCustomActivity(ScanActivity.this,result);
             finish();
 

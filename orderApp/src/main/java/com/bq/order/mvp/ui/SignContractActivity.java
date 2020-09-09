@@ -155,6 +155,7 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
                 Utils.showImage(list.get(i),iv);
                 mLltImgs.addView(iv,params);
             }
+            contactId = mContractInfo.getId();
         }
 
         if(sign == 1){

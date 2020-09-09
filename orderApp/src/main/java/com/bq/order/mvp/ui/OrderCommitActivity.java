@@ -117,6 +117,18 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
     @BindView(R2.id.tv_agent)
     TextView mTvAgent;
 
+    @BindView(R2.id.tv_payType)
+    TextView mTvPayType;
+    @BindView(R2.id.tv_pay_money)
+    TextView mTvPayMoney;
+    @BindView(R2.id.tv_qian_money)
+    TextView mTvQian;
+    @BindView(R2.id.rlt_qian)
+    RelativeLayout mRltQian;
+    @BindView(R2.id.tv_arrears)
+    TextView mTvArrears;
+
+
     @Autowired
     String mPosterId;
 
@@ -155,28 +167,56 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
         mTvBrand.setText(mProductInfo.getBrand_name());
         mTvBrand.setText(mProductInfo.getBrand_name());
         mTvProduct.setText(mProductInfo.getCategory());
-        mTvSalePrice.setText(AppUtils.getDouble2(mProductInfo.getRealPrice()));
+        if(mProductInfo.getSpecification_list().size() >0){
+            mTvSalePrice.setText(AppUtils.getDouble2(mProductInfo.getSpecification_list().get(0).getOriginal_price()));
+        }
         mTvAgent.setText(mProductInfo.getAgent_name()+"为您服务");
 
         mTvCategoryValue.setText(mProductInfo.getAttrubute());
         mTvLogister.setText(mProductInfo.getDespatch_type());
 
 
-        mTvTotalPrice.setText("¥"+AppUtils.getDouble2(mProductInfo.getRealPrice() * mProductInfo.getCount()));
+
+//        mTvTotalPrice.setText("¥"+AppUtils.getDouble2(mProductInfo.getRealPrice() * mProductInfo.getCount()));
         mTvStock.setText("x "+ mProductInfo.getCount());
 
         if(mProductInfo.getSpecification_list().size()>0){
             int originalPrice = mProductInfo.getSpecification_list().get(0).getOriginal_price();
             realPrice = mProductInfo.getSpecification_list().get(0).getSale_price();
 
-            //合计
+            //原价
             mTvRealPrice.setText("¥"+AppUtils.getDouble2(originalPrice*mProductInfo.getCount()));
             //优惠
-            mtvMinPrice.setText("¥"+AppUtils.getDouble2(originalPrice*mProductInfo.getCount() - realPrice * mProductInfo.getCount()));
-            //实付
+            mtvMinPrice.setText("- ¥"+AppUtils.getDouble2(originalPrice*mProductInfo.getCount() - realPrice * mProductInfo.getCount()));
+            //成交价
             mTvMoney.setText("¥"+AppUtils.getDouble2( realPrice * mProductInfo.getCount()));
 
-            mTvTotalPrice.setText("¥"+AppUtils.getDouble2(realPrice * mProductInfo.getCount()));
+            if(mProductInfo.getDeposit() >0 && mProductInfo.getPay_services().equals("installment")){
+                mTvArrears.setText("欠缴：¥"+AppUtils.getDouble2(realPrice)+"  ");
+                mTvTotalPrice.setText(AppUtils.getDouble2(mProductInfo.getDeposit()));
+            }else{
+                mTvTotalPrice.setText(AppUtils.getDouble2(realPrice * mProductInfo.getCount()));
+            }
+
+
+
+
+            if("full_payment".equals(mProductInfo.getPay_services())){
+                mTvPayType.setText("全款");
+            }else if("installment".equals(mProductInfo.getPay_services())){
+                mRltQian.setVisibility(View.VISIBLE);
+                mTvQian.setText("¥"+AppUtils.getDouble2(realPrice));
+                mTvPayType.setText("分期");
+            }else{
+                mRltQian.setVisibility(View.GONE);
+            }
+            //支付金额
+            if(mProductInfo.getDeposit() > 0){
+                mTvPayMoney.setText("¥"+AppUtils.getDouble2(mProductInfo.getDeposit()));
+            }else{
+                mTvPayMoney.setText("¥"+AppUtils.getDouble2(realPrice));
+            }
+
         }
 
         if(mProductInfo.getDespatch_type().contains("教育")){
@@ -242,11 +282,13 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
                     InvoiceInfo info = new InvoiceInfo(name,phone,identification);
                     bean.setInvoice_info(info);
                 }
-                String orderInfo = new Gson().toJson(bean);
                 if(!StringUtils.isEmpty(mPosterId)){
+                    bean.setDeposit(mProductInfo.getDeposit());
+                    String orderInfo = new Gson().toJson(bean);
                     mOrderPresenter.addOrderByPoster(orderInfo,mPosterId);
                 }else{
-                    mOrderPresenter.addOrder(orderInfo);
+                    String info = new Gson().toJson(bean);
+                    mOrderPresenter.addOrder(info);
                     mTvBuy.setEnabled(false);
                 }
             }
@@ -294,7 +336,11 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
 
     @Override
     public void orderAddView(final String orderId) {
+        int price = realPrice;
+        if(mProductInfo.getDeposit() >0){
+            price = mProductInfo.getDeposit();
+        }
         PayViewHelper.getBanenceAndShow(OrderCommitActivity.this, orderId,
-                Utils.getDouble2(realPrice*mProductInfo.getCount()),1);
+                Utils.getDouble2(price),1);
     }
 }

@@ -68,6 +68,7 @@ public class AppArouter {
     public static final String ORDER_ORDER_DETAIL_ACTIVITY = ORDER+"/OrderDetaiActivity";
     public static final String ORDER_ORDER_COMMIT_ACTIVITY = ORDER+"/OrderCommitActivity";
     public static final String ORDER_PAY_SUCCESS_ACTIVITY = ORDER+"/PaySuccessActivity";
+    public static final String ORDER_PAY_ORDER_DETAIL_ACTIVITY = ORDER+"/PayOrderDetailActivity";
 
 
     public static final String ORDER_HOME_FRAGMENT = ORDER +"/HomeFragment";

@@ -2,6 +2,7 @@ package com.bq.order.requset.bean;
 
 import com.blankj.utilcode.util.StringUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * 时间：2020/8/4
  * 版权：
  */
-public class OrderInfo {
+public class OrderInfo implements Serializable{
     /**
      * id : 22
      * number : 0
@@ -30,7 +31,6 @@ public class OrderInfo {
     private int id;
     private String number;
     private String status;
-    private int strike_price;
     private String create_time;
     private String last_payment_type;
     private String last_payment_time;
@@ -40,6 +40,72 @@ public class OrderInfo {
     private String despatch_type;
     private String status_name;
     private InvoiceInfo invoice_info;
+
+
+
+    private int strike_price; //成交金额
+    private int sale_price; //销售总金额
+    private int discount;//优惠金额
+    private int deposit;//付款金额
+    private int arrears;//欠费金额
+    private int actual_amount;//实际支付金额
+    private String pay_services;
+
+    private List<PaymentListBean> payment_list;
+    public List<PaymentListBean> getPayment_list() {
+        return payment_list;
+    }
+    public void setPayment_list(List<PaymentListBean> payment_list) {
+        this.payment_list = payment_list;
+    }
+
+    public String getPay_services() {
+        return pay_services;
+    }
+
+    public void setPay_services(String pay_services) {
+        this.pay_services = pay_services;
+    }
+
+    public int getSale_price() {
+        return sale_price;
+    }
+
+    public void setSale_price(int sale_price) {
+        this.sale_price = sale_price;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
+    public int getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(int deposit) {
+        this.deposit = deposit;
+    }
+
+    public int getArrears() {
+        return arrears;
+    }
+
+    public void setArrears(int arrears) {
+        this.arrears = arrears;
+    }
+
+    public int getActual_amount() {
+        return actual_amount;
+    }
+
+    public void setActual_amount(int actual_amount) {
+        this.actual_amount = actual_amount;
+    }
 
     public InvoiceInfo getInvoice_info() {
         return invoice_info;
@@ -159,7 +225,7 @@ public class OrderInfo {
         this.order_item_list = order_item_list;
     }
 
-    public static class OrderItemListBean {
+    public static class OrderItemListBean implements Serializable {
         /**
          * sale_price : 916722
          * total_price : 916722
@@ -192,6 +258,7 @@ public class OrderInfo {
         private String category;
         private String id;
 
+
         public String getId() {
             return id;
         }
@@ -202,6 +269,8 @@ public class OrderInfo {
 
         private List<SpecificationValueListBean> specification_value_list;
 
+
+
         public String getAgent_name() {
             return agent_name;
         }
@@ -209,6 +278,8 @@ public class OrderInfo {
         public void setAgent_name(String agent_name) {
             this.agent_name = agent_name;
         }
+
+
 
         public String getDespatch_type() {
             if(StringUtils.isEmpty(despatch_type)){
@@ -368,5 +439,63 @@ public class OrderInfo {
             }
         }
 
+    }
+
+
+    public static class PaymentListBean implements Serializable{
+        private int id;
+        private int amount;
+        private String status;
+        private String number;
+        private String create_time;
+        private String pay_type;
+
+        public String getPay_type() {
+            return pay_type;
+        }
+
+        public void setPay_type(String pay_type) {
+            this.pay_type = pay_type;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getAmount() {
+            return amount;
+        }
+
+        public void setAmount(int amount) {
+            this.amount = amount;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getNumber() {
+            return number;
+        }
+
+        public void setNumber(String number) {
+            this.number = number;
+        }
+
+        public String getCreate_time() {
+            return create_time;
+        }
+
+        public void setCreate_time(String create_time) {
+            this.create_time = create_time;
+        }
     }
 }

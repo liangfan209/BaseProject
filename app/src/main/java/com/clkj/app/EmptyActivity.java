@@ -1,4 +1,4 @@
-package com.bquan.app;
+package com.clkj.app;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.FileIOUtils;

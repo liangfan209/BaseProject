@@ -16,6 +16,7 @@ import com.bq.wallet.pay.zhifubao.AliPay;
 import com.bq.wallet.pay.zhifubao.AlipayInfoImpli;
 import com.bq.wallet.requset.WalletHttpReqeustImp;
 import com.bq.wallet.requset.bean.WxBean;
+import com.fan.baseuilibrary.utils.ToastUtils;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -61,6 +62,7 @@ public class WalletProvider {
                 @Override
                 public void onError(String msg) {
 //                    event.eventInterface.callBack(new MessageBody(MessageBody.FAIL_CODE,msg));
+                    ToastUtils.showToast(event.activity,msg);
                 }
             });
         }

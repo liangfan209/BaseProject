@@ -16,7 +16,7 @@
         app:tl_indicator_height="3dp"
         app:tl_textUnselectColor="@color/ui_txt_normal_color"
         app:tl_textSelectColor="@color/ui_primary_color"
-        app:tl_textsize="18sp"
+        app:tl_textsize="16sp"
         app:tl_indicator_width_equal_title="true"
         app:tl_tab_space_equal="true"
         app:tl_iconVisible="false"/>

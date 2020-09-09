@@ -1,4 +1,4 @@
-package com.bquan.app;
+package com.clkj.app;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -8,12 +8,8 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
-import com.bq.comm_config_lib.msgService.MessageBody;
-import com.bq.comm_config_lib.msgService.MessageEvent;
-import com.bq.comm_config_lib.msgService.MessageInter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
-import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.user_center.mvp.user.ui.UserFragment;
 import com.fan.baseuilibrary.view.flycotablayout.TabEntity;
 import com.fan.baseuilibrary.view.flycotablayout.widget.SkinCommonTabLayout;

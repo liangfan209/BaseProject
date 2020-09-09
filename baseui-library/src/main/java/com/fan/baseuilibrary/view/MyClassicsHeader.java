@@ -114,6 +114,7 @@ public class MyClassicsHeader extends RelativeLayout implements RefreshHeader {
         layout.setId(android.R.id.widget_frame);
         layout.setGravity(Gravity.CENTER_HORIZONTAL);
         layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setBackgroundColor(0xf2f2f2);
         mTitleText = new TextView(context);
         mTitleText.setText(REFRESH_HEADER_PULLDOWN);
         mTitleText.setTextColor(0xff666666);

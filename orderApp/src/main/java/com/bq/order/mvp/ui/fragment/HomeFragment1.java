@@ -417,7 +417,12 @@ public class HomeFragment1 extends BaseFragment implements  ProductIview {
             }
 
 
-        }else if(view.getId() == R.id.iv_address_location){
+//                String result = "type=poster&poster_id=24";
+//                Utils.goCustomActivity(getActivity(),result);
+
+
+
+            }else if(view.getId() == R.id.iv_address_location){
             EventBus.getDefault().post(new MessageEvent("location", getActivity(), new MessageInter() {
                 @Override
                 public void callBack(MessageBody data) {

@@ -88,7 +88,7 @@ public class ContractListActivity extends BaseActivity implements ProductIview {
                             tvType.setBackground(getResources().getDrawable(R.drawable.shap_green_radius_5));
                         }
                         ImageView ivcontract = helper.getView(R.id.iv_contract);
-                        if (bean.getUrl().size() > 0)
+                        if (bean.getImg_url().size() > 0)
                             Utils.showImage(bean.getImg_url().get(0), ivcontract);
                     }
                 };
@@ -109,9 +109,13 @@ public class ContractListActivity extends BaseActivity implements ProductIview {
                 }
             }
         });
-        mProductPresenter.getContractList();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mProductPresenter.getContractList();
+    }
 
     @Override
     public void getContractListView(List<ContractInfo> list) {

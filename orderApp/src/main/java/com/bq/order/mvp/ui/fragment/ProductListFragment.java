@@ -97,6 +97,8 @@ public class ProductListFragment extends BaseFragment implements MyRefreshLayout
 //                Glide.with(iv).load(bean.getThumbnail())
 //                        .apply(Utils.getRequestOptionRadus(iv.getContext(),0)).into(iv);
                 Utils.showImage(bean.getThumbnail(),iv,3);
+                helper.setText(R.id.tv_bottom_right,"起");
+
                 helper.setText(R.id.tv_product_title,bean.getTitle());
                 helper.setText(R.id.tv_school,bean.getSchool_name());
                 helper.setText(R.id.tv_profession,bean.getMajor_name());

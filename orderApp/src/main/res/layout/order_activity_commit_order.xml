@@ -449,7 +449,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="合计"
+                        android:text="助学原价"
                         android:textColor="@color/ui_txt_normal_color"
                         android:textSize="@dimen/h3_font_size"
                         />
@@ -474,7 +474,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="优惠"
+                        android:text="优惠金额"
                         android:textColor="@color/ui_txt_normal_color"
                         android:textSize="@dimen/h3_font_size"
                         />
@@ -484,7 +484,71 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="¥0.00"
-                        android:textColor="@color/ui_primary_color"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/h4_font_size"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="15dp"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="¥866.00"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h4_font_size"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="15dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="成交价:   "
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h3_font_size"
+                        android:layout_toLeftOf="@id/tv_money"
+                        />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="支付方式"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h3_font_size"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_payType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/ui_txt_normal_color"
                         android:textSize="@dimen/h4_font_size"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="15dp"
@@ -499,17 +563,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="实付"
+                        android:text="支付金额"
                         android:textColor="@color/ui_txt_normal_color"
                         android:textSize="@dimen/h3_font_size"
                         />
 
                     <TextView
-                        android:id="@+id/tv_money"
+                        android:id="@+id/tv_pay_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="¥866.00"
-                        android:textColor="@color/red"
+                        android:text="¥0.00"
+                        android:textColor="@color/ui_primary_color"
                         android:textSize="@dimen/h4_font_size"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="15dp"
@@ -517,8 +581,35 @@
                 </RelativeLayout>
 
 
+                <RelativeLayout
+                    android:id="@+id/rlt_qian"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:visibility="gone">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="欠缴金额"
+                        android:textColor="@color/ui_txt_normal_color"
+                        android:textSize="@dimen/h3_font_size"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_qian_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="¥0.00"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/h4_font_size"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="15dp"
+                        />
+                </RelativeLayout>
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
     <RelativeLayout
@@ -527,17 +618,48 @@
         android:layout_alignParentBottom="true"
         android:background="@color/white">
 
-        <TextView
-            android:id="@+id/tv_total_price"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" ¥866.00"
-            android:textColor="@color/ui_txt_normal_color"
-            android:textSize="@dimen/h3_font_size"
-            android:layout_marginLeft="15dp"
+            android:orientation="horizontal"
             android:layout_centerVertical="true"
-            android:textColorHint="@color/ui_txt_normal_color"
-            />
+           >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="需付：¥"
+                android:textColor="@color/ui_txt_hint_color"
+                android:textSize="@dimen/h5_font_size"
+                android:layout_centerVertical="true"
+                android:textColorHint="@color/ui_txt_normal_color"
+                />
+            <TextView
+                android:id="@+id/tv_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ui_txt_normal_color"
+                android:textSize="@dimen/h3_font_size"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:textColorHint="@color/ui_txt_normal_color" />
+            <TextView
+                android:id="@+id/tv_arrears"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ui_txt_hint_color"
+                android:textSize="@dimen/h5_font_size"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:textColorHint="@color/ui_txt_normal_color"
+                android:layout_toLeftOf="@id/tv_total_price"
+                />
+        </LinearLayout>
+
+
+
+
 
 
         <TextView
@@ -547,12 +669,12 @@
             android:text="立即支付"
             android:textSize="@dimen/h5_font_size"
             android:gravity="center"
-            android:textColor="@color/ui_primary_color"
+            android:textColor="@color/white"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:drawablePadding="4dp"
-            android:background="@drawable/ui_shap_verification_code_select"
+            android:background="@drawable/ui_shap_button_primary_bg"
             />
     </RelativeLayout>
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.bquan.app;
+package com.clkj.app;
 
 import android.content.Context;
 import android.os.Build;
@@ -109,7 +109,7 @@ public class AppApplication extends BaseApplication {
         //1.super是完成路由
         super.onCreate();
         //2.注册组件中暴露的服务
-        Servicemanager.getInstance().resiter(this,"com.bq");
+        Servicemanager.getInstance().resiter(this,"com.clkj");
 
         baseUrl = Api.BASE_API+ Api.INTER;
 

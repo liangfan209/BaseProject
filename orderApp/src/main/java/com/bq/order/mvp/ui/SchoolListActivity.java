@@ -180,7 +180,8 @@ public class SchoolListActivity extends BaseActivity implements MyRefreshLayout.
     @OnClick({R2.id.rlt_search,R2.id.tv_address_location,R2.id.iv_address_location})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.rlt_search){
-
+            Utils.cancelFocus(mDetSearch);
+            updateSelf();
         }else if(view.getId() == R.id.tv_address_location){
             CityUtils.getInstance(this).showPickerView(this, new CityUtils.CityCallBack() {
                 @Override

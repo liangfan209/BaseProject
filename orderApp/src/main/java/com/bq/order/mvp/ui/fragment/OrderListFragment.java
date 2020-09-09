@@ -110,8 +110,8 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
             protected void convert(@NotNull BaseViewHolder helper, OrderInfo info) {
                 TextView tvType = helper.getView(R.id.tv_type);
 
-                TextView tvTotalCount = helper.getView(R.id.tv_total_acount);
-                helper.getView(R.id.tv_bottom_right).setVisibility(View.GONE);
+//                TextView tvTotalCount = helper.getView(R.id.tv_total_acount);
+//                helper.getView(R.id.tv_bottom_right).setVisibility(View.GONE);
 
                 TextView tvHint = helper.getView(R.id.tv_hint);
                 TextView tvPrimary = helper.getView(R.id.tv_primary);
@@ -130,18 +130,34 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                 helper.setText(R.id.tv_price, AppUtils.getDouble2(orderItemListBean.getSale_price()));
                 helper.setText(R.id.tv_orgamnization, orderItemListBean.getAgent_name()+"为您服务");
 
-                helper.setText(R.id.tv_total_price,"总价： ¥"+AppUtils.getDouble2(info.getStrike_price()*orderItemListBean.getQuantity()));
-                tvTotalCount.setText("数量：x"+ orderItemListBean.getQuantity());
-                String status = info.getStatus();
 
+                TextView tvPrice = helper.getView(R.id.tv_total_price);
+//                helper.setText(R.id.tv_total_price,"总价： ¥"+AppUtils.getDouble2(info.getStrike_price()*orderItemListBean.getQuantity()));
+//                tvTotalCount.setText("数量：x"+ orderItemListBean.getQuantity());
+                String status = info.getStatus();
                 tvType.setTextColor(SkinCompatResources.getColor(tvType.getContext(),R.color.ui_primary_color));
                 tvHint.setVisibility(View.VISIBLE);
                 tvPrimary.setVisibility(View.VISIBLE);
+                String aount = "      ";
+                if(status.contains("order_launched")){
+                    //如果是待支付  如果是已支付
+                    tvPrice.setText("需付款: ¥"+AppUtils.getDouble2(info.getDeposit()));
+                    //实际支付金额小于需付款金额，说明还有欠缴部分
+                    if(info.getArrears() >0){
+                        tvPrice.setText("欠缴: ¥"+AppUtils.getDouble2(info.getArrears())+aount+"需付款: ¥"+AppUtils.getDouble2(info.getDeposit()));
+                    }
+
+                }else{
+                    tvPrice.setText("实付款: ¥"+AppUtils.getDouble2(info.getActual_amount()));
+                    if(info.getArrears() >0){
+                        tvPrice.setText("欠缴: ¥"+AppUtils.getDouble2(info.getArrears()) +aount+"实付款: ¥"+AppUtils.getDouble2(info.getActual_amount()));
+                    }
+                }
 
                 tvPrimary.setOnClickListener(v->{
                     if(info.getDespatch_type().contains("物流")){
                         if(status.contains("order_launched")){
-                            showPayView(info.getId()+"",AppUtils.getDouble2(orderItemListBean.getSale_price()*orderItemListBean.getQuantity()));
+                            showPayView(info.getId()+"",AppUtils.getDouble2(info.getDeposit()));
                             //待发货
                         }else if(status.contains("payment_finished")){
                             //待收货
@@ -152,7 +168,7 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                         }
                     }else{
                         if(status.contains("order_launched")){
-                            showPayView(info.getId()+"",AppUtils.getDouble2(orderItemListBean.getSale_price()*orderItemListBean.getQuantity()));
+                            showPayView(info.getId()+"",AppUtils.getDouble2(info.getDeposit()));
                             //待发货  待收货
                         }else if(status.contains("delivery_finished")){
                             ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
