@@ -1,4 +1,4 @@
-package com.bq.order;
+package com.clkj.order;
 
 import org.junit.Test;
 

@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:fitsSystemWindows="false"
             app:elevation="0dp"
-            app:layout_behavior="com.bq.order.mvp.ui.AppBarLayoutBehavior">
+            app:layout_behavior="com.clkj.order.mvp.ui.AppBarLayoutBehavior">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"

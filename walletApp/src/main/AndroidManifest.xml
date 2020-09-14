@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bq.wallet" >
+    package="com.clkj.wallet" >
     <application>
         <activity android:name=".mvp.wallet.ui.MyWalletActivity"
             android:configChanges="orientation|screenSize"

@@ -64,6 +64,10 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
     @BindView(R2.id.tv_remark)
     TextView mTvRemark;
 
+    @BindView(R2.id.tv_privacy_agreement)
+    TextView mTvPrivacyAgreement;
+
+
     @BindView(R2.id.rlt_pwd_option) //密码操作、注册、忘记
             RelativeLayout mRltPwdOption;
     @BindView(R2.id.rlt_pwd) //密码选项
@@ -267,7 +271,7 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
 
 
     @OnClick({R2.id.tv_forget_pwd, R2.id.tv_login, R2.id.tv_get_verification_code, R2.id.tv_register, R2.id.cb_login_type,
-            R2.id.cb_eye})
+            R2.id.cb_eye,R2.id.tv_privacy_agreement})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.tv_login) {
             if (loginConfig.isHasImageVirification()) {
@@ -292,6 +296,10 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
             if(!mEtPwd.hasFocus()){
                 mEtPwd.setClearDrawableVisible(false);
             }
+        } else if(view.getId() == R.id.tv_privacy_agreement){
+            ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
+                    .withString("h5url","http://policy.dsggy.cn/")
+                    .navigation();
         }
     }
 

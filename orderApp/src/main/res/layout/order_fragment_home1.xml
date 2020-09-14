@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="#f2f2f2"
     android:paddingTop="20dp">
 
     <RelativeLayout

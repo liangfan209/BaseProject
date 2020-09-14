@@ -1,4 +1,4 @@
-package com.bq.user_center;
+package com.clkj.user_center;
 
 import org.junit.Test;
 

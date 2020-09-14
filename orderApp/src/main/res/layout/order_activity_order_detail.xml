@@ -117,7 +117,7 @@
                         android:id="@+id/tv_education_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="李大钊"
+                        android:text=""
                         android:textSize="@dimen/h3_font_size"
                         android:textStyle="bold"
                         android:textColor="@color/ui_txt_normal_color"/>
@@ -127,6 +127,8 @@
                         android:layout_height="wrap_content"
                         android:text=""
                         android:layout_marginTop="3dp"
+                        android:drawableRight="@mipmap/icon_order_detail_phone"
+                        android:drawablePadding="3dp"
                         android:textSize="@dimen/h5_font_size"
                         android:textColor="@color/ui_txt_normal_color"/>
 
@@ -136,6 +138,8 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/h5_font_size"
                         android:text=""
+                        android:drawableRight="@mipmap/icon_order_detail_id"
+                        android:drawablePadding="3dp"
                         android:layout_marginTop="3dp"
                         android:maxLines="2"
                         android:ellipsize="end"

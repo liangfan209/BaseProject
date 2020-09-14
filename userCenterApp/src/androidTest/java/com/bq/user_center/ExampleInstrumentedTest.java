@@ -1,4 +1,4 @@
-package com.bq.user_center;
+package com.clkj.user_center;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.bq.user_center.test", appContext.getPackageName());
+        assertEquals("com.clkj.user_center.test", appContext.getPackageName());
     }
 }

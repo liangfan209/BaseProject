@@ -190,4 +190,38 @@
         android:background="@null"
         />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp">
+
+
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="60dp"
+            android:text="登录代表同意橙鹿教育科技 "
+            android:textSize="@dimen/h5_font_size"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:id="@+id/tv_privacy_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="《隐私协议》"
+            android:layout_toRightOf="@id/tv_1"
+            android:textSize="@dimen/h5_font_size"
+            android:textColor="@color/ui_primary_color"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="并授权使用您的账号信息 （如昵称、头像、地址）"
+            android:textSize="@dimen/h5_font_size"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
 </LinearLayout>

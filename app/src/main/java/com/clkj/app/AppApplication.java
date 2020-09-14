@@ -98,7 +98,7 @@ public class AppApplication extends BaseApplication {
 
 
         {
-        PlatformConfig.setWeixin("wx22a8fc65e8d220af", "f90d0b596034a8c92ed578f9c9a7773a");
+        PlatformConfig.setWeixin("wx8aa0090b4ffd643f", "f90d0b596034a8c92ed578f9c9a7773a");
         PlatformConfig.setQQZone("123", "123");
     }
 

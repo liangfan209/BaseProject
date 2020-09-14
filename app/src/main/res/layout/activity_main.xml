@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp"
-        android:background="#f2f2f2"
         />
 <!--    tl:tl_indicator_color="@color/t2_3_tl_indicator_color"-->
 <!--    tl:tl_underline_color="@color/t2_3_tl_underline_color"-->

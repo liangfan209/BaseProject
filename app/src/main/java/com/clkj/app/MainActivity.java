@@ -10,7 +10,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
-import com.bq.user_center.mvp.user.ui.UserFragment;
+import com.bq.comm_config_lib.utils.MyStatusBarUtil;
+import com.clkj.user_center.mvp.user.ui.UserFragment;
 import com.fan.baseuilibrary.view.flycotablayout.TabEntity;
 import com.fan.baseuilibrary.view.flycotablayout.widget.SkinCommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -110,6 +111,7 @@ public class MainActivity extends BaseActivity {
         hideFragments(transaction);
         switch (index) {
             case 0:
+                MyStatusBarUtil.setStatusBarTranslucent(getActivity(), com.bq.comm_config_lib.R.color.f2f2f2, true);
                 if (mHomeFragment == null) {
                     mHomeFragment = (Fragment) ARouter.getInstance().build(AppArouter.ORDER_HOME_FRAGMENT).navigation();
                     transaction.add(R.id.flt_content, mHomeFragment, "flag" + index);
@@ -126,6 +128,7 @@ public class MainActivity extends BaseActivity {
 ////                }
 ////                break;
             case 2:
+                MyStatusBarUtil.setStatusBarTranslucent(getActivity(), com.bq.comm_config_lib.R.color.white, true);
                 if (mUserFragment == null) {
                     mUserFragment = (Fragment) ARouter.getInstance().build(AppArouter.USER_CENTER_USER_FRAGMENT).navigation();
                     transaction.add(R.id.flt_content, mUserFragment, "flag" + index);
