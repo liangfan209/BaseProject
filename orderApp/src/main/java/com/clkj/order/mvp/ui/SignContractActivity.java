@@ -257,6 +257,7 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
 //            imgBaseStr = "+123+abc";
             imgBaseStr = imgBaseStr.replaceAll("\\+","%2B");
             //将图片转换为base64
+            imgBaseStr = "data:image/png;base64,"+imgBaseStr;
             ContractRequsetBean bean = new ContractRequsetBean(email,imgBaseStr);
             //上传信息
             if(!StringUtils.isEmpty(contactId)){

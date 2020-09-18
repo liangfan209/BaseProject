@@ -119,4 +119,73 @@ public class UploadHelper {
             }
         }).start();
     }
+
+
+    public void uploadStart(File file, CallBackInter inter,String type) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                MultipartBody.Builder builder = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM);
+                Map<String,String> map = new HashMap();
+                map.put("api","file.upload");
+                map.put("role","customer");
+                map.put("timestamp",String.valueOf(System.currentTimeMillis()));
+                map.put("flag","file");
+                map.put("auth", CommSpUtils.getToken());
+                map.put("store_type","person");
+                map.put("clientType","android");
+                map.put("version","1");
+
+//            map.put("token",token);
+
+                Set<Map.Entry<String, String>> entries = map.entrySet();
+                StringBuilder sb = new StringBuilder();
+                for(Map.Entry<String,String> entry: entries){
+                    String key = entry.getKey();
+                    sb.append(entry.getKey()+"="+entry.getValue()+"&");
+
+                    builder.addFormDataPart(entry.getKey(),entry.getValue());
+                }
+                String bufferStr = sb.toString();
+                bufferStr =   bufferStr.substring(0,bufferStr.length()-1);
+                String unSign = RSA.getSign(bufferStr);
+                String s1 = RSA.sha1(unSign);
+                String sign = RSA.sampling(s1, RSA.requestBodyStr2Map(bufferStr), 1.4);
+                builder.addFormDataPart("sign",sign);
+                builder.addFormDataPart("image", file.getName(),
+                        RequestBody.create(MediaType.parse("image/png"), file));
+                RequestBody requestBody = builder.build();
+                Request request = new Request.Builder()
+                        .url(BaseApplication.baseUrl)
+                        .post(requestBody)
+                        .build();
+                try {
+                    Response response = mOkHttpClient.newCall(request).execute();
+                    String responseBody = response.body().string();
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            inter.callBack(responseBody);
+                        }
+                    });
+
+//                UploadImgBean uploadBean = new Gson().fromJson(responseBody,  UploadImgBean.class);
+//                if ("10000".equals(uploadBean.getCode())) {
+//                    String result = uploadBean.getResult();
+//                    toMainTheardSaveUser(result);
+//                    //将结果上传到服务器
+//                }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            inter.error();
+                        }
+                    });
+                }
+            }
+        }).start();
+    }
 }

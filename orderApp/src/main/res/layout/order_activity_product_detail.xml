@@ -479,6 +479,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="客服"
+            android:visibility="gone"
             android:textColor="@color/ui_txt_hint_color"
             android:textSize="@dimen/h5_font_size"
             android:layout_marginLeft="25dp"

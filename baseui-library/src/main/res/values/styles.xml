@@ -185,4 +185,17 @@
         <item name="android:paddingTop">6dp</item>
         <item name="android:paddingBottom">6dp</item>
     </style>
+
+    <declare-styleable name="SwipeMenuLayout">
+        <!--是否开启侧滑，默认开启-->
+        <attr format="boolean" name="isEnableSwipe"/>
+        <!--true后菜单放置在左边， 默认放在右边-->
+        <attr format="boolean" name="isEnableLeftMenu"/>
+        <!--是否点击菜单内容后自动关闭   默认false不关闭-->
+        <attr format="boolean" name="isClickMenuAndClose"/>
+        <!--是否开启阻塞，默认是开启的，阻塞效果是 列表中当前有一个item的菜单已经被划出，
+        想滑出第二个的时候，会先阻塞滑动的动作，把第一个先关掉，再次滑动才能划开第二个；
+        不阻塞的话 滑动第二个item的同时，第二个item划开，第一个item同时关闭-->
+        <attr format="boolean" name="isOpenChoke"/>
+    </declare-styleable>
 </resources>

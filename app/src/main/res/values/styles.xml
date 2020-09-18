@@ -13,4 +13,10 @@
 <!--        <item name="android:textColor">@color/ui_title_txt_color</item>-->
 <!--        <item name="android:textStyle">bold</item>-->
 <!--    </style>-->
+
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@mipmap/app_bg</item>
+        <item name="android:selectableItemBackground">@null</item>
+    </style>
 </resources>

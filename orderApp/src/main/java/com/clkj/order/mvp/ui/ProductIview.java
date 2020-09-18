@@ -62,4 +62,7 @@ public interface ProductIview extends BaseIView {
 
     //检查更新
     default void checkUpdateView(AppVersionBean.AppVersionInfo edition_info){};
+
+    default void collectProductView(){}
+
 }

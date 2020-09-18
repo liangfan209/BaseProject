@@ -356,12 +356,12 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
             if(mOrderInfoBean.getStatus().equals("delivery_finished")){
                 ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
                         .withInt("sign",1)
-                        .withString("mOrderDetailId",mProductInfo.getId()+"").navigation();
+                        .withString("mOrderDetailId",mProductInfo.getOrder_item_id()+"").navigation();
 //                        .withSerializable("imgPathList",mOrderInfoBean.getContract_background()).navigation();
 
             }else if(mOrderInfoBean.getStatus().equals("order_finished")){
                 ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
-                        .withString("mOrderDetailId",mProductInfo.getId()+"").navigation();
+                        .withString("mOrderDetailId",mProductInfo.getOrder_item_id()+"").navigation();
             }
         });
         mTvOrderBottomRight.setOnClickListener(v->{

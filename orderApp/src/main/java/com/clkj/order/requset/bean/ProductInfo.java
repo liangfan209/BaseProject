@@ -42,7 +42,6 @@ public class ProductInfo implements Serializable {
     private int deposit;
     private String pay_services;
 
-
     public String getPay_services() {
         return pay_services;
     }

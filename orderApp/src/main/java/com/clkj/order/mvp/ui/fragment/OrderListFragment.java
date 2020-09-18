@@ -84,8 +84,9 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 OrderInfo info = (OrderInfo) adapter.getData().get(position);
+                if(info.getOrder_item_list() != null && info.getOrder_item_list().size() >0)
                 ARouter.getInstance().build(AppArouter.ORDER_ORDER_DETAIL_ACTIVITY)
-                        .withString("mOrderId",info.getId()+"").navigation();
+                        .withString("mOrderId",info.getOrder_item_list().get(0).getOrder_item_id()).navigation();
             }
         });
         EventBus.getDefault().register(this);

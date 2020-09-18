@@ -151,6 +151,26 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         });
     }
 
+
+    /**
+     * 收藏列表
+     * @param searchStr
+     * @param callBack
+     */
+    public void collectProductList(int currentPage,String searchStr,RequestCallBackInter callBack){
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.PRODUCT_COLLECT_PRODUCT_LIST);
+        map.put("current_page", currentPage+"");
+        map.put("search_info", searchStr);
+        map.put("auth", CommSpUtils.getToken());
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ProductListBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<ProductListBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
     /**
      * 所有专业
      * @param searchStr
@@ -443,5 +463,19 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
                 super.onSuccess(response);
             }
         });
+    }
+
+    public void hasCollectProduct(String id,AbstractReqeustCallback<String> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.ORDER_PRODUCT_COLLECT);
+        map.put("auth", CommSpUtils.getToken());
+        map.put("goods_id", id);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<AppVersionBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<AppVersionBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+
     }
 }

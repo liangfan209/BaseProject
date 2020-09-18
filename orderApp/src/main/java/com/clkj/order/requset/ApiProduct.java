@@ -37,6 +37,8 @@ public class ApiProduct {
 
     //产品搜索列表
     public static String PRODUCT_PRODUCT_LIST = "production.goods.search";
+    //收藏列表
+    public static String PRODUCT_COLLECT_PRODUCT_LIST = "customer.collection.search";
     //所有专业
     public static String PRODUCT_PROFESSION_ALL = "university.major.all";
     //所有学年
@@ -70,6 +72,8 @@ public class ApiProduct {
     //在线更新
     public static final String UPDATE_APP = "edition.get";
 
+    //收藏与取消
+    public static final String ORDER_PRODUCT_COLLECT = "customer.collection.collection";
 
 
 }

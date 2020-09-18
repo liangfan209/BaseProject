@@ -27,6 +27,11 @@ import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.comm_config_lib.utils.BitImageUtils;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.comm_config_lib.utils.Utils;
+import com.bq.utilslib.AppUtils;
+import com.bq.utilslib.BitmapUtils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.clkj.order.R;
 import com.clkj.order.R2;
 import com.clkj.order.mvp.presenter.ProductPresenter;
@@ -35,12 +40,6 @@ import com.clkj.order.mvp.ui.hodler.NewTypeViewHolder;
 import com.clkj.order.requset.bean.BannerData;
 import com.clkj.order.requset.bean.ProductInfo;
 import com.clkj.order.requset.bean.SpecificationList;
-import com.bq.utilslib.AppUtils;
-import com.bq.utilslib.BitmapUtils;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
-import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.CustomPopWindow;
 import com.fan.baseuilibrary.view.FlowRadioGroup;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
@@ -518,7 +517,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
             tvBuy.setEnabled(false);
         }
         if(specification_list.size() > 0){
-            tvRealPrice.setText(AppUtils.getDouble2(specification_list.get(0).getSale_price()));
+            tvRealPrice.setText(AppUtils.getDouble2(specification_list.get(mProductInfo.getSelectPosition()).getSale_price()));
         }
         for (int i = 0; i < specification_list.size(); i++) {
             final RadioButton rb = (RadioButton) LayoutInflater.from(this).inflate(R.layout.order_layout_radiobutton, null);
@@ -663,7 +662,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
                 showBuyPopwindow();
             }
         }else if(view.getId() == R.id.tv_save|| view.getId() == R.id.tv_server){
-            ToastUtils.showToast(this,"正在开发中");
+            mProductPresenter.hasCollectProduct(mProductId);
         }
     }
 

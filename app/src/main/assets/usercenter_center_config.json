@@ -19,6 +19,14 @@
           "path": "/order/ContractListActivity",
           "params": 1,
           "jumpType": "arouter"
+        },
+        {
+          "name": "我的收藏",
+          "remark": "",
+          "icon": "user_center_icon_order_shouchang",
+          "path": "/order/ProductCollectActivity",
+          "params": 1,
+          "jumpType": "arouter"
         }
       ]
     },

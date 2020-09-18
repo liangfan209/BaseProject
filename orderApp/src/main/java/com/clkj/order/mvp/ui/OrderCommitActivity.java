@@ -171,8 +171,10 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
         mTvBrand.setText(mProductInfo.getBrand_name());
         mTvBrand.setText(mProductInfo.getBrand_name());
         mTvProduct.setText(mProductInfo.getCategory());
+
+        //告诉选择的是哪一个
         if(mProductInfo.getSpecification_list().size() >0){
-            mTvSalePrice.setText(AppUtils.getDouble2(mProductInfo.getSpecification_list().get(0).getOriginal_price()));
+            mTvSalePrice.setText(AppUtils.getDouble2(mProductInfo.getSpecification_list().get(mProductInfo.getSelectPosition()).getOriginal_price()));
         }
         mTvAgent.setText(mProductInfo.getAgent_name()+"为您服务");
 
@@ -185,8 +187,8 @@ public class OrderCommitActivity extends BaseActivity implements OrderIview{
         mTvStock.setText("x "+ mProductInfo.getCount());
 
         if(mProductInfo.getSpecification_list().size()>0){
-            int originalPrice = mProductInfo.getSpecification_list().get(0).getOriginal_price();
-            realPrice = mProductInfo.getSpecification_list().get(0).getSale_price();
+            int originalPrice = mProductInfo.getSpecification_list().get(mProductInfo.getSelectPosition()).getOriginal_price();
+            realPrice = mProductInfo.getSpecification_list().get(mProductInfo.getSelectPosition()).getSale_price();
 
             //原价
             mTvRealPrice.setText("¥"+AppUtils.getDouble2(originalPrice*mProductInfo.getCount()));

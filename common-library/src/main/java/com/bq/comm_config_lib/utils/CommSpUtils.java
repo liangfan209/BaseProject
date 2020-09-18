@@ -55,6 +55,15 @@ public class CommSpUtils {
         return "";
     }
 
+
+    public static boolean getWelecom() {
+      return SPUtils.getInstance(SpField.AUTH_HAS_WELCOM).getBoolean(SpField.AUTH_HAS_WELCOM,false);
+    }
+    public static void saveWelecom(boolean b) {
+        SPUtils.getInstance(SpField.AUTH_HAS_WELCOM).put(SpField.AUTH_HAS_WELCOM, b);
+    }
+
+
     public static LoginBean getLoginBean() {
         String loginInfoStr = SPUtils.getInstance(SpField.AUTH_TOKEN).getString(SpField.AUTH_TOKEN);
         LoginBean loginBean = new Gson().fromJson(loginInfoStr, LoginBean.class);

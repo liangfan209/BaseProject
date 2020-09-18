@@ -1,6 +1,7 @@
 package com.clkj.order.mvp.presenter;
 
 import com.bq.comm_config_lib.mvp.BasePresenter;
+import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.clkj.order.mvp.ui.ProductIview;
 import com.clkj.order.requset.ProductHttpReqeustImp;
@@ -15,6 +16,7 @@ import com.clkj.order.requset.bean.SchoolBean;
 import com.clkj.order.requset.bean.SchoolListBean;
 import com.clkj.order.requset.bean.SchoolProfessionListBean;
 import com.clkj.order.requset.bean.SelecterBean;
+import com.fan.baseuilibrary.utils.ToastUtils;
 import com.google.gson.Gson;
 
 import androidx.annotation.NonNull;
@@ -146,6 +148,23 @@ public class ProductPresenter implements BasePresenter {
 
     }
 
+
+    //
+    public void collectProductList(int page,String strs){
+        mProductHttpReqeustImp.collectProductList(page,strs, new AbstractReqeustCallback<ProductListBean>(mIView) {
+            @Override
+            public void onSuccess(ProductListBean bean) {
+                mIView.getProductListView(bean.getData_list());
+            }
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+                mIView.getProductListErrorView();
+            }
+        });
+
+    }
+
     //获取产品详情
     public void getProductDetail(String id){
         mProductHttpReqeustImp.getProductionDetail(id, new AbstractReqeustCallback<ProductBean>(mIView) {
@@ -255,6 +274,20 @@ public class ProductPresenter implements BasePresenter {
             @Override
             public void onSuccess(AppVersionBean bean) {
                 mIView.checkUpdateView(bean.getEdition_info());
+            }
+
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+            }
+        });
+    }
+
+    public void hasCollectProduct(String id) {
+        mProductHttpReqeustImp.hasCollectProduct(id,new AbstractReqeustCallback<String>(mIView) {
+            @Override
+            public void onSuccess(String bean) {
+                ToastUtils.showToast(((BaseActivity)mIView),"操作成功");
             }
 
             @Override

@@ -14,6 +14,9 @@ public class AppArouter {
     //壳子
     public static final String MAIN = "/main";
     public static final String MAIN_ACTIVITY = "/main/MainActivity";
+    //导航页面
+//    public static final String ORDER_WELCOME_ACTIVITY = MAIN +"/WelcomeActivity";
+
 
     //登录模块
     public static final String LOGIN = "/login";
@@ -32,6 +35,8 @@ public class AppArouter {
     public static final String USER_CENTER_BANK_LIST = USER_CENTER+"/BankManagerActivity";
     public static final String USER_CENTER_BANK_ADD_ACTIVITY = USER_CENTER+"/AddBankActivity";
     public static final String USER_CENTER_USER_FRAGMENT = USER_CENTER+"/UserInfoFragment";
+
+
     public static final String USER_CENTER_ADDRESS_LIST = USER_CENTER+"/AddressManagerActivity";
     public static final String USER_CENTER_ADDRESS_SELECT = USER_CENTER+"/AddressSelectActivity";
     public static final String USER_CENTER_ADDRESS_OPTION = USER_CENTER+"/AddAddressActivity";
@@ -61,6 +66,7 @@ public class AppArouter {
 
 
 
+
     //我的订单
     public static final String ORDER= "/order";
     public static final String ORDER_PRODUCT_DETAIL_ACTIVITY = ORDER+"/ProductDetailActivity";
@@ -71,7 +77,9 @@ public class AppArouter {
     public static final String ORDER_PAY_ORDER_DETAIL_ACTIVITY = ORDER+"/PayOrderDetailActivity";
 
 
-    public static final String ORDER_HOME_FRAGMENT = ORDER +"/HomeFragment";
+    public static final String ORDER_HOME_FRAGMENT = ORDER+"/HomeFragment1";
+
+
     //商品列表
     public static final String ORDER_PRODUCT_LIST_ACTIVITY = ORDER +"/ProductListActivity";
     //学校列表
@@ -100,9 +108,14 @@ public class AppArouter {
     public static final String ORDER_OPEN_FILE_ACTIVITY = ORDER+"/OpenFilesActivity";
 
     public static final String ORDER_SCAN_ACTIVITY = ORDER +"/ScanActivity";
+    public static final String ORDER_COLLECT_ACTIVITY = ORDER+"/ProductCollectActivity";
+
+
 
     //h5页面
     public static final String H5_ACTIVITY = "/h5/H5Activity";
 
 
+    public class ORDER_WELCOME_ACTIVITY {
+    }
 }

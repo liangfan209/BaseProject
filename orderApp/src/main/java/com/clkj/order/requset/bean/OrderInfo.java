@@ -43,6 +43,7 @@ public class OrderInfo implements Serializable{
 
 
 
+
     private int strike_price; //成交金额
     private int sale_price; //销售总金额
     private int discount;//优惠金额
@@ -55,6 +56,9 @@ public class OrderInfo implements Serializable{
     public List<PaymentListBean> getPayment_list() {
         return payment_list;
     }
+
+
+
     public void setPayment_list(List<PaymentListBean> payment_list) {
         this.payment_list = payment_list;
     }
@@ -257,7 +261,16 @@ public class OrderInfo implements Serializable{
         private String agent_name;
         private String category;
         private String id;
+        private String order_item_id;
 
+
+        public String getOrder_item_id() {
+            return order_item_id;
+        }
+
+        public void setOrder_item_id(String order_item_id) {
+            this.order_item_id = order_item_id;
+        }
 
         public String getId() {
             return id;

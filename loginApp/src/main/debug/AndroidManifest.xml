@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bq.login" >
+    package="com.clkj.login" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
@@ -27,7 +27,7 @@
             android:name="design_height_in_dp"
             android:value="640" />
 
-        <meta-data android:name="com.bq.login.AppApplicationConfig"
+        <meta-data android:name="com.clkj.login.AppApplicationConfig"
             android:value="test"
             />
     </application>
