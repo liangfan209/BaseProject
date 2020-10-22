@@ -32,6 +32,7 @@
         tl:tl_textSelectColor="@color/ui_primary_color"
         tl:tl_textUnselectColor="@color/ui_txt_normal_color"
         tl:tl_textsize="@dimen/h5_font_size"
+        android:background="@color/white"
         />
 
 

@@ -11,6 +11,8 @@ import com.clkj.user_center.mvp.user.ui.UserFragment;
 import com.clkj.user_center.mvp.user.ui.UserinfoActivity;
 import com.clkj.user_center.requset.UserCenterHttpReqeustImp;
 import com.clkj.user_center.requset.bean.CertificationBean;
+import com.clkj.user_center.requset.bean.MessageListBean;
+import com.clkj.user_center.requset.bean.UnreadCountBean;
 import com.clkj.user_center.requset.bean.UserInfo;
 import com.google.gson.Gson;
 
@@ -110,6 +112,50 @@ public class UserPresenter implements BasePresenter {
         }
     }
 
+    public void getMessage(int page,int type) {
+        mUserCenterHttpReqeustImp.getMessageList(page,type,new AbstractReqeustCallback<MessageListBean>(mUserIView) {
+            @Override
+            public void onSuccess(MessageListBean bean) {
+                mUserIView.messageListView(bean.getData_list());
+            }
+
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+            }
+        });
+    }
+
+    public void getUnreadCount() {
+        mUserCenterHttpReqeustImp.unReadCount(new AbstractReqeustCallback<UnreadCountBean>(mUserIView) {
+            @Override
+            public void onSuccess(UnreadCountBean bean) {
+                mUserIView.unReadCountView(bean.getUnread_count());
+            }
+
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+            }
+        });
+    }
+
+
+    public void readMessage(String id) {
+        mUserCenterHttpReqeustImp.readMessage(id,new AbstractReqeustCallback<String>(mUserIView) {
+            @Override
+            public void onSuccess(String bean) {
+                mUserIView.changeMsgIView();
+            }
+
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+            }
+        });
+    }
+
+
     @Override
     public void onCreate(@NonNull LifecycleOwner owner) {
         EventBus.getDefault().register(this);
@@ -119,4 +165,6 @@ public class UserPresenter implements BasePresenter {
     public void onDestroy(@NonNull LifecycleOwner owner) {
         EventBus.getDefault().unregister(this);
     }
+
+
 }

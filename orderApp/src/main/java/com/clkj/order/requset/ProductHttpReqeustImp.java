@@ -10,6 +10,7 @@ import com.clkj.order.requset.bean.AppVersionBean;
 import com.clkj.order.requset.bean.BannerListBean;
 import com.clkj.order.requset.bean.ContractListBean;
 import com.clkj.order.requset.bean.ContractinfoBean;
+import com.clkj.order.requset.bean.EvaluationListBean;
 import com.clkj.order.requset.bean.OrderIdBean;
 import com.clkj.order.requset.bean.OrderInfoDetailBean;
 import com.clkj.order.requset.bean.OrderInfoListBean;
@@ -359,7 +360,7 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
     public void getContactImg(String productId, AbstractReqeustCallback<ContractinfoBean> callBack) {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiProduct.ORDER_GET_CONTRACT);
-        map.put("order_item_id", productId);
+        map.put("contract_id", productId);
         map.put("auth", CommSpUtils.getToken());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<ContractinfoBean>>(callBack){
             @Override
@@ -478,4 +479,75 @@ public class ProductHttpReqeustImp implements ProductHttpReqeustInter {
         });
 
     }
+
+    public void feedBack(String info, AbstractReqeustCallback<String> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.ORDER_FEED_BACK);
+        map.put("auth", CommSpUtils.getToken());
+        map.put("feedback_info", info);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<AppVersionBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<AppVersionBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+
+    public void evaluationAdd(String info, String orderId, AbstractReqeustCallback<String> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.ORDER_EVALUATION_ADD);
+        map.put("auth", CommSpUtils.getToken());
+        map.put("evaluation_info", info);
+        map.put("order_item_id", orderId);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<String>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    public void getMyEvaluation(int page, AbstractReqeustCallback<EvaluationListBean> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.ORDER_EVALUATION_LIST);
+        map.put("auth", CommSpUtils.getToken());
+        map.put("current_page", page+"");
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<EvaluationListBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<EvaluationListBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    public void getAllEvaluation(int page, String good_id, AbstractReqeustCallback<EvaluationListBean> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.ORDER_EVALUATION_ALL);
+        map.put("auth", CommSpUtils.getToken());
+        map.put("current_page", page+"");
+        map.put("goods_id", good_id);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<EvaluationListBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<EvaluationListBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    public void searchAllEvaluation(int page, String good_id,String info, AbstractReqeustCallback<EvaluationListBean> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiProduct.ORDER_EVALUATION_SEARCH_ALL);
+        map.put("auth", CommSpUtils.getToken());
+        map.put("current_page", page+"");
+        map.put("goods_id", good_id);
+        map.put("search_info", info);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<EvaluationListBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<EvaluationListBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
 }

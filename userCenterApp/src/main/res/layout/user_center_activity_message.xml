@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/fafafa">
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp">
+
+                <com.fan.baseuilibrary.view.flycotablayout.widget.SkinSlidingTabLayout
+                    android:id="@+id/tablayout"
+                    android:layout_width="150dp"
+                    android:layout_height="55dp"
+                    app:tl_indicator_color="@color/ui_primary_color"
+                    app:tl_indicator_height="3dp"
+                    app:tl_textUnselectColor="@color/ui_txt_normal_color"
+                    app:tl_textSelectColor="@color/ui_primary_color"
+                    app:tl_textsize="@dimen/h1_font_size"
+                    app:tl_iconVisible="false"
+                    app:tl_indicator_width="40dp"
+                    app:tl_tab_padding="15dp"
+                    app:tl_tab_space_equal="true"
+                    android:layout_centerInParent="true"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_title_left"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="14dp"
+                    android:paddingTop="14dp"
+                    android:src="@mipmap/public_ic_arrow_back_black" />
+        </RelativeLayout>
+
+        <com.fan.baseuilibrary.view.NoAnimationViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true" />
+</LinearLayout>

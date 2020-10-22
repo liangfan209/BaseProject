@@ -36,7 +36,8 @@ public class ActivityInterceptor implements IInterceptor {
                     AppArouter.ORDER_LIST_ACTIVITY.equals(path) ||  //订单管理
                     AppArouter.ORDER_ORDER_COMMIT_ACTIVITY.equals(path) ||  //订单管理
                     AppArouter.ORDER_SCAN_ACTIVITY.equals(path) ||  //扫码
-                    AppArouter.LOGIN_MODIFY_ACTIVITY.equals(path)) { //修改面膜
+                    AppArouter.USER_CENTER_MESSAGE_ACTIVITY.equals(path) ||  //消息
+                    AppArouter.LOGIN_MODIFY_ACTIVITY.equals(path)) { //修改密码
                 Bundle optionsBundle = postcard.getOptionsBundle();
                 ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY)
                         .withBundle("mBundle", optionsBundle)

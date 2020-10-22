@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/fafafa">
+
+
+    <include layout="@layout/layout_public_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="评价描述"
+            android:textColor="@color/ui_txt_normal_color"
+            android:textSize="@dimen/h3_font_size"
+            android:textStyle="bold"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="15dp" />
+
+        <com.fan.baseuilibrary.view.FlowRadioGroup
+            android:id="@+id/frg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="5dp"
+            >
+
+            <skin.support.widget.SkinCompatRadioButton
+                android:id="@+id/rb1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:text="服务周到"
+                android:background="@drawable/ui_shap_radio_bt_selecter"
+                android:textColor="@color/ui_radio_bt_color_selector"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="7dp"
+                android:drawablePadding="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/iv_img"
+                />
+
+            <skin.support.widget.SkinCompatRadioButton
+                android:id="@+id/rb2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:background="@drawable/ui_shap_radio_bt_selecter"
+                android:text="课程齐全"
+                android:textColor="@color/ui_radio_bt_color_selector"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="7dp"
+                android:drawablePadding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/iv_img"
+                />
+            <skin.support.widget.SkinCompatRadioButton
+                android:id="@+id/rb3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:background="@drawable/ui_shap_radio_bt_selecter"
+                android:text="售后保障"
+                android:textColor="@color/ui_radio_bt_color_selector"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="7dp"
+                android:drawablePadding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/iv_img"
+                />
+
+        </com.fan.baseuilibrary.view.FlowRadioGroup>
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/et_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="120dp"
+            android:background="@color/transparent"
+            android:drawableRight="@mipmap/icon_clear"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/h5_font_size"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="15dp"
+            android:gravity="top"
+            android:hint="请填写评价内容"/>
+
+
+        <cn.bingoogolapple.photopicker.widget.BGASortableNinePhotoLayout
+            android:id="@+id/snpl_moment_add_photos"
+            style="@style/WrapWrap"
+            android:layout_margin="10dp"
+            app:bga_snpl_deleteDrawable="@mipmap/bga_pp_ic_delete"
+            app:bga_snpl_deleteDrawableOverlapQuarter="false"
+            app:bga_snpl_editable="true"
+            app:bga_snpl_itemCornerRadius="0dp"
+            app:bga_snpl_itemSpanCount="3"
+            app:bga_snpl_itemWhiteSpacing="4dp"
+            app:bga_snpl_itemWidth="0dp"
+            app:bga_snpl_maxItemCount="3"
+            app:bga_snpl_otherWhiteSpacing="100dp"
+            app:bga_snpl_placeholderDrawable="@mipmap/bga_pp_ic_holder_light"
+            app:bga_snpl_plusDrawable="@mipmap/bga_pp_ic_plus"
+            app:bga_snpl_plusEnable="true"
+            app:bga_snpl_sortable="true"
+            android:layout_marginLeft="15dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="25dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="服务态度"
+                android:textColor="#ff999999"
+                android:textSize="12sp"
+                android:layout_marginTop="7dp"
+                />
+
+            <per.wsj.library.AndRatingBar
+                android:id="@+id/rating1"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:numStars="5"
+                android:stepSize="1"
+                app:starColor="#4AC97F"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="课程质量"
+                android:textColor="#ff999999"
+                android:textSize="12sp"
+                android:layout_marginTop="7dp"
+                />
+
+            <per.wsj.library.AndRatingBar
+                android:id="@+id/rating2"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:numStars="5"
+                android:stepSize="1"
+                app:starColor="#4AC97F"
+                />
+        </LinearLayout>
+        <!--
+        android:rating=”1″                            设置Rating
+    android:numStars=”8″                      设置星星的数量
+    android:layout_height=”36dp”          设置控件的高度
+    android:stepSize=”0.5″                     设置Rating的步长
+    android:isIndicator=”true”                 设置是否是指示器（只能代码设置，不可手动设置）
+    另外AndRatingBar提供了扩展属性，可以方便的进行样式设置：
+
+    app:starDrawable=””                        设置星星的图标
+    app:bgDrawable=””                          设置背景的图标
+    app:starColor=””                               设置星星的颜色
+    app:subStarColor=””                         设置二级颜色
+    app:starColor=””                                 设置星星背景颜色
+    app:keepOriginColor=””                    设置是否保持图标原有的颜色
+    app:starSpacing=”4dp”                     调整星星之间的间距
+    app:scaleFactor=”1.2″                       通过缩放比例调整星星之间的间距
+    app:right2Left=”true”                         从右往左展示
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="院校专业"
+                android:textColor="#ff999999"
+                android:textSize="12sp"
+                android:layout_marginTop="7dp"
+                />
+
+            <per.wsj.library.AndRatingBar
+                android:id="@+id/rating3"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:numStars="5"
+                android:stepSize="1"
+                app:starColor="#4AC97F"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/tv_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="28dp"
+        android:gravity="center"
+        android:text="提交"
+        android:textStyle="normal"
+        style="@style/ui_h3_button_primary_style"
+        android:background="@drawable/ui_shap_button_bg_selector"
+        android:enabled="true"
+        />
+</LinearLayout>

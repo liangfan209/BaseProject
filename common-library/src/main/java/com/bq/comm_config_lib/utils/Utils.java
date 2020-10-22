@@ -233,7 +233,7 @@ public class Utils {
             retriever.setDataSource(videoUrl, new HashMap());
             //获得第一帧图片
             bitmap = retriever.getFrameAtTime();
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             retriever.release();

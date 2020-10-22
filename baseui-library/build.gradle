@@ -75,6 +75,12 @@ dependencies {
     api 'com.umeng.umsdk:common:2.0.0'
 
 
+    api 'cn.bingoogolapple:bga-photopicker:2.0.0@aar'
+    api 'cn.bingoogolapple:bga-baseadapter:2.0.0@aar'
+    api 'pub.devrel:easypermissions:1.0.1'
+    api 'com.github.giswangsj:AndRatingBar:1.0.3'
+
+
     implementation files('libs/umeng-shareboard-widget-6.9.6.jar')
     implementation files('libs/umeng-share-core-6.9.6.jar')
     implementation files('libs/umeng-sharetool-6.9.6.jar')
@@ -83,6 +89,8 @@ dependencies {
     implementation files('libs/umeng-share-sina-simplify-6.9.6.jar')
     implementation files('libs/core_3.0.1.jar')
     implementation files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
+
+
 
     //test
     api rootProject.ext.dependencies["junit"]

@@ -1,5 +1,7 @@
 package com.clkj.login.requset;
 
+import com.blankj.utilcode.util.DeviceUtils;
+import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.comm_config_lib.request.RequestCallBackInter;
 import com.bq.comm_config_lib.request.SignJsonCallBack;
 import com.bq.comm_config_lib.utils.CommSpUtils;
@@ -27,6 +29,7 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
         map.put("api", ApiLogin.API_LOGIN_LOGIN);
         map.put("username",name);
         map.put("password",pwd);
+        map.put("unique_code", DeviceUtils.getUniqueDeviceId());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<LoginInfo>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<LoginInfo>> response) {
@@ -41,6 +44,7 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
         map.put("api", ApiLogin.API_VERTIFICATION_LOGIN);
         map.put("username",name);
         map.put("verify_code",verticationCode);
+        map.put("unique_code", DeviceUtils.getUniqueDeviceId());
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<LoginInfo>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<LoginInfo>> response) {
@@ -100,6 +104,7 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
     public void register(String phone, String password, String code, RequestCallBackInter callBack) {
         Map<String,String> map = new HashMap<>();
         map.put("api", ApiLogin.API_LOGIN_REGISTER);
+        map.put("unique_code", DeviceUtils.getUniqueDeviceId());
         map.put("phone", phone);
         map.put("password", password);
         map.put("code", code);
@@ -135,6 +140,36 @@ public class LoginHttpReqeustImp implements LoginHttpReqeustInter{
         NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<Object>>(callBack){
             @Override
             public void onSuccess(Response<BaseResponse<Object>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    public void getToken(String openId,String token, AbstractReqeustCallback<LoginInfo> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiLogin.API_OPENID_LOGIN);
+        map.put("open_id", openId);
+        map.put("access_token", token);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<LoginInfo>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<LoginInfo>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    public void wechatRegister(String access_token, String open_id, String phone, String unique_code, String verify_code, AbstractReqeustCallback<LoginInfo> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiLogin.API_WETCHATBIND_LOGIN);
+        map.put("access_token", access_token);
+        map.put("open_id", open_id);
+        map.put("client_type", "android");
+        map.put("phone", phone);
+        map.put("unique_code", unique_code);
+        map.put("verify_code", verify_code);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<LoginInfo>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<LoginInfo>> response) {
                 super.onSuccess(response);
             }
         });

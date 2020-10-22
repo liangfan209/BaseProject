@@ -1,5 +1,7 @@
 package com.clkj.login.requset.bean;
 
+import java.util.List;
+
 /**
  * 文件名：
  * 描述：
@@ -20,6 +22,15 @@ public class LoginInfo {
     private String expire_time;
     private String renew_flag;
     private int is_password;
+    private List<Integer> goods_ids;
+
+    public List<Integer> getGoods_ids() {
+        return goods_ids;
+    }
+
+    public void setGoods_ids(List<Integer> goods_ids) {
+        this.goods_ids = goods_ids;
+    }
 
     public int getIs_password() {
         return is_password;

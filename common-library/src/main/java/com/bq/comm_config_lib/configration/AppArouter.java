@@ -24,6 +24,7 @@ public class AppArouter {
     public static final String FORGET_PWD_ACTIVITY = LOGIN+"/RegisterActivity";
     public static final String LOGIN_SETTING_ACTIVITY = LOGIN+"/SettingPwdActivity";
     public static final String LOGIN_MODIFY_ACTIVITY = LOGIN+"/ModifyPwdActivity";
+    public static final String LOGIN_BIND_ACTIVITY = LOGIN+"/BindPhoneActivity";
 
     public static final String LOGIN_SERVER = LOGIN+"/LoginService";
     public static final String LOGOUT_SERVER = LOGIN+"/logoutService";
@@ -35,6 +36,8 @@ public class AppArouter {
     public static final String USER_CENTER_BANK_LIST = USER_CENTER+"/BankManagerActivity";
     public static final String USER_CENTER_BANK_ADD_ACTIVITY = USER_CENTER+"/AddBankActivity";
     public static final String USER_CENTER_USER_FRAGMENT = USER_CENTER+"/UserInfoFragment";
+    public static final String USER_CENTER_MESSAGE_ACTIVITY = USER_CENTER+"/MessageActivity";
+    public static final String USER_CENTER_MESSAGE_DETAIL_ACTIVITY = USER_CENTER+"/MessageDetailActivity";
 
 
     public static final String USER_CENTER_ADDRESS_LIST = USER_CENTER+"/AddressManagerActivity";
@@ -110,12 +113,19 @@ public class AppArouter {
     public static final String ORDER_SCAN_ACTIVITY = ORDER +"/ScanActivity";
     public static final String ORDER_COLLECT_ACTIVITY = ORDER+"/ProductCollectActivity";
 
+    //意见反馈
+    public static final String ORDER_FEED_BACK_ACTIVITY = ORDER+"/FeedBackActivity";
+    public static final String ORDER_EVALUATION_ADD_ACTIVITY = ORDER+"/EvaluationAddActivity";
+
+    //我的评价
+    public static final String ORDER_MY_EVALUATION_ACTIVITY = ORDER+"/MyEvaluationActivity";
+    public static final String ORDER_EVALUATION_ALL_ACTIVITY = ORDER+"/EvaluationAllActivity";
+    public static final String ORDER_EVALUATION_SUCCESS_ACTIVITY = ORDER+"/EvaluationSuccessActivity";
+
 
 
     //h5页面
     public static final String H5_ACTIVITY = "/h5/H5Activity";
 
 
-    public class ORDER_WELCOME_ACTIVITY {
-    }
 }

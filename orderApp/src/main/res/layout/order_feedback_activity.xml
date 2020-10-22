@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/fafafa">
+
+
+    <include layout="@layout/layout_public_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="反馈描述"
+            android:textColor="@color/ui_txt_normal_color"
+            android:textSize="@dimen/h3_font_size"
+            android:textStyle="bold"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="15dp" />
+
+        <com.fan.baseuilibrary.view.FlowRadioGroup
+            android:id="@+id/frg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="5dp"
+            >
+
+            <skin.support.widget.SkinCompatRadioButton
+                android:id="@+id/rb1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:background="@drawable/ui_shap_radio_bt_selecter"
+                android:text="功能异常"
+                android:textColor="@color/ui_radio_bt_color_selector"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="7dp"
+                android:drawablePadding="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/iv_img"
+                />
+
+            <skin.support.widget.SkinCompatRadioButton
+                android:id="@+id/rb2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:background="@drawable/ui_shap_radio_bt_selecter"
+                android:text="优化建议"
+                android:textColor="@color/ui_radio_bt_color_selector"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="7dp"
+                android:drawablePadding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/iv_img"
+                />
+            <skin.support.widget.SkinCompatRadioButton
+                android:id="@+id/rb3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:background="@drawable/ui_shap_radio_bt_selecter"
+                android:text="投诉建议"
+                android:textColor="@color/ui_radio_bt_color_selector"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="7dp"
+                android:drawablePadding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/iv_img"
+                />
+
+            <skin.support.widget.SkinCompatRadioButton
+                android:id="@+id/rb4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:background="@drawable/ui_shap_radio_bt_selecter"
+                android:text="其它反馈"
+                android:textColor="@color/ui_radio_bt_color_selector"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="7dp"
+                android:drawablePadding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/iv_img"
+                />
+        </com.fan.baseuilibrary.view.FlowRadioGroup>
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/et_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="120dp"
+            android:background="@color/transparent"
+            android:drawableRight="@mipmap/icon_clear"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/h5_font_size"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="15dp"
+            android:gravity="top"
+            android:hint="请选择问题类型，并填写3个字以上的反馈，我们尽快解决"/>
+
+
+        <cn.bingoogolapple.photopicker.widget.BGASortableNinePhotoLayout
+            android:id="@+id/snpl_moment_add_photos"
+            style="@style/WrapWrap"
+            android:layout_margin="10dp"
+            app:bga_snpl_deleteDrawable="@mipmap/bga_pp_ic_delete"
+            app:bga_snpl_deleteDrawableOverlapQuarter="false"
+            app:bga_snpl_editable="true"
+            app:bga_snpl_itemCornerRadius="0dp"
+            app:bga_snpl_itemSpanCount="3"
+            app:bga_snpl_itemWhiteSpacing="4dp"
+            app:bga_snpl_itemWidth="0dp"
+            app:bga_snpl_maxItemCount="3"
+            app:bga_snpl_otherWhiteSpacing="100dp"
+            app:bga_snpl_placeholderDrawable="@mipmap/bga_pp_ic_holder_light"
+            app:bga_snpl_plusDrawable="@mipmap/bga_pp_ic_plus"
+            app:bga_snpl_plusEnable="true"
+            app:bga_snpl_sortable="true"
+            android:layout_marginLeft="15dp"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="28dp"
+        android:gravity="center"
+        android:text="提交反馈"
+        android:textStyle="normal"
+        style="@style/ui_h3_button_primary_style"
+        android:background="@drawable/ui_shap_button_bg_selector"
+        android:enabled="true"
+        />
+</LinearLayout>

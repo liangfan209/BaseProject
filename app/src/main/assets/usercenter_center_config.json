@@ -27,6 +27,13 @@
           "path": "/order/ProductCollectActivity",
           "params": 1,
           "jumpType": "arouter"
+        },{
+          "name": "我的评论",
+          "remark": "",
+          "icon": "user_center_icon_order_shouchang",
+          "path": "/order/MyEvaluationActivity",
+          "params": 1,
+          "jumpType": "arouter"
         }
       ]
     },
@@ -48,6 +55,14 @@
           "remark": "",
           "icon": "user_center_icon_usercenter_address_manager",
           "path": "/userCenter/AddressManagerActivity",
+          "jumpType": "arouter"
+        },
+
+        {
+          "name": "意见反馈",
+          "remark": "",
+          "icon": "user_center_icon_usercenter_address_manager",
+          "path": "/order/FeedBackActivity",
           "jumpType": "arouter"
         },
         {

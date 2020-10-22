@@ -8,6 +8,7 @@ import com.clkj.order.requset.ProductHttpReqeustImp;
 import com.clkj.order.requset.bean.AppVersionBean;
 import com.clkj.order.requset.bean.BannerListBean;
 import com.clkj.order.requset.bean.ContractListBean;
+import com.clkj.order.requset.bean.EvaluationListBean;
 import com.clkj.order.requset.bean.ProductBean;
 import com.clkj.order.requset.bean.ProductListBean;
 import com.clkj.order.requset.bean.ProfessionListBean;
@@ -287,7 +288,51 @@ public class ProductPresenter implements BasePresenter {
         mProductHttpReqeustImp.hasCollectProduct(id,new AbstractReqeustCallback<String>(mIView) {
             @Override
             public void onSuccess(String bean) {
-                ToastUtils.showToast(((BaseActivity)mIView),"操作成功");
+                ToastUtils.showToastOk(((BaseActivity)mIView),"操作成功");
+                mIView.collectProductView();
+            }
+
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+            }
+        });
+    }
+
+
+    public void getMyEvaluation(int page) {
+        mProductHttpReqeustImp.getMyEvaluation(page,new AbstractReqeustCallback<EvaluationListBean>(mIView) {
+            @Override
+            public void onSuccess(EvaluationListBean bean) {
+                mIView.getMyEvaluationList(bean.getData_list());
+            }
+
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+            }
+        });
+    }
+
+    public void getAllEvaluation(int page, String good_id) {
+        mProductHttpReqeustImp.getAllEvaluation(page,good_id,new AbstractReqeustCallback<EvaluationListBean>(mIView) {
+            @Override
+            public void onSuccess(EvaluationListBean bean) {
+                mIView.geEvaluationList(bean);
+            }
+
+            @Override
+            public void onError(String msg) {
+                super.onError(msg);
+            }
+        });
+    }
+
+    public void searchAllEvaluation(int page, String good_id,String info) {
+        mProductHttpReqeustImp.searchAllEvaluation(page,good_id,info,new AbstractReqeustCallback<EvaluationListBean>(mIView) {
+            @Override
+            public void onSuccess(EvaluationListBean bean) {
+                mIView.geEvaluationList(bean);
             }
 
             @Override

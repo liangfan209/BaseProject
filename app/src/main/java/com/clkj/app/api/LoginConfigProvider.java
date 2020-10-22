@@ -2,6 +2,7 @@ package com.clkj.app.api;
 
 import android.Manifest;
 
+import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.annotation.Register;
 import com.bq.comm_config_lib.msgService.MessageBody;
@@ -14,6 +15,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import cn.jpush.android.api.JPushInterface;
 import io.jiantao.android.locate.LocationHelper;
 import io.reactivex.functions.Consumer;
 
@@ -34,7 +36,17 @@ public class LoginConfigProvider {
         if ("config/login".equals(event.key)) {
             String configStr = AppUtils.getAssetJson(AppUtils.getApp(), "login_login_config.json");
             event.eventInterface.callBack(new MessageBody(MessageBody.SUCCESS_CODE, configStr));
-        } else if ("location".equals(event.key)) {
+        }
+        //注册极光推送
+        else if("create_jpush".equals(event.key)){
+            System.out.println("====>>>> unique = "+DeviceUtils.getUniqueDeviceId());
+            JPushInterface.setAlias(event.activity, 0, DeviceUtils.getUniqueDeviceId());
+        }
+        //销毁极光推送
+        else if("desdory_jpush".equals(event.key)){
+            JPushInterface.deleteAlias(event.activity,  0);
+        }
+        else if ("location".equals(event.key)) {
             if(StringUtils.isEmpty(mCity)){
                 LocationHelper locateHelper = new LocationHelper.Builder(event.activity)
                         .setScanSpan(0)

@@ -298,13 +298,6 @@
             </RelativeLayout>
 
 
-
-
-
-
-
-
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
@@ -416,6 +409,171 @@
                     />
             </RelativeLayout>
 
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/fafafa"/>
+            <LinearLayout
+                android:id="@+id/llt_evaluation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="27dp"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/tv_evaluation_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="评价"
+                        android:textColor="#ff434343"
+                        android:textSize="15sp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_all_click"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="全部"
+                        android:textColor="#ff999999"
+                        android:textSize="12sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="27dp"
+                        android:layout_marginTop="4dp"
+                        android:drawableRight="@mipmap/next_step"
+                        android:drawablePadding="5dp"
+                        />
+
+                </RelativeLayout>
+
+
+                <com.fan.baseuilibrary.view.FlowLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:background="@drawable/shap_evaluation_bg"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:background="@drawable/shap_evaluation_bg"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:background="@drawable/shap_evaluation_bg"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:background="@drawable/shap_evaluation_bg"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:background="@drawable/shap_evaluation_bg"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        />
+                </com.fan.baseuilibrary.view.FlowLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shap_white_radius_10"
+                    android:layout_marginTop="0dp"
+                    android:paddingBottom="15dp">
+
+
+                    <com.fan.baseuilibrary.view.CircleImageView
+                    android:id="@+id/civ_img"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@mipmap/icon_user_head"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="15dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="安安宝贝"
+                    android:textColor="#ff999999"
+                    android:textSize="14sp"
+                    android:layout_toRightOf="@id/civ_img"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginLeft="15dp"
+                    />
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="煎炒烹砸都可以，好用的不得了啊非常喜欢，下次会回购哦。"
+                    android:textColor="#ff999999"
+                    android:textSize="14sp"
+                    android:maxLines="5"
+                    android:layout_marginTop="13dp"
+                    android:layout_below="@+id/tv_name"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="30dp"
+                    />
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_img_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginBottom="15dp"/>
+            </LinearLayout>
+
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
@@ -488,15 +646,16 @@
             android:drawablePadding="4dp"
             />
 
-        <TextView
-            android:id="@+id/tv_save"
+        <skin.support.widget.SkinCompatCheckBox
+            android:id="@+id/cb_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="收藏"
+            android:button="@null"
             android:textColor="@color/ui_txt_hint_color"
             android:textSize="@dimen/h5_font_size"
-            android:layout_marginLeft="64dp"
-            android:drawableTop="@mipmap/order_icon_collect"
+            android:layout_marginLeft="24dp"
+            android:drawableTop="@drawable/shap_collect_selecter"
             android:layout_marginTop="11dp"
             android:drawablePadding="4dp"
             />

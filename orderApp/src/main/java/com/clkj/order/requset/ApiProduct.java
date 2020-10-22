@@ -76,4 +76,17 @@ public class ApiProduct {
     public static final String ORDER_PRODUCT_COLLECT = "customer.collection.collection";
 
 
+
+    public static final String ORDER_FEED_BACK = "customer.feedback.add";
+    //添加评论
+    public static final String ORDER_EVALUATION_ADD = "customer.order.addevaluation";
+
+    //我的评价列表
+    public static final String ORDER_EVALUATION_LIST = "customer.order.myevaluations";
+    //所有评价
+    public static final String ORDER_EVALUATION_ALL = "customer.order.allevaluations";
+    //搜索评价
+    public static final String ORDER_EVALUATION_SEARCH_ALL = "customer.order.searchevaluations";
+
+
 }

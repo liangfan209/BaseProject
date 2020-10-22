@@ -6,6 +6,9 @@ import com.bq.comm_config_lib.request.LoginBean;
 import com.bq.utilslib.SPUtils;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 文件名：
  * 描述：
@@ -26,10 +29,13 @@ public class CommSpUtils {
     public static void saveUserInfo(String userinfo){
         SPUtils.getInstance(SpField.AUTH_TOKEN).put(SpField.AUTH_USERINFO, userinfo);
     }
+
+
     public static UserInfo getUserInfo(){
         String userinfoStr = SPUtils.getInstance(SpField.AUTH_TOKEN).getString(SpField.AUTH_USERINFO);
         return new Gson().fromJson(userinfoStr,UserInfo.class);
     }
+
 
 
     public static String getToken() {
@@ -39,6 +45,18 @@ public class CommSpUtils {
         } else {
             return "";
         }
+    }
+
+    public static List<Integer> getGoodsIds() {
+        LoginBean loginBean = getLoginBean();
+        if(loginBean == null){
+            return new ArrayList<>();
+        }
+        List<Integer> goods_ids = loginBean.getGoods_ids();
+        if(goods_ids == null){
+            return new ArrayList<>();
+        }
+        return loginBean.getGoods_ids();
     }
 
     public static String getRenewFlag() {

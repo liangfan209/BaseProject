@@ -15,24 +15,29 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.msgService.MessageEvent;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.comm_config_lib.utils.CommSpUtils;
+import com.bq.utilslib.AccountValidatorUtil;
+import com.bq.utilslib.AppUtils;
+import com.bq.utilslib.EditFormatUtils;
+import com.bq.utilslib.Md5Utils;
 import com.clkj.login.R;
 import com.clkj.login.R2;
 import com.clkj.login.api.bean.LoginConfigBean;
 import com.clkj.login.mvp.login.presenter.LoginPresenter;
 import com.clkj.login.requset.bean.LoginInfo;
-import com.bq.utilslib.AccountValidatorUtil;
-import com.bq.utilslib.AppUtils;
-import com.bq.utilslib.EditFormatUtils;
-import com.bq.utilslib.Md5Utils;
 import com.fan.baseuilibrary.utils.CountDownHelper;
 import com.fan.baseuilibrary.utils.ToastUtils;
+import com.fan.baseuilibrary.view.ChooseShare;
 import com.fan.baseuilibrary.view.DeletableEditText;
 import com.fan.baseuilibrary.view.captcha.Captcha;
 import com.fan.baseuilibrary.view.dialog.CaptchaDialog;
 import com.google.gson.Gson;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -76,7 +81,8 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
     @BindView(R2.id.cb_eye) //密码选项
             SkinCompatCheckBox mCbEye;
 
-
+    private String open_id = "";
+    private String token = "";
 
     @BindView(R2.id.cb_login_type)
     SkinCompatCheckBox mCbLoginType;
@@ -210,9 +216,11 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
     }
 
     private void login() {
+
 //        mEtPhone.setText("13260606900");
 //        mEtPwd.setText("123456");
         String phoneNumber = mEtPhone.getText().toString().replaceAll(" ", "").trim();
+
         String pwd = mEtPwd.getText().toString().trim();
         pwd = Md5Utils.md5(pwd);
 
@@ -225,12 +233,15 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
 
         }
 
+
     }
 
     @Override
     public void loginVertificationView(LoginInfo info) {
         //将token保存到本地sp中
         CommSpUtils.saveLoginInfo(new Gson().toJson(info));
+        String phoneNumber = mEtPhone.getText().toString().replaceAll(" ", "").trim();
+        EventBus.getDefault().post(new MessageEvent("create_jpush",this,phoneNumber));
         if(info.getIs_password() == 0){
             if(!StringUtils.isEmpty(mPath) && !mPath.equals("-1")){
                 ARouter.getInstance().build(mPath)
@@ -250,14 +261,25 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
                         .withBundle("mBundle", mBundle).navigation();
             }
         }
-
+//        EventBus.getDefault().post("un_message");
         finish();
     }
 
     @Override
     public void loginView(LoginInfo info) {
+        if(StringUtils.isEmpty(info.getAccess_token())){
+            //进入绑定手机号页面
+            ARouter.getInstance().build(AppArouter.LOGIN_BIND_ACTIVITY)
+                    .withString("open_id",open_id)
+                    .withString("access_token",token)
+                    .navigation();
+            return;
+        }
+
         //将token保存到本地sp中
         CommSpUtils.saveLoginInfo(new Gson().toJson(info));
+        String phoneNumber = mEtPhone.getText().toString().replaceAll(" ", "").trim();
+        EventBus.getDefault().post(new MessageEvent("create_jpush",this));
         //跳转到主页面中
         if (StringUtils.isEmpty(mPath)) {
             ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
@@ -266,18 +288,20 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
             ARouter.getInstance().build(mPath)
                     .withBundle("mBundle", mBundle).navigation();
         }
+//        EventBus.getDefault().post("un_message");
         finish();
     }
 
 
     @OnClick({R2.id.tv_forget_pwd, R2.id.tv_login, R2.id.tv_get_verification_code, R2.id.tv_register, R2.id.cb_login_type,
-            R2.id.cb_eye,R2.id.tv_privacy_agreement})
+            R2.id.cb_eye,R2.id.tv_privacy_agreement,R2.id.iv_wechat})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.tv_login) {
             if (loginConfig.isHasImageVirification()) {
                 showCaptcha();
             } else {
                 login();
+//                ARouter.getInstance().build(AppArouter.ORDER_MESSAGE_ACTIVITY).navigation();
             }
         } else if (view.getId() == R.id.tv_forget_pwd) {
             ARouter.getInstance().build(AppArouter.FORGET_PWD_ACTIVITY).withInt("optionType"
@@ -297,11 +321,20 @@ public class LoginActivity extends BaseActivity implements LoginBaseIView {
                 mEtPwd.setClearDrawableVisible(false);
             }
         } else if(view.getId() == R.id.tv_privacy_agreement){
-            ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
-                    .withString("h5url","http://policy.dsggy.cn/")
-                    .navigation();
+//            ARouter.getInstance().build(AppArouter.H5_ACTIVITY)
+//                    .withString("h5url","http://policy.dsggy.cn/")
+//                    .navigation();
+            ChooseShare.shareLogin(this,SHARE_MEDIA.WEIXIN);
+
+        } else if(view.getId() == R.id.iv_wechat){
+            ChooseShare.shareLogin(this,SHARE_MEDIA.WEIXIN,(o,t)->{
+                open_id = o;
+                token = t;
+                mLoginPresenter.getToken(o,t);
+            });
         }
     }
+
 
     @Override
     public void getVerticalCodeView() {

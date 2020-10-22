@@ -7,12 +7,12 @@ import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.comm_config_lib.utils.CheckUtils;
 import com.bq.comm_config_lib.utils.CommSpUtils;
+import com.bq.utilslib.AccountValidatorUtil;
 import com.clkj.login.R;
 import com.clkj.login.api.bean.LoginConfigBean;
 import com.clkj.login.mvp.login.ui.LoginBaseIView;
 import com.clkj.login.requset.LoginHttpReqeustImp;
 import com.clkj.login.requset.bean.LoginInfo;
-import com.bq.utilslib.AccountValidatorUtil;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.google.gson.Gson;
 
@@ -31,6 +31,8 @@ public class LoginPresenter implements BasePresenter {
     private LoginConfigBean mLoginConfigBean;
     private LoginHttpReqeustImp mLoginHttpReqeustImp;
 //    private LoginModel mLoginModel;
+
+
 
     public LoginPresenter(LoginBaseIView IView) {
         this(IView, false);
@@ -231,4 +233,29 @@ public class LoginPresenter implements BasePresenter {
         return true;
     }
 
+    public void getToken(String openId,String token) {
+        mLoginHttpReqeustImp.getToken(openId,token, new AbstractReqeustCallback<LoginInfo>(mIView) {
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+            @Override
+            public void onSuccess(LoginInfo loginInfo) {
+                mIView.loginView(loginInfo);
+            }
+        });
+    }
+
+    public void wechatRegister(String access_token, String open_id, String phoneNumber, String uniqueDeviceId, String verifyCode) {
+        mLoginHttpReqeustImp.wechatRegister(access_token,open_id,phoneNumber, uniqueDeviceId,verifyCode,new AbstractReqeustCallback<LoginInfo>(mIView) {
+            @Override
+            public void onStart() {
+                mIView.showLoading();
+            }
+            @Override
+            public void onSuccess(LoginInfo loginInfo) {
+                mIView.loginVertificationView(loginInfo);
+            }
+        });
+    }
 }

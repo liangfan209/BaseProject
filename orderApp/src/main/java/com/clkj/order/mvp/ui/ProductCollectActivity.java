@@ -10,6 +10,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
+import com.bq.comm_config_lib.request.LoginBean;
+import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.comm_config_lib.utils.Utils;
 import com.bq.utilslib.AppUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -22,6 +24,7 @@ import com.clkj.order.mvp.ui.hodler.ProductType;
 import com.clkj.order.requset.bean.ProductInfo;
 import com.fan.baseuilibrary.view.ChooseShare;
 import com.fan.baseuilibrary.view.MyRefreshLayout;
+import com.google.gson.Gson;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import org.jetbrains.annotations.NotNull;
@@ -54,6 +57,10 @@ public class ProductCollectActivity extends BaseActivity implements MyRefreshLay
     private String mSearchInfo = "{}";
 
 
+    //要删除的id
+    private int deleteId = -1;
+
+
     @Override
     protected int getContentViewLayout() {
         return R.layout.laoyut_collect_frame_layout;
@@ -67,7 +74,6 @@ public class ProductCollectActivity extends BaseActivity implements MyRefreshLay
 
     @Override
     protected void attach() {
-
         mRefreshLayout = new MyRefreshLayout<String>(this, this);
         mRefreshLayout.setRefresh(true, true);
         mFltContent.addView(mRefreshLayout);
@@ -119,13 +125,31 @@ public class ProductCollectActivity extends BaseActivity implements MyRefreshLay
 
                 helper.getView(R.id.tv_del).setOnClickListener(v->{
                     mProductPresenter.hasCollectProduct(bean.getId());
+                    deleteId = Integer.valueOf(bean.getId());
+                    LoginBean loginBean = CommSpUtils.getLoginBean();
+                    List<Integer> goods_ids = loginBean.getGoods_ids();
+                    for (Integer goods_id : goods_ids) {
+                        if(goods_id == deleteId){
+                            goods_ids.remove(goods_id);
+                            break;
+                        }
+                    }
+                    loginBean.setGoods_ids(goods_ids);
+                    CommSpUtils.saveLoginInfo(new Gson().toJson(loginBean));
                 });
             }
         };
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        loadData(1,10);
+    }
+
+    @Override
     public void collectProductView() {
+//        mRefreshLayout.autoRefresh();
         loadData(1,10);
     }
 

@@ -197,6 +197,8 @@ public class OrderInfo implements Serializable{
             return "微信";
         }else if("alipay".equals(last_payment_type)){
             return "支付宝";
+        }else if("saobei".equals(last_payment_type)){
+            return "扫呗";
         }
         return last_payment_type;
     }
@@ -262,7 +264,24 @@ public class OrderInfo implements Serializable{
         private String category;
         private String id;
         private String order_item_id;
+        private String contract_id;
+        private String evaluation;
 
+        public String getEvaluation() {
+            return evaluation;
+        }
+
+        public void setEvaluation(String evaluation) {
+            this.evaluation = evaluation;
+        }
+
+        public String getContract_id() {
+            return contract_id;
+        }
+
+        public void setContract_id(String contract_id) {
+            this.contract_id = contract_id;
+        }
 
         public String getOrder_item_id() {
             return order_item_id;

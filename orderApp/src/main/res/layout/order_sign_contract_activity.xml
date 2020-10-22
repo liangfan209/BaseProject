@@ -26,7 +26,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:layout_marginLeft="15dp">
+                    android:layout_marginLeft="15dp"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -56,7 +57,9 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:layout_marginLeft="15dp">
+                    android:layout_marginLeft="15dp"
+
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -85,7 +88,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:layout_marginLeft="15dp">
+                    android:layout_marginLeft="15dp"
+                    android:visibility="gone">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -120,6 +124,7 @@
                     android:layout_height="1px"
                     android:background="#f2f2f2"/>
                 <RelativeLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginLeft="15dp">
@@ -147,7 +152,7 @@
             </LinearLayout>
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:id="@+id/llt_imgs"
@@ -189,6 +194,19 @@
             android:textSize="@dimen/h5_font_size"
             android:layout_marginLeft="25dp"
             android:drawableTop="@mipmap/order_icon_sign"
+            android:layout_marginTop="11dp"
+            android:drawablePadding="4dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_emails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邮箱"
+            android:textColor="@color/ui_txt_hint_color"
+            android:textSize="@dimen/h5_font_size"
+            android:layout_marginLeft="70dp"
+            android:drawableTop="@mipmap/order_icon_email"
             android:layout_marginTop="11dp"
             android:drawablePadding="4dp"
             />

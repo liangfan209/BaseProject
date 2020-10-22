@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <include layout="@layout/layout_public_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@mipmap/icon_pay_success"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="评价成功"
+            android:textColor="@color/ui_txt_normal_color"
+            android:textSize="@dimen/h2_font_size"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/h5_font_size"
+            android:layout_marginTop="10dp"
+            android:text="感谢您的评价，橙鹿教育，照亮您前行之路。"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_goback"
+            android:layout_width="130dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="22dp"
+            style="@style/ui_h3_button_primary_style"
+            android:text="返回首页"
+            android:background="@drawable/ui_shap_verification_code_select"
+            android:gravity="center"
+            android:textColor="@color/ui_primary_color"
+            android:layout_marginLeft="38dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_evaluation_detail"
+            android:layout_width="130dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="22dp"
+            style="@style/ui_h3_button_primary_style"
+            android:text="查看评价"
+            android:background="@drawable/ui_shap_button_bg_selector"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginLeft="38dp"
+            android:layout_marginRight="38dp"
+            />
+    </LinearLayout>
+</LinearLayout>

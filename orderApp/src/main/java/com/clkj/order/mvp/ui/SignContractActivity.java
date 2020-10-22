@@ -19,16 +19,17 @@ import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.comm_config_lib.utils.Utils;
+import com.bq.utilslib.AccountValidatorUtil;
+import com.bq.utilslib.EditFormatUtils;
 import com.clkj.order.R;
 import com.clkj.order.R2;
 import com.clkj.order.api.OrderEventKey;
 import com.clkj.order.mvp.presenter.OrderPresenter;
 import com.clkj.order.requset.bean.ContractInfo;
 import com.clkj.order.requset.bean.ContractRequsetBean;
-import com.bq.utilslib.AccountValidatorUtil;
-import com.bq.utilslib.EditFormatUtils;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.DeletableEditText;
+import com.fan.baseuilibrary.view.dialog.CustomDialog;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
@@ -107,6 +108,8 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
 
     String imgBaseStr = "";
 
+    private String emailStr = "";
+
     @Override
     protected int getContentViewLayout() {
         return R.layout.order_sign_contract_activity;
@@ -138,15 +141,15 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
 //签合同
 
         if(mContractInfo != null){
-            mEtName.setText(mContractInfo.getName());
-            mEtPhone.setText(mContractInfo.getPhone());
-            mEtIdCard.setText(mContractInfo.getIdentification());
-            mEtName.setEnabled(false);
-            mEtPhone.setEnabled(false);
-            mEtIdCard.setEnabled(false);
-            mEtName.setClearDrawableVisible(false);
-            mEtPhone.setClearDrawableVisible(false);
-            mEtIdCard.setClearDrawableVisible(false);
+//            mEtName.setText(mContractInfo.getName());
+//            mEtPhone.setText(mContractInfo.getPhone());
+//            mEtIdCard.setText(mContractInfo.getIdentification());
+//            mEtName.setEnabled(false);
+//            mEtPhone.setEnabled(false);
+//            mEtIdCard.setEnabled(false);
+//            mEtName.setClearDrawableVisible(false);
+//            mEtPhone.setClearDrawableVisible(false);
+//            mEtIdCard.setClearDrawableVisible(false);
             ArrayList<String> list = mContractInfo.getImg_url();
             if(list == null || list.size() == 0)return;
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -195,6 +198,18 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
             return;
         }
 
+        if(info.getStatus_name().equals("待签署")){
+            mTvTitle.setText("签合同");
+        }else{
+            mTvTitle.setText("查看合同");
+            mRltBottom.setVisibility(View.GONE);
+            mLltTopContent.setVisibility(View.GONE);
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mScrollview.getLayoutParams();
+            layoutParams.bottomMargin = 0;
+            mScrollview.setLayoutParams(layoutParams);
+        }
+
+
         contactId = info.getId();
         ArrayList<String> list = info.getImg_url();
         if(list == null || list.size() == 0)return;
@@ -206,34 +221,66 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
         }
     }
 
-    @OnClick({R2.id.tv_sign, R2.id.tv_commit})
+    @OnClick({R2.id.tv_sign, R2.id.tv_commit,R2.id.tv_emails})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.tv_sign){
             ARouter.getInstance().build(AppArouter.ORDER_AUTOGRAPH_ACTIVITY).navigation(this,11);
-        }else if(view.getId() == R.id.tv_commit){
+        }else if(view.getId() == R.id.tv_emails){
+            View view1 = LinearLayout.inflate(this, R.layout.order_input_view, null);
+            final DeletableEditText etValue = view1.findViewById(R.id.et_value);
+            etValue.setHint("请输入邮箱（用户接收电子合同）");
+            if(!StringUtils.isEmpty(emailStr)){
+                etValue.setText(emailStr);
+            }
+            CustomDialog mCustomDialog = new CustomDialog();
+            mCustomDialog.showCustonViewDialog(this, view1, "填写邮箱",false, new CustomDialog.ClickCallBack() {
+                @Override
+                public void ok() {
+                    emailStr = etValue.getText().toString().trim();
+                    if(StringUtils.isEmpty(emailStr)){
+                        ToastUtils.showToast(SignContractActivity.this,"请输入邮箱");
+                        return;
+                    }
+                    if(!AccountValidatorUtil.isEmail(emailStr)){
+                        ToastUtils.showToast(SignContractActivity.this,"请输入正确的邮箱");
+                        return;
+                    }
+                    mCustomDialog.dissMissDialog();
+                }
+
+                @Override
+                public void cacel() {
+                    mCustomDialog.dissMissDialog();
+                }
+            });
+        }
+        else if(view.getId() == R.id.tv_commit){
 
             if(Utils.isFastDoubleClick(mTvCommit,4000)) {
                 return;
             }
-            String name = mEtName.getText().toString();
-            String phone = mEtPhone.getText().toString().replaceAll(" ","");
-            String identication = mEtIdCard.getText().toString().replaceAll(" ","");
-            String email = mEtEmail.getText().toString();
+//            String name = mEtName.getText().toString();
+//            String phone = mEtPhone.getText().toString().replaceAll(" ","");
+//            String identication = mEtIdCard.getText().toString().replaceAll(" ","");
+//            String email = mEtEmail.getText().toString();
+//            if(StringUtils.isEmpty(name)){
+//                ToastUtils.showToast(this,"请输入姓名");
+//                return;
+//            }
+//            if(StringUtils.isEmpty(phone)){
+//                ToastUtils.showToast(this,"请输入手机号");
+//                return;
+//            }
+//            if(!AccountValidatorUtil.isIdCard(identication)){
+//                ToastUtils.showToast(this,"请输入正确的身份证号");
+//                return;
+//            }
 
-
-            if(StringUtils.isEmpty(name)){
-                ToastUtils.showToast(this,"请输入姓名");
+            if(StringUtils.isEmpty(emailStr)){
+                ToastUtils.showToast(this,"请输入邮箱");
                 return;
             }
-            if(StringUtils.isEmpty(phone)){
-                ToastUtils.showToast(this,"请输入手机号");
-                return;
-            }
-            if(!AccountValidatorUtil.isIdCard(identication)){
-                ToastUtils.showToast(this,"请输入正确的身份证号");
-                return;
-            }
-            if(!AccountValidatorUtil.isEmail(email)){
+            if(!AccountValidatorUtil.isEmail(emailStr)){
                 ToastUtils.showToast(this,"请输入正确的邮箱");
                 return;
             }
@@ -258,7 +305,7 @@ public class SignContractActivity extends BaseActivity implements OrderIview{
             imgBaseStr = imgBaseStr.replaceAll("\\+","%2B");
             //将图片转换为base64
             imgBaseStr = "data:image/png;base64,"+imgBaseStr;
-            ContractRequsetBean bean = new ContractRequsetBean(email,imgBaseStr);
+            ContractRequsetBean bean = new ContractRequsetBean(emailStr,imgBaseStr);
             //上传信息
             if(!StringUtils.isEmpty(contactId)){
                 String info = new Gson().toJson(bean);

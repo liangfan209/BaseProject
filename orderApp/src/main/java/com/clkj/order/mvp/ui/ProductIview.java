@@ -4,6 +4,8 @@ import com.bq.comm_config_lib.mvp.BaseIView;
 import com.clkj.order.requset.bean.AppVersionBean;
 import com.clkj.order.requset.bean.BannerInfo;
 import com.clkj.order.requset.bean.ContractInfo;
+import com.clkj.order.requset.bean.EvaluationInfo;
+import com.clkj.order.requset.bean.EvaluationListBean;
 import com.clkj.order.requset.bean.ProductInfo;
 import com.clkj.order.requset.bean.ProfessionInfo;
 import com.clkj.order.requset.bean.SchoolInfo;
@@ -64,5 +66,12 @@ public interface ProductIview extends BaseIView {
     default void checkUpdateView(AppVersionBean.AppVersionInfo edition_info){};
 
     default void collectProductView(){}
+
+
+    //我的评价列表
+    default void getMyEvaluationList(List<EvaluationInfo> info){}
+    //全部评论
+    default void geEvaluationList(EvaluationListBean info){}
+
 
 }

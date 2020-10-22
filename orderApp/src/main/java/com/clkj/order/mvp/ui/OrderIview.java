@@ -21,5 +21,8 @@ public interface OrderIview extends BaseIView {
 
     default void getContactInfo(ContractInfo info){}
     default void addContactView(){}
+
+    default void feedbackView(){}
+    default void feedbackCompleView(){}
 //    default void createContactView(ContractInfo info){}
 }

@@ -273,18 +273,20 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
         //支付方式分期 tv_fenqi
         mTvFenqi.setText(mOrderInfoBean.getPay_services());
         //付款金额 tv_shifu_jine
-        if("order_launched".equals(mOrderInfoBean.getStatus())){
-            mTvShiFuJe.setText("¥"+Utils.getDouble2(mOrderInfoBean.getDeposit()));
-        }else{
-            mTvShiFuJe.setText("¥"+Utils.getDouble2(mOrderInfoBean.getActual_amount()));
-        }
+        mTvShiFuJe.setText("¥"+Utils.getDouble2(mOrderInfoBean.getDeposit()));
+//        if("order_launched".equals(mOrderInfoBean.getStatus())){
+//            mTvShiFuJe.setText("¥"+Utils.getDouble2(mOrderInfoBean.getDeposit()));
+//        }else{
+//            mTvShiFuJe.setText("¥"+Utils.getDouble2(mOrderInfoBean.getActual_amount()));
+//        }
 
         mTvPayDetail.setOnClickListener(v->{
             ARouter.getInstance().build(AppArouter.ORDER_PAY_ORDER_DETAIL_ACTIVITY)
                     .withSerializable("mOrderInfo",mOrderInfoBean).navigation();
         });
 
-        mTvRefund.setVisibility(View.VISIBLE);
+        //屏蔽申请退款
+//        mTvRefund.setVisibility(View.VISIBLE);
 
         List<OrderInfo.OrderItemListBean> order_item_list = mOrderInfoBean.getOrder_item_list();
         if(order_item_list.size() <=0) return;
@@ -356,12 +358,12 @@ public class OrderDetaiActivity extends BaseActivity implements OrderIview {
             if(mOrderInfoBean.getStatus().equals("delivery_finished")){
                 ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
                         .withInt("sign",1)
-                        .withString("mOrderDetailId",mProductInfo.getOrder_item_id()+"").navigation();
+                        .withString("mOrderDetailId",mProductInfo.getContract_id()+"").navigation();
 //                        .withSerializable("imgPathList",mOrderInfoBean.getContract_background()).navigation();
 
             }else if(mOrderInfoBean.getStatus().equals("order_finished")){
                 ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
-                        .withString("mOrderDetailId",mProductInfo.getOrder_item_id()+"").navigation();
+                        .withString("mOrderDetailId",mProductInfo.getContract_id()+"").navigation();
             }
         });
         mTvOrderBottomRight.setOnClickListener(v->{

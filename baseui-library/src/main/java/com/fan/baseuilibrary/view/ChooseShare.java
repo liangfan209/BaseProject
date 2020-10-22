@@ -2,6 +2,7 @@ package com.fan.baseuilibrary.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.fan.baseuilibrary.R;
 import com.fan.baseuilibrary.bean.ItemBean;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
@@ -23,6 +26,7 @@ import com.umeng.socialize.media.UMWeb;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -44,6 +48,9 @@ public class ChooseShare {
     private CustomPopWindow mCustomPopWindow;
     PopupWindow.OnDismissListener mOnDismissListener;
 
+    public interface ThirdCallBack{
+        public void getOpenId(String openId,String token);
+    }
 
     List<ItemBean> itemBeans1 = Arrays.asList(new ItemBean[]{
             new ItemBean(R.mipmap.share_wchat, "微信", null),
@@ -142,5 +149,90 @@ public class ChooseShare {
             public void onCancel(SHARE_MEDIA share_media) {
             }
         }).share();
+    }
+
+    public static void shareLogin(Activity activity,SHARE_MEDIA platform,ThirdCallBack back){
+        UMShareAPI.get(activity).getPlatformInfo(activity, platform, new UMAuthListener() {
+            @Override
+            public void onStart(SHARE_MEDIA share_media) {
+                Log.e("授权开始", "======onStart授权开始: ");
+            }
+
+            @Override
+            public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                String uid = map.get("uid");
+                String openid = map.get("openid");//微博没有
+                String unionid = map.get("unionid");//微博没有
+                String access_token = map.get("access_token");
+                String refresh_token = map.get("refresh_token");//微信,qq,微博都没有获取到
+                String expires_in = map.get("expires_in");
+                String name = map.get("name");//名称
+                String gender = map.get("gender");//性别
+                String iconurl = map.get("iconurl");//头像地址
+
+                Log.e("openid", "======onStart授权完成: " + openid);
+                Log.e("unionid", "======onStart授权完成: " + unionid);
+                Log.e("access_token", "======onStart授权完成: " + access_token);
+                Log.e("refresh_token", "======onStart授权完成: " + refresh_token);
+                Log.e("expires_in", "======onStart授权完成: " + expires_in);
+                Log.e("uid", "======onStart授权完成: " + uid);
+                Log.e("name", "======onStart授权完成: " + name);
+                Log.e("gender", "======onStart授权完成: " + gender);
+                Log.e("iconurl", "======onStart授权完成: " + iconurl);
+                back.getOpenId(openid,access_token);
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA share_media, int i) {
+
+            }
+        });
+    }
+
+    public static void shareLogin(Activity activity,SHARE_MEDIA platform){
+        UMShareAPI.get(activity).getPlatformInfo(activity, platform, new UMAuthListener() {
+            @Override
+            public void onStart(SHARE_MEDIA share_media) {
+                Log.e("授权开始", "======onStart授权开始: ");
+            }
+
+            @Override
+            public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                String uid = map.get("uid");
+                String openid = map.get("openid");//微博没有
+                String unionid = map.get("unionid");//微博没有
+                String access_token = map.get("access_token");
+                String refresh_token = map.get("refresh_token");//微信,qq,微博都没有获取到
+                String expires_in = map.get("expires_in");
+                String name = map.get("name");//名称
+                String gender = map.get("gender");//性别
+                String iconurl = map.get("iconurl");//头像地址
+
+                Log.e("openid", "======onStart授权完成: " + openid);
+                Log.e("unionid", "======onStart授权完成: " + unionid);
+                Log.e("access_token", "======onStart授权完成: " + access_token);
+                Log.e("refresh_token", "======onStart授权完成: " + refresh_token);
+                Log.e("expires_in", "======onStart授权完成: " + expires_in);
+                Log.e("uid", "======onStart授权完成: " + uid);
+                Log.e("name", "======onStart授权完成: " + name);
+                Log.e("gender", "======onStart授权完成: " + gender);
+                Log.e("iconurl", "======onStart授权完成: " + iconurl);
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA share_media, int i) {
+
+            }
+        });
     }
 }

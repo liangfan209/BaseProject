@@ -24,6 +24,7 @@ import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
+import com.bq.comm_config_lib.request.LoginBean;
 import com.bq.comm_config_lib.utils.BitImageUtils;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.comm_config_lib.utils.Utils;
@@ -32,16 +33,23 @@ import com.bq.utilslib.BitmapUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.clkj.order.R;
 import com.clkj.order.R2;
 import com.clkj.order.mvp.presenter.ProductPresenter;
 import com.clkj.order.mvp.ui.adapter.BannerAdapter;
 import com.clkj.order.mvp.ui.hodler.NewTypeViewHolder;
 import com.clkj.order.requset.bean.BannerData;
+import com.clkj.order.requset.bean.EvaluationInfo;
+import com.clkj.order.requset.bean.EvaluationListBean;
 import com.clkj.order.requset.bean.ProductInfo;
 import com.clkj.order.requset.bean.SpecificationList;
+import com.clkj.order.requset.bean.StatisticsInfo;
+import com.fan.baseuilibrary.view.CircleImageView;
 import com.fan.baseuilibrary.view.CustomPopWindow;
 import com.fan.baseuilibrary.view.FlowRadioGroup;
+import com.google.gson.Gson;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack;
@@ -54,15 +62,20 @@ import com.zhpan.indicator.base.IIndicator;
 import com.zhpan.indicator.enums.IndicatorSlideMode;
 import com.zhpan.indicator.enums.IndicatorStyle;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cc.shinichi.library.bean.ImageInfo;
+import skin.support.widget.SkinCompatCheckBox;
 import skin.support.widget.SkinCompatRadioButton;
 import skin.support.widget.SkinCompatRadioGroup;
 
@@ -111,6 +124,9 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
     @BindView(R2.id.tv_buy)
     TextView mTvBuy;
 
+    @BindView(R2.id.cb_save)
+    SkinCompatCheckBox mCbSave;
+
 
 //    @BindView(R2.id.iv_product_mark)
 //    ImageView mIvProductMark;
@@ -145,6 +161,35 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
 //    private BannerViewPager mViewPager;
 
 
+    //评论相关
+    @BindView(R2.id.llt_evaluation)
+    LinearLayout mLltEvaluation;
+    @BindView(R2.id.tv_1)
+    TextView tv1;
+    @BindView(R2.id.tv_2)
+    TextView tv2;
+    @BindView(R2.id.tv_3)
+    TextView tv3;
+    @BindView(R2.id.tv_4)
+    TextView tv4;
+    @BindView(R2.id.tv_5)
+    TextView tv5;
+    @BindView(R2.id.civ_img)
+    CircleImageView mCivImg;
+    @BindView(R2.id.tv_name)
+    TextView mTvName;
+    @BindView(R2.id.tv_content)
+    TextView mTvContent;
+    @BindView(R2.id.tv_evaluation_count)
+    TextView mTv_evaluation_count;
+    @BindView(R2.id.rcv_img_list)
+    RecyclerView imgRcv;
+
+
+    //默认没有收藏
+    public boolean isCollect = false;
+
+
     @Autowired
     String mProductId;
 
@@ -173,13 +218,59 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
     @Override
     public void getProductDetailView(ProductInfo info) {
         this.mProductInfo = info;
+        mProductPresenter.getAllEvaluation(1,info.getId());
         createViewHolder();
+        mCbSave.setChecked(isCollect);
+        List<Integer> goodsIds = CommSpUtils.getGoodsIds();
+        for (Integer goodsId : goodsIds) {
+            if(goodsId == Integer.valueOf(info.getId())){
+                isCollect = true;
+                mCbSave.setChecked(isCollect);
+            }
+        }
+
+    }
+
+    @Override
+    public void geEvaluationList(EvaluationListBean bean) {
+        List<EvaluationInfo> info = bean.getData_list();
+        StatisticsInfo sinfo = bean.getStatistics();
+        mLltEvaluation.setVisibility(info.size() >0?View.VISIBLE:View.GONE);
+        if(info.size() <= 0) return;
+        if(sinfo != null){
+            tv1.setText("有图("+sinfo.getPic_numbers()+")");
+            tv2.setText("有视频("+sinfo.getVideo_numbers()+")");
+            tv3.setText("售后保障("+sinfo.getSale_guarantee_numbers()+")");
+            tv4.setText("服务周到("+sinfo.getGood_service_numbers()+")");
+            tv5.setText("课程齐全("+sinfo.getCourse_all_numbers()+")");
+        }
+        EvaluationInfo evaInfo = bean.getData_list().get(0);
+        Utils.showImageHeader(evaInfo.getHead_url(), mCivImg);
+        mTvContent.setText(evaInfo.getContent());
+        mTvName.setText(evaInfo.getNickname());
+        mTv_evaluation_count.setText("评价 ("+bean.getTotal()+")");
+        initImgRcv(imgRcv,info.get(0).getPics());
+    }
+
+    //初始化图片列表
+    void initImgRcv(RecyclerView imgRcv, List<String> list) {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 5);
+        imgRcv.setLayoutManager(gridLayoutManager);
+        BaseQuickAdapter adapter = new
+                BaseQuickAdapter<String, BaseViewHolder>(R.layout.order_item_evaluation_img, list) {
+                    @Override
+                    protected void convert(@NotNull BaseViewHolder helper,
+                                           String bean) {
+                        ImageView iv = helper.getView(R.id.iv_item);
+                        Utils.showImage(bean, iv, 3);
+                    }
+                };
+        imgRcv.setAdapter(adapter);
     }
 
     @Override
     protected void attach() {
         ARouter.getInstance().inject(this);
-
         if(StringUtils.isEmpty(mPosterId)){
             mTvTitle.setText("助学详情");
         }else{
@@ -192,6 +283,8 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
         }else if(!StringUtils.isEmpty(mPosterId)){
             mProductPresenter.getPosterDetail(mPosterId);
         }
+
+
     }
 
     private void initView() {
@@ -649,10 +742,9 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
     }
 
 
-    @OnClick({R2.id.value2, R2.id.tv_buy, R2.id.rlt_type,R2.id.tv_save,R2.id.tv_server})
+    @OnClick({R2.id.value2, R2.id.tv_buy, R2.id.rlt_type,R2.id.cb_save,R2.id.tv_server,
+                R2.id.tv_all_click})
     public void onViewClicked(View view) {
-
-
         if (view.getId() == R.id.tv_buy) {
             if(!Utils.isFastDoubleClick(mTvBuy,1000)){
                 showBuyPopwindow();
@@ -661,11 +753,40 @@ public class ProductDetailActivity extends BaseActivity implements ProductIview 
             if(!Utils.isFastDoubleClick(mRltType,1000)){
                 showBuyPopwindow();
             }
-        }else if(view.getId() == R.id.tv_save|| view.getId() == R.id.tv_server){
-            mProductPresenter.hasCollectProduct(mProductId);
+        }else if(view.getId() == R.id.cb_save){
+            String token = CommSpUtils.getToken();
+            if(StringUtils.isEmpty(token)){
+                ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).withString("mPath","-1").navigation();
+                mCbSave.setChecked(isCollect);
+                return;
+            }
+            mProductPresenter.hasCollectProduct(mProductInfo.getId());
+        }else if(view.getId() == R.id.tv_all_click){
+            ARouter.getInstance().build(AppArouter.ORDER_EVALUATION_ALL_ACTIVITY).withString("good_id",mProductInfo.getId()).navigation();
         }
     }
 
+    @Override
+    public void collectProductView() {
+        //
+        isCollect = !isCollect;
+        List<Integer> goodsIds = CommSpUtils.getGoodsIds();
+        if(isCollect){
+            goodsIds.add(Integer.valueOf(mProductInfo.getId()));
+
+        }else{
+            for (Integer goodsId : goodsIds) {
+                if(goodsId == Integer.valueOf(mProductInfo.getId())){
+                    goodsIds.remove(goodsId);
+                    break;
+                }
+            }
+        }
+        LoginBean loginBean = CommSpUtils.getLoginBean();
+        loginBean.setGoods_ids(goodsIds);
+        CommSpUtils.saveLoginInfo(new Gson().toJson(loginBean));
+        mCbSave.setChecked(isCollect);
+    }
 
     List<ImageInfo> getImgList() {
         List<String> images = mProductInfo.getSlideshow();

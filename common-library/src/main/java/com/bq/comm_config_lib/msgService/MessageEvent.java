@@ -17,6 +17,7 @@ public class MessageEvent {
     public String price;
     public String payType;
     public int aType;
+    public String phoneNumber;
 
 
 
@@ -37,7 +38,16 @@ public class MessageEvent {
     public MessageEvent(String key, Activity a,MessageInter eventInter) {
         this.key = key;
         this.activity = a;
-        eventInterface = eventInter;
+        this.eventInterface = eventInter;
     }
 
+    public MessageEvent(String key, Activity activity, String phoneNumber) {
+        this.key = key;
+        this.activity = activity;
+        this.phoneNumber = phoneNumber;
+    }
+    public MessageEvent(String key, Activity activity) {
+        this.key = key;
+        this.activity = activity;
+    }
 }

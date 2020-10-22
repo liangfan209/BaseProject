@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+
+
+    <include layout="@layout/layout_public_title"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="依网络安全法要求，账号需绑定手机号"
+        android:textSize="12sp"
+        android:textColor="#999999"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="20dp"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="20dp">
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:drawableRight="@mipmap/icon_clear"
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:hint="请输入手机号"
+            android:inputType="number"
+            android:maxLength="13"
+            android:layout_marginRight="15dp"
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/ui_recycleview_item_line_color" />
+    <RelativeLayout
+        android:id="@+id/rlt_verification"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="16dp">
+
+        <com.fan.baseuilibrary.view.DeletableEditText
+            android:id="@+id/tv_input_verification"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:hint="请输入验证码"
+            android:inputType="number"
+            android:layout_marginRight="15dp"
+            android:maxLength="6"
+            android:minWidth="200dp"
+            style="@style/ui_edit_txt_style"
+            android:textSize="@dimen/h4_font_size"/>
+
+        <TextView
+            android:id="@+id/tv_get_verification_code1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取验证码"
+            android:gravity="center"
+            android:textSize="@dimen/h5_font_size"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:textColor="@color/ui_verification_code_color_selector"
+            android:background="@drawable/ui_shap_verification_code_selecter"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:enabled="false"
+            />
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/ui_recycleview_item_line_color" />
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="28dp"
+        android:gravity="center"
+        android:text="绑定"
+        android:textStyle="normal"
+        style="@style/ui_h3_button_primary_style"
+        android:background="@drawable/ui_shap_button_bg_selector"
+        android:enabled="true"
+        />
+
+</LinearLayout>

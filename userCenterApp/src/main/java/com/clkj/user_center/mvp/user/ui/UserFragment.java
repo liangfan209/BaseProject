@@ -3,6 +3,7 @@ package com.clkj.user_center.mvp.user.ui;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -12,19 +13,20 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
 import com.bq.comm_config_lib.configration.AppArouter;
+import com.bq.comm_config_lib.msgService.MessageEvent;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
 import com.bq.comm_config_lib.utils.CommSpUtils;
 import com.bq.comm_config_lib.utils.Utils;
+import com.bq.utilslib.AppUtils;
+import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.clkj.user_center.R;
 import com.clkj.user_center.R2;
 import com.clkj.user_center.api.bean.UserCenterConfigBean;
 import com.clkj.user_center.mvp.user.presenter.UserPresenter;
 import com.clkj.user_center.requset.bean.UserInfo;
-import com.bq.utilslib.AppUtils;
-import com.bumptech.glide.Glide;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.fan.baseuilibrary.utils.ToastUtils;
 import com.fan.baseuilibrary.view.CircleImageView;
 import com.fan.baseuilibrary.view.SimpleDividerItemDecoration;
@@ -60,6 +62,13 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
     CircleImageView mIvHead;
     @BindView(R2.id.tv_nick_name)
     TextView mTvNickName;
+
+    @BindView(R2.id.tv_badgeview)
+    TextView mTvBadgeView ;
+
+    @BindView(R2.id.flt_badgeview)
+    FrameLayout mFltBadgeView ;
+
     @BindView(R2.id.rlt_head)
     RelativeLayout mRltHead;
 
@@ -92,6 +101,7 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         userConfig = new Gson().fromJson(jsonStr, UserCenterConfigBean.class);
         updateView();
         EventBus.getDefault().register(this);
+        mUserPersenter.getUnreadCount();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -101,6 +111,12 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
                 EventBus.getDefault().post("go_home");
                 ARouter.getInstance().build(AppArouter.LOGIN_ACTVITY).navigation();
             },300);
+        }else if(key.contains("unread_count,") ){
+            int count =Integer.valueOf( key.split(",")[1]);
+            mTvBadgeView.setText(count+"");
+            mTvBadgeView.setVisibility(count> 0? View.VISIBLE:View.GONE);
+        }else if(key.contains("un_message")){
+            mUserPersenter.getUnreadCount();
         }
     }
 
@@ -118,12 +134,17 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         if(!StringUtils.isEmpty(token)){
             mUserPersenter.showUserInfo();
             mRltLogout.setVisibility(View.VISIBLE);
+            mUserPersenter.getUnreadCount();
+//            mFltBadgeView.setVisibility(View.VISIBLE);
         }else{
             mRltLogout.setVisibility(View.GONE);
+//            mFltBadgeView.setVisibility(View.GONE);
+
             mTvNickName.setText("未登录");
             Glide.with(this).load(R.mipmap.icon_user_head)
                     .apply(Utils.getRequestOptionRadus(mIvHead.getContext(),0)).into(mIvHead);
         }
+
     }
 
     public void updateView() {
@@ -206,7 +227,7 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         mLltContent.addView(view,params);
     }
 
-    @OnClick({R2.id.rlt_head,R2.id.tv_logout})
+    @OnClick({R2.id.rlt_head,R2.id.tv_logout,R2.id.flt_badgeview})
     public void onViewClicked(View view) {
         if(view.getId() == R.id.rlt_head){
             ARouter.getInstance().build(AppArouter.USER_CENTER_USER_INFO_ACTIVITY).navigation();
@@ -221,12 +242,15 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
                 public void cacel() {
                 }
             });
+        }else if(view.getId() == R.id.flt_badgeview){
+            ARouter.getInstance().build(AppArouter.USER_CENTER_MESSAGE_ACTIVITY).navigation();
         }
     }
 
     @Override
     public void logout() {
         ToastUtils.showToastOk(this.getActivity(), "退出成功");
+        EventBus.getDefault().post(new MessageEvent("desdory_jpush",this.getActivity()));
         new Handler().postDelayed(() -> {
 //            getActivity().finish();
 //            ((MainActivity)getActivity()).selectFragment(0);
@@ -253,5 +277,11 @@ public class UserFragment extends BaseFragment implements UserBaseIView {
         Utils.showImageHeader(info.getCustomer_info().getHead_url(),mIvHead);
 //        Glide.with(this).load(Api.BASE_API+ info.getCustomer_info().getHead_url()).into(mIvHead);
 
+    }
+
+    @Override
+    public void unReadCountView(int count) {
+        mTvBadgeView.setText(count+"");
+        mTvBadgeView.setVisibility(count> 0? View.VISIBLE:View.GONE);
     }
 }

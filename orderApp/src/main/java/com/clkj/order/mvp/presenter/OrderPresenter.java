@@ -157,5 +157,34 @@ public class OrderPresenter implements BasePresenter {
     }
 
 
+    /**
+     * 意见反馈
+     */
+    public void feedBack(String info) {
+        mProductHttpReqeustImp.feedBack(info,new AbstractReqeustCallback<String>(mIView) {
+            @Override
+            public void onSuccess(String bean) {
+                mIView.feedbackView();
+            }
 
+            @Override
+            public void onComplete() {
+                mIView.onComplete();
+            }
+        });
+    }
+
+    public void evaluationAdd(String info, String orderId) {
+        mProductHttpReqeustImp.evaluationAdd(info,orderId,new AbstractReqeustCallback<String>(mIView) {
+            @Override
+            public void onSuccess(String bean) {
+                mIView.feedbackView();
+            }
+
+            @Override
+            public void onComplete() {
+                mIView.onComplete();
+            }
+        });
+    }
 }

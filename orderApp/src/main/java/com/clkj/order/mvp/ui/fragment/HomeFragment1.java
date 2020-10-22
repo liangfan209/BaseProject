@@ -18,7 +18,6 @@ import com.bq.comm_config_lib.msgService.MessageInter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseFragment;
 import com.bq.comm_config_lib.utils.CommSpUtils;
-import com.bq.comm_config_lib.utils.MyStatusBarUtil;
 import com.bq.comm_config_lib.utils.Utils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -126,7 +125,10 @@ public class HomeFragment1 extends BaseFragment implements  ProductIview {
 
     @Override
     protected void attach() {
-
+        String token = CommSpUtils.getToken();
+        if(!StringUtils.isEmpty(token)) {
+            EventBus.getDefault().post(new MessageEvent("create_jpush",this.getActivity()));
+        }
         mTvAddressLocation.setText(CommSpUtils.getLocation());
         intHotProfessionView();
 
@@ -214,7 +216,7 @@ public class HomeFragment1 extends BaseFragment implements  ProductIview {
                 .setCanLoop(true)
                 .setAdapter(new BannerAdapter())
                 .setOnPageClickListener(position -> {
-                    BannerData info = (BannerData) mBannerView.getData().get(position);
+                    BannerData info = (BannerData) mBannerAdvertising.getData().get(position);
                     Utils.goCustomActivity(this.getActivity(), info.getUrl());
                 }).create();
         ArrayList<BannerData> dataList = new ArrayList<BannerData>();

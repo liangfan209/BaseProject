@@ -196,6 +196,61 @@
         android:layout_marginBottom="20dp">
 
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="1px"
+                android:background="#f2f2f2"
+                android:layout_marginTop="28dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="第三方登录"
+                android:textColor="#ff666666"
+                android:textSize="12sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="1px"
+                android:background="#f2f2f2"
+                android:layout_marginTop="28dp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="55dp">
+
+
+            <ImageView
+                android:id="@+id/iv_wechat"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@mipmap/icon_pay_wechat"
+                />
+            <ImageView
+                android:id="@+id/iv_qq"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"
+                android:background="@mipmap/share_qq"
+                />
+        </LinearLayout>
+
+
         <TextView
             android:id="@+id/tv_1"
             android:layout_width="wrap_content"

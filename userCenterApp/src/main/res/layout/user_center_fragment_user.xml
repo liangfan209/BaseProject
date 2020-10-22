@@ -27,9 +27,9 @@
             android:textSize="@dimen/h2_font_size"
             android:textStyle="bold" />
 
-        <TextView
-            style="@style/user_center_item_right"
-            android:drawableRight="@mipmap/next_step" />
+<!--        <TextView-->
+<!--            style="@style/user_center_item_right"-->
+<!--            android:drawableRight="@mipmap/next_step" />-->
 
         <com.fan.baseuilibrary.view.CircleImageView
             android:id="@+id/iv_head"
@@ -40,6 +40,38 @@
             android:background="@mipmap/icon_user_head"
             android:gravity="center_vertical"
             android:textSize="14sp" />
+
+        <FrameLayout
+            android:id="@+id/flt_badgeview"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp">
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:textSize="@dimen/h3_font_size"
+                android:background="@mipmap/icon_message"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="10dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_badgeview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@drawable/badgeview_select"
+                android:textSize="@dimen/h5_font_size"
+                android:visibility="gone"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/white" />
+
+        </FrameLayout>
+
+
     </RelativeLayout>
 
     <LinearLayout

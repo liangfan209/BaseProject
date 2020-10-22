@@ -47,7 +47,7 @@ public class MyRefreshLayout<T> extends SmartRefreshLayout {
     //下拉刷新组件
     protected RecyclerView mRecyclerView;
     protected StatusView mStatusView;
-    protected int page = 1;
+    public int page = 1;
     protected int pageSize = 10;
     protected boolean refreshBoo = false;
     protected boolean loadmoreBoo = false;

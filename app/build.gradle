@@ -24,8 +24,8 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
-        manifestPlaceholders = [JPUSH_PKGNAME: "com.bquan.app",
-                                JPUSH_APPKEY : "e38664ecb4acf5db15e6c465", //JPush 上注册的包名对应的 Appkey.
+        manifestPlaceholders = [JPUSH_PKGNAME: "com.clkj.app",
+                                JPUSH_APPKEY : "f49ba8db36ec204fbaca066b", //JPush 上注册的包名对应的 Appkey.
                                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
 
@@ -77,6 +77,11 @@ dependencies {
         implementation project(":walletApp")
         implementation project(":orderApp")
     }
+
+    compile 'cn.jiguang.sdk:jpush:3.3.4'
+    // 此处以JPush 3.3.4 版本为例。
+    compile 'cn.jiguang.sdk:jcore:2.1.2'
+
     annotationProcessor rootProject.ext.dependencies["butterknife.compiler"]
     annotationProcessor rootProject.ext.dependencies["arouter.compiler"]
 }

@@ -98,7 +98,7 @@ public class AppApplication extends BaseApplication {
 
 
         {
-        PlatformConfig.setWeixin("wx8aa0090b4ffd643f", "f90d0b596034a8c92ed578f9c9a7773a");
+        PlatformConfig.setWeixin("wx8aa0090b4ffd643f", "06312ddcbfb17e74d213759db95dc34a"); //06312ddcbfb17e74d213759db95dc34a
         PlatformConfig.setQQZone("123", "123");
     }
 
@@ -123,6 +123,11 @@ public class AppApplication extends BaseApplication {
         //友盟
         UMConfigure.setLogEnabled(true);
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE,"");
+        UMConfigure.init(this, "5f87a90880455950e4aa4a0f","umeng",UMConfigure.DEVICE_TYPE_PHONE,"");
+//        应用名称：澄鹿科技
+//        平台：Android
+//        Appkey：5f87a90880455950e4aa4a0f
+//        SDK下载地址：https://developer.umeng.com/sdk
 
         SkinInflaterFactory.setFactory(LayoutInflater.from(this));
         //初始化城市json
@@ -138,7 +143,7 @@ public class AppApplication extends BaseApplication {
                 .setSkinStatusBarColorEnable(false)                     // 关闭状态栏换肤，默认打开[可选]
                 .setSkinWindowBackgroundEnable(false)                   // 关闭windowBackground换肤，默认打开[可选]
                 .loadSkin();
-
+//
         SkinCompatManager.getInstance().loadSkin("appskin-debug.apk", null,
                 SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
 

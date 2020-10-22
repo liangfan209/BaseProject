@@ -1,5 +1,6 @@
 package com.clkj.user_center.requset;
 
+import com.bq.comm_config_lib.request.AbstractReqeustCallback;
 import com.bq.comm_config_lib.request.RequestCallBackInter;
 import com.bq.comm_config_lib.request.SignJsonCallBack;
 import com.bq.comm_config_lib.utils.CommSpUtils;
@@ -10,6 +11,8 @@ import com.clkj.user_center.requset.bean.AddressListBean;
 import com.clkj.user_center.requset.bean.BankListBean;
 import com.clkj.user_center.requset.bean.CertificationBean;
 import com.clkj.user_center.requset.bean.CertificationInfo;
+import com.clkj.user_center.requset.bean.MessageListBean;
+import com.clkj.user_center.requset.bean.UnreadCountBean;
 import com.clkj.user_center.requset.bean.UserInfo;
 import com.google.gson.Gson;
 import com.lzy.okgo.model.Response;
@@ -241,5 +244,41 @@ public class UserCenterHttpReqeustImp implements UserCenterHttpReqestInter {
         });
     }
 
+    public void getMessageList(int page,int type, AbstractReqeustCallback<MessageListBean> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", type == 1?ApiUserCenter.API_MESSAGE_LIST:ApiUserCenter.API_NOTICE_LIST);
+        map.put("auth", CommSpUtils.getToken());
+        map.put("current_page", page+"");
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<MessageListBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<MessageListBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
 
+    public void unReadCount(AbstractReqeustCallback<UnreadCountBean> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiUserCenter.API_UNREAD_COUNT);
+        map.put("auth", CommSpUtils.getToken());
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<UnreadCountBean>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<UnreadCountBean>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
+
+    public void readMessage(String id,AbstractReqeustCallback<String> callBack) {
+        Map<String,String> map = new HashMap<>();
+        map.put("api", ApiUserCenter.API_ChANGE_MSG);
+        map.put("auth", CommSpUtils.getToken());
+        map.put("message_id", id);
+        NetManager.getNetManger().request(map, new SignJsonCallBack<BaseResponse<String>>(callBack){
+            @Override
+            public void onSuccess(Response<BaseResponse<String>> response) {
+                super.onSuccess(response);
+            }
+        });
+    }
 }

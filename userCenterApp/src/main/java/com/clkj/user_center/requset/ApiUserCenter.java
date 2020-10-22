@@ -19,7 +19,14 @@ public class ApiUserCenter {
     public static final String API_UPDATE_USER_INFO = "customer.myself.update";
     public static final String API_AUTHENTICATGION = "customer.myself.real.authenticate";
     public static final String API_AUTHENTICATGION_GET = "customer.myself.real.get";
-
+    //获取消息
+    public static final String API_MESSAGE_LIST = "message.search";
+    //获取公告
+    public static final String API_NOTICE_LIST = "notice.search";
+    //未读消息
+    public static final String API_UNREAD_COUNT = "message.unreadcount";
+    //更改消息状态
+    public static final String API_ChANGE_MSG = "message.changestatus";
 
 
     //地址列表

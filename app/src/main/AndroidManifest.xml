@@ -56,6 +56,55 @@
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
+
+
+        <!-- Since JCore2.0.0 Required SDK核心功能-->
+        <!-- 这个Service要继承JCommonService -->
+        <service android:name=".jiguang.MyPushService"
+            android:process=":pushcore">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service>
+
+        <!-- User defined.  For test only  用户自定义接收消息器,3.0.7开始支持,目前新tag/alias接口设置结果会在该广播接收器对应的方法中回调-->
+        <receiver android:name=".jiguang.MyJPushMessageReceiver">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+                <category android:name="com.clkj.app"></category>
+            </intent-filter>
+        </receiver>
+
+        <!--&lt;!&ndash; Required SDK 核心功能&ndash;&gt;-->
+        <!--&lt;!&ndash; 可配置android:process参数将PushService放在其他进程中 &ndash;&gt;-->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:process=":multiprocess"
+            tools:node="replace">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+
+        <!--&lt;!&ndash; User defined.  For test only  用户自定义的广播接收器 &ndash;&gt;-->
+        <receiver
+            android:name=".jiguang.MyJPushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /> <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.clkj.app" />
+            </intent-filter>
+        </receiver>
+
+
         <meta-data
             android:name="design_width_in_dp"
             android:value="375" />
@@ -64,6 +113,7 @@
             android:value="667" />
 
         <meta-data android:value="5d775acc0cafb241aa000dc2" android:name="UMENG_APPKEY"/>
+<!--        <meta-data android:value="5f87a90880455950e4aa4a0f" android:name="UMENG_APPKEY"/>-->
     </application>
 
 </manifest>

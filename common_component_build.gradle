@@ -81,9 +81,10 @@ dependencies {
         releaseImplementation rootProject.ext.dependencies["canary.release"]
         testImplementation rootProject.ext.dependencies["canary.release"]
     } else {
-        compileOnly rootProject.ext.dependencies["butterknife.compiler"]
+        annotationProcessor rootProject.ext.dependencies["butterknife.compiler"]
         annotationProcessor rootProject.ext.dependencies["arouter.compiler"]
         compileOnly rootProject.ext.dependencies["canary.debug"]
         compileOnly rootProject.ext.dependencies["canary.release"]
+
     }
 }

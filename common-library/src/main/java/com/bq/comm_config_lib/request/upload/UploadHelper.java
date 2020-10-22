@@ -133,7 +133,7 @@ public class UploadHelper {
                 map.put("timestamp",String.valueOf(System.currentTimeMillis()));
                 map.put("flag","file");
                 map.put("auth", CommSpUtils.getToken());
-                map.put("store_type","person");
+                map.put("store_type",type);
                 map.put("clientType","android");
                 map.put("version","1");
 

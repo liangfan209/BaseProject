@@ -25,7 +25,7 @@ public class LoginProvider {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void providerData(MessageEvent event) {
         if (AppArouter.LOGIN_SERVER.equals(event.key)) {
-            event.eventInterface.callBack(new MessageBody(MessageBody.SUCCESS_CODE,"登录模块提供服务"));
+//            event.eventInterface.callBack(new MessageBody(MessageBody.SUCCESS_CODE,"登录模块提供服务"));
         } else if(AppArouter.LOGOUT_SERVER.equals(event.key)){
             new LoginHttpReqeustImp().logout(new RequestCallBackInter() {
                 @Override

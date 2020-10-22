@@ -86,7 +86,7 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                 OrderInfo info = (OrderInfo) adapter.getData().get(position);
                 if(info.getOrder_item_list() != null && info.getOrder_item_list().size() >0)
                 ARouter.getInstance().build(AppArouter.ORDER_ORDER_DETAIL_ACTIVITY)
-                        .withString("mOrderId",info.getOrder_item_list().get(0).getOrder_item_id()).navigation();
+                        .withString("mOrderId",info.getId()+"").navigation();
             }
         });
         EventBus.getDefault().register(this);
@@ -116,6 +116,7 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
 
                 TextView tvHint = helper.getView(R.id.tv_hint);
                 TextView tvPrimary = helper.getView(R.id.tv_primary);
+                TextView tvEvaluation = helper.getView(R.id.tv_evaluation);
 
                 OrderInfo.OrderItemListBean orderItemListBean = info.getOrder_item_list().get(0);
                 ImageView iv = helper.getView(R.id.iv_item);
@@ -155,6 +156,11 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                     }
                 }
 
+
+                tvEvaluation.setOnClickListener(v->{
+                    ARouter.getInstance().build(AppArouter.ORDER_EVALUATION_ADD_ACTIVITY)
+                            .withString("orderId",orderItemListBean.getOrder_item_id()).navigation();
+                });
                 tvPrimary.setOnClickListener(v->{
                     if(info.getDespatch_type().contains("物流")){
                         if(status.contains("order_launched")){
@@ -165,7 +171,7 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                         }else if(status.contains("delivery_finished")){
                             //已完成
                         }else if(status.contains("order_finished")){
-
+                            tvEvaluation.setVisibility(View.VISIBLE);
                         }
                     }else{
                         if(status.contains("order_launched")){
@@ -173,14 +179,14 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                             //待发货  待收货
                         }else if(status.contains("delivery_finished")){
                             ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
-                                    .withString("mOrderDetailId",info.getId()+"")
+                                    .withString("mOrderDetailId",info.getOrder_item_list().get(0).getContract_id())
                                     .withInt("sign",1)
                                     .navigation();
 
 
                         }else if(status.contains("order_finished")){
                             ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY)
-                                    .withString("mOrderDetailId",info.getId()+"").navigation();
+                                    .withString("mOrderDetailId",info.getOrder_item_list().get(0).getContract_id()).navigation();
                         }
                     }
                 });
@@ -222,6 +228,7 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                         tvHint.setVisibility(View.GONE);
                         tvPrimary.setVisibility(View.VISIBLE);
                         tvPrimary.setText("查看合同");
+                        tvEvaluation.setVisibility(View.VISIBLE);
                         tvType.setText("已完成");
                         tvType.setTextColor(SkinCompatResources.getColor(tvType.getContext(),R.color.ui_txt_hint_color));
                     }else if(status.contains("order_closed")){
@@ -260,6 +267,10 @@ public class OrderListFragment extends BaseFragment implements MyRefreshLayout.L
                         tvType.setText("已取消");
                         tvType.setTextColor(SkinCompatResources.getColor(tvType.getContext(),R.color.ui_txt_hint_color));
                     }
+                }
+
+                if("evaluated".equals(orderItemListBean.getEvaluation())){
+                    tvEvaluation.setVisibility(View.GONE);
                 }
                 tvType.setText(info.getStatus_name());
             }

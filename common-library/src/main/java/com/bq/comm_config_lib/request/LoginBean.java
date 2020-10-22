@@ -1,5 +1,7 @@
 package com.bq.comm_config_lib.request;
 
+import java.util.List;
+
 /**
  * 文件名：
  * 描述：
@@ -18,6 +20,15 @@ public class LoginBean {
     private String access_token;
     private String expire_time;
     private String renew_flag;
+    private List<Integer> goods_ids;
+
+    public List<Integer> getGoods_ids() {
+        return goods_ids;
+    }
+
+    public void setGoods_ids(List<Integer> goods_ids) {
+        this.goods_ids = goods_ids;
+    }
 
     public String getAccess_token() {
         return access_token;

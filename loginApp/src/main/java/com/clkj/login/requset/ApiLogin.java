@@ -17,5 +17,8 @@ public class ApiLogin {
     public static final String API_MODIFY_PWD = "customer.account.password.modify";
     public static final String API_SETTING_PWD = "customer.account.password.setup";
 
+    public static final String API_OPENID_LOGIN = "customer.account.wechatlogin";
+    public static final String API_WETCHATBIND_LOGIN = "customer.account.wechatregister";
+
     public static final String API_LOGIN_REGISTER = "customer.account.register";
 }
