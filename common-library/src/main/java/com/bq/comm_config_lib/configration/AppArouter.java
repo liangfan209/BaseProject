@@ -25,6 +25,10 @@ public class AppArouter {
     public static final String LOGIN_SETTING_ACTIVITY = LOGIN+"/SettingPwdActivity";
     public static final String LOGIN_MODIFY_ACTIVITY = LOGIN+"/ModifyPwdActivity";
     public static final String LOGIN_BIND_ACTIVITY = LOGIN+"/BindPhoneActivity";
+    //手势指纹
+    public static final String LOGIN_FINGER_LOCK_ACTIVITY = LOGIN+"/FingerLockActivity";
+    //创建手势密码
+    public static final String LOGIN_PATTERN_LOCK_ACTIVITY = LOGIN+"/PatternCreateActivity";
 
     public static final String LOGIN_SERVER = LOGIN+"/LoginService";
     public static final String LOGOUT_SERVER = LOGIN+"/logoutService";
@@ -121,6 +125,10 @@ public class AppArouter {
     public static final String ORDER_MY_EVALUATION_ACTIVITY = ORDER+"/MyEvaluationActivity";
     public static final String ORDER_EVALUATION_ALL_ACTIVITY = ORDER+"/EvaluationAllActivity";
     public static final String ORDER_EVALUATION_SUCCESS_ACTIVITY = ORDER+"/EvaluationSuccessActivity";
+
+
+    //搜索页面
+    public static final String ORDER_SEARCH_ACTIVITY = ORDER+"/SearchActivity";
 
 
 

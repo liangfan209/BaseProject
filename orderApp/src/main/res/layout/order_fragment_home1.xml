@@ -45,13 +45,12 @@
                 android:layout_marginLeft="10dp"
                 android:background="@color/ui_txt_hint_color"
                 />
-            <com.fan.baseuilibrary.view.DeletableEditText
+            <TextView
                 android:id="@+id/det_search"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:layout_marginLeft="10dp"
-                style="@style/ui_edit_txt_style"
                 android:textSize="@dimen/h5_font_size"
                 android:hint="请输入搜索名称"
                 />

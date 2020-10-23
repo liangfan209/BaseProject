@@ -1,8 +1,6 @@
 package com.clkj.order.mvp.ui.fragment;
 
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -36,7 +34,6 @@ import com.clkj.order.requset.bean.ProductTypeBean;
 import com.clkj.order.requset.bean.ProfessionInfo;
 import com.clkj.order.requset.bean.SchoolInfo;
 import com.fan.baseuilibrary.utils.provinces.CityUtils;
-import com.fan.baseuilibrary.view.DeletableEditText;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -83,7 +80,7 @@ public class HomeFragment1 extends BaseFragment implements  ProductIview {
     @BindView(R2.id.tv_address_location)
     TextView mTvAddressLocation;
     @BindView(R2.id.det_search)
-    DeletableEditText mDetSearch;
+    TextView mDetSearch;
     @BindView(R2.id.rlt_search)
     RelativeLayout mRltSearch;
 
@@ -132,7 +129,7 @@ public class HomeFragment1 extends BaseFragment implements  ProductIview {
         mTvAddressLocation.setText(CommSpUtils.getLocation());
         intHotProfessionView();
 
-        initEditText();
+//        initEditText();
         mSmartRefreshLayout.setEnableLoadmore(false);
         mSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -277,17 +274,17 @@ public class HomeFragment1 extends BaseFragment implements  ProductIview {
     }
 
     private void initEditText() {
-        mDetSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEND
-//                        || actionId == EditorInfo.IME_ACTION_DONE
-                        || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
-                    jumpProductListActivity(null);
-                }
-                return true;
-            }
-        });
+//        mDetSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_SEND
+////                        || actionId == EditorInfo.IME_ACTION_DONE
+//                        || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
+//                    jumpProductListActivity(null);
+//                }
+//                return true;
+//            }
+//        });
     }
 
     private void intHotProfessionView() {
@@ -398,12 +395,13 @@ public class HomeFragment1 extends BaseFragment implements  ProductIview {
     }
 
     @OnClick({R2.id.rlt_search, R2.id.tv_address_location,
-            R2.id.iv_scan_home,R2.id.iv_address_location})
+            R2.id.iv_scan_home,R2.id.iv_address_location,R2.id.det_search})
     public void onViewClicked(View view) {
 
-            if(view.getId() == R.id.rlt_search){
-            jumpProductListActivity(null);
-//            ARouter.getInstance().build(AppArouter.ORDER_SIGN_CONTRACT_ACTIVITY).navigation();
+            if(view.getId() == R.id.rlt_search || view.getId() == R.id.det_search){
+//            jumpProductListActivity(null);
+            ARouter.getInstance().build(AppArouter.ORDER_SEARCH_ACTIVITY).navigation();
+
         }else if(view.getId() == R.id.tv_address_location){
             CityUtils.getInstance(this.getContext()).showPickerView(this.getContext(), new CityUtils.CityCallBack() {
                 @Override
@@ -419,13 +417,6 @@ public class HomeFragment1 extends BaseFragment implements  ProductIview {
             if(!Utils.isFastDoubleClick(mIvScanHome,1000)){
                 ARouter.getInstance().build(AppArouter.ORDER_SCAN_ACTIVITY).navigation();
             }
-
-
-//                String result = "type=poster&poster_id=24";
-//                Utils.goCustomActivity(getActivity(),result);
-
-
-
             }else if(view.getId() == R.id.iv_address_location){
             EventBus.getDefault().post(new MessageEvent("location", getActivity(), new MessageInter() {
                 @Override
@@ -442,23 +433,20 @@ public class HomeFragment1 extends BaseFragment implements  ProductIview {
     //根据搜索内容跳转到商品列表页面
     private void jumpProductListActivity(String catogory){
         //取消焦点，隐藏键盘
-        Utils.cancelFocus(mDetSearch);
+//        Utils.cancelFocus(mDetSearch);
         //跳转到下一个页面进行搜索
-        String titleSearch = mDetSearch.getText().toString();
+//        String titleSearch = mDetSearch.getText().toString();
 
         ProductSearchBean bean = new ProductSearchBean(CommSpUtils.getLocation());
         if(!StringUtils.isEmpty(catogory)){
             bean.setCategory(catogory);
         }
 
-        bean.setTitle(titleSearch);
+//        bean.setTitle(titleSearch);
         String serachInfo = new Gson().toJson(bean);
         ARouter.getInstance().build(AppArouter.ORDER_PRODUCT_LIST_ACTIVITY)
                 .withString("mSearchInfo",serachInfo)
-                .withString("mSearchName",titleSearch).navigation();
+                .withString("mSearchName","").navigation();
     }
 
-    public void updateTest(String catogory){
-        jumpProductListActivity(catogory);
-    }
 }

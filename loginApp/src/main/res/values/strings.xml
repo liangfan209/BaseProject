@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">BiometricLib</string>
+    <string name="biometric_dialog_cancel">取消</string>
+    <string name="biometric_dialog_title">Verification</string>
+    <string name="biometric_dialog_subtitle">请验证指纹</string>
+    <string name="biometric_dialog_state_normal">“泛能”正在开启指纹登录</string>
+    <string name="biometric_dialog_state_failed">验证失败</string>
+    <string name="biometric_dialog_state_error">验证失败</string>
+    <string name="biometric_dialog_state_error_enable_process">Verification error, setup failed</string>
+    <string name="biometric_dialog_state_succeeded">验证成功</string>
+    <string name="biometric_dialog_use_password">Use Password</string>
+</resources>

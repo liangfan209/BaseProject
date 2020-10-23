@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:ignore="MissingDefaultResource">
+    <include layout="@layout/layout_public_title" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="图形验证"
+        android:textSize="@dimen/h3_font_size"
+        android:textColor="@color/color_999999"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        />
+    <com.henleylee.lockpattern.PatternLockerView
+        android:id="@+id/pattern_locker_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="60dp"
+        app:pattern_normalColor="#999999"
+        app:pattern_checkColor="#79D0F3"
+        app:pattern_errorColor="#ff0000"
+        />
+
+    <TextView
+        android:id="@+id/tv_finger"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="指纹验证"
+        android:textSize="@dimen/h3_font_size"
+        android:textColor="@color/color_999999"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        />
+</LinearLayout>

@@ -73,6 +73,7 @@ dependencies {
     api 'com.airbnb.android:lottie:2.7.0'
     api 'com.umeng.umsdk:analytics:8.0.0'
     api 'com.umeng.umsdk:common:2.0.0'
+    api 'com.henley.android:lockpattern:1.0.1'
 
 
     api 'cn.bingoogolapple:bga-photopicker:2.0.0@aar'

@@ -44,6 +44,13 @@
       "type": "vertical",
       "tabList": [
         {
+          "name": "手势指纹",
+          "remark": "",
+          "icon": "user_center_icon_modify_pwd",
+          "path": "/login/ModifyPwdActivity",
+          "jumpType": "arouter"
+        },
+        {
           "name": "修改密码",
           "remark": "",
           "icon": "user_center_icon_modify_pwd",

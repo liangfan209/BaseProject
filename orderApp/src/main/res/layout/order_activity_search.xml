@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/fafafa">
+    <include layout="@layout/layout_public_title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="50dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:background="@drawable/shap_white_radius_4">
+
+            <com.fan.baseuilibrary.view.DeletableEditText
+                android:id="@+id/det_search"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginLeft="15dp"
+                style="@style/ui_edit_txt_style"
+                android:textSize="@dimen/h5_font_size"
+                android:drawableRight="@null"
+                android:hint="请输入搜索名称"
+                android:maxLines="1"
+                />
+            <RelativeLayout
+                android:id="@+id/rlt_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:background="@mipmap/icon_search"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="取消"
+            android:textColor="@color/color_999999"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="最近搜索"
+        android:textColor="@color/color_999999"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="20dp"/>
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:padding="15dp"
+            android:background="@mipmap/icon_ic_delete"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            />
+    </RelativeLayout>
+
+    <com.fan.baseuilibrary.view.FlowLayout
+        android:id="@+id/flt_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

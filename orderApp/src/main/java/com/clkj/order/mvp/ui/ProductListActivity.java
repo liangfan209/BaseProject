@@ -1,8 +1,7 @@
 package com.clkj.order.mvp.ui;
 
-import android.view.KeyEvent;
+import android.content.Intent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -19,7 +18,6 @@ import com.bq.comm_config_lib.configration.AppArouter;
 import com.bq.comm_config_lib.mvp.BasePresenter;
 import com.bq.comm_config_lib.mvp.ui.BaseActivity;
 import com.bq.comm_config_lib.utils.CommSpUtils;
-import com.bq.comm_config_lib.utils.Utils;
 import com.clkj.order.R;
 import com.clkj.order.R2;
 import com.clkj.order.mvp.presenter.ProductPresenter;
@@ -28,7 +26,6 @@ import com.clkj.order.mvp.ui.hodler.ProductType;
 import com.clkj.order.requset.bean.ProductSearchBean;
 import com.clkj.order.requset.bean.SelecterBean;
 import com.fan.baseuilibrary.utils.provinces.CityUtils;
-import com.fan.baseuilibrary.view.DeletableEditText;
 import com.fan.baseuilibrary.view.DeleteTextView;
 import com.fan.baseuilibrary.view.FlowLayout;
 import com.google.gson.Gson;
@@ -66,7 +63,7 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
     @BindView(R2.id.tv_address_location)
     TextView mTvAddressLocation;
     @BindView(R2.id.det_search)
-    DeletableEditText mDetSearch;
+    TextView mDetSearch;
     @BindView(R2.id.rlt_search)
     RelativeLayout mRltSearch;
     @BindView(R2.id.iv_advertising)
@@ -126,9 +123,17 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
 
     @Override
     protected void attach() {
-        ARouter.getInstance().inject(this);
         mTvTitle.setText("助学帮助");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ARouter.getInstance().inject(this);
+        mSearchName = getIntent().getStringExtra("mSearchName");
         mTvAddressLocation.setText(CommSpUtils.getLocation());
+
         initProductListView();
         mTvSchool.setCallBack(()->{
             updateFlowlayout(0,"delete",null,true);
@@ -146,29 +151,33 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
         mTvYear.setBackgroundDrawable(SkinCompatResources.getDrawable(this,R.drawable.ui_shap_verification_code_select));
         mTvYear.setTextColor(SkinCompatResources.getColor(this,R.color.ui_primary_color));
         initEditText();
+    }
 
-
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
     }
 
     private void initEditText() {
-        mDetSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEND
-//                        || actionId == EditorInfo.IME_ACTION_DONE
-                        || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
-
-                    //取消焦点，隐藏键盘
-                    Utils.cancelFocus(mDetSearch);
-                    updateFragment();
-                }
-                return true;
-            }
-        });
+//        mDetSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_SEND
+////                        || actionId == EditorInfo.IME_ACTION_DONE
+//                        || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
+//
+//                    //取消焦点，隐藏键盘
+//                    Utils.cancelFocus(mDetSearch);
+//                    updateFragment();
+//                }
+//                return true;
+//            }
+//        });
         if(!StringUtils.isEmpty(mSearchName)){
             mDetSearch.setText(mSearchName);
         }
-        mDetSearch.setClearDrawableVisible(false);
+//        mDetSearch.setClearDrawableVisible(false);
     }
 
     private void initProductListView() {
@@ -204,7 +213,7 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
 
     }
 
-    @OnClick({R2.id.rlt_search, R2.id.tv_school_select, R2.id.tv_profession_select, R2.id.tv_year_select,R2.id.tv_address_location,R2.id.iv_address_location})
+    @OnClick({R2.id.rlt_search,R2.id.det_search, R2.id.tv_school_select, R2.id.tv_profession_select, R2.id.tv_year_select,R2.id.tv_address_location,R2.id.iv_address_location})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.tv_school_select) {
             chooseType(0);
@@ -212,9 +221,11 @@ public class ProductListActivity extends BaseActivity implements ProductIview{
             chooseType(1);
         } else if (view.getId() == R.id.tv_year_select) {
             chooseType(2);
-        }else if(view.getId() == R.id.rlt_search){
-            Utils.cancelFocus(mDetSearch);
-            updateFragment();
+        }else if(view.getId() == R.id.rlt_search || view.getId() == R.id.det_search){
+//            Utils.cancelFocus(mDetSearch);
+//            updateFragment();
+            ARouter.getInstance().build(AppArouter.ORDER_SEARCH_ACTIVITY)
+                    .withString("searchName",mSearchName).navigation();
         }else if(view.getId() == R.id.tv_address_location){
             CityUtils.getInstance(this).showPickerView(this, new CityUtils.CityCallBack() {
                 @Override

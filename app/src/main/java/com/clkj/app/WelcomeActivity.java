@@ -47,7 +47,8 @@ public class WelcomeActivity extends BaseActivity {
         super.onStart();
         boolean welecom = CommSpUtils.getWelecom();
         if (welecom) {
-            ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
+//            ARouter.getInstance().build(AppArouter.MAIN_ACTIVITY).navigation();
+            ARouter.getInstance().build(AppArouter.LOGIN_FINGER_LOCK_ACTIVITY).navigation();
             new Handler().postDelayed(()->{finish();},1000);
         } else {
             ArrayList<Integer> list = new ArrayList<>();

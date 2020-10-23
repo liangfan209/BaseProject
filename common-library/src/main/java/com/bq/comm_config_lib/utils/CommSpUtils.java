@@ -96,4 +96,12 @@ public class CommSpUtils {
     public static String getLocation(){
         return SPUtils.getInstance(SpField.AUTH_TOKEN).getString("city", "武汉市");
     }
+
+    //存入标签
+    public static void saveLables(String labels){
+        SPUtils.getInstance(SpField.AUTH_TOKEN).put("labels", labels);
+    }
+    public static String getLables(){
+        return SPUtils.getInstance(SpField.AUTH_TOKEN).getString("labels", "");
+    }
 }
